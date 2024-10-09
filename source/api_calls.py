@@ -28,9 +28,20 @@ def get_spotify_access_token():
 def get_artist(artist_id):
     url = f"https://api.spotify.com/v1/artists/{artist_id}"
     headers = {
-    "Authorization": f"Bearer BQCQZMJxrkf8fe8p7CDzAQaZdfRfHU0FSoV5FqzMrcZ6EuZmFN5lQqkF7M1cwa6dyOGT1FhhcxhX61OkFztnCOua6Vpf-3oNw42ziKrmNC90Il5SYbo"
+    "Authorization": f"Bearer BQDJIrC9VK7lzJ7RmogZhwCaZyy53jFj8U0iqxgd5j4R-WB9_AAjwd0WJL5zYzIr-Q315nHixsSMlq8uJll3HMkxRvysuiTDSqtCkSAIc1FjtTzs1xI"
     }
 
     response = requests.get(url, headers=headers)
     artist_info = response.json()
     return artist_info
+
+
+def get_track(track_id):
+    url = f"https://api.spotify.com/v1/tracks/{track_id}"
+    headers = {
+    "Authorization": f"Bearer BQDJIrC9VK7lzJ7RmogZhwCaZyy53jFj8U0iqxgd5j4R-WB9_AAjwd0WJL5zYzIr-Q315nHixsSMlq8uJll3HMkxRvysuiTDSqtCkSAIc1FjtTzs1xI"
+    }
+
+    response = requests.get(url, headers=headers)
+    track_info = response.json()
+    return track_info

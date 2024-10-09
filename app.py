@@ -11,4 +11,6 @@ marilyn_manson_id = '2VYQTNDsvvKN9wmU5W7xpj'
 artist_json_manson = api_calls.get_artist(marilyn_manson_id)
 pprint(artist_json_manson)
 
-print("App finished")
+mm_say10_id = '3sxNhARfL8uj7NlMqwF61p'
+track_json_mm_say10 = api_calls.get_track(mm_say10_id)
+pprint(track_json_mm_say10)
