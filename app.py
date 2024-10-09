@@ -14,3 +14,8 @@ pprint(artist_json_manson)
 mm_say10_id = '3sxNhARfL8uj7NlMqwF61p'
 track_json_mm_say10 = api_calls.get_track(mm_say10_id)
 pprint(track_json_mm_say10)
+
+mm_kill4me_id = '6UIo6YbaXihIZ72MWUpcGb'
+market = 'UA'
+track_json_mm_say10 = api_calls.get_track_market(mm_kill4me_id, market)
+pprint(track_json_mm_say10)

@@ -45,3 +45,13 @@ def get_track(track_id):
     response = requests.get(url, headers=headers)
     track_info = response.json()
     return track_info
+
+def get_track_market(track_id, market):
+    url = f"https://api.spotify.com/v1/tracks/{track_id}?market={market}"
+    headers = {
+    "Authorization": f"Bearer BQDJIrC9VK7lzJ7RmogZhwCaZyy53jFj8U0iqxgd5j4R-WB9_AAjwd0WJL5zYzIr-Q315nHixsSMlq8uJll3HMkxRvysuiTDSqtCkSAIc1FjtTzs1xI"
+    }
+
+    response = requests.get(url, headers=headers)
+    track_info = response.json()
+    return track_info
