@@ -12,3 +12,5 @@ artist_json_manson = api_calls.get_artist(marilyn_manson_id)
 pprint(artist_json_manson)
 
 print("App finished")
+
+print('Bug is fixed')
