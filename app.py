@@ -7,15 +7,23 @@ from pprint import pprint
 token = api_calls.get_spotify_access_token()
 print(token)
 
+print('--------------------Marilyn Manson')
 marilyn_manson_id = '2VYQTNDsvvKN9wmU5W7xpj'
 artist_json_manson = api_calls.get_artist(marilyn_manson_id, token)
 pprint(artist_json_manson)
 
+print('--------------------track SAY10 Marilyn Manson')
 mm_say10_id = '3sxNhARfL8uj7NlMqwF61p'
 track_json_mm_say10 = api_calls.get_track(mm_say10_id, token)
 pprint(track_json_mm_say10)
 
+print('--------------------track KILL4ME Marilyn Manson')
 mm_kill4me_id = '6UIo6YbaXihIZ72MWUpcGb'
 market = 'UA'
 track_json_mm_say10 = api_calls.get_track_market(mm_kill4me_id, market, token)
 pprint(track_json_mm_say10)
+
+print('--------------------album WE ARE CHAOS Marilyn Manson')
+mm_we_are_chaos_id = '3VOlp4Dion1qjjvhmuDZvV'
+album_json_mm_we_are_chaos_id = api_calls.get_album(mm_we_are_chaos_id, token)
+pprint(album_json_mm_we_are_chaos_id)

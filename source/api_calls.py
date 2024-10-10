@@ -55,3 +55,13 @@ def get_track_market(track_id, market, access_token):
     response = requests.get(url, headers=headers)
     track_info = response.json()
     return track_info
+
+def get_album(album_id, access_token):
+    url = f"https://api.spotify.com/v1/albums/{album_id}/tracks"
+    headers = {
+    "Authorization": f"Bearer {access_token}"
+    }
+
+    response = requests.get(url, headers=headers)
+    album_info = response.json()
+    return album_info
