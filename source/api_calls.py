@@ -32,8 +32,22 @@ def get_artist(artist_id, access_token):
     }
 
     response = requests.get(url, headers=headers)
-    artist_info = response.json()
-    return artist_info
+
+    # Check the status code
+    if response.status_code == 200:
+        artist_info = response.json()
+        print("Artist information retrieved successfully:")
+        return artist_info
+    else:
+        # If not successful, print the status code and error message
+        print(f"Error: Received status code {response.status_code}")
+        try:
+            error_info = response.json()
+            print("Error details:", error_info)
+        # If the response doesn't contain valid JSON
+        except ValueError:
+            print("No JSON response received.")
+        return None
 
 
 def get_track(track_id, access_token):
