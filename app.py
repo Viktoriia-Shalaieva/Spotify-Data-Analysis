@@ -1,4 +1,3 @@
-import requests
 from source import api_calls
 from pprint import pprint
 # from source.api_calls import *
@@ -40,3 +39,17 @@ pprint(more_tracks)
 print('--------------------Tracks_MARKET')
 more_tracks_market = api_calls.get_more_tracks_market(token, 'UA')
 pprint(more_tracks_market)
+
+print('--------------------OLD Recommendations')
+old_artist_id = '2VYQTNDsvvKN9wmU5W7xpj'
+old_genre = 'rock'
+old_track = '3sxNhARfL8uj7NlMqwF61p'
+old_recommendations = api_calls.get_recommendations_old(token, old_artist_id, old_genre, old_track)
+pprint(old_recommendations)
+
+print('--------------------Recommendations')
+artist_id = '2VYQTNDsvvKN9wmU5W7xpj'
+genre = 'hard rock'
+track = '3sxNhARfL8uj7NlMqwF61p'
+recommendations = api_calls.get_recommendations(token, artist_id, genre, track)
+pprint(recommendations)

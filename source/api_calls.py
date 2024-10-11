@@ -101,7 +101,7 @@ def get_more_tracks(access_token):
     params = {
         'q': 'genre:rock',
         'type': 'track',
-        'limit': 1
+        'limit': 1,
     }
 
     response = requests.get(url, headers=headers, params=params)
@@ -124,3 +124,34 @@ def get_more_tracks_market(access_token, market):
     response = requests.get(url, headers=headers, params=params)
     more_tracks_market = response.json()
     return more_tracks_market
+
+
+def get_recommendations_old(access_token, artist_id, genre, track):
+    url = f"https://api.spotify.com/v1/recommendations?seed_artists={artist_id}&seed_genres={genre}&seed_tracks={track}"
+    headers = {
+        'Authorization': f'Bearer {access_token}'
+    }
+    params = {
+        'type': 'track',
+        'limit': 1,
+    }
+
+    response = requests.get(url, headers=headers, params=params)
+    recommendations = response.json()
+    return recommendations
+
+def get_recommendations(access_token, artist_id, genre, track):
+    url = "https://api.spotify.com/v1/recommendations"
+    headers = {
+        'Authorization': f'Bearer {access_token}'
+    }
+    params = {
+        'seed_artists': artist_id,
+        'seed_genres': genre,
+        'seed_tracks': track,
+        'limit': 1,
+    }
+
+    response = requests.get(url, headers=headers, params=params)
+    recommendations = response.json()
+    return recommendations
