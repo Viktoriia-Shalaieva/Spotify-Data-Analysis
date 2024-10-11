@@ -60,6 +60,7 @@ def get_track(track_id, access_token):
     track_info = response.json()
     return track_info
 
+
 def get_track_market(track_id, market, access_token):
     url = f"https://api.spotify.com/v1/tracks/{track_id}?market={market}"
     headers = {
@@ -70,6 +71,7 @@ def get_track_market(track_id, market, access_token):
     track_info = response.json()
     return track_info
 
+
 def get_album(album_id, access_token):
     url = f"https://api.spotify.com/v1/albums/{album_id}/tracks"
     headers = {
@@ -79,3 +81,46 @@ def get_album(album_id, access_token):
     response = requests.get(url, headers=headers)
     album_info = response.json()
     return album_info
+
+
+def get_genre(access_token):
+    url = f"https://api.spotify.com/v1/recommendations/available-genre-seeds"
+    headers = {
+    "Authorization": f"Bearer {access_token}"
+    }
+
+    response = requests.get(url, headers=headers)
+    genre_info = response.json()
+    return genre_info
+
+def get_more_tracks(access_token):
+    url = "https://api.spotify.com/v1/search"
+    headers = {
+        'Authorization': f'Bearer {access_token}'
+    }
+    params = {
+        'q': 'genre:rock',
+        'type': 'track',
+        'limit': 1
+    }
+
+    response = requests.get(url, headers=headers, params=params)
+    more_tracks = response.json()
+    return more_tracks
+
+
+def get_more_tracks_market(access_token, market):
+    url = "https://api.spotify.com/v1/search"
+    headers = {
+        'Authorization': f'Bearer {access_token}'
+    }
+    params = {
+        'q': 'genre:rock',
+        'type': 'track',
+        'limit': 5,
+        'market': market,
+    }
+
+    response = requests.get(url, headers=headers, params=params)
+    more_tracks_market = response.json()
+    return more_tracks_market

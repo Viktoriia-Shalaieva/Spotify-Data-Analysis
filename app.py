@@ -1,3 +1,4 @@
+import requests
 from source import api_calls
 from pprint import pprint
 # from source.api_calls import *
@@ -27,3 +28,15 @@ print('--------------------album WE ARE CHAOS Marilyn Manson')
 mm_we_are_chaos_id = '3VOlp4Dion1qjjvhmuDZvV'
 album_json_mm_we_are_chaos_id = api_calls.get_album(mm_we_are_chaos_id, token)
 pprint(album_json_mm_we_are_chaos_id)
+
+print('--------------------Available Genre Seeds')
+genre_seeds = api_calls.get_genre(token)
+pprint(genre_seeds)
+
+print('--------------------Tracks')
+more_tracks = api_calls.get_more_tracks(token)
+pprint(more_tracks)
+
+print('--------------------Tracks_MARKET')
+more_tracks_market = api_calls.get_more_tracks_market(token, 'UA')
+pprint(more_tracks_market)
