@@ -155,3 +155,19 @@ def get_recommendations(access_token, artist_id, genre, track):
     response = requests.get(url, headers=headers, params=params)
     recommendations = response.json()
     return recommendations
+
+
+def get_50_artists(access_token):
+    url = "https://api.spotify.com/v1/search"
+    headers = {
+        'Authorization': f'Bearer {access_token}'
+    }
+    params = {
+        'q': 'genre:rock',
+        'type': 'artist',
+        'limit': 50,
+    }
+
+    response = requests.get(url, headers=headers, params=params)
+    artists = response.json()
+    return artists

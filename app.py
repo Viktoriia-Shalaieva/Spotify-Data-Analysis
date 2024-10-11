@@ -53,3 +53,7 @@ genre = 'hard rock'
 track = '3sxNhARfL8uj7NlMqwF61p'
 recommendations = api_calls.get_recommendations(token, artist_id, genre, track)
 pprint(recommendations)
+
+print('--------------------50 ARTISTS')
+artists_50 = api_calls.get_50_artists(token)
+pprint(artists_50)
