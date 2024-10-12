@@ -13,16 +13,20 @@ def get_spotify_access_token():
         "client_secret": client_secret
     }
 
-    response = requests.post(
+    try:
+        response = requests.post(
         token_url,
         data=payload,
         headers={"Content-Type": "application/x-www-form-urlencoded"}
-    )
+        )
 
-    token_info = response.json()
-    access_token = token_info.get("access_token")
+        token_info = response.json()
+        access_token = token_info.get("access_token")
+        print("Access token retrieved successfully")
+        return access_token
 
-    return access_token
+    except Exception as error_message:
+        print(f"The following error occurred: {error_message}")
 
 
 def get_artist(artist_id, access_token):
@@ -37,7 +41,7 @@ def get_artist(artist_id, access_token):
         return artist_info
 
     except Exception as error_message:
-        print(f"The following error occured: {error_message}")
+        print(f"The following error occurred: {error_message}")
 
 
 def get_track(track_id, access_token):
@@ -161,3 +165,31 @@ def get_50_artists(access_token):
     response = requests.get(url, headers=headers, params=params)
     artists = response.json()
     return artists
+
+def get_playlist(access_token, playlist_id):
+    url = f"https://api.spotify.com/v1/playlists/{playlist_id}"
+    headers = {
+    "Authorization": f"Bearer {access_token}"
+    }
+    try:
+        response = requests.get(url, headers=headers)
+        playlist_info = response.json()
+        print("Playlist information retrieved successfully")
+        return playlist_info
+
+    except Exception as error_message:
+        print(f"The following error occurred: {error_message}")
+
+def get_playlist_items(access_token, playlist_id):
+    url = f"https://api.spotify.com/v1/playlists/{playlist_id}"
+    headers = {
+    "Authorization": f"Bearer {access_token}"
+    }
+    try:
+        response = requests.get(url, headers=headers)
+        playlist_items_info = response.json()
+        print("Playlist items information retrieved successfully")
+        return playlist_items_info
+
+    except Exception as error_message:
+        print(f"The following error occurred: {error_message}")
