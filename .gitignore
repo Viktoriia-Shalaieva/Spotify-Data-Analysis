@@ -1,6 +1,6 @@
 **/data/
 **/.idea/
-**/for_none.py
+for_none.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
