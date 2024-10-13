@@ -64,15 +64,18 @@ pl_top_50_ua_id = '37i9dQZEVXbKkidEfWYRuD'
 playlist_top_50_ua = api_calls.get_playlist(token, pl_top_50_ua_id)
 pprint(playlist_top_50_ua)
 
+# Defines the path to the file where the playlist data will be saved in JSON format
 file_pl_top_50_ua = 'C:/Users/vgrec/Desktop/Spotify_Songs/Spotify-Songs-Analysis/json/pl_top_50_ua.json'
-with open(file_pl_top_50_ua, 'w') as file: # create a file and open it in writen mode
-    json.dump(playlist_top_50_ua, file) # write json to the opened file
+# Opens the file for writing and saves the retrieved playlist data in JSON format
+with open(file_pl_top_50_ua, 'w') as file:
+    # Uses json.dump to write the playlist data to the specified file in JSON format
+    json.dump(playlist_top_50_ua, file)
 
 print('--------------------TOP 50 - UKRAINE Playlist Items')
 pl_items_top_50_ua_id = '37i9dQZEVXbKkidEfWYRuD'
 playlist_items_top_50_ua = api_calls.get_playlist_items(token, pl_items_top_50_ua_id)
 pprint(playlist_items_top_50_ua)
 
-file_pl_items_top_50_ua = 'C:/Users/vgrec/Desktop/Spotify_Songs/Spotify-Songs-Analysis/json/pl_items_top_50_ua.json'
-with open(file_pl_items_top_50_ua, 'w') as file: # create a file and open it in writen mode
-    json.dump(playlist_items_top_50_ua, file) # write json to the opened file
+file_pl_items_top_50_ua = 'json/pl_items_top_50_ua.json'
+with open(file_pl_items_top_50_ua, 'w') as file:
+    json.dump(playlist_items_top_50_ua, file)
