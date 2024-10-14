@@ -59,23 +59,61 @@ print(token)
 # artists_50 = api_calls.get_50_artists(token)
 # pprint(artists_50)
 
-print('--------------------TOP 50 - UKRAINE')
-pl_top_50_ua_id = '37i9dQZEVXbKkidEfWYRuD'
-playlist_top_50_ua = api_calls.get_playlist(token, pl_top_50_ua_id)
-pprint(playlist_top_50_ua)
+# print('--------------------TOP 50 - UKRAINE')
+# pl_top_50_ua_id = '37i9dQZEVXbKkidEfWYRuD'
+# playlist_top_50_ua = api_calls.get_playlist(token, pl_top_50_ua_id)
+# pprint(playlist_top_50_ua)
 
-# Defines the path to the file where the playlist data will be saved in JSON format
-file_pl_top_50_ua = 'C:/Users/vgrec/Desktop/Spotify_Songs/Spotify-Songs-Analysis/json/pl_top_50_ua.json'
-# Opens the file for writing and saves the retrieved playlist data in JSON format
-with open(file_pl_top_50_ua, 'w') as file:
-    # Uses json.dump to write the playlist data to the specified file in JSON format
-    json.dump(playlist_top_50_ua, file)
+# # Defines the path to the file where the playlist data will be saved in JSON format
+# file_pl_top_50_ua = 'C:/Users/vgrec/Desktop/Spotify_Songs/Spotify-Songs-Analysis/json/pl_top_50_ua.json'
+# # Opens the file for writing and saves the retrieved playlist data in JSON format
+# with open(file_pl_top_50_ua, 'w') as file:
+#     # Uses json.dump to write the playlist data to the specified file in JSON format
+#     json.dump(playlist_top_50_ua, file)
+#
+# print('--------------------TOP 50 - UKRAINE Playlist Items')
+# pl_items_top_50_ua_id = '37i9dQZEVXbKkidEfWYRuD'
+# playlist_items_top_50_ua = api_calls.get_playlist_items(token, pl_items_top_50_ua_id)
+# pprint(playlist_items_top_50_ua)
 
-print('--------------------TOP 50 - UKRAINE Playlist Items')
-pl_items_top_50_ua_id = '37i9dQZEVXbKkidEfWYRuD'
-playlist_items_top_50_ua = api_calls.get_playlist_items(token, pl_items_top_50_ua_id)
-pprint(playlist_items_top_50_ua)
+# file_pl_items_top_50_ua = 'json/pl_items_top_50_ua.json'
+# with open(file_pl_items_top_50_ua, 'w') as file:
+#     json.dump(playlist_items_top_50_ua, file)
 
-file_pl_items_top_50_ua = 'json/pl_items_top_50_ua.json'
-with open(file_pl_items_top_50_ua, 'w') as file:
-    json.dump(playlist_items_top_50_ua, file)
+# Discogs
+print('--------------------Discogs')
+discogs_api_token = 'EaALIPVnUVkCSfqeUhhWzcdXZfgXNvERIHfabBFh'
+
+print('--------------------Discogs track The Emptiness Machine Linkin Park')
+track_title_lp = 'The Emptiness Machine'
+artist_name_lp = 'Linkin Park'
+track_release_lp = api_calls.get_track_release(discogs_api_token, track_title_lp, artist_name_lp)
+pprint(track_release_lp)
+
+print('--------------------Discogs genre The Emptiness Machine Linkin Park')
+genre = api_calls.get_genre(discogs_api_token, track_title_lp, artist_name_lp)
+pprint(genre)
+
+print('--------------------Discogs genre Театр Klavdia Petrivna')
+track_title_kp = 'Театр'
+artist_name_kp = 'Klavdia Petrivna'
+genre_kp = api_calls.get_genre(discogs_api_token, track_title_kp, artist_name_kp)
+pprint(genre_kp)
+
+print('--------------------Discogs genre Барабан Artem Pivovarov')
+track_title_ap_ = 'Барабан'
+artist_name_ap_ = 'Artem Pivovarov'
+genre_ap_ = api_calls.get_genre(discogs_api_token, track_title_ap_, artist_name_ap_)
+pprint(genre_ap_)
+
+print('--------------------Discogs genre Барабан Klavdia Petrivna')
+track_title_ap = 'Барабан'
+artist_name_ap = 'Klavdia Petrivna'
+genre_ap = api_calls.get_genre(discogs_api_token, track_title_ap, artist_name_ap)
+pprint(genre_ap)
+
+print('--------------------Discogs genre KEEP UP Odetari')
+track_title_o = 'KEEP UP'
+artist_name_o = 'Odetari'
+genre_o = api_calls.get_genre(discogs_api_token, track_title_o, artist_name_o)
+pprint(genre_o)

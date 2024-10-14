@@ -193,3 +193,35 @@ def get_playlist_items(access_token, playlist_id):
 
     except Exception as error_message:
         print(f"The following error occurred: {error_message}")
+
+
+def get_track_release(discogs_api_token, track_title, artist_name):
+    url = 'https://api.discogs.com/database/search'
+    params = {
+        'q': track_title,
+        'artist': artist_name,
+        'token': discogs_api_token
+    }
+    response = requests.get(url, params=params)
+    track_release = response.json()
+    return track_release
+
+
+def get_genre(discogs_api_token, track_title, artist_name):
+    url = 'https://api.discogs.com/database/search'
+    params = {
+        'track': track_title,
+        'artist': artist_name,
+        'token': discogs_api_token
+    }
+    response = requests.get(url, params=params)
+    track = response.json()
+    genres = set()
+    # for result in track['results']:
+    #     if 'genre' in result:
+    #         for genre in result['genre']:
+    #             genres.add(genre)
+    for result in track['results']:
+        if 'genre' in result:
+            genres.update(result['genre'])
+    return list(genres)
