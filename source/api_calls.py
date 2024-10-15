@@ -77,7 +77,7 @@ def get_album(album_id, access_token):
     return album_info
 
 
-def get_genre(access_token):
+def get_genre_recom(access_token):
     url = f"https://api.spotify.com/v1/recommendations/available-genre-seeds"
     headers = {
     "Authorization": f"Bearer {access_token}"
@@ -225,3 +225,26 @@ def get_genre(discogs_api_token, track_title, artist_name):
         if 'genre' in result:
             genres.update(result['genre'])
     return list(genres)
+
+
+def get_track_discogs(discogs_api_token, track_title, artist_name):
+    url = 'https://api.discogs.com/database/search'
+    params = {
+        'track': track_title,
+        'artist': artist_name,
+        'token': discogs_api_token
+    }
+    response = requests.get(url, params=params)
+    track = response.json()
+    return track
+
+
+def get_track_discogs_isrc(discogs_api_token, isrc):
+    url = 'https://api.discogs.com/database/search'
+    params = {
+        'query': isrc,
+        'token': discogs_api_token
+    }
+    response = requests.get(url, params=params)
+    track = response.json()
+    return track
