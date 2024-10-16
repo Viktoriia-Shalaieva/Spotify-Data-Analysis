@@ -195,12 +195,25 @@ def get_playlist_items(access_token, playlist_id):
         print(f"The following error occurred: {error_message}")
 
 
-def get_track_release(discogs_api_token, track_title, artist_name):
+def get_track_discogs(discogs_api_token, track_title, artist_name):
     url = 'https://api.discogs.com/database/search'
     params = {
-        'q': track_title,
+        'track': track_title,
         'artist': artist_name,
         'token': discogs_api_token
+    }
+    response = requests.get(url, params=params)
+    track_release = response.json()
+    return track_release
+
+
+def get_track_discogs_album(discogs_api_token, track_title, artist_name, album):
+    url = 'https://api.discogs.com/database/search'
+    params = {
+        'track': track_title,
+        'artist': artist_name,
+        'token': discogs_api_token,
+        'album': album
     }
     response = requests.get(url, params=params)
     track_release = response.json()

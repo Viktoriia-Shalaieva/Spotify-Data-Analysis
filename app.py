@@ -23,7 +23,7 @@ print(token)
 # market = 'UA'
 # track_json_mm_say10 = api_calls.get_track_market(mm_kill4me_id, market, token)
 # pprint(track_json_mm_say10)
-#
+# #
 # print('--------------------album WE ARE CHAOS Marilyn Manson')
 # mm_we_are_chaos_id = '3VOlp4Dion1qjjvhmuDZvV'
 # album_json_mm_we_are_chaos_id = api_calls.get_album(mm_we_are_chaos_id, token)
@@ -83,13 +83,13 @@ print(token)
 # Discogs
 print('--------------------Discogs')
 discogs_api_token = 'EaALIPVnUVkCSfqeUhhWzcdXZfgXNvERIHfabBFh'
-#
+
 # print('--------------------Discogs track The Emptiness Machine Linkin Park')
 # track_title_lp = 'The Emptiness Machine'
 # artist_name_lp = 'Linkin Park'
-# track_release_lp = api_calls.get_track_release(discogs_api_token, track_title_lp, artist_name_lp)
+# track_release_lp = api_calls.get_track_discogs(discogs_api_token, track_title_lp, artist_name_lp)
 # pprint(track_release_lp)
-#
+
 # print('--------------------Discogs genre The Emptiness Machine Linkin Park')
 # genre = api_calls.get_genre(discogs_api_token, track_title_lp, artist_name_lp)
 # pprint(genre)
@@ -100,18 +100,38 @@ discogs_api_token = 'EaALIPVnUVkCSfqeUhhWzcdXZfgXNvERIHfabBFh'
 # genre_kp = api_calls.get_genre(discogs_api_token, track_title_kp, artist_name_kp)
 # pprint(genre_kp)
 #
-# print('--------------------Discogs genre Барабан Artem Pivovarov')
+
+# print('--------------------Discogs track_discogs Барабан Klavdia Petrivna Артём Пивоваров')
 # track_title_ap_ = 'Барабан'
-# artist_name_ap_ = 'Artem Pivovarov'
-# genre_ap_ = api_calls.get_genre(discogs_api_token, track_title_ap_, artist_name_ap_)
+# artist_name_ap_ = 'Klavdia Petrivna', 'Артём Пивоваров'
+# genre_ap_ = api_calls.get_track_discogs(discogs_api_token, track_title_ap_, artist_name_ap_)
 # pprint(genre_ap_)
-#
+
+# print('--------------------Discogs track_discogs Барабан Klavdia Petrivna Artem Pivovarov')
+# track_title_ap_ = 'Барабан'
+# artist_name_ap_ = 'Klavdia Petrivna', 'Artem Pivovarov'
+# genre_ap_ = api_calls.get_track_discogs(discogs_api_token, track_title_ap_, artist_name_ap_)
+# pprint(genre_ap_)
+# #
+print('--------------------Discogs track_discogs Барабан Klavdia Petrivna Artem Pivovarov + album')
+track_title_ap_ = 'Барабан'
+artist_name_ap_ = 'Klavdia Petrivna', 'Artem Pivovarov'
+album_ap_ = 'THE BEST'
+genre_ap_ = api_calls.get_track_discogs_album(discogs_api_token, track_title_ap_, artist_name_ap_, album_ap_)
+pprint(genre_ap_)
+
 # print('--------------------Discogs genre Барабан Klavdia Petrivna')
 # track_title_ap = 'Барабан'
 # artist_name_ap = 'Klavdia Petrivna'
 # genre_ap = api_calls.get_genre(discogs_api_token, track_title_ap, artist_name_ap)
+# # pprint(genre_ap)
+# #
+# print('--------------------Discogs  track Барабан Klavdia Petrivna')
+# track_title_ap = 'Барабан'
+# artist_name_ap = 'Klavdia Petrivna'
+# genre_ap = api_calls.get_track_discogs(discogs_api_token, track_title_ap, artist_name_ap)
 # pprint(genre_ap)
-#
+# #
 # print('--------------------Discogs genre KEEP UP Odetari')
 # track_title_o = 'KEEP UP'
 # artist_name_o = 'Odetari'
@@ -124,12 +144,23 @@ discogs_api_token = 'EaALIPVnUVkCSfqeUhhWzcdXZfgXNvERIHfabBFh'
 # genre_say = api_calls.get_track_discogs(discogs_api_token, track_title_say, artist_name_say)
 # pprint(genre_say)
 
-print('--------------------smells like teen spirit Nirvana')
-smells_like_teen_spirit_id = '5ghIJDpPoe3CfHMGu71E6T'
-smells_like_teen_spirit = api_calls.get_track(smells_like_teen_spirit_id, token)
-pprint(smells_like_teen_spirit)
-
-print('--------------------Discogs isrc SAY10 Marilyn Manson')
-isrc = 'USC4R1702226'
-genre_say = api_calls.get_track_discogs_isrc(discogs_api_token, isrc)
-pprint(genre_say)
+# print('--------------------smells like teen spirit Nirvana')
+# smells_like_teen_spirit_id = '5ghIJDpPoe3CfHMGu71E6T'
+# smells_like_teen_spirit = api_calls.get_track(smells_like_teen_spirit_id, token)
+# pprint(smells_like_teen_spirit)
+#
+# print('--------------------Discogs isrc SAY10 Marilyn Manson')
+# isrc = 'USC4R1702226'
+# genre_say = api_calls.get_track_discogs_isrc(discogs_api_token, isrc)
+# pprint(genre_say)
+#
+# print('--------------------Discogs isrc smells like teen spirit Nirvana')
+# isrc_smells_like_teen_spirit = 'USGF19942501'
+# genre_smells_like_teen_spirit = api_calls.get_track_discogs_isrc(discogs_api_token, isrc_smells_like_teen_spirit)
+# pprint(genre_smells_like_teen_spirit)
+#
+#
+# print('--------------------Discogs isrc KILL4ME Marilyn Manson')
+# isrc_KILL4ME = 'USC4R1702226'
+# genre_KILL4ME = api_calls.get_track_discogs_isrc(discogs_api_token, isrc_KILL4ME)
+# pprint(genre_KILL4ME)
