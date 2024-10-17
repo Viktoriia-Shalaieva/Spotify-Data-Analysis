@@ -1,9 +1,10 @@
 from source import api_calls
 from pprint import pprint
 import json
+import pandas as pd
 # from source.api_calls import *
 # from source.api_calls import get_spotify_access_token
-
+pd.set_option('display.max_columns', None)
 #
 token = api_calls.get_spotify_access_token()
 print(token)
@@ -59,33 +60,14 @@ print(token)
 # artists_50 = api_calls.get_50_artists(token)
 # pprint(artists_50)
 #
-# print('--------------------TOP 50 - UKRAINE')
-# pl_top_50_ua_id = '37i9dQZEVXbKkidEfWYRuD'
-# playlist_top_50_ua = api_calls.get_playlist(token, pl_top_50_ua_id)
-# pprint(playlist_top_50_ua)
-#
-# # Defines the path to the file where the playlist data will be saved in JSON format
-# file_pl_top_50_ua = 'C:/Users/vgrec/Desktop/Spotify_Songs/Spotify-Songs-Analysis/json/pl_top_50_ua.json'
-# # Opens the file for writing and saves the retrieved playlist data in JSON format
-# with open(file_pl_top_50_ua, 'w') as file:
-#     # Uses json.dump to write the playlist data to the specified file in JSON format
-#     json.dump(playlist_top_50_ua, file)
-#
-# print('--------------------TOP 50 - UKRAINE Playlist Items')
-# pl_items_top_50_ua_id = '37i9dQZEVXbKkidEfWYRuD'
-# playlist_items_top_50_ua = api_calls.get_playlist_items(token, pl_items_top_50_ua_id)
-# pprint(playlist_items_top_50_ua)
-#
-# file_pl_items_top_50_ua = 'json/pl_items_top_50_ua.json'
-# with open(file_pl_items_top_50_ua, 'w') as file:
-#      json.dump(playlist_items_top_50_ua, file)
 
-# Discogs
-print('--------------------Discogs')
-discogs_api_token = 'EaALIPVnUVkCSfqeUhhWzcdXZfgXNvERIHfabBFh'
 
-# print('--------------------Discogs track The Emptiness Machine Linkin Park')
-# track_title_lp = 'The Emptiness Machine'
+# # Discogs
+# print('--------------------Discogs')
+# discogs_api_token = 'EaALIPVnUVkCSfqeUhhWzcdXZfgXNvERIHfabBFh'
+#
+# # print('--------------------Discogs track The Emptiness Machine Linkin Park')
+# # track_title_lp = 'The Emptiness Machine'
 # artist_name_lp = 'Linkin Park'
 # track_release_lp = api_calls.get_track_discogs(discogs_api_token, track_title_lp, artist_name_lp)
 # pprint(track_release_lp)
@@ -110,15 +92,15 @@ discogs_api_token = 'EaALIPVnUVkCSfqeUhhWzcdXZfgXNvERIHfabBFh'
 # print('--------------------Discogs track_discogs Барабан Klavdia Petrivna Artem Pivovarov')
 # track_title_ap_ = 'Барабан'
 # artist_name_ap_ = 'Klavdia Petrivna', 'Artem Pivovarov'
-# genre_ap_ = api_calls.get_track_discogs(discogs_api_token, track_title_ap_, artist_name_ap_)
+# # genre_ap_ = api_calls.get_track_discogs(discogs_api_token, track_title_ap_, artist_name_ap_)
+# # pprint(genre_ap_)
+# # #
+# print('--------------------Discogs track_discogs Барабан Klavdia Petrivna Artem Pivovarov + album')
+# track_title_ap_ = 'Барабан'
+# artist_name_ap_ = 'Klavdia Petrivna', 'Artem Pivovarov'
+# album_ap_ = 'THE BEST'
+# genre_ap_ = api_calls.get_track_discogs_album(discogs_api_token, track_title_ap_, artist_name_ap_, album_ap_)
 # pprint(genre_ap_)
-# #
-print('--------------------Discogs track_discogs Барабан Klavdia Petrivna Artem Pivovarov + album')
-track_title_ap_ = 'Барабан'
-artist_name_ap_ = 'Klavdia Petrivna', 'Artem Pivovarov'
-album_ap_ = 'THE BEST'
-genre_ap_ = api_calls.get_track_discogs_album(discogs_api_token, track_title_ap_, artist_name_ap_, album_ap_)
-pprint(genre_ap_)
 
 # print('--------------------Discogs genre Барабан Klavdia Petrivna')
 # track_title_ap = 'Барабан'
@@ -164,3 +146,64 @@ pprint(genre_ap_)
 # isrc_KILL4ME = 'USC4R1702226'
 # genre_KILL4ME = api_calls.get_track_discogs_isrc(discogs_api_token, isrc_KILL4ME)
 # pprint(genre_KILL4ME)
+
+# print('--------------------TOP 50 - UKRAINE')
+# pl_top_50_ua_id = '37i9dQZEVXbKkidEfWYRuD'
+# playlist_top_50_ua = api_calls.get_playlist(token, pl_top_50_ua_id)
+# pprint(playlist_top_50_ua)
+
+# print('--------------------TOP 50 - UKRAINE')
+pl_top_50_ua_id = '37i9dQZEVXbKkidEfWYRuD'
+playlist_top_50_ua = api_calls.get_playlist(token, pl_top_50_ua_id)
+# pprint(playlist_top_50_ua)
+#
+# Defines the path to the file where the playlist data will be saved in JSON format
+# file_pl_top_50_ua = 'C:/Users/vgrec/Desktop/Spotify_Songs/Spotify-Songs-Analysis/json/pl_top_50_ua.json'
+# # Opens the file for writing and saves the retrieved playlist data in JSON format
+# with open(file_pl_top_50_ua, 'w') as file:
+#     # Uses json.dump to write the playlist data to the specified file in JSON format
+#     json.dump(playlist_top_50_ua, file)
+
+# print('--------------------TOP 50 - UKRAINE Playlist Items')
+pl_items_top_50_ua_id = '37i9dQZEVXbKkidEfWYRuD'
+playlist_items_top_50_ua = api_calls.get_playlist_items(token, pl_items_top_50_ua_id)
+# pprint(playlist_items_top_50_ua)
+
+# table_data = []
+# playlist_name_top_50_ua = playlist_top_50_ua['name']
+# print(playlist_name_top_50_ua)
+# playlist_followers_total_top_50_ua = playlist_top_50_ua['followers']['total']
+# print(playlist_followers_total_top_50_ua)
+# playlist_id_top_50_ua = playlist_top_50_ua['id']
+# print(playlist_id_top_50_ua)
+
+# file_pl_items_top_50_ua = 'json/pl_items_top_50_ua.json'
+# with open(file_pl_items_top_50_ua, 'w') as file:
+#      json.dump(playlist_items_top_50_ua, file)
+
+# Using df2 = pd.DataFrame(playlist_items_top_50_ua) is not appropriate
+# because playlist_items_top_50_ua contains nested structures.
+# df2 = pd.DataFrame(playlist_items_top_50_ua)
+# print(df2)
+
+# normalized_data = api_calls.normalize_json(playlist_top_50_ua)
+# # print(normalized_data)
+# print('--------------------------------------------------')
+# keys = normalized_data.keys()
+# keys_to_remove = []
+#
+# for key in normalized_data:
+#     if "available_markets" in key:
+#         keys_to_remove.append(key)
+#
+# for key in keys_to_remove:
+#     del normalized_data[key]
+
+# print(normalized_data)
+
+# print(keys)
+
+df_top_50_ua = api_calls.create_playlist_table(playlist_top_50_ua)
+print(df_top_50_ua.head(10))
+print(df_top_50_ua.describe(include=['object']))
+print(df_top_50_ua.info())

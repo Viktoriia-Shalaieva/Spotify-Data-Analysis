@@ -1,5 +1,5 @@
 import requests
-
+import pandas as pd
 
 def get_spotify_access_token():
     client_id = 'ac3eaf00cb0845a8a8a2f60c134c328e'
@@ -173,6 +173,7 @@ def get_playlist(access_token, playlist_id):
     }
     try:
         response = requests.get(url, headers=headers)
+        # Converts the API response (in JSON format) into a Python dictionary for further processing.
         playlist_info = response.json()
         print("Playlist information retrieved successfully")
         return playlist_info
@@ -261,3 +262,130 @@ def get_track_discogs_isrc(discogs_api_token, isrc):
     response = requests.get(url, params=params)
     track = response.json()
     return track
+
+
+# Function to normalize a JSON object by flattening nested dictionaries
+# def normalize_json(data: dict) -> dict:
+#     # Create an empty dictionary to store the flattened data
+#     new_data = dict()
+#
+#     # Loop through each key-value pair in the input dictionary
+#     for key, value in data.items():
+#         # Check if the value is NOT a dictionary (i.e., it's already a simple value)
+#         if not isinstance(value, dict):
+#             # If the value is simple (not a dictionary), directly add it to the new_data dictionary
+#             new_data[key] = value
+#         else:
+#             # If the value is a dictionary (i.e., a nested structure),
+#             # loop through its key-value pairs to flatten it
+#             for k, v in value.items():
+#                 # Combine the original key and the nested key using an underscore as a separator
+#                 # Add the flattened key-value pair to new_data
+#                 new_data[key + "_" + k] = v
+#
+#     # Return the flattened dictionary
+#     return new_data
+
+
+# def normalize_json(data: dict, parent_key: str = '') -> dict:
+#     new_data = dict()
+#     for key, value in data.items():
+#         new_key = f'{parent_key}_{key}' if parent_key else key
+#         if isinstance(value, dict):
+#             new_data.update(normalize_json(value, new_key))
+#         elif isinstance(value, list):
+#             for i, item in enumerate(value):
+#                 if isinstance(item, dict):
+#                     new_data.update(normalize_json(item, f'{new_key}_{i}'))
+#                 else:
+#                     new_data[f'{new_key}_{i}'] = item
+#         else:
+#             new_data[new_key] = value
+#     return new_data
+
+# def create_playlist_table(playlist):
+#     playlist_id = playlist['id']
+#     playlist_name = playlist['name']
+#     playlist_followers_total = playlist['followers']['total']
+#     rows = []
+#
+#     for item in playlist['tracks']['items']:
+#         track = item['track']
+#
+#         row = []
+#
+#         for item in playlist['tracks']['items']:
+#             track = item['track']
+#             track_added_at = item['added_at'],
+#
+#             row = {
+#                 'playlist_id': playlist_id,
+#                 'playlist_name': playlist_name,
+#                 'playlist_followers_total': playlist_followers_total,
+#                 # 'artist_id': track['artists']['id'],
+#                 'track_id': track['id'],
+#                 'track_name': track['name'],
+#                 'track_added_at': track_added_at,
+#                 'track_duration_ms': track['duration_ms'],
+#                 'track_popularity': track['popularity'],
+#                 'track_explicit': track['explicit'],
+#                 'track_isrc': track['external_ids'].get('isrc'),
+#                 'track_ean': track['external_ids'].get('ids'),
+#                 'track_upc': track['external_ids'].get('upc'),
+#             }
+#
+#             album = track['album']
+#
+#             album_info = {
+#                 'album_id': album['id'],
+#                 'album_name': album['name'],
+#                 'album_release_date': album['release_date'],
+#                 'album_type': album['album_type'],
+#                 'album_restrictions': album.get('restrictions', {}).get('reason'),
+#             }
+#
+#             row.update(album_info)
+#
+#             rows.append(row)
+#     df = pd.DataFrame(rows)
+#     return df
+
+
+def create_playlist_table(playlist):
+    playlist_id = playlist['id']
+    playlist_name = playlist['name']
+    playlist_followers_total = playlist['followers']['total']
+    rows = []
+
+    for item in playlist['tracks']['items']:
+        track = item['track']
+
+        row = []
+
+        for item in playlist['tracks']['items']:
+            track = item['track']
+            track_added_at = item['added_at'],
+
+            row = {
+                'playlist_id': playlist_id,
+                'playlist_name': playlist_name,
+                'playlist_followers_total': playlist_followers_total,
+                'album_id': track['album']['id'],
+                'album_name': track['album']['name'],
+                'album_release_date': track['album']['release_date'],
+                'album_type': track['album']['album_type'],
+                'album_restrictions': track['album'].get('restrictions', {}).get('reason'),
+                # 'artist_id': track['artists']['id'],
+                'track_id': track['id'],
+                'track_name': track['name'],
+                'track_added_at': track_added_at,
+                'track_duration_ms': track['duration_ms'],
+                'track_popularity': track['popularity'],
+                'track_explicit': track['explicit'],
+                'track_isrc': track['external_ids'].get('isrc'),
+                'track_ean': track['external_ids'].get('ids'),
+                'track_upc': track['external_ids'].get('upc'),
+            }
+            rows.append(row)
+    df = pd.DataFrame(rows)
+    return df
