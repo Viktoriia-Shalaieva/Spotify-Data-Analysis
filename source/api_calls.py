@@ -303,54 +303,6 @@ def get_track_discogs_isrc(discogs_api_token, isrc):
 #             new_data[new_key] = value
 #     return new_data
 
-# def create_playlist_table(playlist):
-#     playlist_id = playlist['id']
-#     playlist_name = playlist['name']
-#     playlist_followers_total = playlist['followers']['total']
-#     rows = []
-#
-#     for item in playlist['tracks']['items']:
-#         track = item['track']
-#
-#         row = []
-#
-#         for item in playlist['tracks']['items']:
-#             track = item['track']
-#             track_added_at = item['added_at'],
-#
-#             row = {
-#                 'playlist_id': playlist_id,
-#                 'playlist_name': playlist_name,
-#                 'playlist_followers_total': playlist_followers_total,
-#                 # 'artist_id': track['artists']['id'],
-#                 'track_id': track['id'],
-#                 'track_name': track['name'],
-#                 'track_added_at': track_added_at,
-#                 'track_duration_ms': track['duration_ms'],
-#                 'track_popularity': track['popularity'],
-#                 'track_explicit': track['explicit'],
-#                 'track_isrc': track['external_ids'].get('isrc'),
-#                 'track_ean': track['external_ids'].get('ids'),
-#                 'track_upc': track['external_ids'].get('upc'),
-#             }
-#
-#             album = track['album']
-#
-#             album_info = {
-#                 'album_id': album['id'],
-#                 'album_name': album['name'],
-#                 'album_release_date': album['release_date'],
-#                 'album_type': album['album_type'],
-#                 'album_restrictions': album.get('restrictions', {}).get('reason'),
-#             }
-#
-#             row.update(album_info)
-#
-#             rows.append(row)
-#     df = pd.DataFrame(rows)
-#     return df
-
-
 def create_playlist_table(playlist):
     playlist_id = playlist['id']
     playlist_name = playlist['name']
@@ -359,33 +311,84 @@ def create_playlist_table(playlist):
 
     for item in playlist['tracks']['items']:
         track = item['track']
+        track_added_at = item['added_at']
 
-        row = []
 
-        for item in playlist['tracks']['items']:
-            track = item['track']
-            track_added_at = item['added_at'],
+        row = {
+            'playlist_id': playlist_id,
+            'playlist_name': playlist_name,
+            'playlist_followers_total': playlist_followers_total,
+            'track_id': track['id'],
+            'track_name': track['name'],
+            'track_added_at': track_added_at,
+            'track_duration_ms': track['duration_ms'],
+            'track_popularity': track['popularity'],
+            'track_explicit': track['explicit'],
+            'track_restrictions': track.get('restrictions', {}).get('reason'),
+            'track_isrc': track['external_ids'].get('isrc'),
+            'track_ean': track['external_ids'].get('ids'),
+            'track_upc': track['external_ids'].get('upc'),
+        }
 
-            row = {
-                'playlist_id': playlist_id,
-                'playlist_name': playlist_name,
-                'playlist_followers_total': playlist_followers_total,
-                'album_id': track['album']['id'],
-                'album_name': track['album']['name'],
-                'album_release_date': track['album']['release_date'],
-                'album_type': track['album']['album_type'],
-                'album_restrictions': track['album'].get('restrictions', {}).get('reason'),
-                # 'artist_id': track['artists']['id'],
-                'track_id': track['id'],
-                'track_name': track['name'],
-                'track_added_at': track_added_at,
-                'track_duration_ms': track['duration_ms'],
-                'track_popularity': track['popularity'],
-                'track_explicit': track['explicit'],
-                'track_isrc': track['external_ids'].get('isrc'),
-                'track_ean': track['external_ids'].get('ids'),
-                'track_upc': track['external_ids'].get('upc'),
-            }
-            rows.append(row)
+        album = track['album']
+
+        album_info = {
+            'album_id': album['id'],
+            'album_name': album['name'],
+            'album_release_date': album['release_date'],
+            'album_type': album['album_type'],
+            'album_total_tracks': album['total_tracks'],
+            'album_restrictions': album.get('restrictions', {}).get('reason'),
+        }
+
+        artists_info = {
+            'artist_id': ', '.join([artist['id'] for artist in track['artists']]),
+            'artist_name': ', '.join([artist['name'] for artist in track['artists']]),
+        }
+
+        row.update(album_info)
+        row.update(artists_info)
+
+        rows.append(row)
+    df = pd.DataFrame(rows)
+    return df
+
+
+def create_playlist_table_2(playlist):
+    playlist_id = playlist['id']
+    playlist_name = playlist['name']
+    playlist_followers_total = playlist['followers']['total']
+    rows = []
+
+    for item in playlist['tracks']['items']:
+        track = item['track']
+        track_added_at = item['added_at']
+
+        row = {
+            'playlist_id': playlist_id,
+            'playlist_name': playlist_name,
+            'playlist_followers_total': playlist_followers_total,
+            'album_id': track['album']['id'],
+            'album_name': track['album']['name'],
+            'album_release_date': track['album']['release_date'],
+            'album_type': track['album']['album_type'],
+            'album_total_tracks': track['album']['total_tracks'],
+            'album_restrictions': track['album'].get('restrictions', {}).get('reason'),
+            'artist_id': ', '.join([artist['id'] for artist in track['artists']]),
+            'artist_name': ', '.join([artist['name'] for artist in track['artists']]),
+            'track_id': track['id'],
+            'track_name': track['name'],
+            'track_added_at': track_added_at,
+            'track_duration_ms': track['duration_ms'],
+            'track_popularity': track['popularity'],
+            'track_explicit': track['explicit'],
+            'track_restrictions': track.get('restrictions', {}).get('reason'),
+            'track_isrc': track['external_ids'].get('isrc'),
+            'track_ean': track['external_ids'].get('ids'),
+            'track_upc': track['external_ids'].get('upc'),
+        }
+
+        rows.append(row)
+
     df = pd.DataFrame(rows)
     return df

@@ -5,6 +5,7 @@ import pandas as pd
 # from source.api_calls import *
 # from source.api_calls import get_spotify_access_token
 pd.set_option('display.max_columns', None)
+
 #
 token = api_calls.get_spotify_access_token()
 print(token)
@@ -203,7 +204,14 @@ playlist_items_top_50_ua = api_calls.get_playlist_items(token, pl_items_top_50_u
 
 # print(keys)
 
+print('------------------------------------df_top_50_ua')
 df_top_50_ua = api_calls.create_playlist_table(playlist_top_50_ua)
 print(df_top_50_ua.head(10))
 print(df_top_50_ua.describe(include=['object']))
 print(df_top_50_ua.info())
+
+print('------------------------------------df_top_50_ua_2')
+df_top_50_ua_2 = api_calls.create_playlist_table_2(playlist_top_50_ua)
+print(df_top_50_ua_2.head(10))
+print(df_top_50_ua_2.describe(include=['object']))
+print(df_top_50_ua_2.info())
