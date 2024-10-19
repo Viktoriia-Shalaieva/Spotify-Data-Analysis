@@ -215,3 +215,21 @@ df_top_50_ua_2 = api_calls.create_playlist_table_2(playlist_top_50_ua)
 print(df_top_50_ua_2.head(10))
 print(df_top_50_ua_2.describe(include=['object']))
 print(df_top_50_ua_2.info())
+
+playlist_ids = [
+    '37i9dQZEVXbMDoHDwVN2tF',
+    '37i9dQZEVXbLRQDuF5jeBp',
+    '37i9dQZEVXbKj23U1GF4IR',
+    '37i9dQZEVXbMXbN3EUUhlg',
+    '37i9dQZEVXbMMy2roB9myp',
+    '37i9dQZEVXbJiZcmkrIHGU',
+    '37i9dQZEVXbIPWwFssbupI',
+    '37i9dQZEVXbNFJfN1Vw8d9',
+    '37i9dQZEVXbKkidEfWYRuD',
+    '37i9dQZEVXbMH2jvi6jvjk',
+    '37i9dQZEVXbLn7RQmT5Xv2',
+    '37i9dQZEVXbM4UZuIrvHvA',
+    '37i9dQZEVXbLrQBcXqUtaC',
+    '37i9dQZEVXbKXQ4mDTEBXq',
+    '37i9dQZEVXbNxXF4SkHj9F'
+]
