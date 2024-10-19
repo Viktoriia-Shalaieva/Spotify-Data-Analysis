@@ -233,3 +233,9 @@ playlist_ids = [
     '37i9dQZEVXbKXQ4mDTEBXq',
     '37i9dQZEVXbNxXF4SkHj9F'
 ]
+
+for playlist_id in playlist_ids:
+    playlist_data = api_calls.get_playlist(token, playlist_id)
+    df_playlist = api_calls.create_playlist_table(playlist_data)
+    print(f'---------------------------------------------------{playlist_id}')
+    print(df_playlist.head(10))
