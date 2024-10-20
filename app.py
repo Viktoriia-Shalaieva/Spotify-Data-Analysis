@@ -234,8 +234,16 @@ playlist_ids = [
     '37i9dQZEVXbNxXF4SkHj9F'
 ]
 
+all_playlists = []
+
 for playlist_id in playlist_ids:
     playlist_data = api_calls.get_playlist(token, playlist_id)
     df_playlist = api_calls.create_playlist_table(playlist_data)
-    print(f'---------------------------------------------------{playlist_id}')
-    print(df_playlist.head(10))
+    # print(f'---------------------------------------------------{playlist_id}')
+    # print(df_playlist.head(10))
+    all_playlists.append(df_playlist)
+
+# print(all_playlists)
+
+playlists_df = pd.concat(all_playlists, ignore_index=True)
+print(playlists_df)
