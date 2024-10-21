@@ -394,9 +394,9 @@ def create_playlist_table_2(playlist):
     return df
 
 
-def create_all_playlist_df(token, playlist_ids):
+def create_all_playlists_df(token, playlists_id):
     all_playlists = []
-    for playlist_id in playlist_ids:
+    for playlist_id in playlists_id:
         playlist_data = get_playlist(token, playlist_id)
         df_playlist = create_playlist_table(playlist_data)
         all_playlists.append(df_playlist)

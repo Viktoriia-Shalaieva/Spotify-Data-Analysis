@@ -216,7 +216,7 @@ print(df_top_50_ua_2.head(10))
 print(df_top_50_ua_2.describe(include=['object']))
 print(df_top_50_ua_2.info())
 
-playlist_ids = [
+playlists_id = [
     '37i9dQZEVXbMDoHDwVN2tF',
     '37i9dQZEVXbLRQDuF5jeBp',
     '37i9dQZEVXbKj23U1GF4IR',
@@ -248,7 +248,7 @@ playlist_ids = [
 # playlists_df = pd.concat(all_playlists, ignore_index=True)
 # print(playlists_df)
 
-playlists_df = api_calls.create_all_playlist_df(token, playlist_ids)
+playlists_df = api_calls.create_all_playlists_df(token, playlists_id)
 print(playlists_df)
 
 file_path_playlists = 'C:/Users/vgrec/Desktop/Spotify_Songs/Spotify-Songs-Analysis/data/playlists_df.csv'
