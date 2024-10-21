@@ -248,5 +248,8 @@ playlist_ids = [
 # playlists_df = pd.concat(all_playlists, ignore_index=True)
 # print(playlists_df)
 
-playlists_df = api_calls.all_playlist_df(token, playlist_ids)
+playlists_df = api_calls.create_all_playlist_df(token, playlist_ids)
 print(playlists_df)
+
+file_path_playlists = 'C:/Users/vgrec/Desktop/Spotify_Songs/Spotify-Songs-Analysis/data/playlists_df.csv'
+playlists_df.to_csv(file_path_playlists, index=False)

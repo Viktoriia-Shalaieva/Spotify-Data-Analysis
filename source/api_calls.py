@@ -394,7 +394,7 @@ def create_playlist_table_2(playlist):
     return df
 
 
-def all_playlist_df(token, playlist_ids):
+def create_all_playlist_df(token, playlist_ids):
     all_playlists = []
     for playlist_id in playlist_ids:
         playlist_data = get_playlist(token, playlist_id)
