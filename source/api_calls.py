@@ -392,3 +392,14 @@ def create_playlist_table_2(playlist):
 
     df = pd.DataFrame(rows)
     return df
+
+
+def all_playlist_df(token, playlist_ids):
+    all_playlists = []
+    for playlist_id in playlist_ids:
+        playlist_data = get_playlist(token, playlist_id)
+        df_playlist = create_playlist_table(playlist_data)
+        all_playlists.append(df_playlist)
+
+    playlists_df = pd.concat(all_playlists, ignore_index=True)
+    return playlists_df
