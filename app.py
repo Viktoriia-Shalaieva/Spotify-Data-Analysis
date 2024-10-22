@@ -1,18 +1,14 @@
-import source.preprocessing.data_preprocessing
-from source import api_calls
 from pprint import pprint
-import json
 import pandas as pd
-
 from source.api import discogs
 from source.api import spotify
-from source.preprocessing import data_preprocessing
+from source.preprocessing import data_prep
 import yaml
 
 pd.set_option('display.max_columns', None)
 
 print('--------------------Spotify API token')
-token = api_calls.get_spotify_access_token()
+token = spotify.get_spotify_access_token()
 print(token)
 
 print('--------------------Discogs API token')
@@ -37,7 +33,7 @@ with open('config.yaml', 'r') as file:
 pprint(config)
 
 playlists_id = config['playlists_id']
-playlists = data_preprocessing.create_all_playlists(token, playlists_id)
+playlists = data_prep.create_all_playlists(token, playlists_id)
 print(playlists)
 
 file_path_playlists = './data/preprocessed/playlists.csv'
