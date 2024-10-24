@@ -35,25 +35,6 @@ with open('config/config.yaml', 'r') as file:
 
 playlists = config['playlists']
 
-# file_path_playlists = './data/raw/playlists/'
-#
-# for playlist in playlists:
-#     playlist_id = playlist['id']
-#     playlist_name = playlist['name']
-#
-#     playlist_data = spotify.get_playlist(token, playlist_id)
-#
-#     file_name = playlist_name.replace(' ', '_').replace('-', '').replace('__', '_').lower() + '.json'
-#     print(file_name)
-#     file_path_playlist = file_path_playlists + file_name
-#     print(file_path_playlist)
-#
-#     with open(file_path_playlist, 'w') as file:
-#         # Uses json.dump to write the playlist data to the specified file in JSON format
-#         json.dump(playlist_data, file)
-#
-# playlist_data = spotify.get_playlist(token, playlists)
-
 file_path_playlists = './data/raw/playlists/'
 playlist_data = spotify.get_save_playlist(token, playlists, file_path_playlists)
 

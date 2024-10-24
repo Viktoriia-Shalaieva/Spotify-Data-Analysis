@@ -16,34 +16,31 @@ def create_playlist(playlist):
             'playlist_id': playlist_id,
             'playlist_name': playlist_name,
             'playlist_followers_total': playlist_followers_total,
-            'track_id': track['id'],
-            'track_name': track['name'],
+            'track_id': track.get('id'),
+            'track_name': track.get('name'),
             'track_added_at': track_added_at,
-            'track_duration_ms': track['duration_ms'],
-            'track_popularity': track['popularity'],
-            'track_explicit': track['explicit'],
+            'track_duration_ms': track.get('duration_ms'),
+            'track_popularity': track.get('popularity'),
+            'track_explicit': track.get('explicit'),
             'track_restrictions': track.get('restrictions', {}).get('reason'),
-            'track_isrc': track['external_ids'].get('isrc'),
-            'track_ean': track['external_ids'].get('ids'),
-            'track_upc': track['external_ids'].get('upc'),
+            'track_isrc': track.get('external_ids', {}).get('isrc'),
+            'track_ean': track.get('external_ids', {}).get('ids'),
+            'track_upc': track.get('external_ids', {}).get('upc'),
         }
-
-        album = track['album']
+        album = track.get('album', {})
 
         album_info = {
-            'album_id': album['id'],
-            'album_name': album['name'],
-            'album_release_date': album['release_date'],
-            'album_type': album['album_type'],
-            'album_total_tracks': album['total_tracks'],
+            'album_id': album.get('id'),
+            'album_name': album.get('name'),
+            'album_release_date': album.get('release_date'),
+            'album_type': album.get('album_type'),
+            'album_total_tracks': album.get('total_tracks'),
             'album_restrictions': album.get('restrictions', {}).get('reason'),
         }
-
         artists_info = {
-            'artist_id': ', '.join([artist['id'] for artist in track['artists']]),
-            'artist_name': ', '.join([artist['name'] for artist in track['artists']]),
+            'artist_id': ', '.join([artist.get('id') for artist in track.get('artists', [])]),
+            'artist_name': ', '.join([artist.get('name') for artist in track.get('artists', [])]),
         }
-
         row.update(album_info)
         row.update(artists_info)
 
