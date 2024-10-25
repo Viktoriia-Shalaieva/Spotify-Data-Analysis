@@ -35,7 +35,9 @@ def get_spotify_access_token():
 
 def get_playlist(access_token, playlist_id):
     playlist_info = None
-    url = f"https://api.spotify.com/v1/playlists/{playlist_id}"
+    # url = f"https://api.spotify.com/v1/playlists/{playlist_id}"
+    url_base = "https://api.spotify.com/v1/playlists/"
+    url = os.path.join(url_base, playlist_id)
     headers = {
         "Authorization": f"Bearer {access_token}"
     }
@@ -52,10 +54,7 @@ def get_playlist(access_token, playlist_id):
 
 def get_save_playlist(token, playlists, file_path):
     os.makedirs(file_path, exist_ok=True)
-    for playlist in playlists:
-        playlist_id = playlist['id']
-        playlist_name = playlist['name']
-
+    for playlist_name, playlist_id in playlists.items():
         playlist_info = get_playlist(token, playlist_id)
 
         if playlist_info:

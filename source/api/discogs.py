@@ -13,6 +13,7 @@ def get_track(discogs_api_token, track_title, artist_name, album):
     track_release = response.json()
     return track_release
 
+
 def get_genre(discogs_api_token, track_title, artist_name):
     url = 'https://api.discogs.com/database/search'
     params = {
