@@ -1,6 +1,7 @@
 import os
 import requests
 import json
+from slugify import slugify
 
 
 def get_spotify_access_token():
@@ -58,8 +59,10 @@ def get_save_playlist(token, playlists, file_path):
         playlist_info = get_playlist(token, playlist_id)
 
         if playlist_info:
-            file_name = playlist_name.replace(' ', '_').replace('-', '').replace('__', '_').lower() + '.json'
-            file_path_playlist = file_path + file_name
+            # file_name = playlist_name.replace(' ', '_').replace('-', '').replace('__', '_').lower() + '.json'
+            # file_path_playlist = file_path + file_name
+            file_name = slugify(playlist_name) + '.json'
+            file_path_playlist = os.path.join(file_path, file_name)
 
             try:
                 with open(file_path_playlist, 'w') as file:
