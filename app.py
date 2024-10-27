@@ -25,8 +25,16 @@ file_path_playlists = './data/raw/playlists/'
 playlist_data = spotify.get_save_playlist(token, playlists, file_path_playlists)
 
 playlists_ids = list(playlists.values())
-playlists = data_prep.create_all_playlists(token, playlists_ids)
+playlists = data_prep.create_all_playlists_table(token, playlists_ids)
 print(playlists)
 
 file_path_all_playlists = './data/preprocessed/playlists.csv'
 playlists.to_csv(file_path_all_playlists, index=False, sep="~")
+
+track_ids = playlists['track_id'].tolist()
+
+tracks = data_prep.create_tracks_table(token, track_ids)
+print(tracks)
+
+file_path_tracks = './data/preprocessed/tracks.csv'
+tracks.to_csv(file_path_tracks, index=False, sep="~")

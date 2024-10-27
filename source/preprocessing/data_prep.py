@@ -2,7 +2,7 @@ import pandas as pd
 from source.api.spotify import *
 
 
-def create_playlist(playlist):
+def create_playlist_table(playlist):
     playlist_id = playlist['id']
     playlist_name = playlist['name']
     playlist_followers_total = playlist['followers']['total']
@@ -49,12 +49,33 @@ def create_playlist(playlist):
     return df
 
 
-def create_all_playlists(token, playlists_id):
+def create_all_playlists_table(token, playlists_id):
     all_playlists = []
     for playlist_id in playlists_id:
         playlist_data = get_playlist(token, playlist_id)
-        df_playlist = create_playlist(playlist_data)
+        df_playlist = create_playlist_table(playlist_data)
         all_playlists.append(df_playlist)
 
     playlists = pd.concat(all_playlists, ignore_index=True)
     return playlists
+
+
+def create_tracks_table(access_token, track_ids):
+    tracks_data = []
+
+    for track_id in track_ids:
+        track_info = get_track(access_token, track_id)
+
+        if track_info:
+            track_data = {
+                'track_id': track_info.get('id'),
+                'track_name': track_info.get('name'),
+                'track_duration_ms': track_info.get('duration_ms'),
+                'track_explicit': track_info.get('explicit'),
+                'track_popularity': track_info.get('popularity'),
+                'track_restrictions': track_info.get('restrictions', {}).get('reason', 'None')
+            }
+            tracks_data.append(track_data)
+
+    tracks = pd.DataFrame(tracks_data)
+    return tracks

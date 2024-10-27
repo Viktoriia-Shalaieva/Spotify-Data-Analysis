@@ -2,6 +2,7 @@ import os
 import requests
 import json
 from slugify import slugify
+from urllib.parse import urljoin
 
 
 def get_spotify_access_token():
@@ -38,7 +39,8 @@ def get_playlist(access_token, playlist_id):
     playlist_info = None
     # url = f"https://api.spotify.com/v1/playlists/{playlist_id}"
     url_base = "https://api.spotify.com/v1/playlists/"
-    url = os.path.join(url_base, playlist_id)
+    # url = os.path.join(url_base, playlist_id)
+    url = urljoin(url_base, playlist_id)
     headers = {
         "Authorization": f"Bearer {access_token}"
     }
@@ -74,3 +76,21 @@ def get_save_playlist(token, playlists, file_path):
             print(f"Failed to retrieve playlist {playlist_name}")
 
     return None
+
+
+def get_track(access_token, track_id):
+    track_info = None
+    url_base = "https://api.spotify.com/v1/tracks/"
+    url = urljoin(url_base, track_id)
+    headers = {
+        "Authorization": f"Bearer {access_token}"
+    }
+    try:
+        response = requests.get(url, headers=headers)
+        # Converts the API response (in JSON format) into a Python dictionary for further processing.
+        track_info = response.json()
+        print("Track information retrieved successfully")
+    except Exception as error_message:
+        print(f"The following error occurred: {error_message}")
+
+    return track_info
