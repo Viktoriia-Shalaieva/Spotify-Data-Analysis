@@ -73,7 +73,7 @@ def create_tracks_table(access_token, track_ids):
                 'track_duration_ms': track_info.get('duration_ms'),
                 'track_explicit': track_info.get('explicit'),
                 'track_popularity': track_info.get('popularity'),
-                'track_restrictions': track_info.get('restrictions', {}).get('reason', 'None')
+                'track_restrictions': track_info.get('restrictions', {}).get('reason')
             }
             tracks_data.append(track_data)
 

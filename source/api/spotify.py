@@ -94,3 +94,21 @@ def get_track(access_token, track_id):
         print(f"The following error occurred: {error_message}")
 
     return track_info
+
+
+def get_album(access_token, album_id):
+    album_info = None
+    # url = f"https://api.spotify.com/v1/albums/{album_id}"
+    url_base = "https://api.spotify.com/v1/albums/"
+    url = urljoin(url_base, album_id)
+    headers = {
+        "Authorization": f"Bearer {access_token}"
+    }
+    try:
+        response = requests.get(url, headers=headers)
+        album_info = response.json()
+        print("Album information retrieved successfully")
+    except Exception as error_message:
+        print(f"The following error occurred: {error_message}")
+
+    return album_info
