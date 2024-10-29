@@ -112,3 +112,20 @@ def get_album(access_token, album_id):
         print(f"The following error occurred: {error_message}")
 
     return album_info
+
+
+def get_track_audio_features(access_token, track_id):
+    track_audio_info = None
+    url_base = "https://api.spotify.com/v1/audio-features/"
+    url = urljoin(url_base, track_id)
+    headers = {
+        "Authorization": f"Bearer {access_token}"
+    }
+    try:
+        response = requests.get(url, headers=headers)
+        track_audio_info = response.json()
+        print("Track Audio Features information retrieved successfully")
+    except Exception as error_message:
+        print(f"The following error occurred: {error_message}")
+
+    return track_audio_info
