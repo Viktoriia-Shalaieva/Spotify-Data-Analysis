@@ -79,3 +79,56 @@ def create_tracks_table(access_token, track_ids):
 
     tracks = pd.DataFrame(tracks_data)
     return tracks
+
+
+def create_albums_table(access_token, album_ids):
+    albums_data = []
+
+    for album_id in album_ids:
+        album_info = get_album(access_token, album_id)
+
+        if album_info:
+            album_data = {
+                'album_id': album_info.get('id'),
+                'album_name': album_info.get('name'),
+                'album_type': album_info.get('album_type'),
+                'album_release_date': album_info.get('release_date'),
+                'album_total_tracks': album_info.get('total_tracks'),
+                'album_genres': album_info.get('genres'),
+                'album_label': album_info.get('label'),
+                'album_popularity': album_info.get('popularity'),
+                'album_restrictions': album_info.get('restrictions', {}).get('reason'),
+            }
+            albums_data.append(album_data)
+
+    albums = pd.DataFrame(albums_data)
+    return albums
+
+
+def create_tracks_af_table(access_token, track_ids):
+    tracks_af_data = []
+
+    for track_id in track_ids:
+        track_info = get_track_audio_features(access_token, track_id)
+
+        if track_info:
+            track_data = {
+                'track_id': track_info.get('id'),
+                'track_acousticness': track_info.get('acousticness'),
+                'track_danceability': track_info.get('danceability'),
+                'track_duration_ms': track_info.get('duration_ms'),
+                'track_energy': track_info.get('energy'),
+                'track_instrumentalness': track_info.get('instrumentalness'),
+                'track_key': track_info.get('key'),
+                'track_liveness': track_info.get('liveness'),
+                'track_loudness': track_info.get('loudness'),
+                'track_mode': track_info.get('mode'),
+                'track_speechiness': track_info.get('speechiness'),
+                'track_tempo': track_info.get('tempo'),
+                'track_time_signature': track_info.get('time_signature'),
+                'track_valence': track_info.get('valence'),
+            }
+            tracks_af_data.append(track_data)
+
+    tracks_af = pd.DataFrame(tracks_af_data)
+    return tracks_af
