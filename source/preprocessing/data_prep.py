@@ -106,13 +106,13 @@ def create_albums_table(access_token, album_ids):
 
 
 def create_tracks_af_table(access_token, track_ids):
-    tracks_af_data = []
+    rows = []
 
     for track_id in track_ids:
         track_info = get_track_audio_features(access_token, track_id)
 
         if track_info:
-            track_data = {
+            row = {
                 'track_id': track_info.get('id'),
                 'track_acousticness': track_info.get('acousticness'),
                 'track_danceability': track_info.get('danceability'),
@@ -128,7 +128,29 @@ def create_tracks_af_table(access_token, track_ids):
                 'track_time_signature': track_info.get('time_signature'),
                 'track_valence': track_info.get('valence'),
             }
-            tracks_af_data.append(track_data)
+            rows.append(row)
 
-    tracks_af = pd.DataFrame(tracks_af_data)
+    tracks_af = pd.DataFrame(rows)
     return tracks_af
+
+
+def create_artists_table(access_token, artist_ids):
+    rows = []
+    unique_artist_ids = set()
+
+    for ids in artist_ids:
+        separated_ids = [artist.strip() for artist in ids.split(',')]
+        unique_artist_ids.update(separated_ids)
+
+    for artist_id in unique_artist_ids:
+        artist_info = get_artist(access_token, artist_id)
+
+        if artist_info:
+            row = {
+                'artist_id': artist_info.get('id'),
+                'artist_name': artist_info.get('name'),
+            }
+            rows.append(row)
+
+    artists = pd.DataFrame(rows)
+    return artists
