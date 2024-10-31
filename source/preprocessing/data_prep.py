@@ -149,6 +149,9 @@ def create_artists_table(access_token, artist_ids):
             row = {
                 'artist_id': artist_info.get('id'),
                 'artist_name': artist_info.get('name'),
+                'artist_followers': artist_info.get('followers', {}).get('total'),
+                'artist_genres': artist_info.get('genres'),
+                'artist_popularity': artist_info.get('popularity'),
             }
             rows.append(row)
 
