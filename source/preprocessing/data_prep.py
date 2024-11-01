@@ -1,5 +1,7 @@
 import pandas as pd
-from source.api.spotify import *
+from source.api import discogs
+from source.api import spotify
+import time
 
 
 def create_playlist_table(playlist):
@@ -52,7 +54,8 @@ def create_playlist_table(playlist):
 def create_all_playlists_table(token, playlists_id):
     all_playlists = []
     for playlist_id in playlists_id:
-        playlist_data = get_playlist(token, playlist_id)
+        playlist_data = spotify.get_playlist(token, playlist_id)
+        time.sleep(1)
         df_playlist = create_playlist_table(playlist_data)
         all_playlists.append(df_playlist)
 
@@ -64,7 +67,8 @@ def create_tracks_table(access_token, track_ids):
     tracks_data = []
 
     for track_id in track_ids:
-        track_info = get_track(access_token, track_id)
+        track_info = spotify.get_track(access_token, track_id)
+        time.sleep(1)
 
         if track_info:
             track_data = {
@@ -85,7 +89,8 @@ def create_albums_table(access_token, album_ids):
     albums_data = []
 
     for album_id in album_ids:
-        album_info = get_album(access_token, album_id)
+        album_info = spotify.get_album(access_token, album_id)
+        time.sleep(1)
 
         if album_info:
             album_data = {
@@ -109,7 +114,8 @@ def create_tracks_af_table(access_token, track_ids):
     rows = []
 
     for track_id in track_ids:
-        track_info = get_track_audio_features(access_token, track_id)
+        track_info = spotify.get_track_audio_features(access_token, track_id)
+        time.sleep(1)
 
         if track_info:
             row = {
@@ -143,7 +149,8 @@ def create_artists_table(access_token, artist_ids):
         unique_artist_ids.update(separated_ids)
 
     for artist_id in unique_artist_ids:
-        artist_info = get_artist(access_token, artist_id)
+        artist_info = spotify.get_artist(access_token, artist_id)
+        # time.sleep(1)
 
         if artist_info:
             row = {
@@ -157,3 +164,17 @@ def create_artists_table(access_token, artist_ids):
 
     artists = pd.DataFrame(rows)
     return artists
+
+
+def add_genres_to_playlists(file_path, discogs_api_token):
+    playlists = pd.read_csv(file_path, sep="~")
+
+    playlists['track_genre'] = None
+
+    for index, row in playlists.iterrows():
+        genre = discogs.get_genre(discogs_api_token, row['track_name'], row['artist_name'])
+        playlists.at[index, 'track_genre'] = genre
+
+        time.sleep(1)
+
+    playlists.to_csv(file_path, index=False, sep="~")

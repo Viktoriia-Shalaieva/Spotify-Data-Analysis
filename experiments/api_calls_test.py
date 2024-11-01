@@ -167,6 +167,7 @@ def get_50_artists(access_token):
     artists = response.json()
     return artists
 
+
 def get_playlist(access_token, playlist_id):
     url = f"https://api.spotify.com/v1/playlists/{playlist_id}"
     headers = {
