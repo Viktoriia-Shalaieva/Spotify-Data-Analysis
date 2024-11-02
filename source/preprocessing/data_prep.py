@@ -166,15 +166,22 @@ def create_artists_table(access_token, artist_ids):
     return artists
 
 
-def add_genres_to_playlists(file_path, discogs_api_token):
-    playlists = pd.read_csv(file_path, sep="~")
+def create_track_genre_table(file, discogs_api_token):
+    rows = []
 
-    playlists['track_genre'] = None
+    for _, row in file.iterrows():  # Using _ indicates that the index value is not important and will not be used.
+        track_id = row['track_id']
+        track_name = row['track_name']
+        artists = row['artist_name']
 
-    for index, row in playlists.iterrows():
-        genre = discogs.get_genre(discogs_api_token, row['track_name'], row['artist_name'])
-        playlists.at[index, 'track_genre'] = genre
-
+        genres = discogs.get_genre(discogs_api_token, track_name, artists)
         time.sleep(1)
 
-    playlists.to_csv(file_path, index=False, sep="~")
+        rows.append({
+                'track_id': track_id,
+                'track_name': track_name,
+                'artist_name': artists,
+                'track_genre': genres,
+        })
+    track_genre = pd.DataFrame(rows, columns=['track_id', 'track_name', 'artist_name', 'track_genre'])
+    return track_genre
