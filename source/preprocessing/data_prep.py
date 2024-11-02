@@ -150,7 +150,7 @@ def create_artists_table(access_token, artist_ids):
 
     for artist_id in unique_artist_ids:
         artist_info = spotify.get_artist(access_token, artist_id)
-        # time.sleep(1)
+        time.sleep(1)
 
         if artist_info:
             row = {

@@ -19,22 +19,22 @@ discogs_api_token = 'EaALIPVnUVkCSfqeUhhWzcdXZfgXNvERIHfabBFh'
 # with open('config/config.yaml', 'r') as file:
 #     config = yaml.safe_load(file)
 #
-# # pprint(config)
+# pprint(config)
 #
 # playlists = config['playlists']
 #
 # file_path_playlists = './data/raw/playlists/'
 # playlist_data = spotify.get_save_playlist(token, playlists, file_path_playlists)
-#
+
 # playlists_ids = list(playlists.values())
 # playlists = data_prep.create_all_playlists_table(token, playlists_ids)
 # print(playlists)
-# #
+#
 file_path_all_playlists = './data/preprocessed/playlists.csv'
 # playlists.to_csv(file_path_all_playlists, index=False, sep="~")
 
 playlists_table = pd.read_csv(file_path_all_playlists, sep="~")
-#
+
 # track_ids = set(playlists_table['track_id'])
 # pprint(track_ids)
 #
@@ -60,11 +60,7 @@ playlists_table = pd.read_csv(file_path_all_playlists, sep="~")
 #
 # artist_ids = set(playlists_table['artist_id'])
 # pprint(artist_ids)
-
-# artist_chet_singh_id = '5aWkTGq5O45ES0fDFmN1Wv'
-# artist_chet_singh = spotify.get_artist(token, artist_chet_singh_id)
-# pprint(artist_chet_singh)
-
+#
 # artists = data_prep.create_artists_table(token, artist_ids)
 # print(artists)
 #
@@ -85,6 +81,7 @@ print(f"Number of empty track genres in tracks_genres.csv: {empty_genre_count_tg
 
 artists_path = './data/preprocessed/artists.csv'
 artists = pd.read_csv(artists_path, sep="~")
+print(artists)
 
 empty_genre_count_art = (artists['artist_genres'] == '[]').sum()
 print(f"Number of empty track genres in artists.csv: {empty_genre_count_art}")

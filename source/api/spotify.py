@@ -16,14 +16,12 @@ def get_spotify_access_token():
         "client_id": client_id,
         "client_secret": client_secret
     }
-
     try:
         response = requests.post(
             token_url,
             data=payload,
             headers={"Content-Type": "application/x-www-form-urlencoded"}
         )
-
         token_info = response.json()
         access_token = token_info.get("access_token")
         print("Access token retrieved successfully")
@@ -56,14 +54,16 @@ def get_playlist(access_token, playlist_id):
 
 
 def get_save_playlist(token, playlists, file_path):
+    # Create the specified directory path if it doesn't already exist.
+    # 'exist_ok=True' ensures no error is raised if the directory already exists.
     os.makedirs(file_path, exist_ok=True)
     for playlist_name, playlist_id in playlists.items():
         playlist_info = get_playlist(token, playlist_id)
 
         if playlist_info:
-            # file_name = playlist_name.replace(' ', '_').replace('-', '').replace('__', '_').lower() + '.json'
-            # file_path_playlist = file_path + file_name
-            file_name = slugify(playlist_name) + '.json'
+            # Convert the playlist name into a file-safe format using slugify
+            # to avoid spaces and special characters
+            file_name = slugify(playlist_name, separator="_") + '.json'
             file_path_playlist = os.path.join(file_path, file_name)
 
             try:
@@ -142,7 +142,6 @@ def get_artist(access_token, artist_id):
         response = requests.get(url, headers=headers)
         artist_info = response.json()
         print("Artist information retrieved successfully")
-
     except Exception as error_message:
         print(f"The following error occurred: {error_message}")
 
