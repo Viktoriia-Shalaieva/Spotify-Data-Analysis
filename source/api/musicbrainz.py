@@ -10,11 +10,23 @@ from pprint import pprint
 # data = response.json()
 # pprint(data)
 
-isrc_2 = "RUAGW2400908"
+isrc = "USAT21203287"
+isrc_2 = 'USWB12403466'
 
-url_2 = f"https://musicbrainz.org/ws/2/recording?query=isrc:{isrc_2}&fmt=json"
 
-response_2 = requests.get(url_2, headers={"User-Agent": "YourAppName/1.0 (your.email@example.com)"})
+def get_recording_by_isrc(isrc):
+    url = f"https://musicbrainz.org/ws/2/recording"
+    params = {
+        'query': f'isrc:{isrc}',
+        'fmt': 'json'
+    }
+    response = requests.get(url, params=params)
+    data = response.json()
+    return data
 
-data_2 = response_2.json()
-pprint(data_2)
+
+track = get_recording_by_isrc(isrc)
+pprint(track)
+
+# track_2 = get_recording_by_isrc(isrc_2)
+# pprint(track_2)

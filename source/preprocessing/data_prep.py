@@ -185,3 +185,22 @@ def create_track_genre_table(file, discogs_api_token):
         })
     track_genre = pd.DataFrame(rows, columns=['track_id', 'track_name', 'artist_name', 'track_genre'])
     return track_genre
+
+
+def create_artist_genre_table(file, discogs_api_token):
+    rows = []
+
+    for _, row in file.iterrows():  # Using _ indicates that the index value is not important and will not be used.
+        artist_id = row['artist_id']
+        artist = row['artist_name']
+
+        genres = discogs.get_genre_artist(discogs_api_token, artist)
+        time.sleep(1)
+
+        rows.append({
+                'artist_id': artist_id,
+                'artist_name': artist,
+                'artist_genre': genres,
+        })
+    artist_genre = pd.DataFrame(rows, columns=['artist_id', 'artist_name', 'artist_genre'])
+    return artist_genre
