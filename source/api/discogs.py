@@ -1,4 +1,5 @@
 import requests
+from logs.logger_config import logger
 
 
 def get_genre(discogs_api_token, track_title, artist_name):
@@ -16,9 +17,9 @@ def get_genre(discogs_api_token, track_title, artist_name):
         for result in track['results']:
             if 'genre' in result:
                 genres.update(result['genre'])
-                print("Genre information retrieved successfully")
+                logger.info("Genre information retrieved successfully")
     except Exception as error_message:
-        print(f"The following error occurred: {error_message}")
+        logger.error(f"Failed to retrieve genre for track '{track_title}' by artist '{artist_name}': {error_message}")
 
     # Return a list instead of a set for compatibility with DataFrame and file storage
     return list(genres)
@@ -38,9 +39,9 @@ def get_genre_artist(discogs_api_token, artist_name):
         for result in track['results']:
             if 'genre' in result:
                 genres.update(result['genre'])
-                print("Genre information retrieved successfully")
+                logger.info("Genre information for artist retrieved successfully")
     except Exception as error_message:
-        print(f"The following error occurred: {error_message}")
+        logger.error(f"Failed to retrieve genre for artist '{artist_name}': {error_message}")
 
     # Return a list instead of a set for compatibility with DataFrame and file storage
     return list(genres)

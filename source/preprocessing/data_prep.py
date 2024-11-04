@@ -2,6 +2,7 @@ import pandas as pd
 from source.api import discogs
 from source.api import spotify
 import time
+from logs.logger_config import logger
 
 
 def create_playlist_table(playlist):
@@ -48,6 +49,7 @@ def create_playlist_table(playlist):
 
         rows.append(row)
     df = pd.DataFrame(rows)
+    logger.info(f"Playlist '{playlist_name}' processed with {len(rows)} tracks.")
     return df
 
 
@@ -55,11 +57,13 @@ def create_all_playlists_table(token, playlists_id):
     all_playlists = []
     for playlist_id in playlists_id:
         playlist_data = spotify.get_playlist(token, playlist_id)
+        logger.info(f"Retrieving playlist data for playlist ID: {playlist_id}")
         time.sleep(1)
         df_playlist = create_playlist_table(playlist_data)
         all_playlists.append(df_playlist)
 
     playlists = pd.concat(all_playlists, ignore_index=True)
+    logger.info("All playlists processed successfully.")
     return playlists
 
 
@@ -80,8 +84,12 @@ def create_tracks_table(access_token, track_ids):
                 'track_restrictions': track_info.get('restrictions', {}).get('reason')
             }
             tracks_data.append(track_data)
+            logger.info(f"Track data retrieved successfully for track ID: {track_id}")
+        else:
+            logger.error(f"Track data not found for track ID: {track_id}")
 
     tracks = pd.DataFrame(tracks_data)
+    logger.info("All track data processed successfully.")
     return tracks
 
 
@@ -105,8 +113,12 @@ def create_albums_table(access_token, album_ids):
                 'album_restrictions': album_info.get('restrictions', {}).get('reason'),
             }
             albums_data.append(album_data)
+            logger.info(f"Album data retrieved successfully for album ID: {album_id}")
+        else:
+            logger.error(f"Album data not found for album ID: {album_id}")
 
     albums = pd.DataFrame(albums_data)
+    logger.info("All album data processed successfully.")
     return albums
 
 
@@ -135,6 +147,9 @@ def create_tracks_af_table(access_token, track_ids):
                 'track_valence': track_info.get('valence'),
             }
             rows.append(row)
+            logger.info(f"Audio features retrieved for track ID: {track_id}")
+        else:
+            logger.error(f"Audio features not found for track ID: {track_id}")
 
     tracks_af = pd.DataFrame(rows)
     return tracks_af
@@ -161,8 +176,12 @@ def create_artists_table(access_token, artist_ids):
                 'artist_popularity': artist_info.get('popularity'),
             }
             rows.append(row)
+            logger.info(f"Artist data retrieved for artist ID: {artist_id}")
+        else:
+            logger.error(f"Artist data not found for artist ID: {artist_id}")
 
     artists = pd.DataFrame(rows)
+    logger.info("All artist data processed successfully.")
     return artists
 
 
@@ -183,7 +202,10 @@ def create_track_genre_table(file, discogs_api_token):
                 'artist_name': artists,
                 'track_genre': genres,
         })
+        logger.info(f"Genre data retrieved for track '{track_name}' by artist '{artists}'")
+
     track_genre = pd.DataFrame(rows, columns=['track_id', 'track_name', 'artist_name', 'track_genre'])
+    logger.info("All track genre data processed successfully.")
     return track_genre
 
 
@@ -202,5 +224,7 @@ def create_artist_genre_table(file, discogs_api_token):
                 'artist_name': artist,
                 'artist_genre': genres,
         })
+        logger.info(f"Genre data retrieved for artist '{artist}'")
     artist_genre = pd.DataFrame(rows, columns=['artist_id', 'artist_name', 'artist_genre'])
+    logger.info("All artist genre data processed successfully.")
     return artist_genre

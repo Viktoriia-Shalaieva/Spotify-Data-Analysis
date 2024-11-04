@@ -3,6 +3,7 @@ import requests
 import json
 from slugify import slugify
 from urllib.parse import urljoin
+from logs.logger_config import logger
 
 
 def get_spotify_access_token():
@@ -24,11 +25,11 @@ def get_spotify_access_token():
         )
         token_info = response.json()
         access_token = token_info.get("access_token")
-        print("Access token retrieved successfully")
+        logger.info("Access token retrieved successfully")
         return access_token
 
     except Exception as error_message:
-        print(f"The following error occurred: {error_message}")
+        logger.error(f"Failed to retrieve access token: {error_message}")
 
     return None
 
@@ -46,9 +47,9 @@ def get_playlist(access_token, playlist_id):
         response = requests.get(url, headers=headers)
         # Converts the API response (in JSON format) into a Python dictionary for further processing.
         playlist_info = response.json()
-        print("Playlist information retrieved successfully")
+        logger.info("Playlist information retrieved successfully")
     except Exception as error_message:
-        print(f"The following error occurred: {error_message}")
+        logger.error(f"Failed to retrieve playlist {playlist_id}: {error_message}")
 
     return playlist_info
 
@@ -69,11 +70,11 @@ def get_save_playlist(token, playlists, file_path):
             try:
                 with open(file_path_playlist, 'w') as file:
                     json.dump(playlist_info, file)
-                print(f"Playlist {playlist_name} saved successfully")
+                logger.info(f"Playlist '{playlist_name}' saved successfully")
             except Exception as error_message:
-                print(f"Failed to save playlist {playlist_name}: {error_message}")
+                logger.error(f"Failed to save playlist '{playlist_name}': {error_message}")
         else:
-            print(f"Failed to retrieve playlist {playlist_name}")
+            logger.error(f"Failed to retrieve playlist '{playlist_name}'")
 
     return None
 
@@ -89,9 +90,9 @@ def get_track(access_token, track_id):
         response = requests.get(url, headers=headers)
         # Converts the API response (in JSON format) into a Python dictionary for further processing.
         track_info = response.json()
-        print("Track information retrieved successfully")
+        logger.info("Track information retrieved successfully")
     except Exception as error_message:
-        print(f"The following error occurred: {error_message}")
+        logger.error(f"Failed to retrieve track {track_id}: {error_message}")
 
     return track_info
 
@@ -107,9 +108,9 @@ def get_album(access_token, album_id):
     try:
         response = requests.get(url, headers=headers)
         album_info = response.json()
-        print("Album information retrieved successfully")
+        logger.info("Album information retrieved successfully")
     except Exception as error_message:
-        print(f"The following error occurred: {error_message}")
+        logger.error(f"Failed to retrieve album {album_id}: {error_message}")
 
     return album_info
 
@@ -124,9 +125,9 @@ def get_track_audio_features(access_token, track_id):
     try:
         response = requests.get(url, headers=headers)
         track_audio_info = response.json()
-        print("Track Audio Features information retrieved successfully")
+        logger.info("Track audio features retrieved successfully")
     except Exception as error_message:
-        print(f"The following error occurred: {error_message}")
+        logger.error(f"Failed to retrieve audio features for track {track_id}: {error_message}")
 
     return track_audio_info
 
@@ -141,8 +142,8 @@ def get_artist(access_token, artist_id):
     try:
         response = requests.get(url, headers=headers)
         artist_info = response.json()
-        print("Artist information retrieved successfully")
+        logger.info("Artist information retrieved successfully")
     except Exception as error_message:
-        print(f"The following error occurred: {error_message}")
+        logger.error(f"Failed to retrieve artist {artist_id}: {error_message}")
 
     return artist_info
