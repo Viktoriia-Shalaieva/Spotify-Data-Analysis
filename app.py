@@ -4,6 +4,7 @@ from source.api import spotify
 from source.preprocessing import data_prep
 import yaml
 from logs.logger_config import logger
+from source.utils import file_utils
 
 
 pd.set_option('display.max_columns', None)
@@ -32,9 +33,9 @@ file_path_all_playlists = './data/preprocessed/playlists.csv'
 # playlists.to_csv(file_path_all_playlists, index=False, sep="~")
 # logger.info(f"Playlists data saved to {file_path_all_playlists}")
 
-playlists_table = pd.read_csv(file_path_all_playlists, sep="~")
+# playlists_table = pd.read_csv(file_path_all_playlists, sep="~")
 
-track_ids = set(playlists_table['track_id'])
+track_ids = set(file_utils.playlists_table['track_id'])
 pprint(track_ids)
 
 # tracks = data_prep.create_tracks_table(spotify_api_token, track_ids)
@@ -80,40 +81,40 @@ file_path_artists = './data/preprocessed/artists.csv'
 # tracks_genres = pd.read_csv(tracks_genres_path, sep="~")
 #
 # empty_genre_count_tg = (tracks_genres['track_genre'] == '[]').sum()
-# logger.info(f"Number of empty track genres in tracks_genres.csv: {empty_genre_count_tg}")
+# # logger.info(f"Number of empty track genres in tracks_genres.csv: {empty_genre_count_tg}")
+# #
+# artists_path = './data/preprocessed/artists.csv'
+# artists = pd.read_csv(artists_path, sep="~")
+# print(artists)
 #
-artists_path = './data/preprocessed/artists.csv'
-artists = pd.read_csv(artists_path, sep="~")
+# # empty_genre_count_art = (artists['artist_genres'] == '[]').sum()
+# # logger.info(f"Number of empty artist genres in artists.csv: {empty_genre_count_art}")
+# #
+artists_table = pd.read_csv(file_path_artists, sep="~")
+#
+# artists_genres_discogs = data_prep.create_artist_genre_table(artists_table, discogs_api_token)
+# print(artists_genres_discogs)
+#
+artists_genres_discogs_path = './data/preprocessed/artists_genres_discogs.csv'
+# artists_genres_discogs.to_csv(artists_genres_path, index=False, sep="~")
+# #
+artists_genres_discogs = pd.read_csv(artists_genres_discogs_path, sep="~")
+empty_genre_count_art = (artists_genres_discogs['artist_genre'] == '[]').sum()
+logger.info(f"Number of empty genres in artists_genres_discogs.csv: {empty_genre_count_art}")
+
+artists_table['artist_genres'] = artists_table['artist_genres'].replace('[]', pd.NA)
+
+artists = artists_table.merge(artists_genres_discogs, on='artist_id', how='left')
+print(artists)
+artists['artist_genres'] = artists['artist_genres'].fillna(artists['artist_genre'])
 print(artists)
 
-# empty_genre_count_art = (artists['artist_genres'] == '[]').sum()
-# logger.info(f"Number of empty artist genres in artists.csv: {empty_genre_count_art}")
-#
-artists_table = pd.read_csv(file_path_artists, sep="~")
+artists_genre_full_path = './data/preprocessed/artists_genres_full.csv'
+artists = artists.drop(columns=['artist_genre', 'artist_name_y'])
+artists = artists.rename(columns={'artist_name_x': 'artist_name'})
+artists.to_csv(artists_genre_full_path, index=False, sep="~")
+print(artists)
 
-artists_genres_discogs = data_prep.create_artist_genre_table(artists_table, discogs_api_token)
-print(artists_genres_discogs)
-
-artists_genres_path = './data/preprocessed/artists_genres_discogs.csv'
-artists_genres_discogs.to_csv(artists_genres_path, index=False, sep="~")
-#
-# artists_genres = pd.read_csv(artists_genres_path, sep="~")
-# empty_genre_count_art = (artists_genres['artist_genre'] == '[]').sum()
-# logger.info(f"Number of empty genres in artists_genres_discogs.csv: {empty_genre_count_art}")
-#
-# artists_table['artist_genres'] = artists_table['artist_genres'].replace('[]', pd.NA)
-#
-# artists = artists_table.merge(artists_genres, on='artist_id', how='left')
-# print(artists)
-# artists['artist_genres'] = artists['artist_genres'].fillna(artists['artist_genre'])
-# print(artists)
-#
-# artists_genre_full_path = './data/preprocessed/artists_genres_full.csv'
-# artists = artists.drop(columns=['artist_genre', 'artist_name_y'])
-# artists = artists.rename(columns={'artist_name_x': 'artist_name'})
-# artists.to_csv(artists_genre_full_path, index=False, sep="~")
-# print(artists)
-#
-# artists_genre_full = pd.read_csv(artists_genre_full_path, sep="~")
-# empty_genre_count_art = (artists_genre_full['artist_genres'] == '[]').sum()
-# logger.info(f"Number of empty artist genres in artists_genre_full.csv: {empty_genre_count_art}")
+artists_genre_full = pd.read_csv(artists_genre_full_path, sep="~")
+empty_genre_count_art = (artists_genre_full['artist_genres'] == '[]').sum()
+logger.info(f"Number of empty artist genres in artists_genre_full.csv: {empty_genre_count_art}")

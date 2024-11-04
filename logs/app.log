@@ -13406,3 +13406,12 @@
 04-Nov-24 14:48:09 [INFO] Genre information for artist retrieved successfully
 04-Nov-24 14:48:11 [INFO] Genre data retrieved for artist 'Post Malone'
 04-Nov-24 14:48:11 [INFO] All artist genre data processed successfully.
+04-Nov-24 15:18:40 [INFO] Access token retrieved successfully
+04-Nov-24 15:18:40 [INFO] Spotify API token: BQDfnhVzkMrOIdpZpyboEUzzpQOStP1bw-AVEXT1WiDNf3kgOixWlUR2E_DGNc-4M1vaHqOQkvUBr9rf74asHkCl-q_mBvK_M0NI6-yOfAaGfPXPOZI
+04-Nov-24 15:18:40 [INFO] Discogs API token: EaALIPVnUVkCSfqeUhhWzcdXZfgXNvERIHfabBFh
+04-Nov-24 15:18:40 [INFO] Number of empty genres in artists_genres_discogs.csv: 278
+04-Nov-24 15:21:20 [INFO] Access token retrieved successfully
+04-Nov-24 15:21:20 [INFO] Spotify API token: BQBpiToZdWAcq_yquTSoAeuvfX6WnrWKjFjR3blKT0bs1t5fP72lh5WfHs_Qy22tprme_dqD3tgJ_QH3tCgxYv1FEeQQecwKIbkWQv6g5cp1O5KoRcE
+04-Nov-24 15:21:20 [INFO] Discogs API token: EaALIPVnUVkCSfqeUhhWzcdXZfgXNvERIHfabBFh
+04-Nov-24 15:21:20 [INFO] Number of empty genres in artists_genres_discogs.csv: 278
+04-Nov-24 15:21:20 [INFO] Number of empty artist genres in artists_genre_full.csv: 123
