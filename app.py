@@ -113,7 +113,7 @@ artists_genre_full_path = './data/preprocessed/artists_genres_full.csv'
 artists = artists.drop(columns=['artist_genre', 'artist_name_y'])
 artists = artists.rename(columns={'artist_name_x': 'artist_name'})
 artists.to_csv(artists_genre_full_path, index=False, sep="~")
-print(artists)
+logger.debug(artists)
 
 artists_genre_full = pd.read_csv(artists_genre_full_path, sep="~")
 empty_genre_count_art = (artists_genre_full['artist_genres'] == '[]').sum()

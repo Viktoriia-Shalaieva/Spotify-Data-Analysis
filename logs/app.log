@@ -13415,3 +13415,79 @@
 04-Nov-24 15:21:20 [INFO] Discogs API token: EaALIPVnUVkCSfqeUhhWzcdXZfgXNvERIHfabBFh
 04-Nov-24 15:21:20 [INFO] Number of empty genres in artists_genres_discogs.csv: 278
 04-Nov-24 15:21:20 [INFO] Number of empty artist genres in artists_genre_full.csv: 123
+04-Nov-24 16:12:43 [INFO] Access token retrieved successfully
+04-Nov-24 16:12:43 [INFO] Spotify API token: BQCxihoqgnSuVAPJtqrwiN6__AYKOA-FEtCu9ZEu6Le0sSXvtx5oVkifKuPQ1qZB3zJdhCyqK0Rju8fLvm3IohsVLScXoekcrKdmDz58qe_69yUQaPI
+04-Nov-24 16:12:43 [INFO] Discogs API token: EaALIPVnUVkCSfqeUhhWzcdXZfgXNvERIHfabBFh
+04-Nov-24 16:12:43 [INFO] Number of empty genres in artists_genres_discogs.csv: 278
+04-Nov-24 16:12:43 [INFO] Number of empty artist genres in artists_genre_full.csv: 123
+04-Nov-24 18:05:41 [INFO] Access token retrieved successfully
+04-Nov-24 18:05:41 [INFO] Spotify API token: BQAGlQPJGYDx7EslEPOjDfEJCEdXOdjKpTmMka71tRXb31zFRMy-N5-ZKeQ2UFxNhVS_GLDy_GmyKYpBZBf3ht-HsIaRMIA4C6kj3AB5OZ2OhDLz0Rs
+04-Nov-24 18:05:41 [INFO] Discogs API token: EaALIPVnUVkCSfqeUhhWzcdXZfgXNvERIHfabBFh
+04-Nov-24 18:05:42 [INFO] Number of empty genres in artists_genres_discogs.csv: 278
+04-Nov-24 18:05:42 [INFO]                   artist_id        artist_name  artist_followers  \
+0    1bAftSH8umNcGZ0uyV7LMg               Duki          11406961   
+1    0E56Ncr2I37JQhW71UJALE               KRBK            337555   
+2    250b0Wlc5Vk0CoUsaCY84M             JENNIE           7666973   
+3    1Yj5Xey7kTwvZla8sqdsdE            Cris Mj           4131890   
+4    054D7n62qxjhkfcBZhdRSI          Hamo Bika           2108630   
+..                      ...                ...               ...   
+729  34PYzJSu4DHKEyhdBfsn0E            TORRRES              4007   
+730  6Z6xrqezBTUUDnCinhPwCO            2Point1            100923   
+731  0lxNEAFHu0uIMSTWMiKV3q              Amaza              2998   
+732  77SW9BnxLY8rJ0RciFqkHh  The Neighbourhood          18359602   
+733  246dkjvS1zLTtiykXe5h60        Post Malone          45696713   
+
+                                         artist_genres  artist_popularity  
+0    ['argentine hip hop', 'trap argentino', 'trap ...                 84  
+1          ['russian gangster rap', 'russian hip hop']                 62  
+2                                            ['k-pop']                 83  
+3    ['mambo chileno', 'trap latino', 'urbano chile...                 88  
+4             ['egyptian pop', 'mahraganat', 'shaabi']                 56  
+..                                                 ...                ...  
+729                                                 []                 56  
+730                                                 []                 46  
+731                                                 []                 48  
+732  ['modern alternative rock', 'modern rock', 'pop']                 86  
+733           ['dfw rap', 'melodic rap', 'pop', 'rap']                 91  
+
+[734 rows x 5 columns]
+04-Nov-24 18:05:42 [INFO] Number of empty artist genres in artists_genre_full.csv: 123
+04-Nov-24 22:04:28 [INFO] Access token retrieved successfully
+04-Nov-24 22:04:28 [INFO] Spotify API token: BQAFAGE2T-0NTKvbf4BFeJmqc0wWWrljBPTZb6ikl4OR-HDVEMLmtmUdvecoELHPIvIKlhjGQqzWQjKMBEErK6SAKRLLfJJGCzQVnSG2Vm_gKha2fzc
+04-Nov-24 22:04:28 [INFO] Discogs API token: EaALIPVnUVkCSfqeUhhWzcdXZfgXNvERIHfabBFh
+04-Nov-24 22:04:28 [INFO] Number of empty genres in artists_genres_discogs.csv: 278
+04-Nov-24 22:04:28 [INFO] Number of empty artist genres in artists_genre_full.csv: 123
+04-Nov-24 22:04:50 [DEBUG] Starting new HTTPS connection (1): accounts.spotify.com:443
+04-Nov-24 22:04:50 [DEBUG] https://accounts.spotify.com:443 "POST /api/token HTTP/11" 200 None
+04-Nov-24 22:04:50 [INFO] Access token retrieved successfully
+04-Nov-24 22:04:50 [INFO] Spotify API token: BQD7z3GuTjYybQPWJ0yXRj5sRIO8u__-PkDZbs-Ds5dGxF4RkXtbgLe-VrW162Nw9sIr0Zn6BWDsCwi8DzofGtLEZ18jEdkhgySCEtcb3nbHnX9vH8Q
+04-Nov-24 22:04:50 [INFO] Discogs API token: EaALIPVnUVkCSfqeUhhWzcdXZfgXNvERIHfabBFh
+04-Nov-24 22:04:50 [INFO] Number of empty genres in artists_genres_discogs.csv: 278
+04-Nov-24 22:04:50 [DEBUG]                   artist_id        artist_name  artist_followers  \
+0    1bAftSH8umNcGZ0uyV7LMg               Duki          11406961   
+1    0E56Ncr2I37JQhW71UJALE               KRBK            337555   
+2    250b0Wlc5Vk0CoUsaCY84M             JENNIE           7666973   
+3    1Yj5Xey7kTwvZla8sqdsdE            Cris Mj           4131890   
+4    054D7n62qxjhkfcBZhdRSI          Hamo Bika           2108630   
+..                      ...                ...               ...   
+729  34PYzJSu4DHKEyhdBfsn0E            TORRRES              4007   
+730  6Z6xrqezBTUUDnCinhPwCO            2Point1            100923   
+731  0lxNEAFHu0uIMSTWMiKV3q              Amaza              2998   
+732  77SW9BnxLY8rJ0RciFqkHh  The Neighbourhood          18359602   
+733  246dkjvS1zLTtiykXe5h60        Post Malone          45696713   
+
+                                         artist_genres  artist_popularity  
+0    ['argentine hip hop', 'trap argentino', 'trap ...                 84  
+1          ['russian gangster rap', 'russian hip hop']                 62  
+2                                            ['k-pop']                 83  
+3    ['mambo chileno', 'trap latino', 'urbano chile...                 88  
+4             ['egyptian pop', 'mahraganat', 'shaabi']                 56  
+..                                                 ...                ...  
+729                                                 []                 56  
+730                                                 []                 46  
+731                                                 []                 48  
+732  ['modern alternative rock', 'modern rock', 'pop']                 86  
+733           ['dfw rap', 'melodic rap', 'pop', 'rap']                 91  
+
+[734 rows x 5 columns]
+04-Nov-24 22:04:50 [INFO] Number of empty artist genres in artists_genre_full.csv: 123
