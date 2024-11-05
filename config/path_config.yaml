@@ -1,0 +1,12 @@
+data_dir:
+  - './data/preprocessed'
+
+names:
+  - 'albums.csv'
+  - 'artists.csv'
+  - 'artists_genres_discogs.csv'
+  - 'artists_genres_full.csv'
+  - 'playlists.csv'
+  - 'tracks.csv'
+  - 'tracks_audio_features.csv'
+  - 'tracks_genres.csv'

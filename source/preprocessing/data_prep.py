@@ -72,7 +72,7 @@ def create_tracks_table(access_token, track_ids):
 
     for track_id in track_ids:
         track_info = spotify.get_track(access_token, track_id)
-        time.sleep(1)
+        time.sleep(0.5)
 
         if track_info:
             track_data = {
@@ -98,7 +98,7 @@ def create_albums_table(access_token, album_ids):
 
     for album_id in album_ids:
         album_info = spotify.get_album(access_token, album_id)
-        time.sleep(1)
+        time.sleep(0.5)
 
         if album_info:
             album_data = {
@@ -127,7 +127,7 @@ def create_tracks_af_table(access_token, track_ids):
 
     for track_id in track_ids:
         track_info = spotify.get_track_audio_features(access_token, track_id)
-        time.sleep(1)
+        time.sleep(0.5)
 
         if track_info:
             row = {
@@ -194,7 +194,7 @@ def create_track_genre_table(file, discogs_api_token):
         artists = row['artist_name']
 
         genres = discogs.get_genre(discogs_api_token, track_name, artists)
-        time.sleep(1)
+        time.sleep(0.5)
 
         rows.append({
                 'track_id': track_id,
@@ -217,7 +217,7 @@ def create_artist_genre_table(file, discogs_api_token):
         artist = row['artist_name']
 
         genres = discogs.get_genre_artist(discogs_api_token, artist)
-        time.sleep(0.1)
+        time.sleep(0.7)
 
         rows.append({
                 'artist_id': artist_id,
