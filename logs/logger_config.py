@@ -11,7 +11,7 @@ logging.basicConfig(
     datefmt='%d-%b-%y %H:%M:%S',  # Date format for the timestamp
     handlers=[
         # Write logs to "logs/app.log" with UTF-8 encodingz
-        logging.FileHandler("logs/app.log", encoding="utf-8"),
+        logging.FileHandler("logs/app.log",  mode="w", encoding="utf-8"),
         logging.StreamHandler()  # Output logs to the console
     ]
 )

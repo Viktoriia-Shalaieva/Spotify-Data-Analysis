@@ -165,7 +165,7 @@ def create_artists_table(access_token, artist_ids):
 
     for artist_id in unique_artist_ids:
         artist_info = spotify.get_artist(access_token, artist_id)
-        time.sleep(1)
+        time.sleep(0.5)
 
         if artist_info:
             row = {
@@ -217,7 +217,7 @@ def create_artist_genre_table(file, discogs_api_token):
         artist = row['artist_name']
 
         genres = discogs.get_genre_artist(discogs_api_token, artist)
-        time.sleep(1)
+        time.sleep(0.1)
 
         rows.append({
                 'artist_id': artist_id,

@@ -5,7 +5,6 @@ from source.preprocessing import data_prep
 import yaml
 from logs.logger_config import logger
 from source.utils import file_utils
-import openai
 
 
 pd.set_option('display.max_columns', None)
@@ -16,9 +15,6 @@ logger.info(f"Spotify API token: {spotify_api_token}")
 discogs_api_token = 'EaALIPVnUVkCSfqeUhhWzcdXZfgXNvERIHfabBFh'
 logger.info(f"Discogs API token: {discogs_api_token}")
 
-openai.api_key = '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'
-logger.info(f"GPT API key: {openai.api_key}")
-
 with open('config/config.yaml', 'r') as file:
     config = yaml.safe_load(file)
 
@@ -26,21 +22,21 @@ with open('config/config.yaml', 'r') as file:
 
 playlists = config['playlists']
 
-file_path_playlists = './data/raw/playlists/'
+# file_path_playlists = './data/raw/playlists/'
 # playlist_data = spotify.get_save_playlist(spotify_api_token, playlists, file_path_playlists)
-#
+
 # playlists_ids = list(playlists.values())
 # playlists = data_prep.create_all_playlists_table(spotify_api_token, playlists_ids)
 # print(playlists)
-
+#
 file_path_all_playlists = './data/preprocessed/playlists.csv'
 # playlists.to_csv(file_path_all_playlists, index=False, sep="~")
 # logger.info(f"Playlists data saved to {file_path_all_playlists}")
 
-# playlists_table = pd.read_csv(file_path_all_playlists, sep="~")
+playlists_table = pd.read_csv(file_path_all_playlists, sep="~")
 
 track_ids = set(file_utils.playlists_table['track_id'])
-pprint(track_ids)
+# pprint(track_ids)
 
 # tracks = data_prep.create_tracks_table(spotify_api_token, track_ids)
 # print(tracks)
@@ -65,12 +61,12 @@ pprint(track_ids)
 # tracks_audio_features.to_csv(file_path_tracks_af, index=False, sep="~")
 # logger.info(f"Track audio features saved to {file_path_tracks_af}")
 #
-# artist_ids = set(playlists_table['artist_id'])
-# pprint(artist_ids)
-#
+artist_ids = set(playlists_table['artist_id'])
+pprint(artist_ids)
+
 # artists = data_prep.create_artists_table(spotify_api_token, artist_ids)
 # print(artists)
-#
+
 file_path_artists = './data/preprocessed/artists.csv'
 # artists.to_csv(file_path_artists, index=False, sep="~")
 # logger.info(f"Artists data saved to {file_path_artists}")
@@ -99,26 +95,28 @@ artists_table = pd.read_csv(file_path_artists, sep="~")
 # artists_genres_discogs = data_prep.create_artist_genre_table(artists_table, discogs_api_token)
 # print(artists_genres_discogs)
 #
-artists_genres_discogs_path = './data/preprocessed/artists_genres_discogs.csv'
-# artists_genres_discogs.to_csv(artists_genres_path, index=False, sep="~")
-# #
-artists_genres_discogs = pd.read_csv(artists_genres_discogs_path, sep="~")
-empty_genre_count_art = (artists_genres_discogs['artist_genre'] == '[]').sum()
-logger.info(f"Number of empty genres in artists_genres_discogs.csv: {empty_genre_count_art}")
+# artists_genres_discogs_path = './data/preprocessed/artists_genres_discogs.csv'
+# # artists_genres_discogs.to_csv(artists_genres_path, index=False, sep="~")
+# # #
+# artists_genres_discogs = pd.read_csv(artists_genres_discogs_path, sep="~")
+# empty_genre_count_art = (artists_genres_discogs['artist_genre'] == '[]').sum()
+# logger.info(f"Number of empty genres in artists_genres_discogs.csv: {empty_genre_count_art}")
+#
+# artists_table['artist_genres'] = artists_table['artist_genres'].replace('[]', pd.NA)
+#
+# artists = artists_table.merge(artists_genres_discogs, on='artist_id', how='left')
+# print(artists)
+# artists['artist_genres'] = artists['artist_genres'].fillna(artists['artist_genre'])
+# print(artists)
+#
+# artists_genre_full_path = './data/preprocessed/artists_genres_full.csv'
+# artists = artists.drop(columns=['artist_genre', 'artist_name_y'])
+# artists = artists.rename(columns={'artist_name_x': 'artist_name'})
+# artists.to_csv(artists_genre_full_path, index=False, sep="~")
+# logger.debug(artists)
+#
+# artists_genre_full = pd.read_csv(artists_genre_full_path, sep="~")
+# empty_genre_count_art = (artists_genre_full['artist_genres'] == '[]').sum()
+# logger.info(f"Number of empty artist genres in artists_genre_full.csv: {empty_genre_count_art}")
 
-artists_table['artist_genres'] = artists_table['artist_genres'].replace('[]', pd.NA)
-
-artists = artists_table.merge(artists_genres_discogs, on='artist_id', how='left')
-print(artists)
-artists['artist_genres'] = artists['artist_genres'].fillna(artists['artist_genre'])
-print(artists)
-
-artists_genre_full_path = './data/preprocessed/artists_genres_full.csv'
-artists = artists.drop(columns=['artist_genre', 'artist_name_y'])
-artists = artists.rename(columns={'artist_name_x': 'artist_name'})
-artists.to_csv(artists_genre_full_path, index=False, sep="~")
-logger.debug(artists)
-
-artists_genre_full = pd.read_csv(artists_genre_full_path, sep="~")
-empty_genre_count_art = (artists_genre_full['artist_genres'] == '[]').sum()
-logger.info(f"Number of empty artist genres in artists_genre_full.csv: {empty_genre_count_art}")
+artist = 'Oskoow'
