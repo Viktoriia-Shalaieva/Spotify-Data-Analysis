@@ -2,3 +2,4 @@ pandas
 requests
 pyyaml
 python-slugify
+openai

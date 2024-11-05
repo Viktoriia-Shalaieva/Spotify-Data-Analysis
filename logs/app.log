@@ -13491,3 +13491,38 @@
 
 [734 rows x 5 columns]
 04-Nov-24 22:04:50 [INFO] Number of empty artist genres in artists_genre_full.csv: 123
+05-Nov-24 10:48:10 [DEBUG] Starting new HTTPS connection (1): accounts.spotify.com:443
+05-Nov-24 10:48:10 [DEBUG] https://accounts.spotify.com:443 "POST /api/token HTTP/11" 200 None
+05-Nov-24 10:48:10 [INFO] Access token retrieved successfully
+05-Nov-24 10:48:10 [INFO] Spotify API token: BQAxdXLZucASM6as1tynmsCRNbANNye1WnPyJ1Bz5GyuX3obt2rt1WfdQN_4ga_mLRqwRmhWhTS_foGHQd690JHqtJ1bgAAED97aC5INjHACSuqwN3Y
+05-Nov-24 10:48:10 [INFO] Discogs API token: EaALIPVnUVkCSfqeUhhWzcdXZfgXNvERIHfabBFh
+05-Nov-24 10:48:10 [INFO] GPT API key: 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
+05-Nov-24 10:48:10 [INFO] Number of empty genres in artists_genres_discogs.csv: 278
+05-Nov-24 10:48:10 [DEBUG]                   artist_id        artist_name  artist_followers  \
+0    1bAftSH8umNcGZ0uyV7LMg               Duki          11406961   
+1    0E56Ncr2I37JQhW71UJALE               KRBK            337555   
+2    250b0Wlc5Vk0CoUsaCY84M             JENNIE           7666973   
+3    1Yj5Xey7kTwvZla8sqdsdE            Cris Mj           4131890   
+4    054D7n62qxjhkfcBZhdRSI          Hamo Bika           2108630   
+..                      ...                ...               ...   
+729  34PYzJSu4DHKEyhdBfsn0E            TORRRES              4007   
+730  6Z6xrqezBTUUDnCinhPwCO            2Point1            100923   
+731  0lxNEAFHu0uIMSTWMiKV3q              Amaza              2998   
+732  77SW9BnxLY8rJ0RciFqkHh  The Neighbourhood          18359602   
+733  246dkjvS1zLTtiykXe5h60        Post Malone          45696713   
+
+                                         artist_genres  artist_popularity  
+0    ['argentine hip hop', 'trap argentino', 'trap ...                 84  
+1          ['russian gangster rap', 'russian hip hop']                 62  
+2                                            ['k-pop']                 83  
+3    ['mambo chileno', 'trap latino', 'urbano chile...                 88  
+4             ['egyptian pop', 'mahraganat', 'shaabi']                 56  
+..                                                 ...                ...  
+729                                                 []                 56  
+730                                                 []                 46  
+731                                                 []                 48  
+732  ['modern alternative rock', 'modern rock', 'pop']                 86  
+733           ['dfw rap', 'melodic rap', 'pop', 'rap']                 91  
+
+[734 rows x 5 columns]
+05-Nov-24 10:48:10 [INFO] Number of empty artist genres in artists_genre_full.csv: 123

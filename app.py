@@ -5,6 +5,7 @@ from source.preprocessing import data_prep
 import yaml
 from logs.logger_config import logger
 from source.utils import file_utils
+import openai
 
 
 pd.set_option('display.max_columns', None)
@@ -14,6 +15,9 @@ logger.info(f"Spotify API token: {spotify_api_token}")
 
 discogs_api_token = 'EaALIPVnUVkCSfqeUhhWzcdXZfgXNvERIHfabBFh'
 logger.info(f"Discogs API token: {discogs_api_token}")
+
+openai.api_key = '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'
+logger.info(f"GPT API key: {openai.api_key}")
 
 with open('config/config.yaml', 'r') as file:
     config = yaml.safe_load(file)
