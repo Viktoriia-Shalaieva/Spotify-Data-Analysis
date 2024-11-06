@@ -1,10 +1,9 @@
-from pprint import pprint
 import pandas as pd
 from source.api import spotify
 from source.preprocessing import data_prep
 import yaml
 from logs.logger_config import logger
-from source.utils import file_utils
+import os
 
 
 pd.set_option('display.max_columns', None)
@@ -18,104 +17,102 @@ logger.info(f"Discogs API token: {discogs_api_token}")
 with open('config/config.yaml', 'r') as file:
     config = yaml.safe_load(file)
 
-playlists = config['playlists']
+playlists_all = config['playlists']
 
 with open('config/path_config.yaml', 'r') as config_file:
     path_config = yaml.safe_load(config_file)
 
-file_path_playlists = './data/raw/playlists/'
-playlist_data = spotify.get_save_playlist(spotify_api_token, playlists, file_path_playlists)
+data_dir = path_config['data_dir'][0]
+raw_dir = path_config['raw_dir'][0]
+file_paths = {file_name: os.path.join(data_dir, file_name) for file_name in path_config['files_names']}
 
-playlists_ids = list(playlists.values())
+playlists_path = str(file_paths['playlists.csv'])
+albums_path = str(file_paths['albums.csv'])
+artists_path = str(file_paths['artists.csv'])
+artists_genres_discogs_path = str(file_paths['artists_genres_discogs.csv'])
+artists_genres_full_path = str(file_paths['artists_genres_full.csv'])
+tracks_path = str(file_paths['tracks.csv'])
+tracks_audio_features_path = str(file_paths['tracks_audio_features.csv'])
+tracks_genres_discogs_path = str(file_paths['tracks_genres_discogs.csv'])
+
+playlist_data = spotify.get_save_playlist(spotify_api_token, playlists_all, raw_dir)
+
+playlists_ids = list(playlists_all.values())
 playlists = data_prep.create_all_playlists_table(spotify_api_token, playlists_ids)
 logger.debug(playlists)
 
-file_path_all_playlists = './data/preprocessed/playlists.csv'
-playlists.to_csv(file_path_all_playlists, index=False, sep="~")
-logger.info(f"Playlists data saved to {file_path_all_playlists}")
+playlists.to_csv(playlists_path, index=False, sep="~")
+logger.info(f"Playlists data saved to {playlists_path}")
 
-playlists_table = pd.read_csv(file_path_all_playlists, sep="~")
-
-track_ids = set(file_utils.playlists_table['track_id'])
-pprint(track_ids)
-
-tracks = data_prep.create_tracks_table(spotify_api_token, track_ids)
-logger.debug(tracks)
-
-file_path_tracks = './data/preprocessed/tracks.csv'
-tracks.to_csv(file_path_tracks, index=False, sep="~")
-logger.info(f"Tracks data saved to {file_path_tracks}")
+playlists_table = pd.read_csv(playlists_path, sep="~")
 
 album_ids = set(playlists_table['album_id'])
+artist_ids = set(playlists_table['artist_id'])
+track_ids = set(playlists_table['track_id'])
 
 albums = data_prep.create_albums_table(spotify_api_token, album_ids)
 logger.debug(albums)
 
-file_path_albums = './data/preprocessed/albums.csv'
-albums.to_csv(file_path_albums, index=False, sep="~")
-logger.info(f"Albums data saved to {file_path_albums}")
-
-tracks_audio_features = data_prep.create_tracks_af_table(spotify_api_token, track_ids)
-logger.debug(tracks_audio_features)
-
-file_path_tracks_af = './data/preprocessed/tracks_audio_features.csv'
-tracks_audio_features.to_csv(file_path_tracks_af, index=False, sep="~")
-logger.info(f"Track audio features saved to {file_path_tracks_af}")
-
-artist_ids = set(playlists_table['artist_id'])
-pprint(artist_ids)
+albums.to_csv(albums_path, index=False, sep="~")
+logger.info(f"Albums data saved to {albums_path}")
 
 artists = data_prep.create_artists_table(spotify_api_token, artist_ids)
 logger.debug(artists)
 
-file_path_artists = './data/preprocessed/artists.csv'
-artists.to_csv(file_path_artists, index=False, sep="~")
-logger.info(f"Artists data saved to {file_path_artists}")
+artists.to_csv(artists_path, index=False, sep="~")
+logger.info(f"Artists data saved to {artists_path}")
 
-tracks_genres = data_prep.create_track_genre_table(playlists_table, discogs_api_token)
-logger.debug(tracks_genres)
+tracks = data_prep.create_tracks_table(spotify_api_token, track_ids)
+logger.debug(tracks)
 
-tracks_genres_path = './data/preprocessed/tracks_genres.csv'
-tracks_genres.to_csv(tracks_genres_path, index=False, sep="~")
-logger.info(f"Track genres saved to {tracks_genres_path}")
+tracks.to_csv(tracks_path, index=False, sep="~")
+logger.info(f"Tracks data saved to {tracks_path}")
 
-tracks_genres = pd.read_csv(tracks_genres_path, sep="~")
+tracks_audio_features = data_prep.create_tracks_af_table(spotify_api_token, track_ids)
+logger.debug(tracks_audio_features)
 
-empty_genre_count_tg = (tracks_genres['track_genre'] == '[]').sum()
-logger.info(f"Number of empty track genres in tracks_genres.csv: {empty_genre_count_tg}")
-
-artists_path = './data/preprocessed/artists.csv'
-artists = pd.read_csv(artists_path, sep="~")
-logger.debug(artists)
+tracks_audio_features.to_csv(tracks_audio_features_path, index=False, sep="~")
+logger.info(f"Track audio features saved to {tracks_audio_features_path}")
 #
+tracks_genres_discogs = data_prep.create_track_genre_table(playlists_table, discogs_api_token)
+logger.debug(tracks_genres_discogs)
+
+tracks_genres_discogs.to_csv(tracks_genres_discogs_path, index=False, sep="~")
+logger.info(f"Track genres saved to {tracks_genres_discogs_path}")
+
+tracks_genres_discogs = pd.read_csv(tracks_genres_discogs_path, sep="~")
+
+empty_tracks_genres_discogs = (tracks_genres_discogs['track_genre'] == '[]').sum()
+logger.info(f"Number of empty track genres in tracks_genres.csv: {empty_tracks_genres_discogs}")
+
+artists = pd.read_csv(artists_path, sep="~")
+# logger.debug(artists)
+# #
 empty_genre_count_art = (artists['artist_genres'] == '[]').sum()
 logger.info(f"Number of empty artist genres in artists.csv: {empty_genre_count_art}")
-
-artists_table = pd.read_csv(file_path_artists, sep="~")
 
 artists_genres_discogs = data_prep.create_artist_genre_table(artists, discogs_api_token)
 logger.debug(artists_genres_discogs)
 
-artists_genres_discogs_path = './data/preprocessed/artists_genres_discogs.csv'
 artists_genres_discogs.to_csv(artists_genres_discogs_path, index=False, sep="~")
 
 artists_genres_discogs = pd.read_csv(artists_genres_discogs_path, sep="~")
-empty_genre_count_art = (artists_genres_discogs['artist_genre'] == '[]').sum()
-logger.info(f"Number of empty genres in artists_genres_discogs.csv: {empty_genre_count_art}")
+
+empty_artists_genres_count = (artists_genres_discogs['artist_genre'] == '[]').sum()
+logger.info(f"Number of empty genres in artists_genres_discogs.csv: {empty_artists_genres_count}")
 
 artists['artist_genres'] = artists['artist_genres'].replace('[]', pd.NA)
 
-artists = artists.merge(artists_genres_discogs, on='artist_id', how='left')
+artists = artists.merge(artists_genres_discogs, on='artist_name', how='left')
 logger.debug(artists)
 artists['artist_genres'] = artists['artist_genres'].fillna(artists['artist_genre'])
 logger.debug(artists)
 
-artists_genre_full_path = './data/preprocessed/artists_genres_full.csv'
-artists = artists.drop(columns=['artist_genre', 'artist_name_y'])
-artists = artists.rename(columns={'artist_name_x': 'artist_name'})
-artists.to_csv(artists_genre_full_path, index=False, sep="~")
+artists = artists.drop(columns=['artist_genre'])
+
+artists.to_csv(artists_genres_full_path, index=False, sep="~")
 logger.debug(artists)
 
-artists_genre_full = pd.read_csv(artists_genre_full_path, sep="~")
-empty_genre_count_art = (artists_genre_full['artist_genres'] == '[]').sum()
+artists_full = pd.read_csv(artists_genres_full_path, sep="~")
+empty_genre_count_art = (artists_full['artist_genres'] == '[]').sum()
 logger.info(f"Number of empty artist genres in artists_genre_full.csv: {empty_genre_count_art}")

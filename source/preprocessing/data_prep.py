@@ -58,7 +58,7 @@ def create_all_playlists_table(token, playlists_id):
     for playlist_id in playlists_id:
         playlist_data = spotify.get_playlist(token, playlist_id)
         logger.info(f"Retrieving playlist data for playlist ID: {playlist_id}")
-        time.sleep(1)
+        time.sleep(0.2)
         df_playlist = create_playlist_table(playlist_data)
         all_playlists.append(df_playlist)
 
@@ -72,7 +72,7 @@ def create_tracks_table(access_token, track_ids):
 
     for track_id in track_ids:
         track_info = spotify.get_track(access_token, track_id)
-        time.sleep(0.5)
+        time.sleep(0.2)
 
         if track_info:
             track_data = {
@@ -98,7 +98,7 @@ def create_albums_table(access_token, album_ids):
 
     for album_id in album_ids:
         album_info = spotify.get_album(access_token, album_id)
-        time.sleep(0.5)
+        time.sleep(0.2)
 
         if album_info:
             album_data = {
@@ -127,7 +127,7 @@ def create_tracks_af_table(access_token, track_ids):
 
     for track_id in track_ids:
         track_info = spotify.get_track_audio_features(access_token, track_id)
-        time.sleep(0.5)
+        time.sleep(0.2)
 
         if track_info:
             row = {
@@ -165,7 +165,7 @@ def create_artists_table(access_token, artist_ids):
 
     for artist_id in unique_artist_ids:
         artist_info = spotify.get_artist(access_token, artist_id)
-        time.sleep(0.5)
+        time.sleep(0.2)
 
         if artist_info:
             row = {
@@ -189,22 +189,20 @@ def create_track_genre_table(file, discogs_api_token):
     rows = []
 
     for _, row in file.iterrows():  # Using _ indicates that the index value is not important and will not be used.
-        track_id = row['track_id']
         track_name = row['track_name']
         artists = row['artist_name']
 
         genres = discogs.get_genre(discogs_api_token, track_name, artists)
-        time.sleep(0.5)
+        time.sleep(0.7)
 
         rows.append({
-                'track_id': track_id,
                 'track_name': track_name,
                 'artist_name': artists,
                 'track_genre': genres,
         })
         logger.info(f"Genre data retrieved for track '{track_name}' by artist '{artists}'")
 
-    track_genre = pd.DataFrame(rows, columns=['track_id', 'track_name', 'artist_name', 'track_genre'])
+    track_genre = pd.DataFrame(rows, columns=['track_name', 'artist_name', 'track_genre'])
     logger.info("All track genre data processed successfully.")
     return track_genre
 
@@ -213,18 +211,16 @@ def create_artist_genre_table(file, discogs_api_token):
     rows = []
 
     for _, row in file.iterrows():  # Using _ indicates that the index value is not important and will not be used.
-        artist_id = row['artist_id']
         artist = row['artist_name']
 
         genres = discogs.get_genre_artist(discogs_api_token, artist)
         time.sleep(0.7)
 
         rows.append({
-                'artist_id': artist_id,
                 'artist_name': artist,
                 'artist_genre': genres,
         })
         logger.info(f"Genre data retrieved for artist '{artist}'")
-    artist_genre = pd.DataFrame(rows, columns=['artist_id', 'artist_name', 'artist_genre'])
+    artist_genre = pd.DataFrame(rows, columns=['artist_name', 'artist_genre'])
     logger.info("All artist genre data processed successfully.")
     return artist_genre

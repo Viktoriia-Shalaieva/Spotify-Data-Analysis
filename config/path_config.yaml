@@ -1,7 +1,10 @@
 data_dir:
-  - './data/preprocessed'
+  - './data/preprocessed/'
 
-names:
+raw_dir:
+  - './data/raw/playlists/'
+
+files_names:
   - 'albums.csv'
   - 'artists.csv'
   - 'artists_genres_discogs.csv'
@@ -9,4 +12,11 @@ names:
   - 'playlists.csv'
   - 'tracks.csv'
   - 'tracks_audio_features.csv'
-  - 'tracks_genres.csv'
+  - 'tracks_genres_discogs.csv'
+
+
+directories:
+  data_preprocessed: './data/preprocessed'
+  raw_playlists: './data/raw/playlists'
+
+
