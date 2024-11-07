@@ -1,0 +1,2 @@
+07-Nov-24 22:38:37 [DEBUG] Starting new HTTPS connection (1): www.theaudiodb.com:443
+07-Nov-24 22:38:38 [DEBUG] https://www.theaudiodb.com:443 "GET /api/v1/json/2/artist.php?i=111329 HTTP/11" 200 None

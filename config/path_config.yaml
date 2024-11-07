@@ -13,10 +13,4 @@ files_names:
   - 'tracks.csv'
   - 'tracks_audio_features.csv'
   - 'tracks_genres_discogs.csv'
-
-
-directories:
-  data_preprocessed: './data/preprocessed'
-  raw_playlists: './data/raw/playlists'
-
-
+  - 'tracks_genres_theaudiodb.csv'

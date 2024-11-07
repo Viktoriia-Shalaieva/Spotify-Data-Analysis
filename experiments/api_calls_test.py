@@ -51,9 +51,14 @@ def get_track(track_id, access_token):
         "Authorization": f"Bearer {access_token}"
     }
 
-    response = requests.get(url, headers=headers)
-    track_info = response.json()
-    return track_info
+    try:
+        response = requests.get(url, headers=headers)
+        track_info = response.json()
+        return track_info
+
+    except Exception as error_message:
+        print(f"The following error occurred: {error_message}")
+
 
 
 def get_track_market(track_id, market, access_token):
