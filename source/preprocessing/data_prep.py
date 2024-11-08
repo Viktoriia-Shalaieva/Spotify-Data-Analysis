@@ -1,5 +1,5 @@
 import pandas as pd
-from source.api import discogs, theaudiodb, spotify
+from source.api import discogs, spotify
 import time
 from logs.logger_config import logger
 
@@ -223,25 +223,25 @@ def create_artist_genre_table(file, discogs_api_token):
     logger.info("All artist genre data processed successfully.")
     return artist_genre
 
-
-def create_track_genre_theaudiodb(file):
-    rows = []
-
-    for _, row in file.iterrows():  # Using _ indicates that the index value is not important and will not be used.
-        track_name = row['track_name']
-        artists = row['artist_name']
-
-        genres = theaudiodb.get_track_genre_theaudiodb(track_name, artists)
-
-        time.sleep(0.7)
-
-        rows.append({
-                'track_name': track_name,
-                'artist_name': artists,
-                'track_genre': genres,
-        })
-        logger.info(f"Genre data retrieved for track '{track_name}' by artist '{artists}'")
-
-    track_genre = pd.DataFrame(rows, columns=['track_name', 'artist_name', 'track_genre'])
-    logger.info("All track genre data processed successfully.")
-    return track_genre
+#
+# def create_track_genre_theaudiodb(file):
+#     rows = []
+#
+#     for _, row in file.iterrows():  # Using _ indicates that the index value is not important and will not be used.
+#         track_name = row['track_name']
+#         artists = row['artist_name']
+#
+#         genres = theaudiodb.get_track_genre_theaudiodb(track_name, artists)
+#
+#         time.sleep(0.7)
+#
+#         rows.append({
+#                 'track_name': track_name,
+#                 'artist_name': artists,
+#                 'track_genre': genres,
+#         })
+#         logger.info(f"Genre data retrieved for track '{track_name}' by artist '{artists}'")
+#
+#     track_genre = pd.DataFrame(rows, columns=['track_name', 'artist_name', 'track_genre'])
+#     logger.info("All track genre data processed successfully.")
+#     return track_genre
