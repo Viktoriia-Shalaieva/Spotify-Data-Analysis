@@ -24,10 +24,7 @@ def create_playlist_table(playlist):
             'track_duration_ms': track.get('duration_ms'),
             'track_popularity': track.get('popularity'),
             'track_explicit': track.get('explicit'),
-            'track_restrictions': track.get('restrictions', {}).get('reason'),
             'track_isrc': track.get('external_ids', {}).get('isrc'),
-            'track_ean': track.get('external_ids', {}).get('ids'),
-            'track_upc': track.get('external_ids', {}).get('upc'),
         }
         album = track.get('album', {})
 
@@ -37,7 +34,6 @@ def create_playlist_table(playlist):
             'album_release_date': album.get('release_date'),
             'album_type': album.get('album_type'),
             'album_total_tracks': album.get('total_tracks'),
-            'album_restrictions': album.get('restrictions', {}).get('reason'),
         }
         artists_info = {
             'artist_id': ', '.join([artist.get('id') for artist in track.get('artists', [])]),
@@ -79,7 +75,6 @@ def create_tracks_table(access_token, track_ids):
                 'track_duration_ms': track_info.get('duration_ms'),
                 'track_explicit': track_info.get('explicit'),
                 'track_popularity': track_info.get('popularity'),
-                'track_restrictions': track_info.get('restrictions', {}).get('reason')
             }
             tracks_data.append(track_data)
             logger.info(f"Track data retrieved successfully for track ID: {track_id}")
@@ -108,7 +103,6 @@ def create_albums_table(access_token, album_ids):
                 'album_genres': album_info.get('genres'),
                 'album_label': album_info.get('label'),
                 'album_popularity': album_info.get('popularity'),
-                'album_restrictions': album_info.get('restrictions', {}).get('reason'),
             }
             albums_data.append(album_data)
             logger.info(f"Album data retrieved successfully for album ID: {album_id}")
