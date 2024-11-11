@@ -9,6 +9,7 @@ files_names:
   - 'artists.csv'
   - 'artists_genres_discogs.csv'
   - 'artists_genres_full.csv'
+  - 'artists_genres_full_random.csv'
   - 'artists_genres_full_unknown.csv'
   - 'playlists.csv'
   - 'tracks.csv'

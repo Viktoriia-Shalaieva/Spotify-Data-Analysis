@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import yaml
 import os
+import plotly.express as px
 
 
 with open('config/path_config.yaml', 'r') as config_file:
@@ -23,7 +24,7 @@ artists_genres_full_unknown = pd.read_csv(artists_genres_full_unknown_path, sep=
 tracks_table = pd.read_csv(tracks_path, sep='~')
 tracks_audio_features_table = pd.read_csv(tracks_audio_features_path, sep='~')
 
-st.sidebar.image("images/Spotify_Full_Logo_RGB_Green.png")
+st.sidebar.image("images/songs.png")
 
 st.sidebar.title("Navigation")
 menu_options = ["Home", "Playlists Analysis", "Tracks Analysis", "Artists Analysis", "Albums Analysis", "Recommendations"]
@@ -42,6 +43,20 @@ if choice == "Home":
 
 elif choice == "Playlists Analysis":
     st.title("Playlists Analysis")
+    st.write("Analyze various Spotify playlists data.")
+    playlist_names = playlists_table['playlist_name'].unique()
+    selected_playlist = st.selectbox("Select a Playlist", playlist_names)
+    filtered_data = playlists_table[playlists_table['playlist_name'] == selected_playlist]
+
+    st.write(f"Data for {selected_playlist}:")
+    st.dataframe(filtered_data)
+
+    # Example visualization using Plotly
+    import plotly.express as px
+
+    fig = px.histogram(filtered_data, x='track_popularity', nbins=20,
+                       title=f"Track Popularity Distribution in {selected_playlist}")
+    st.plotly_chart(fig)
 
 elif choice == "Tracks Analysis":
     st.title("Tracks Analysis")
