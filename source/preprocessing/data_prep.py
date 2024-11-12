@@ -98,7 +98,6 @@ def create_albums_table(access_token, album_ids):
                 'album_type': album_info.get('album_type'),
                 'album_release_date': album_info.get('release_date'),
                 'album_total_tracks': album_info.get('total_tracks'),
-                'album_genres': album_info.get('genres'),
                 'album_label': album_info.get('label'),
                 'album_popularity': album_info.get('popularity'),
             }
