@@ -12,7 +12,6 @@ def create_playlist_table(playlist):
 
     for item in playlist['tracks']['items']:
         track = item['track']
-        track_added_at = item['added_at']
 
         row = {
             'playlist_id': playlist_id,
@@ -20,7 +19,6 @@ def create_playlist_table(playlist):
             'playlist_followers_total': playlist_followers_total,
             'track_id': track.get('id'),
             'track_name': track.get('name'),
-            'track_added_at': track_added_at,
             'track_duration_ms': track.get('duration_ms'),
             'track_popularity': track.get('popularity'),
             'track_explicit': track.get('explicit'),

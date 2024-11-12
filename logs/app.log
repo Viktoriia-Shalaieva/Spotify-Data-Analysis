@@ -1,12 +1,228 @@
-11-Nov-24 11:37:32 [DEBUG] Starting new HTTPS connection (1): accounts.spotify.com:443
-11-Nov-24 11:37:32 [DEBUG] https://accounts.spotify.com:443 "POST /api/token HTTP/11" 200 None
-11-Nov-24 11:37:32 [INFO] Access token retrieved successfully
-11-Nov-24 11:37:32 [INFO] Spotify API token: BQBbnlHBYeBb3UyQvrR_cLjCd0yUH_3LnEVu2gY6isGI1rrp05OWubukfKJWR7nGOkzl5kyihrD0Kbf6AjxzGS4NTnuJTmWYY3kxj3ArGnp8UFgH-ac
-11-Nov-24 11:37:32 [INFO] Discogs API token: EaALIPVnUVkCSfqeUhhWzcdXZfgXNvERIHfabBFh
-11-Nov-24 11:37:32 [DEBUG] ['5th gen k-pop', 'Blues', 'Brass & Military', "Children's", 'Classical', 'Electronic', 'Folk, World, & Country', 'Funk / Soul', 'Hip Hop', 'Jazz', 'Latin', 'Non-Music', 'Pop', 'Reggae', 'Rock', 'Stage & Screen', 'adult standards', 'afro drill', 'afro house', 'afro soul', 'afrobeats', 'afropop', 'afroswing', 'agronejo', 'albanian hip hop', 'album rock', 'alt z', 'alte', 'alternative dance', 'alternative metal', 'alternative r&b', 'alternative rock', 'amapiano', 'arabic hip hop', 'argentine hip hop', 'argentine telepop', 'arrocha', 'arrochadeira', 'art pop', 'atl hip hop', 'australian hip hop', 'azonto', 'azontobeats', 'barcadi', 'bases de freestyle', 'bayerischer rap', 'bedroom pop', 'bedroom r&b', 'belgian hip hop', 'belgian pop', 'bhojpuri pop', 'black americana', 'bolobedu house', 'boy band', 'brazilian hip hop', 'brega funk', 'brostep', 'canadian contemporary r&b', 'canadian pop', 'candy pop', 'chill abstract hip hop', 'chill drill', 'classic house', 'classic kollywood', 'classic oklahoma country', 'classic pakistani pop', 'classic rock', 'classic russian rock', 'classic soul', 'classic texas country', 'cloud rap francais', 'colombian pop', 'conscious hip hop', 'contemporary country', 'corrido', 'corridos tumbados', 'country', 'country dawn', 'country road', 'cruise', 'cuarteto', 'cumbia paraguaya', 'cumbia pop', 'cumbia santafesina', 'cumbia villera', 'dance pop', 'dance rock', 'dancefloor dnb', 'dancehall', 'deboxe', 'deep house', 'deep underground hip hop', 'desi hip hop', 'desi pop', 'desi trap', 'dfw rap', 'drill espanol', 'drill francais', 'drum and bass', 'easy listening', 'edm', 'electro', 'electro house', 'filmi', 'filter house', 'flamenco urbano', 'folk-pop', 'folklore argentino', 'forro', 'frauenrap', 'french hip hop', 'french pop', 'funk 150 bpm', 'funk bh', 'funk carioca', 'funk consciente', 'funk mtg', 'funk ostentacao', 'funk paulista', 'funk pop', 'funk rj', 'funk viral', 'gaming dubstep', 'gangster rap', 'garage rock', 'german cloud rap', 'german dance', 'german drill', 'german hip hop', 'german pop', 'german r&b', 'german trap', 'german underground rap', 'ghanaian hip hop', 'ghanaian pop', 'gqom', 'grime', 'gruperas inmortales', 'gujarati pop', 'gym phonk', 'hamburg hip hop', 'haryanvi hip hop', 'haryanvi pop', 'hawaiian hip hop', 'hindi hip hop', 'hindi indie', 'hip hop', 'hip house', 'house', 'indian folk', 'indian indie', 'indian instrumental', 'indian singer-songwriter', 'indie folk', 'indie pop', 'indie rock', 'indietronica', 'irish singer-songwriter', 'j-division', 'k-pop', 'k-pop boy group', 'k-pop girl group', 'k-rap', 'kashmiri pop', 'kasi rap', 'kavkaz', 'kentucky hip hop', 'kollywood', 'korean ost', 'korean r&b', 'kurdish hip hop', 'la indie', 'latin hip hop', 'latin pop', 'latin viral pop', 'london rap', 'lounge', 'mambo chileno', 'maskandi', 'melodic house', 'melodic rap', 'memphis soul', 'metropopolis', 'miami hip hop', 'modern alternative rock', 'modern bhajan', 'modern bollywood', 'modern country pop', 'modern rock', 'mollywood', 'mpb', 'musica mexicana', 'musica tocantinense', 'neo mellow', 'neo-synthpop', 'neoperreo', 'new orleans rap', 'new rave', 'new romantic', 'new wave', 'new wave pop', 'nigerian hip hop', 'nigerian pop', 'nu metal', 'nu-cumbia', 'old school rap francais', 'opm', 'pagode', 'pagode baiano', 'pagode novo', 'permanent wave', 'persian electronic', 'persian pop', 'plugg', 'pluggnb', 'pop', 'pop argentino', 'pop dance', 'pop edm', 'pop lgbtq+ brasileira', 'pop nacional', 'pop rap', 'pop reggaeton', 'pop rock', 'pop urbaine', 'pop venezolano', 'post-grunge', 'post-teen pop', 'pov: indie', 'previa', 'progressive electro house', 'psychedelic pop', 'puerto rican pop', 'punjabi hip hop', 'punjabi lo-fi', 'punjabi pop', 'r&b', 'r&b argentino', 'r&b brasileiro', 'r&b francais', 'rage rap', 'ranchera', 'rap', 'rap belge', 'rap canario', 'rap catala', 'rap cearense', 'rap conciencia', 'rap conscient', 'rap df', 'rap espanol', 'rap francais', 'rap latina', 'rap marseille', 'rap metal', 'rap underground argentino', 'rave funk', 'reggaeton', 'reggaeton chileno', 'reggaeton colombiano', 'reggaeton flow', 'rkt', 'rock', 'rock independant francais', 'rockabilly', 'russian alt pop', 'russian drain', 'russian electronic', 'russian emo rap', 'russian gangster rap', 'russian grime', 'russian hip hop', 'russian pop', 'russian punk', 'russian trap', 'sad sierreno', 'samba-rock', 'sepedi pop', 'sertanejo', 'sertanejo pop', 'sertanejo universitario', 'sgija', 'sheffield indie', 'shimmer pop', 'sierreno', 'singer-songwriter pop', 'slap house', 'social media pop', 'soft rock', 'soul', 'soul blues', 'south african hip hop', 'south african house', 'south african pop', 'south african pop dance', 'south african trap', 'southern hip hop', 'southern soul', 'spanish pop', 'stomp and holler', 'sufi', 'swedish hip hop', 'talent show', 'tamil hip hop', 'tamil pop', 'tontipop', 'trap', 'trap argentino', 'trap boricua', 'trap brasileiro', 'trap catala', 'trap colombiano', 'trap funk', 'trap latino', 'trap queen', 'trap triste', 'tropical', 'trot', 'uk dance', 'uk hip hop', 'uk pop', 'ukrainian edm', 'ukrainian indie', 'ukrainian pop', 'ukrainian post-punk', 'ukrainian rock', 'ukrainian viral pop', 'underground amapiano', 'urban contemporary', 'urbano chileno', 'urbano espanol', 'urbano latino', 'urdu hip hop', 'variete francaise', 'viral afropop', 'vocal jazz', 'west coast rap', 'yacht rock']
-11-Nov-24 11:37:32 [DEBUG] 338
-11-Nov-24 11:37:32 [DEBUG] kavkaz
-11-Nov-24 11:37:32 [DEBUG]                   artist_id             artist_name  artist_followers  \
+11-Nov-24 12:14:58 [DEBUG] Starting new HTTPS connection (1): accounts.spotify.com:443
+11-Nov-24 12:14:58 [DEBUG] https://accounts.spotify.com:443 "POST /api/token HTTP/11" 200 None
+11-Nov-24 12:14:58 [INFO] Access token retrieved successfully
+11-Nov-24 12:14:58 [INFO] Spotify API token: BQAdPjlwLRcojyNomYL2yduVyk1LGef0wBcP6r7A1OisWC8GaL-quDAmgsynC5msTeyAgpGQqmgkfvW7f79xhk91H3iXHBJcrdSFSjLPe3B0P_hB85I
+11-Nov-24 12:14:58 [INFO] Discogs API token: EaALIPVnUVkCSfqeUhhWzcdXZfgXNvERIHfabBFh
+11-Nov-24 12:14:58 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:14:59 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbMDoHDwVN2tF HTTP/11" 200 None
+11-Nov-24 12:14:59 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:14:59 [INFO] Playlist 'Top 50 - Global' saved successfully
+11-Nov-24 12:14:59 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:14:59 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbLRQDuF5jeBp HTTP/11" 200 None
+11-Nov-24 12:14:59 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:14:59 [INFO] Playlist 'Top 50 - USA' saved successfully
+11-Nov-24 12:14:59 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:00 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbKj23U1GF4IR HTTP/11" 200 None
+11-Nov-24 12:15:00 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:00 [INFO] Playlist 'Top 50 - Canada' saved successfully
+11-Nov-24 12:15:00 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:00 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbMXbN3EUUhlg HTTP/11" 200 None
+11-Nov-24 12:15:00 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:00 [INFO] Playlist 'Top 50 - Brazil' saved successfully
+11-Nov-24 12:15:00 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:01 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbMMy2roB9myp HTTP/11" 200 None
+11-Nov-24 12:15:01 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:01 [INFO] Playlist 'Top 50 - Argentina' saved successfully
+11-Nov-24 12:15:01 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:01 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbJiZcmkrIHGU HTTP/11" 200 None
+11-Nov-24 12:15:01 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:01 [INFO] Playlist 'Top 50 - Germany' saved successfully
+11-Nov-24 12:15:01 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:01 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbIPWwFssbupI HTTP/11" 200 None
+11-Nov-24 12:15:01 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:01 [INFO] Playlist 'Top 50 - France' saved successfully
+11-Nov-24 12:15:01 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:02 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbNFJfN1Vw8d9 HTTP/11" 200 None
+11-Nov-24 12:15:02 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:02 [INFO] Playlist 'Top 50 - Spain' saved successfully
+11-Nov-24 12:15:02 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:02 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbKkidEfWYRuD HTTP/11" 200 None
+11-Nov-24 12:15:02 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:02 [INFO] Playlist 'Top 50 - Ukraine' saved successfully
+11-Nov-24 12:15:02 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:03 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbMH2jvi6jvjk HTTP/11" 200 None
+11-Nov-24 12:15:03 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:03 [INFO] Playlist 'Top 50 - South Africa' saved successfully
+11-Nov-24 12:15:03 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:03 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbM4UZuIrvHvA HTTP/11" 200 None
+11-Nov-24 12:15:03 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:03 [INFO] Playlist 'Top 50 - UAE' saved successfully
+11-Nov-24 12:15:03 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:04 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbNxXF4SkHj9F HTTP/11" 200 None
+11-Nov-24 12:15:04 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:04 [INFO] Playlist 'Top 50 - South Korea' saved successfully
+11-Nov-24 12:15:04 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:04 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbLZ52XmnySJg HTTP/11" 200 None
+11-Nov-24 12:15:04 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:04 [INFO] Playlist 'Top 50 - India' saved successfully
+11-Nov-24 12:15:04 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:05 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbLnolsZ8PSNw HTTP/11" 200 None
+11-Nov-24 12:15:05 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:05 [INFO] Playlist 'Top 50 - United Kingdom' saved successfully
+11-Nov-24 12:15:05 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:05 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbKY7jLzlJ11V HTTP/11" 200 None
+11-Nov-24 12:15:05 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:05 [INFO] Playlist 'Top 50 - Nigeria' saved successfully
+11-Nov-24 12:15:05 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:06 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbMDoHDwVN2tF HTTP/11" 200 None
+11-Nov-24 12:15:06 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:06 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbMDoHDwVN2tF
+11-Nov-24 12:15:06 [INFO] Playlist 'Top 50 - Global' processed with 50 tracks.
+11-Nov-24 12:15:06 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:06 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbLRQDuF5jeBp HTTP/11" 200 None
+11-Nov-24 12:15:06 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:06 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbLRQDuF5jeBp
+11-Nov-24 12:15:06 [INFO] Playlist 'Top 50 - USA' processed with 50 tracks.
+11-Nov-24 12:15:06 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:06 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbKj23U1GF4IR HTTP/11" 200 None
+11-Nov-24 12:15:06 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:06 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbKj23U1GF4IR
+11-Nov-24 12:15:06 [INFO] Playlist 'Top 50 - Canada' processed with 50 tracks.
+11-Nov-24 12:15:06 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:07 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbMXbN3EUUhlg HTTP/11" 200 None
+11-Nov-24 12:15:07 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:07 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbMXbN3EUUhlg
+11-Nov-24 12:15:07 [INFO] Playlist 'Top 50 - Brazil' processed with 50 tracks.
+11-Nov-24 12:15:07 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:07 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbMMy2roB9myp HTTP/11" 200 None
+11-Nov-24 12:15:07 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:07 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbMMy2roB9myp
+11-Nov-24 12:15:07 [INFO] Playlist 'Top 50 - Argentina' processed with 50 tracks.
+11-Nov-24 12:15:07 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:08 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbJiZcmkrIHGU HTTP/11" 200 None
+11-Nov-24 12:15:08 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:08 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbJiZcmkrIHGU
+11-Nov-24 12:15:08 [INFO] Playlist 'Top 50 - Germany' processed with 50 tracks.
+11-Nov-24 12:15:08 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:08 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbIPWwFssbupI HTTP/11" 200 None
+11-Nov-24 12:15:08 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:08 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbIPWwFssbupI
+11-Nov-24 12:15:08 [INFO] Playlist 'Top 50 - France' processed with 50 tracks.
+11-Nov-24 12:15:08 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:08 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbNFJfN1Vw8d9 HTTP/11" 200 None
+11-Nov-24 12:15:09 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:09 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbNFJfN1Vw8d9
+11-Nov-24 12:15:09 [INFO] Playlist 'Top 50 - Spain' processed with 50 tracks.
+11-Nov-24 12:15:09 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:09 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbKkidEfWYRuD HTTP/11" 200 None
+11-Nov-24 12:15:09 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:09 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbKkidEfWYRuD
+11-Nov-24 12:15:09 [INFO] Playlist 'Top 50 - Ukraine' processed with 50 tracks.
+11-Nov-24 12:15:09 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:09 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbMH2jvi6jvjk HTTP/11" 200 None
+11-Nov-24 12:15:09 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:09 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbMH2jvi6jvjk
+11-Nov-24 12:15:09 [INFO] Playlist 'Top 50 - South Africa' processed with 50 tracks.
+11-Nov-24 12:15:09 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:10 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbM4UZuIrvHvA HTTP/11" 200 None
+11-Nov-24 12:15:10 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:10 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbM4UZuIrvHvA
+11-Nov-24 12:15:10 [INFO] Playlist 'Top 50 - UAE' processed with 50 tracks.
+11-Nov-24 12:15:10 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:10 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbNxXF4SkHj9F HTTP/11" 200 None
+11-Nov-24 12:15:10 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:10 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbNxXF4SkHj9F
+11-Nov-24 12:15:10 [INFO] Playlist 'Top 50 - South Korea' processed with 50 tracks.
+11-Nov-24 12:15:10 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:11 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbLZ52XmnySJg HTTP/11" 200 None
+11-Nov-24 12:15:11 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:11 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbLZ52XmnySJg
+11-Nov-24 12:15:11 [INFO] Playlist 'Top 50 - India' processed with 50 tracks.
+11-Nov-24 12:15:11 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:11 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbLnolsZ8PSNw HTTP/11" 200 None
+11-Nov-24 12:15:11 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:11 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbLnolsZ8PSNw
+11-Nov-24 12:15:11 [INFO] Playlist 'Top 50 - United Kingdom' processed with 50 tracks.
+11-Nov-24 12:15:11 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+11-Nov-24 12:15:11 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbKY7jLzlJ11V HTTP/11" 200 None
+11-Nov-24 12:15:11 [INFO] Playlist information retrieved successfully
+11-Nov-24 12:15:11 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbKY7jLzlJ11V
+11-Nov-24 12:15:11 [INFO] Playlist 'Top 50 - Nigeria' processed with 50 tracks.
+11-Nov-24 12:15:11 [INFO] All playlists processed successfully.
+11-Nov-24 12:15:11 [DEBUG]                 playlist_id     playlist_name  playlist_followers_total  \
+0    37i9dQZEVXbMDoHDwVN2tF   Top 50 - Global                  17109802   
+1    37i9dQZEVXbMDoHDwVN2tF   Top 50 - Global                  17109802   
+2    37i9dQZEVXbMDoHDwVN2tF   Top 50 - Global                  17109802   
+3    37i9dQZEVXbMDoHDwVN2tF   Top 50 - Global                  17109802   
+4    37i9dQZEVXbMDoHDwVN2tF   Top 50 - Global                  17109802   
+..                      ...               ...                       ...   
+745  37i9dQZEVXbKY7jLzlJ11V  Top 50 - Nigeria                     37962   
+746  37i9dQZEVXbKY7jLzlJ11V  Top 50 - Nigeria                     37962   
+747  37i9dQZEVXbKY7jLzlJ11V  Top 50 - Nigeria                     37962   
+748  37i9dQZEVXbKY7jLzlJ11V  Top 50 - Nigeria                     37962   
+749  37i9dQZEVXbKY7jLzlJ11V  Top 50 - Nigeria                     37962   
+
+                   track_id          track_name  track_duration_ms  \
+0    2plbrEY59IikOBgBGLjaoe    Die With A Smile             251667   
+1    5vNRhkKd0yEAg8suGBpjeY                APT.             169917   
+2    6dOtVTDdiauQNBQEDOtlAB  BIRDS OF A FEATHER             210373   
+3    7tI8dRuH2Yc6RuoTjxo4dU                 Who             170887   
+4    1cOboCuWYI2osTOfolMRS6             Tu Boda             225880   
+..                      ...                 ...                ...   
+745  1SDOo6cNNrvarL9wqEVAJT     Awolowo - Remix             138352   
+746  0CK6SBXMBAW2iTtlrdmutY        Hello Habibi             194661   
+747  6IEYlownuHoYdpMikoyj58            Mentally             197154   
+748  7vKXc90NT5WBm3UTT4iTVG  KANTE (feat. Fave)             194040   
+749  5ZtK8XAVnoaGdBXZWCEVCY   Lonely At The Top             157714   
+
+     track_popularity  track_explicit    track_isrc                album_id  \
+0                  99           False  USUM72409273  10FLjwfpbxLmW8c25Xyc2N   
+1                  97           False  USAT22409172  2IYQwwgxgOIn7t3iF6ufFD   
+2                  97           False  USUM72401994  7aJuG4TFXa2hmE4z1yxc3n   
+3                  92           False  USA2P2431062  15XcLhiVMlSOipUddTNDnr   
+4                  92            True  QZ9QQ2400535  60cQzWfmdg4hyDXrpW6kOA   
+..                ...             ...           ...                     ...   
+745                56           False  QZVEM1807164  4Ktw5YWnBtSo7XUuLL8L68   
+746                49            True  USUYG1582126  43Xxk0OfHCuh0HSEJ3nK07   
+747                63            True  USUYG1566020  3kS42vslfpYnxWkGN4JvlW   
+748                68           False  GBARL2300327  6lI21W76LD0S3vC55GrfSS   
+749                70           False  USUYG1490059  2O9VJaLSnwjZ2HPpMaVoPU   
+
+               album_name album_release_date album_type  album_total_tracks  \
+0        Die With A Smile         2024-08-16     single                   1   
+1                    APT.         2024-10-18     single                   1   
+2    HIT ME HARD AND SOFT         2024-05-17      album                  10   
+3                    MUSE         2024-07-19      album                   7   
+4                 Tu Boda         2024-09-26     single                   1   
+..                    ...                ...        ...                 ...   
+745       Awolowo (Remix)         2024-11-01     single                   1   
+746          Hello Habibi         2024-11-07     single                   1   
+747             Lungu Boy         2024-08-08      album                  15   
+748              Timeless         2023-03-30      album                  17   
+749           Work Of Art         2023-06-15      album                  14   
+
+                                          artist_id  \
+0    1HY2Jd0NmPuamShAr6KMms, 0du5cEVh5yTK9QJze8zA0C   
+1    3eVa5w3URK5duf6eyVDbu9, 0du5cEVh5yTK9QJze8zA0C   
+2                            6qqNVTkY8uBg9cP3Jd7DAH   
+3                            1oSPZhvZMIrWW5I41kPkkY   
+4    3l9G1G9MxH6DaRhwLklaf5, 0ys2OFYzWYB5hRDLCsBqxt   
+..                                              ...   
+745  5HmfRnwYc5vNyWxRfP9U74, 1hNaHKp2Za5YdOAG0WnRbc   
+746  4ovtyvs7j1jSmwhkBGHqSr, 1z7b1Pr1rSlvWRzsW3HOrS   
+747                          3a1tBryiczPAZpgoZN9Rzg   
+748  0Y3agQaa6g2r0YmHPOO9rh, 4wAqlYtTaaHELEgyCh9KjG   
+749                          3a1tBryiczPAZpgoZN9Rzg   
+
+                     artist_name  
+0          Lady Gaga, Bruno Mars  
+1               ROSÉ, Bruno Mars  
+2                  Billie Eilish  
+3                          Jimin  
+4    Oscar Maydon, Fuerza Regida  
+..                           ...  
+745            Fido, Tiwa Savage  
+746                Olamide, Russ  
+747                        Asake  
+748                 Davido, FAVE  
+749                        Asake  
+
+[750 rows x 16 columns]
+11-Nov-24 12:15:11 [INFO] Playlists data saved to ./data/preprocessed/playlists.csv
+11-Nov-24 12:15:11 [DEBUG] ['5th gen k-pop', 'Blues', 'Brass & Military', "Children's", 'Classical', 'Electronic', 'Folk, World, & Country', 'Funk / Soul', 'Hip Hop', 'Jazz', 'Latin', 'Non-Music', 'Pop', 'Reggae', 'Rock', 'Stage & Screen', 'adult standards', 'afro drill', 'afro house', 'afro soul', 'afrobeats', 'afropop', 'afroswing', 'agronejo', 'albanian hip hop', 'album rock', 'alt z', 'alte', 'alternative dance', 'alternative metal', 'alternative r&b', 'alternative rock', 'amapiano', 'arabic hip hop', 'argentine hip hop', 'argentine telepop', 'arrocha', 'arrochadeira', 'art pop', 'atl hip hop', 'australian hip hop', 'azonto', 'azontobeats', 'barcadi', 'bases de freestyle', 'bayerischer rap', 'bedroom pop', 'bedroom r&b', 'belgian hip hop', 'belgian pop', 'bhojpuri pop', 'black americana', 'bolobedu house', 'boy band', 'brazilian hip hop', 'brega funk', 'brostep', 'canadian contemporary r&b', 'canadian pop', 'candy pop', 'chill abstract hip hop', 'chill drill', 'classic house', 'classic kollywood', 'classic oklahoma country', 'classic pakistani pop', 'classic rock', 'classic russian rock', 'classic soul', 'classic texas country', 'cloud rap francais', 'colombian pop', 'conscious hip hop', 'contemporary country', 'corrido', 'corridos tumbados', 'country', 'country dawn', 'country road', 'cruise', 'cuarteto', 'cumbia paraguaya', 'cumbia pop', 'cumbia santafesina', 'cumbia villera', 'dance pop', 'dance rock', 'dancefloor dnb', 'dancehall', 'deboxe', 'deep house', 'deep underground hip hop', 'desi hip hop', 'desi pop', 'desi trap', 'dfw rap', 'drill espanol', 'drill francais', 'drum and bass', 'easy listening', 'edm', 'electro', 'electro house', 'filmi', 'filter house', 'flamenco urbano', 'folk-pop', 'folklore argentino', 'forro', 'frauenrap', 'french hip hop', 'french pop', 'funk 150 bpm', 'funk bh', 'funk carioca', 'funk consciente', 'funk mtg', 'funk ostentacao', 'funk paulista', 'funk pop', 'funk rj', 'funk viral', 'gaming dubstep', 'gangster rap', 'garage rock', 'german cloud rap', 'german dance', 'german drill', 'german hip hop', 'german pop', 'german r&b', 'german trap', 'german underground rap', 'ghanaian hip hop', 'ghanaian pop', 'gqom', 'grime', 'gruperas inmortales', 'gujarati pop', 'gym phonk', 'hamburg hip hop', 'haryanvi hip hop', 'haryanvi pop', 'hawaiian hip hop', 'hindi hip hop', 'hindi indie', 'hip hop', 'hip house', 'house', 'indian folk', 'indian indie', 'indian instrumental', 'indian singer-songwriter', 'indie folk', 'indie pop', 'indie rock', 'indietronica', 'irish singer-songwriter', 'j-division', 'k-pop', 'k-pop boy group', 'k-pop girl group', 'k-rap', 'kashmiri pop', 'kasi rap', 'kavkaz', 'kentucky hip hop', 'kollywood', 'korean ost', 'korean r&b', 'kurdish hip hop', 'la indie', 'latin hip hop', 'latin pop', 'latin viral pop', 'london rap', 'lounge', 'mambo chileno', 'maskandi', 'melodic house', 'melodic rap', 'memphis soul', 'metropopolis', 'miami hip hop', 'modern alternative rock', 'modern bhajan', 'modern bollywood', 'modern country pop', 'modern rock', 'mollywood', 'mpb', 'musica mexicana', 'musica tocantinense', 'neo mellow', 'neo-synthpop', 'neoperreo', 'new orleans rap', 'new rave', 'new romantic', 'new wave', 'new wave pop', 'nigerian hip hop', 'nigerian pop', 'nu metal', 'nu-cumbia', 'old school rap francais', 'opm', 'pagode', 'pagode baiano', 'pagode novo', 'permanent wave', 'persian electronic', 'persian pop', 'plugg', 'pluggnb', 'pop', 'pop argentino', 'pop dance', 'pop edm', 'pop lgbtq+ brasileira', 'pop nacional', 'pop rap', 'pop reggaeton', 'pop rock', 'pop urbaine', 'pop venezolano', 'post-grunge', 'post-teen pop', 'pov: indie', 'previa', 'progressive electro house', 'psychedelic pop', 'puerto rican pop', 'punjabi hip hop', 'punjabi lo-fi', 'punjabi pop', 'r&b', 'r&b argentino', 'r&b brasileiro', 'r&b francais', 'rage rap', 'ranchera', 'rap', 'rap belge', 'rap canario', 'rap catala', 'rap cearense', 'rap conciencia', 'rap conscient', 'rap df', 'rap espanol', 'rap francais', 'rap latina', 'rap marseille', 'rap metal', 'rap underground argentino', 'rave funk', 'reggaeton', 'reggaeton chileno', 'reggaeton colombiano', 'reggaeton flow', 'rkt', 'rock', 'rock independant francais', 'rockabilly', 'russian alt pop', 'russian drain', 'russian electronic', 'russian emo rap', 'russian gangster rap', 'russian grime', 'russian hip hop', 'russian pop', 'russian punk', 'russian trap', 'sad sierreno', 'samba-rock', 'sepedi pop', 'sertanejo', 'sertanejo pop', 'sertanejo universitario', 'sgija', 'sheffield indie', 'shimmer pop', 'sierreno', 'singer-songwriter pop', 'slap house', 'social media pop', 'soft rock', 'soul', 'soul blues', 'south african hip hop', 'south african house', 'south african pop', 'south african pop dance', 'south african trap', 'southern hip hop', 'southern soul', 'spanish pop', 'stomp and holler', 'sufi', 'swedish hip hop', 'talent show', 'tamil hip hop', 'tamil pop', 'tontipop', 'trap', 'trap argentino', 'trap boricua', 'trap brasileiro', 'trap catala', 'trap colombiano', 'trap funk', 'trap latino', 'trap queen', 'trap triste', 'tropical', 'trot', 'uk dance', 'uk hip hop', 'uk pop', 'ukrainian edm', 'ukrainian indie', 'ukrainian pop', 'ukrainian post-punk', 'ukrainian rock', 'ukrainian viral pop', 'underground amapiano', 'urban contemporary', 'urbano chileno', 'urbano espanol', 'urbano latino', 'urdu hip hop', 'variete francaise', 'viral afropop', 'vocal jazz', 'west coast rap', 'yacht rock']
+11-Nov-24 12:15:11 [DEBUG] 338
+11-Nov-24 12:15:11 [DEBUG] german hip hop
+11-Nov-24 12:15:11 [DEBUG]                   artist_id             artist_name  artist_followers  \
 0    4AK6F7OLvEQ5QYCBNiQWHq           One Direction          37425991   
 1    3jNkaOXasoc7RsxdchvEVq          Chase & Status           1054369   
 2    6GRwwWAtmusrgAL5JF9Dfr          Callejero Fino           1772833   
@@ -23,8 +239,8 @@
 0    [boy band, pop, post-teen pop, talent show]                 91  
 1      [dancefloor dnb, drum and bass, uk dance]                 73  
 2                                          [rkt]                 67  
-3                                  pagode baiano                 77  
-4                                    modern rock                 57  
+3                                    german trap                 77  
+4                                  viral afropop                 57  
 ..                                           ...                ...  
 666               [social media pop, uk hip hop]                 71  
 667                                 [cumbia pop]                 78  
@@ -33,4 +249,4 @@
 670                 [Hip Hop, Jazz, Funk / Soul]                 65  
 
 [671 rows x 5 columns]
-11-Nov-24 11:37:32 [DEBUG] None
+11-Nov-24 12:15:11 [DEBUG] None

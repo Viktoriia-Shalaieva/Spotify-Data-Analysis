@@ -28,7 +28,7 @@ data_dir = path_config['data_dir'][0]
 raw_dir = path_config['raw_dir'][0]
 file_paths = {file_name: os.path.join(data_dir, file_name) for file_name in path_config['files_names']}
 
-# playlists_path = str(file_paths['playlists.csv'])
+playlists_path = str(file_paths['playlists.csv'])
 # albums_path = str(file_paths['albums.csv'])
 # artists_path = str(file_paths['artists.csv'])
 # artists_genres_discogs_path = str(file_paths['artists_genres_discogs.csv'])
@@ -39,14 +39,14 @@ artists_genres_full_random_path = str(file_paths['artists_genres_full_random.csv
 # tracks_audio_features_path = str(file_paths['tracks_audio_features.csv'])
 # tracks_genres_discogs_path = str(file_paths['tracks_genres_discogs.csv'])
 #
-# playlist_data = spotify.get_save_playlist(spotify_api_token, playlists_all, raw_dir)
-#
-# playlists_ids = list(playlists_all.values())
-# playlists = data_prep.create_all_playlists_table(spotify_api_token, playlists_ids)
-# logger.debug(playlists)
-#
-# playlists.to_csv(playlists_path, index=False, sep="~")
-# logger.info(f"Playlists data saved to {playlists_path}")
+playlist_data = spotify.get_save_playlist(spotify_api_token, playlists_all, raw_dir)
+
+playlists_ids = list(playlists_all.values())
+playlists = data_prep.create_all_playlists_table(spotify_api_token, playlists_ids)
+logger.debug(playlists)
+
+playlists.to_csv(playlists_path, index=False, sep="~")
+logger.info(f"Playlists data saved to {playlists_path}")
 #
 # playlists_table = pd.read_csv(playlists_path, sep="~")
 #
@@ -161,4 +161,4 @@ artists_genres_full['artist_genres'] = artists_genres_full['artist_genres'].appl
 logger.debug(artists_genres_full)
 logger.debug(artists_genres_full.info())
 
-artists_genres_full.to_csv(artists_genres_full_random_path, index=False, sep="~")
+# artists_genres_full.to_csv(artists_genres_full_random_path, index=False, sep="~")
