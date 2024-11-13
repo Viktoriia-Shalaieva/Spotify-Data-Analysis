@@ -37,17 +37,38 @@ artists_genres_full_unknown = pd.read_csv(artists_genres_full_unknown_path, sep=
 tracks_table = pd.read_csv(tracks_path, sep='~')
 tracks_audio_features_table = pd.read_csv(tracks_audio_features_path, sep='~')
 
+playlists_table['playlist_id'] = playlists_table['playlist_id'].astype(str)
+albums_table['album_id'] = albums_table['album_id'].astype(str)
+artists_genres_full_unknown['artist_id'] = artists_genres_full_unknown['artist_id'].astype(str)
+tracks_table['track_id'] = tracks_table['track_id'].astype(str)
+tracks_audio_features_table['track_id'] = tracks_audio_features_table['track_id'].astype(str)
+
 st.subheader("Playlists:")
 st.dataframe(playlists_table, height=210, hide_index=True)
+st.write("Descriptive Statistics for Playlists:")
+st.dataframe(playlists_table.describe())
+st.dataframe(playlists_table.describe(include=['object']))
 
 st.subheader("Albums:")
 st.dataframe(albums_table, height=210, hide_index=True)
+st.write("Descriptive Statistics for Albums:")
+st.dataframe(albums_table.describe())
+st.dataframe(albums_table.describe(include=['object']))
 
 st.subheader("Artists:")
 st.dataframe(artists_genres_full_unknown, height=210, hide_index=True)
+st.write("Descriptive Statistics for Artists:")
+st.dataframe(artists_genres_full_unknown.describe())
+st.dataframe(artists_genres_full_unknown.describe(include=['object']))
 
 st.subheader("Tracks:")
 st.dataframe(tracks_table, height=210, hide_index=True)
+st.write("Descriptive Statistics for Tracks:")
+st.dataframe(tracks_table.describe())
+st.dataframe(tracks_table.describe(include=['object']))
 
 st.subheader("Tracks Audio Features:")
 st.dataframe(tracks_audio_features_table, height=210, hide_index=True)
+st.write("Descriptive Statistics for Tracks Audio Features:")
+st.dataframe(tracks_audio_features_table.describe())
+st.dataframe(tracks_audio_features_table.describe(include=['object']))
