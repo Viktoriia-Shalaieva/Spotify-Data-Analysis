@@ -52,17 +52,35 @@ st.subheader("Playlist with Minimum Followers")
 st.write(f"Playlist Name: {min_followers_playlist['playlist_name']}")
 st.write(f"Number of Followers: {min_followers_playlist['playlist_followers_total']}")
 
+select_all = st.checkbox("Select All", value=True)
+
+selected_playlists = st.multiselect(
+    "Select Playlists",
+    options=playlist_names,
+    default=playlist_names if select_all else []
+)
+
 followers_data = playlists_table[['playlist_name', 'playlist_followers_total']].drop_duplicates()
 followers_data.columns = ['Playlist Name', 'Number of Followers']
-
+followers_data = followers_data[followers_data['Playlist Name'].isin(selected_playlists)]
 followers_data = followers_data.sort_values(by='Number of Followers', ascending=False)
 
 fig_followers = px.bar(followers_data,
                        x='Playlist Name',
                        y='Number of Followers',
                        color="Playlist Name",
-                       title='Number of Followers per Playlist')
+                       title='Number of Followers per Playlist',
+                       log_y=True)
 st.plotly_chart(fig_followers)
+
+fig_pie_followers = px.pie(
+    followers_data,
+    names='Playlist Name',
+    values='Number of Followers',
+    title='Proportion of Followers per Playlist',
+    height=400
+)
+st.plotly_chart(fig_pie_followers)
 
 avg_popularity = playlists_table.groupby('playlist_name')['track_popularity'].mean().reset_index()
 avg_popularity.columns = ['Playlist', 'Average Popularity']
@@ -74,6 +92,25 @@ fig = px.bar(avg_popularity,
              title='Average Track Popularity Across Playlists')
 
 st.plotly_chart(fig)
+
+fig_violin = px.violin(
+    playlists_table,
+    x='playlist_name',
+    y='track_popularity',
+    points="all",
+    title='Distribution of Track Popularity Across Playlists',
+    labels={'playlist_name': 'Playlist', 'track_popularity': 'Track Popularity'},
+    color='playlist_name',
+    height=700,
+)
+
+fig_violin.update_layout(
+    xaxis_title='Playlist',
+    yaxis_title='Track Popularity',
+    showlegend=False
+)
+
+st.plotly_chart(fig_violin)
 
 selected_playlist = st.selectbox("Select a Playlist", playlist_names)
 filtered_data = playlists_table[playlists_table['playlist_name'] == selected_playlist]
@@ -87,3 +124,5 @@ fig_track_popularity = px.histogram(filtered_data,
                                     labels={'track_popularity': 'Track Popularity'},
                                     title=f"Track Popularity Distribution in {selected_playlist}")
 st.plotly_chart(fig_track_popularity)
+
+

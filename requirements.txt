@@ -5,3 +5,4 @@ python-slugify
 streamlit
 matplotlib
 plotly
+seaborn
