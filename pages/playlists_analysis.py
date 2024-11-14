@@ -5,6 +5,7 @@ import yaml
 import os
 import plotly.express as px
 
+
 st.set_page_config(
     page_title="Spotify Data Analysis",
     page_icon="🎵")
@@ -17,6 +18,38 @@ st.sidebar.markdown("# **Playlists Analysis** 📋️ ")
 
 st.title("Playlists Analysis 📋️ ")
 st.divider()
+
+
+with open('config/country_coords.yaml', 'r') as config_file:
+    country_coords = yaml.safe_load(config_file)
+
+countries = []
+latitudes = []
+longitudes = []
+
+for country, coords in country_coords['countries'].items():
+    countries.append(country)
+    latitudes.append(coords['latitude'])
+    longitudes.append(coords['longitude'])
+
+country_coords_df = pd.DataFrame({
+    'country': countries,
+    'latitude': latitudes,
+    'longitude': longitudes
+})
+
+st.subheader("Map of Countries for Playlist Analysis")
+
+fig = px.choropleth(
+    country_coords_df,
+    locations='country',  # Name of the column containing country names
+    locationmode='country names',  # This mode allows country names to be used for mapping
+    color='country',
+    hover_name="country",
+    title="Countries for Playlist Analysis"
+)
+
+st.plotly_chart(fig)
 
 with open('config/path_config.yaml', 'r') as config_file:
     path_config = yaml.safe_load(config_file)

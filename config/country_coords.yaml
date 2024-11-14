@@ -1,0 +1,46 @@
+countries:
+  Global:
+    latitude: 0.0
+    longitude: 0.0
+  USA:
+    latitude: 37.0902
+    longitude: -95.7129
+  Canada:
+    latitude: 56.1304
+    longitude: -106.3468
+  Brazil:
+    latitude: -14.2350
+    longitude: -51.9253
+  Argentina:
+    latitude: -38.4161
+    longitude: -63.6167
+  Germany:
+    latitude: 51.1657
+    longitude: 10.4515
+  France:
+    latitude: 46.6034
+    longitude: 1.8883
+  Spain:
+    latitude: 40.4637
+    longitude: -3.7492
+  Ukraine:
+    latitude: 48.3794
+    longitude: 31.1656
+  South Africa:
+    latitude: -30.5595
+    longitude: 22.9375
+  UAE:
+    latitude: 23.4241
+    longitude: 53.8478
+  South Korea:
+    latitude: 35.9078
+    longitude: 127.7669
+  India:
+    latitude: 20.5937
+    longitude: 78.9629
+  United Kingdom:
+    latitude: 55.3781
+    longitude: -3.4360
+  Nigeria:
+    latitude: 9.0820
+    longitude: 8.6753
