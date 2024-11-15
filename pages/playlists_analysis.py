@@ -4,6 +4,7 @@ import pandas as pd
 import yaml
 import os
 import plotly.express as px
+import numpy as np
 
 
 st.set_page_config(
@@ -59,7 +60,9 @@ raw_dir = path_config['raw_dir'][0]
 file_paths = {file_name: os.path.join(data_dir, file_name) for file_name in path_config['files_names']}
 
 playlists_path = str(file_paths['playlists.csv'])
+tracks_path = str(file_paths['tracks.csv'])
 playlists_table = pd.read_csv(playlists_path, sep="~")
+tracks_table = pd.read_csv(tracks_path, sep='~')
 
 playlist_names = playlists_table['playlist_name'].unique()
 total_playlists = playlists_table['playlist_id'].nunique()
@@ -115,7 +118,14 @@ fig_pie_followers = px.pie(
 )
 st.plotly_chart(fig_pie_followers)
 
-avg_popularity = playlists_table.groupby('playlist_name')['track_popularity'].mean().reset_index()
+merged_playlists_tracks = pd.merge(
+    playlists_table,
+    tracks_table,
+    on='track_id',
+    how='left'
+)
+
+avg_popularity = merged_playlists_tracks.groupby('playlist_name')['track_popularity'].mean().reset_index()
 avg_popularity.columns = ['Playlist', 'Average Popularity']
 avg_popularity = avg_popularity.sort_values(by='Average Popularity', ascending=False)
 
@@ -127,7 +137,7 @@ fig = px.bar(avg_popularity,
 st.plotly_chart(fig)
 
 fig_violin = px.violin(
-    playlists_table,
+    merged_playlists_tracks,
     x='playlist_name',
     y='track_popularity',
     points="all",
@@ -146,16 +156,94 @@ fig_violin.update_layout(
 st.plotly_chart(fig_violin)
 
 selected_playlist = st.selectbox("Select a Playlist", playlist_names)
-filtered_data = playlists_table[playlists_table['playlist_name'] == selected_playlist]
+filtered_data = merged_playlists_tracks[merged_playlists_tracks['playlist_name'] == selected_playlist]
 
-st.write(f"Data for {selected_playlist}:")
-st.dataframe(filtered_data, height=210, hide_index=True)
+# st.write(f"Data for {selected_playlist}:")
+# st.dataframe(filtered_data, height=210, hide_index=True)
 
-fig_track_popularity = px.histogram(filtered_data,
-                                    x='track_popularity',
-                                    nbins=20,
-                                    labels={'track_popularity': 'Track Popularity'},
-                                    title=f"Track Popularity Distribution in {selected_playlist}")
+mean_popularity = filtered_data['track_popularity'].mean()
+std_popularity = filtered_data['track_popularity'].std()
+
+one_std_dev = (mean_popularity - std_popularity, mean_popularity + std_popularity)
+two_std_dev = (mean_popularity - 2 * std_popularity, mean_popularity + 2 * std_popularity)
+three_std_dev = (mean_popularity - 3 * std_popularity, mean_popularity + 3 * std_popularity)
+
+total_values = len(filtered_data['track_popularity'])
+within_one_std_dev = len(filtered_data
+                         [(filtered_data['track_popularity'] >= one_std_dev[0]) &
+                          (filtered_data['track_popularity'] <= one_std_dev[1])]) / total_values * 100
+within_two_std_dev = len(filtered_data
+                         [(filtered_data['track_popularity'] >= two_std_dev[0]) &
+                          (filtered_data['track_popularity'] <= two_std_dev[1])]) / total_values * 100
+within_three_std_dev = len(filtered_data
+                           [(filtered_data['track_popularity'] >= three_std_dev[0]) &
+                            (filtered_data['track_popularity'] <= three_std_dev[1])]) / total_values * 100
+
+fig_track_popularity = px.histogram(
+    filtered_data,
+    x='track_popularity',
+    nbins=20,
+    labels={'track_popularity': 'Track Popularity'},
+    title=f"Track Popularity Distribution in {selected_playlist}",
+    opacity=0.7,
+    # marginal="box"
+)
+
+mean_popularity = filtered_data['track_popularity'].mean()
+fig_track_popularity.add_vline(
+    x=mean_popularity,
+    line_dash="dash",
+    line_color="red",
+    annotation_text=f"Mean: {mean_popularity:.2f}",
+    annotation_position="top left"
+)
+
+median_popularity = filtered_data['track_popularity'].median()
+fig_track_popularity.add_vline(
+    x=median_popularity,
+    line_dash="dot",
+    line_color="green",
+    annotation_text=f"Median: {median_popularity:.2f}",
+    annotation_position="top right"
+)
+
+fig_track_popularity.update_layout(
+    xaxis_title="Track Popularity",
+    yaxis_title="Count",
+    bargap=0.1,
+    template="plotly_dark"
+)
+
+fig_track_popularity.add_vrect(
+    x0=one_std_dev[0], x1=one_std_dev[1],
+    fillcolor="blue", opacity=0.1,
+    layer="below", line_width=0,
+    annotation_text="1 Std Dev", annotation_position="top left"
+)
+fig_track_popularity.add_vrect(
+    x0=two_std_dev[0], x1=two_std_dev[1],
+    fillcolor="green", opacity=0.1,
+    layer="below", line_width=0,
+    annotation_text="2 Std Dev", annotation_position="top left"
+)
+fig_track_popularity.add_vrect(
+    x0=three_std_dev[0], x1=three_std_dev[1],
+    fillcolor="yellow", opacity=0.1,
+    layer="below", line_width=0,
+    annotation_text="3 Std Dev", annotation_position="top left"
+)
+
 st.plotly_chart(fig_track_popularity)
 
+st.write(f"Percentage of data within 1 standard deviation: {within_one_std_dev:.2f}%")
+st.write(f"Percentage of data within 2 standard deviations: {within_two_std_dev:.2f}%")
+st.write(f"Percentage of data within 3 standard deviations: {within_three_std_dev:.2f}%")
 
+st.subheader("Interpretation of Results")
+st.markdown("""
+If the percentage of data within 1, 2, and 3 standard deviations is approximately 68%, 95%, and 99.7%, respectively, 
+this indicates that the data is approximately normally distributed.
+
+Significant deviations from these values may indicate that the data is skewed, has outliers, 
+or other anomalies in its distribution.
+""")
