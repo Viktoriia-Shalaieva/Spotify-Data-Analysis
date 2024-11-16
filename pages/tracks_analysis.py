@@ -7,6 +7,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import seaborn as sns
 import matplotlib.pyplot as plt
+from datetime import timedelta
 
 
 st.set_page_config(
@@ -89,3 +90,66 @@ fig.update_layout(
     violinmode='overlay'
 )
 st.plotly_chart(fig)
+
+
+def convert_ms_to_minutes_seconds(ms):
+    minutes = ms // 60000
+    seconds = (ms % 60000) // 1000
+    return f"{minutes}m {seconds}s"
+
+
+tracks_table['duration_min_sec'] = tracks_table['track_duration_ms'].apply(lambda x: timedelta(milliseconds=x))
+
+tracks_table['duration_min_sec_2'] = tracks_table['track_duration_ms'].apply(
+    lambda x: str(timedelta(milliseconds=x)).split(".")[0]
+)
+tracks_table['duration_min_sec_3'] = tracks_table['track_duration_ms'].apply(lambda x: x / 1000 / 60)
+tracks_table['track_duration_formatted'] = tracks_table['track_duration_ms'].apply(convert_ms_to_minutes_seconds)
+tracks_table['track_duration_minutes'] = tracks_table['track_duration_ms'] / 60000
+
+st.dataframe(tracks_table, height=210, hide_index=True)
+
+fig_scatter = px.scatter(
+    tracks_table,
+    x='track_duration_minutes',
+    y='track_popularity',
+    color='track_explicit',
+    title='Track Popularity vs. Duration',
+    labels={'track_duration_minutes': 'Track Duration (minutes)', 'track_popularity': 'Track Popularity'},
+    hover_data=['track_name']
+)
+st.plotly_chart(fig_scatter)
+
+
+fig_scatter = px.scatter(
+    tracks_table,
+    x='duration_min_sec',
+    y='track_popularity',
+    color='track_explicit',
+    title='Track Popularity vs. Duration',
+    labels={'track_duration_minutes': 'Track Duration (minutes)', 'track_popularity': 'Track Popularity'},
+    hover_data=['track_name']
+)
+st.plotly_chart(fig_scatter)
+
+fig_scatter = px.scatter(
+    tracks_table,
+    x='duration_min_sec_2',
+    y='track_popularity',
+    color='track_explicit',
+    title='Track Popularity vs. Duration',
+    labels={'track_duration_minutes': 'Track Duration (minutes)', 'track_popularity': 'Track Popularity'},
+    hover_data=['track_name']
+)
+st.plotly_chart(fig_scatter)
+
+fig_scatter = px.scatter(
+    tracks_table,
+    x='duration_min_sec_3',
+    y='track_popularity',
+    color='track_explicit',
+    title='Track Popularity vs. Duration',
+    labels={'track_duration_minutes': 'Track Duration (minutes)', 'track_popularity': 'Track Popularity'},
+    hover_data=['track_name']
+)
+st.plotly_chart(fig_scatter)

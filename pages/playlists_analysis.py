@@ -47,7 +47,7 @@ fig = px.choropleth(
     locationmode='country names',  # This mode allows country names to be used for mapping
     color='country',
     hover_name="country",
-    title="Countries for Playlist Analysis"
+    # title="Countries for Playlist Analysis"
 )
 
 st.plotly_chart(fig)
@@ -195,7 +195,8 @@ fig_track_popularity.add_vline(
     line_dash="dash",
     line_color="red",
     annotation_text=f"Mean: {mean_popularity:.2f}",
-    annotation_position="top left"
+    annotation_position="top left",
+    annotation_font_color="blue"
 )
 
 median_popularity = filtered_data['track_popularity'].median()
@@ -204,7 +205,8 @@ fig_track_popularity.add_vline(
     line_dash="dot",
     line_color="green",
     annotation_text=f"Median: {median_popularity:.2f}",
-    annotation_position="top right"
+    annotation_position="top right",
+    annotation_font_color="blue",
 )
 
 fig_track_popularity.update_layout(
@@ -218,19 +220,25 @@ fig_track_popularity.add_vrect(
     x0=one_std_dev[0], x1=one_std_dev[1],
     fillcolor="blue", opacity=0.1,
     layer="below", line_width=0,
-    annotation_text="1 Std Dev", annotation_position="top left"
+    annotation_text="1 Std Dev",
+    annotation_position="top left",
+    annotation_font_color = "blue",
 )
 fig_track_popularity.add_vrect(
     x0=two_std_dev[0], x1=two_std_dev[1],
     fillcolor="green", opacity=0.1,
     layer="below", line_width=0,
-    annotation_text="2 Std Dev", annotation_position="top left"
+    annotation_text="2 Std Dev",
+    annotation_position="top left",
+    annotation_font_color="blue",
 )
 fig_track_popularity.add_vrect(
     x0=three_std_dev[0], x1=three_std_dev[1],
     fillcolor="yellow", opacity=0.1,
     layer="below", line_width=0,
-    annotation_text="3 Std Dev", annotation_position="top left"
+    annotation_text="3 Std Dev",
+    annotation_position="top left",
+    annotation_font_color="blue",
 )
 
 st.plotly_chart(fig_track_popularity)
