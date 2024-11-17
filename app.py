@@ -89,76 +89,76 @@ track_ids = set(playlists_table['track_id'])
 # empty_tracks_genres_discogs = (tracks_genres_discogs['track_genre'] == '[]').sum()
 # logger.info(f"Number of empty track genres in tracks_genres.csv: {empty_tracks_genres_discogs}")
 
-artists = pd.read_csv(artists_path, sep="~")
-logger.debug(artists)
-
-empty_genre_count_art = (artists['artist_genres'] == '[]').sum()
-logger.info(f"Number of empty artist genres in artists.csv: {empty_genre_count_art}")
-
-artists_genres_discogs = data_prep.create_artist_genre_table(artists, discogs_api_token)
-logger.debug(artists_genres_discogs)
-
-artists_genres_discogs.to_csv(artists_genres_discogs_path, index=False, sep="~")
-
-artists_genres_discogs = pd.read_csv(artists_genres_discogs_path, sep="~")
-
-empty_artists_genres_count = (artists_genres_discogs['artist_genre'] == '[]').sum()
-logger.info(f"Number of empty genres in artists_genres_discogs.csv: {empty_artists_genres_count}")
-
-artists['artist_genres'] = artists['artist_genres'].replace('[]', pd.NA)
-
-artists = artists.merge(artists_genres_discogs, on='artist_name', how='left')
-logger.debug(artists)
-artists['artist_genres'] = artists['artist_genres'].fillna(artists['artist_genre'])
-artists = artists.drop(columns=['artist_genre'])
-artists.to_csv(artists_genres_full_path, index=False, sep="~")
-
-artists['artist_genres'] = artists['artist_genres'].replace('[]', 'unknown genre')
-
-artists.to_csv(artists_genres_full_unknown_path, index=False, sep="~")
-logger.debug(artists)
-
-artists_genres_full_unknown = pd.read_csv(artists_genres_full_unknown_path, sep="~")
-empty_genre_count_art = (artists_genres_full_unknown['artist_genres'] == 'unknown genre').sum()
-logger.info(f"Number of empty artist genres in artists_genre_full.csv: {empty_genre_count_art}")
-
-albums_table = pd.read_csv(albums_path, sep='~')
-artists_genres_full = pd.read_csv(artists_genres_full_path, sep='~')
-tracks_table = pd.read_csv(tracks_path, sep='~')
-tracks_audio_features_table = pd.read_csv(tracks_audio_features_path, sep='~')
-tracks_genres_discogs_table = pd.read_csv(tracks_genres_discogs_path, sep='~')
-
-logger.debug(albums_table.info())
-logger.debug(artists.info())
-logger.debug(artists_genres_discogs.info())
-logger.debug(artists_genres_full.info())
-logger.debug(artists_genres_full_unknown.info())
-logger.debug(playlists_table.info())
-logger.debug(tracks_table.info())
-logger.debug(tracks_audio_features_table.info())
+# artists = pd.read_csv(artists_path, sep="~")
+# logger.debug(artists)
+#
+# empty_genre_count_art = (artists['artist_genres'] == '[]').sum()
+# logger.info(f"Number of empty artist genres in artists.csv: {empty_genre_count_art}")
+#
+# artists_genres_discogs = data_prep.create_artist_genre_table(artists, discogs_api_token)
+# logger.debug(artists_genres_discogs)
+#
+# artists_genres_discogs.to_csv(artists_genres_discogs_path, index=False, sep="~")
+#
+# artists_genres_discogs = pd.read_csv(artists_genres_discogs_path, sep="~")
+#
+# empty_artists_genres_count = (artists_genres_discogs['artist_genre'] == '[]').sum()
+# logger.info(f"Number of empty genres in artists_genres_discogs.csv: {empty_artists_genres_count}")
+#
+# artists['artist_genres'] = artists['artist_genres'].replace('[]', pd.NA)
+#
+# artists = artists.merge(artists_genres_discogs, on='artist_name', how='left')
+# logger.debug(artists)
+# artists['artist_genres'] = artists['artist_genres'].fillna(artists['artist_genre'])
+# artists = artists.drop(columns=['artist_genre'])
+# artists.to_csv(artists_genres_full_path, index=False, sep="~")
+#
+# artists['artist_genres'] = artists['artist_genres'].replace('[]', 'unknown genre')
+#
+# artists.to_csv(artists_genres_full_unknown_path, index=False, sep="~")
+# logger.debug(artists)
+#
+# artists_genres_full_unknown = pd.read_csv(artists_genres_full_unknown_path, sep="~")
+# empty_genre_count_art = (artists_genres_full_unknown['artist_genres'] == 'unknown genre').sum()
+# logger.info(f"Number of empty artist genres in artists_genre_full.csv: {empty_genre_count_art}")
+#
+# albums_table = pd.read_csv(albums_path, sep='~')
+# artists_genres_full = pd.read_csv(artists_genres_full_path, sep='~')
+# tracks_table = pd.read_csv(tracks_path, sep='~')
+# tracks_audio_features_table = pd.read_csv(tracks_audio_features_path, sep='~')
+# tracks_genres_discogs_table = pd.read_csv(tracks_genres_discogs_path, sep='~')
+#
+# logger.debug(albums_table.info())
+# logger.debug(artists.info())
+# logger.debug(artists_genres_discogs.info())
+# logger.debug(artists_genres_full.info())
+# logger.debug(artists_genres_full_unknown.info())
+# logger.debug(playlists_table.info())
+# logger.debug(tracks_table.info())
+# logger.debug(tracks_audio_features_table.info())
 # logger.debug(tracks_genres_discogs_table.info())
 
 # Use the .apply() method to apply the eval function to each element in the 'artist_genres' column
 # The eval function converts the string representation of lists back into actual Python lists
-artists_genres_full['artist_genres'] = artists_genres_full['artist_genres'].apply(eval)
-
-unique_genres = set()
-for genres in artists_genres_full['artist_genres'].dropna():
-    unique_genres.update(genres)
-
-unique_genres_list = sorted(unique_genres)
-
-logger.debug(unique_genres_list)
-num_unique_genres = len(unique_genres_list)
-logger.debug(num_unique_genres)
-
-logger.debug(random.choice(unique_genres_list))
-
-
-artists_genres_full['artist_genres'] = artists_genres_full['artist_genres'].apply(
-    lambda x: random.choice(unique_genres_list) if (isinstance(x, list) and len(x) == 0) else x
-)
-logger.debug(artists_genres_full)
-logger.debug(artists_genres_full.info())
-
-artists_genres_full.to_csv(artists_genres_full_random_path, index=False, sep="~")
+# artists_genres_full['artist_genres'] = artists_genres_full['artist_genres'].apply(eval)
+#
+# unique_genres = set()
+# for genres in artists_genres_full['artist_genres'].dropna():
+#     unique_genres.update(genres)
+#
+# unique_genres_list = sorted(unique_genres)
+#
+# logger.debug(unique_genres_list)
+# num_unique_genres = len(unique_genres_list)
+# logger.debug(num_unique_genres)
+#
+# logger.debug(random.choice(unique_genres_list))
+#
+#
+# artists_genres_full['artist_genres'] = artists_genres_full['artist_genres'].apply(
+#     lambda x: random.choice(unique_genres_list) if (isinstance(x, list) and len(x) == 0) else x
+# )
+# logger.debug(artists_genres_full)
+# logger.debug(artists_genres_full.info())
+#
+# artists_genres_full.to_csv(artists_genres_full_random_path, index=False, sep="~")

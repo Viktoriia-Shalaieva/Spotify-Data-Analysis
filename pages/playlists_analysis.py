@@ -24,17 +24,17 @@ st.divider()
 with open('config/country_coords.yaml', 'r') as config_file:
     country_coords = yaml.safe_load(config_file)
 
-countries = []
+countries_for_map = []
 latitudes = []
 longitudes = []
 
 for country, coords in country_coords['countries'].items():
-    countries.append(country)
+    countries_for_map.append(country)
     latitudes.append(coords['latitude'])
     longitudes.append(coords['longitude'])
 
 country_coords_df = pd.DataFrame({
-    'country': countries,
+    'country': countries_for_map,
     'latitude': latitudes,
     'longitude': longitudes
 })
@@ -65,20 +65,12 @@ playlists_table = pd.read_csv(playlists_path, sep="~")
 tracks_table = pd.read_csv(tracks_path, sep='~')
 
 playlist_names = playlists_table['playlist_name'].unique()
-total_playlists = playlists_table['playlist_id'].nunique()
-average_followers = playlists_table['playlist_followers_total'].mean()
-total_unique_tracks = playlists_table['track_id'].nunique()
+countries_for_map = playlists_table['country'].unique()
 min_followers = playlists_table['playlist_followers_total'].min()
 max_followers = playlists_table['playlist_followers_total'].max()
 
 max_followers_playlist = playlists_table.sort_values(by='playlist_followers_total', ascending=False).iloc[0]
 min_followers_playlist = playlists_table.sort_values(by='playlist_followers_total').iloc[0]
-
-st.subheader("Playlists Analysis - Overview Statistics")
-
-st.metric(label="Total Number of Playlists", value=total_playlists)
-st.metric(label="Average Number of Followers per Playlist", value=f"{average_followers:.0f}")
-st.metric(label="Total Number of Unique Tracks", value=total_unique_tracks)
 
 st.subheader("Playlist with Maximum Followers")
 st.write(f"Playlist Name: {max_followers_playlist['playlist_name']}")
@@ -90,33 +82,24 @@ st.write(f"Number of Followers: {min_followers_playlist['playlist_followers_tota
 
 select_all = st.checkbox("Select All", value=True)
 
-selected_playlists = st.multiselect(
-    "Select Playlists",
-    options=playlist_names,
-    default=playlist_names if select_all else []
+selected_countries = st.multiselect(
+    "Select Countries",
+    options=countries_for_map,
+    default=countries_for_map if select_all else []
 )
 
-followers_data = playlists_table[['playlist_name', 'playlist_followers_total']].drop_duplicates()
-followers_data.columns = ['Playlist Name', 'Number of Followers']
-followers_data = followers_data[followers_data['Playlist Name'].isin(selected_playlists)]
+followers_data = playlists_table[['country', 'playlist_followers_total']].drop_duplicates()
+followers_data.columns = ['Country', 'Number of Followers']
+followers_data = followers_data[followers_data['Country'].isin(selected_countries)]
 followers_data = followers_data.sort_values(by='Number of Followers', ascending=False)
 
 fig_followers = px.bar(followers_data,
-                       x='Playlist Name',
+                       x='Country',
                        y='Number of Followers',
-                       color="Playlist Name",
+                       # color="Country",
                        title='Number of Followers per Playlist',
                        log_y=True)
 st.plotly_chart(fig_followers)
-
-fig_pie_followers = px.pie(
-    followers_data,
-    names='Playlist Name',
-    values='Number of Followers',
-    title='Proportion of Followers per Playlist',
-    height=400
-)
-st.plotly_chart(fig_pie_followers)
 
 merged_playlists_tracks = pd.merge(
     playlists_table,
@@ -125,12 +108,12 @@ merged_playlists_tracks = pd.merge(
     how='left'
 )
 
-avg_popularity = merged_playlists_tracks.groupby('playlist_name')['track_popularity'].mean().reset_index()
-avg_popularity.columns = ['Playlist', 'Average Popularity']
+avg_popularity = merged_playlists_tracks.groupby('country')['track_popularity'].mean().reset_index()
+avg_popularity.columns = ['Country', 'Average Popularity']
 avg_popularity = avg_popularity.sort_values(by='Average Popularity', ascending=False)
 
 fig = px.bar(avg_popularity,
-             x='Playlist',
+             x='Country',
              y='Average Popularity',
              title='Average Track Popularity Across Playlists')
 
@@ -138,25 +121,25 @@ st.plotly_chart(fig)
 
 fig_violin = px.violin(
     merged_playlists_tracks,
-    x='playlist_name',
+    x='country',
     y='track_popularity',
     points="all",
     title='Distribution of Track Popularity Across Playlists',
-    labels={'playlist_name': 'Playlist', 'track_popularity': 'Track Popularity'},
-    color='playlist_name',
+    labels={'country': 'Country', 'track_popularity': 'Track Popularity'},
+    color='country',
     height=700,
 )
 
 fig_violin.update_layout(
-    xaxis_title='Playlist',
+    xaxis_title='Country',
     yaxis_title='Track Popularity',
     showlegend=False
 )
 
 st.plotly_chart(fig_violin)
 
-selected_playlist = st.selectbox("Select a Playlist", playlist_names)
-filtered_data = merged_playlists_tracks[merged_playlists_tracks['playlist_name'] == selected_playlist]
+selected_country = st.selectbox("Select a Country", countries_for_map)
+filtered_data = merged_playlists_tracks[merged_playlists_tracks['country'] == selected_country]
 
 # st.write(f"Data for {selected_playlist}:")
 # st.dataframe(filtered_data, height=210, hide_index=True)
@@ -184,7 +167,7 @@ fig_track_popularity = px.histogram(
     x='track_popularity',
     nbins=20,
     labels={'track_popularity': 'Track Popularity'},
-    title=f"Track Popularity Distribution in {selected_playlist}",
+    title=f"Track Popularity Distribution in Top 50 - {selected_country}",
     opacity=0.7,
     # marginal="box"
 )

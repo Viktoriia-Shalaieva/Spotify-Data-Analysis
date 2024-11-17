@@ -8,6 +8,8 @@ def create_playlist_table(playlist):
     playlist_id = playlist['id']
     playlist_name = playlist['name']
     playlist_followers_total = playlist['followers']['total']
+    country = playlist_name.split('-')[-1].strip()
+
     rows = []
 
     for item in playlist['tracks']['items']:
@@ -16,6 +18,7 @@ def create_playlist_table(playlist):
         row = {
             'playlist_id': playlist_id,
             'playlist_name': playlist_name,
+            'country': country,
             'playlist_followers_total': playlist_followers_total,
             'track_id': track.get('id'),
         }

@@ -43,6 +43,20 @@ artists_genres_full_unknown['artist_id'] = artists_genres_full_unknown['artist_i
 tracks_table['track_id'] = tracks_table['track_id'].astype(str)
 tracks_audio_features_table['track_id'] = tracks_audio_features_table['track_id'].astype(str)
 
+total_playlists = playlists_table['playlist_id'].nunique()
+average_followers = playlists_table['playlist_followers_total'].mean()
+total_unique_tracks = playlists_table['track_id'].nunique()
+
+max_followers_playlist = playlists_table.sort_values(by='playlist_followers_total', ascending=False).iloc[0]
+min_followers_playlist = playlists_table.sort_values(by='playlist_followers_total').iloc[0]
+
+st.subheader("Playlists Analysis - Overview Statistics")
+
+st.metric(label="Total Number of Playlists", value=total_playlists)
+st.metric(label="Average Number of Followers per Playlist", value=f"{average_followers:.0f}")
+st.metric(label="Total Number of Unique Tracks", value=total_unique_tracks)
+
+
 st.subheader("Playlists:")
 st.dataframe(playlists_table, height=210, hide_index=True)
 st.write("Descriptive Statistics for Playlists:")
