@@ -57,32 +57,80 @@ st.metric(label="Average Number of Followers per Playlist", value=f"{average_fol
 st.metric(label="Total Number of Unique Tracks", value=total_unique_tracks)
 
 
+with st.expander("Playlists"):
+    st.dataframe(playlists_table, width=750, height=210, hide_index=True)
+    st.write("Descriptive Statistics for Playlists:")
+    st.dataframe(playlists_table.describe(), width=750)
+    st.dataframe(playlists_table.describe(include=['object']), width=750)
+
 st.subheader("Playlists:")
-st.dataframe(playlists_table, height=210, hide_index=True)
-st.write("Descriptive Statistics for Playlists:")
-st.dataframe(playlists_table.describe())
-st.dataframe(playlists_table.describe(include=['object']))
+
+tab1_playlists, tab2_playlists = st.tabs(["Data", "Descriptive Statistics"])
+
+with tab1_playlists:
+    st.dataframe(playlists_table, width=750, height=210, hide_index=True)
+with tab2_playlists:
+    st.dataframe(playlists_table.describe(), width=750)
+    st.dataframe(playlists_table.describe(include=['object']), width=750)
 
 st.subheader("Albums:")
-st.dataframe(albums_table, height=210, hide_index=True)
-st.write("Descriptive Statistics for Albums:")
-st.dataframe(albums_table.describe())
-st.dataframe(albums_table.describe(include=['object']))
+tab1_albums, tab2_albums = st.tabs(["Data", "Descriptive Statistics"])
+with tab1_albums:
+    st.dataframe(albums_table, width=750, height=210, hide_index=True)
+with tab2_albums:
+    st.dataframe(albums_table.describe(), width=750)
+    st.dataframe(albums_table.describe(include=['object']), width=750)
 
 st.subheader("Artists:")
-st.dataframe(artists_genres_full_unknown, height=210, hide_index=True)
-st.write("Descriptive Statistics for Artists:")
-st.dataframe(artists_genres_full_unknown.describe())
-st.dataframe(artists_genres_full_unknown.describe(include=['object']))
+tab1_artists, tab2_artists = st.tabs(["Data", "Descriptive Statistics"])
+with tab1_artists:
+    st.dataframe(artists_genres_full_unknown, width=750, height=210, hide_index=True)
+with tab2_artists:
+    st.dataframe(artists_genres_full_unknown.describe(), width=750)
+    st.dataframe(artists_genres_full_unknown.describe(include=['object']), width=750)
 
 st.subheader("Tracks:")
-st.dataframe(tracks_table, height=210, hide_index=True)
-st.write("Descriptive Statistics for Tracks:")
-st.dataframe(tracks_table.describe())
-st.dataframe(tracks_table.describe(include=['object']))
+tab1_tracks, tab2_tracks = st.tabs(["Data", "Descriptive Statistics"])
+with tab1_tracks:
+    st.dataframe(tracks_table, width=750, height=210, hide_index=True)
+with tab2_tracks:
+    st.dataframe(tracks_table.describe(), width=750)
+    st.dataframe(tracks_table.describe(include=['object']), width=750)
 
 st.subheader("Tracks Audio Features:")
-st.dataframe(tracks_audio_features_table, height=210, hide_index=True)
-st.write("Descriptive Statistics for Tracks Audio Features:")
-st.dataframe(tracks_audio_features_table.describe())
-st.dataframe(tracks_audio_features_table.describe(include=['object']))
+tab1_tracks_af, tab2_tracks_af = st.tabs(["Data", "Descriptive Statistics"])
+with tab1_tracks_af:
+    st.dataframe(tracks_audio_features_table, width=750, height=210, hide_index=True)
+with tab2_tracks_af:
+    st.dataframe(tracks_audio_features_table.describe(), width=750)
+    st.dataframe(tracks_audio_features_table.describe(include=['object']), width=750)
+#
+# st.subheader("Playlists:")
+# st.dataframe(playlists_table, width=750, height=210, hide_index=True)
+# st.write("Descriptive Statistics for Playlists:")
+# st.dataframe(playlists_table.describe())
+# st.dataframe(playlists_table.describe(include=['object']))
+#
+# st.subheader("Albums:")
+# st.dataframe(albums_table, width=750, height=210, hide_index=True)
+# st.write("Descriptive Statistics for Albums:")
+# st.dataframe(albums_table.describe())
+# st.dataframe(albums_table.describe(include=['object']))
+#
+# st.subheader("Artists:")
+# st.dataframe(artists_genres_full_unknown, width=750, height=210, hide_index=True)
+# st.write("Descriptive Statistics for Artists:")
+# st.dataframe(artists_genres_full_unknown.describe(), width=750, height=210)
+# st.dataframe(artists_genres_full_unknown.describe(include=['object']), width=750)
+#
+# st.subheader("Tracks:")
+# st.dataframe(tracks_table, width=750, height=210, hide_index=True)
+# st.write("Descriptive Statistics for Tracks:")
+# st.dataframe(tracks_table.describe(), width=750, height=210)
+# st.dataframe(tracks_table.describe(include=['object']), width=750)
+#
+# st.subheader("Tracks Audio Features:")
+# st.dataframe(tracks_audio_features_table, width=750, height=210, hide_index=True)
+# st.write("Descriptive Statistics for Tracks Audio Features:")
+# st.dataframe(tracks_audio_features_table.describe())
+# st.dataframe(tracks_audio_features_table.describe(include=['object']))

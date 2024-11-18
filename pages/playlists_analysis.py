@@ -108,14 +108,23 @@ merged_playlists_tracks = pd.merge(
     how='left'
 )
 
+help_input = (
+    '''The popularity of the track across different countries. 
+    The value will be between 0 and 100, with 100 being the most popular.'''
+)
+st.subheader("Average Track Popularity Across Playlists", help=help_input)
+
 avg_popularity = merged_playlists_tracks.groupby('country')['track_popularity'].mean().reset_index()
 avg_popularity.columns = ['Country', 'Average Popularity']
 avg_popularity = avg_popularity.sort_values(by='Average Popularity', ascending=False)
+min_y = avg_popularity['Average Popularity'].min() - 5
+max_y = avg_popularity['Average Popularity'].max() + 5
 
 fig = px.bar(avg_popularity,
              x='Country',
              y='Average Popularity',
-             title='Average Track Popularity Across Playlists')
+             # title='Average Track Popularity Across Playlists',
+             range_y=[min_y, max_y])
 
 st.plotly_chart(fig)
 
