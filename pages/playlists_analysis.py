@@ -309,7 +309,6 @@ with tab2:
     st.dataframe(top_10_tracks, hide_index=True)
 
 with tab3:
-    # st.subheader("Track Popularity Graph for Top 10 Tracks")
     top_tracks_popularity = merged_playlists_tracks[merged_playlists_tracks['track_name'].isin(top_10_tracks['Track Name'])]
     popularity_data = top_tracks_popularity[['track_name', 'track_popularity']].drop_duplicates().reset_index(drop=True)
     popularity_data.columns = ['Track Name', 'Popularity']
