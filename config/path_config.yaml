@@ -1,0 +1,18 @@
+data_dir:
+  - './data/preprocessed/'
+
+raw_dir:
+  - './data/raw/playlists/'
+
+files_names:
+  - 'albums.csv'
+  - 'artists.csv'
+  - 'artists_genres_discogs.csv'
+  - 'artists_genres_full.csv'
+  - 'artists_genres_full_random.csv'
+  - 'artists_genres_full_unknown.csv'
+  - 'playlists.csv'
+  - 'tracks.csv'
+  - 'tracks_audio_features.csv'
+  - 'tracks_genres_discogs.csv'
+  - 'tracks_genres_theaudiodb.csv'

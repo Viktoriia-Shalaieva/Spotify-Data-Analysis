@@ -1,1 +1,8 @@
+pandas
 requests
+pyyaml
+python-slugify
+streamlit
+matplotlib
+plotly
+seaborn

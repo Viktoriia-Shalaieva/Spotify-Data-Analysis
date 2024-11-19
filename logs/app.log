@@ -1,0 +1,182 @@
+17-Nov-24 19:42:11 [DEBUG] Starting new HTTPS connection (1): accounts.spotify.com:443
+17-Nov-24 19:42:11 [DEBUG] https://accounts.spotify.com:443 "POST /api/token HTTP/11" 200 None
+17-Nov-24 19:42:11 [INFO] Access token retrieved successfully
+17-Nov-24 19:42:11 [INFO] Spotify API token: BQCiMvRkUhAUz3yHhdiL1cOj_ZxuKoFB3UmlRMyThjX6MAF8HzC4-PVGd5Cll-MePz_2OTUsOAShBGoV4feoqt6GEPtm5RI2oTpb8PgTdoK9G3O0gPg
+17-Nov-24 19:42:11 [INFO] Discogs API token: EaALIPVnUVkCSfqeUhhWzcdXZfgXNvERIHfabBFh
+17-Nov-24 19:42:11 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:11 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbMDoHDwVN2tF HTTP/11" 200 None
+17-Nov-24 19:42:11 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:11 [INFO] Playlist 'Top 50 - Global' saved successfully
+17-Nov-24 19:42:11 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:12 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbLRQDuF5jeBp HTTP/11" 200 None
+17-Nov-24 19:42:12 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:12 [INFO] Playlist 'Top 50 - USA' saved successfully
+17-Nov-24 19:42:12 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:12 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbKj23U1GF4IR HTTP/11" 200 None
+17-Nov-24 19:42:12 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:12 [INFO] Playlist 'Top 50 - Canada' saved successfully
+17-Nov-24 19:42:12 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:13 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbMXbN3EUUhlg HTTP/11" 200 None
+17-Nov-24 19:42:13 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:13 [INFO] Playlist 'Top 50 - Brazil' saved successfully
+17-Nov-24 19:42:13 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:13 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbMMy2roB9myp HTTP/11" 200 None
+17-Nov-24 19:42:13 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:13 [INFO] Playlist 'Top 50 - Argentina' saved successfully
+17-Nov-24 19:42:13 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:13 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbJiZcmkrIHGU HTTP/11" 200 None
+17-Nov-24 19:42:13 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:13 [INFO] Playlist 'Top 50 - Germany' saved successfully
+17-Nov-24 19:42:13 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:14 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbIPWwFssbupI HTTP/11" 200 None
+17-Nov-24 19:42:14 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:14 [INFO] Playlist 'Top 50 - France' saved successfully
+17-Nov-24 19:42:14 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:14 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbNFJfN1Vw8d9 HTTP/11" 200 None
+17-Nov-24 19:42:14 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:14 [INFO] Playlist 'Top 50 - Spain' saved successfully
+17-Nov-24 19:42:14 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:15 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbKkidEfWYRuD HTTP/11" 200 None
+17-Nov-24 19:42:15 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:15 [INFO] Playlist 'Top 50 - Ukraine' saved successfully
+17-Nov-24 19:42:15 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:15 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbMH2jvi6jvjk HTTP/11" 200 None
+17-Nov-24 19:42:15 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:15 [INFO] Playlist 'Top 50 - South Africa' saved successfully
+17-Nov-24 19:42:15 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:15 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbM4UZuIrvHvA HTTP/11" 200 None
+17-Nov-24 19:42:15 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:16 [INFO] Playlist 'Top 50 - UAE' saved successfully
+17-Nov-24 19:42:16 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:16 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbNxXF4SkHj9F HTTP/11" 200 None
+17-Nov-24 19:42:16 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:16 [INFO] Playlist 'Top 50 - South Korea' saved successfully
+17-Nov-24 19:42:16 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:16 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbLZ52XmnySJg HTTP/11" 200 None
+17-Nov-24 19:42:16 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:16 [INFO] Playlist 'Top 50 - India' saved successfully
+17-Nov-24 19:42:16 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:17 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbLnolsZ8PSNw HTTP/11" 200 None
+17-Nov-24 19:42:17 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:17 [INFO] Playlist 'Top 50 - United Kingdom' saved successfully
+17-Nov-24 19:42:17 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:17 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbKY7jLzlJ11V HTTP/11" 200 None
+17-Nov-24 19:42:17 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:17 [INFO] Playlist 'Top 50 - Nigeria' saved successfully
+17-Nov-24 19:42:17 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:18 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbMDoHDwVN2tF HTTP/11" 200 None
+17-Nov-24 19:42:18 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:18 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbMDoHDwVN2tF
+17-Nov-24 19:42:18 [INFO] Playlist 'Top 50 - Global' processed with 50 tracks.
+17-Nov-24 19:42:18 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:18 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbLRQDuF5jeBp HTTP/11" 200 None
+17-Nov-24 19:42:18 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:18 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbLRQDuF5jeBp
+17-Nov-24 19:42:18 [INFO] Playlist 'Top 50 - USA' processed with 50 tracks.
+17-Nov-24 19:42:18 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:19 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbKj23U1GF4IR HTTP/11" 200 None
+17-Nov-24 19:42:19 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:19 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbKj23U1GF4IR
+17-Nov-24 19:42:19 [INFO] Playlist 'Top 50 - Canada' processed with 50 tracks.
+17-Nov-24 19:42:19 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:19 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbMXbN3EUUhlg HTTP/11" 200 None
+17-Nov-24 19:42:19 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:19 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbMXbN3EUUhlg
+17-Nov-24 19:42:19 [INFO] Playlist 'Top 50 - Brazil' processed with 50 tracks.
+17-Nov-24 19:42:19 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:19 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbMMy2roB9myp HTTP/11" 200 None
+17-Nov-24 19:42:20 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:20 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbMMy2roB9myp
+17-Nov-24 19:42:20 [INFO] Playlist 'Top 50 - Argentina' processed with 50 tracks.
+17-Nov-24 19:42:20 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:20 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbJiZcmkrIHGU HTTP/11" 200 None
+17-Nov-24 19:42:20 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:20 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbJiZcmkrIHGU
+17-Nov-24 19:42:20 [INFO] Playlist 'Top 50 - Germany' processed with 50 tracks.
+17-Nov-24 19:42:20 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:20 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbIPWwFssbupI HTTP/11" 200 None
+17-Nov-24 19:42:20 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:20 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbIPWwFssbupI
+17-Nov-24 19:42:20 [INFO] Playlist 'Top 50 - France' processed with 50 tracks.
+17-Nov-24 19:42:20 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:21 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbNFJfN1Vw8d9 HTTP/11" 200 None
+17-Nov-24 19:42:21 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:21 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbNFJfN1Vw8d9
+17-Nov-24 19:42:21 [INFO] Playlist 'Top 50 - Spain' processed with 50 tracks.
+17-Nov-24 19:42:21 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:21 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbKkidEfWYRuD HTTP/11" 200 None
+17-Nov-24 19:42:21 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:21 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbKkidEfWYRuD
+17-Nov-24 19:42:21 [INFO] Playlist 'Top 50 - Ukraine' processed with 50 tracks.
+17-Nov-24 19:42:21 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:22 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbMH2jvi6jvjk HTTP/11" 200 None
+17-Nov-24 19:42:22 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:22 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbMH2jvi6jvjk
+17-Nov-24 19:42:22 [INFO] Playlist 'Top 50 - South Africa' processed with 50 tracks.
+17-Nov-24 19:42:22 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:22 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbM4UZuIrvHvA HTTP/11" 200 None
+17-Nov-24 19:42:22 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:22 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbM4UZuIrvHvA
+17-Nov-24 19:42:22 [INFO] Playlist 'Top 50 - UAE' processed with 50 tracks.
+17-Nov-24 19:42:22 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:23 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbNxXF4SkHj9F HTTP/11" 200 None
+17-Nov-24 19:42:23 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:23 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbNxXF4SkHj9F
+17-Nov-24 19:42:23 [INFO] Playlist 'Top 50 - South Korea' processed with 50 tracks.
+17-Nov-24 19:42:23 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:23 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbLZ52XmnySJg HTTP/11" 200 None
+17-Nov-24 19:42:23 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:23 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbLZ52XmnySJg
+17-Nov-24 19:42:23 [INFO] Playlist 'Top 50 - India' processed with 50 tracks.
+17-Nov-24 19:42:23 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:23 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbLnolsZ8PSNw HTTP/11" 200 None
+17-Nov-24 19:42:23 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:23 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbLnolsZ8PSNw
+17-Nov-24 19:42:23 [INFO] Playlist 'Top 50 - United Kingdom' processed with 50 tracks.
+17-Nov-24 19:42:23 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
+17-Nov-24 19:42:24 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbKY7jLzlJ11V HTTP/11" 200 None
+17-Nov-24 19:42:24 [INFO] Playlist information retrieved successfully
+17-Nov-24 19:42:24 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbKY7jLzlJ11V
+17-Nov-24 19:42:24 [INFO] Playlist 'Top 50 - Nigeria' processed with 50 tracks.
+17-Nov-24 19:42:24 [INFO] All playlists processed successfully.
+17-Nov-24 19:42:24 [DEBUG]                 playlist_id     playlist_name  country  \
+0    37i9dQZEVXbMDoHDwVN2tF   Top 50 - Global   Global   
+1    37i9dQZEVXbMDoHDwVN2tF   Top 50 - Global   Global   
+2    37i9dQZEVXbMDoHDwVN2tF   Top 50 - Global   Global   
+3    37i9dQZEVXbMDoHDwVN2tF   Top 50 - Global   Global   
+4    37i9dQZEVXbMDoHDwVN2tF   Top 50 - Global   Global   
+..                      ...               ...      ...   
+745  37i9dQZEVXbKY7jLzlJ11V  Top 50 - Nigeria  Nigeria   
+746  37i9dQZEVXbKY7jLzlJ11V  Top 50 - Nigeria  Nigeria   
+747  37i9dQZEVXbKY7jLzlJ11V  Top 50 - Nigeria  Nigeria   
+748  37i9dQZEVXbKY7jLzlJ11V  Top 50 - Nigeria  Nigeria   
+749  37i9dQZEVXbKY7jLzlJ11V  Top 50 - Nigeria  Nigeria   
+
+     playlist_followers_total                track_id                album_id  \
+0                    17114015  2plbrEY59IikOBgBGLjaoe  10FLjwfpbxLmW8c25Xyc2N   
+1                    17114015  5vNRhkKd0yEAg8suGBpjeY  2IYQwwgxgOIn7t3iF6ufFD   
+2                    17114015  6dOtVTDdiauQNBQEDOtlAB  7aJuG4TFXa2hmE4z1yxc3n   
+3                    17114015  7ne4VBA60CxGM75vw0EYad  0hBRqPYPXhr1RkTDG3n4Mk   
+4                    17114015  7tI8dRuH2Yc6RuoTjxo4dU  15XcLhiVMlSOipUddTNDnr   
+..                        ...                     ...                     ...   
+745                     39081  7d2oqmG3bFZjw3BhfPAOS7  5dOM4EFOJqqWwK61p7NHO6   
+746                     39081  3eBKDleW7uifghc9C6ggTy  0ihygUWXjTDuzy7ApFskoi   
+747                     39081  7jDMQi5XZooBgF5i7m3DBo  7d1uJdESkLI3mrGgBXkkr7   
+748                     39081  75c5cm8y5Fzb6aTZM3MOpN  6xr2tWr8pg5ndECtOD66lp   
+749                     39081  5FzsdlFgAFN1aSe9YwoN6s  2ElVuPg0F7mHNcveABN2Rw   
+
+                                             artist_id  
+0       1HY2Jd0NmPuamShAr6KMms, 0du5cEVh5yTK9QJze8zA0C  
+1       3eVa5w3URK5duf6eyVDbu9, 0du5cEVh5yTK9QJze8zA0C  
+2                               6qqNVTkY8uBg9cP3Jd7DAH  
+3                               4tuJ0bMpJh08umKkEXKUI5  
+4                               1oSPZhvZMIrWW5I41kPkkY  
+..                                                 ...  
+745  4x4ggvlhCaj5oNqKRRwOAL, 0xJqq4oOJVpnnUv8h7dOwG...  
+746                             2BfAlovyHR2zzxNVhFo1VK  
+747                             3zaDigUwjHvjOkSn0NDf9x  
+748                             4JM1zsVj1pt38Q8mhv5teI  
+749                             1X6cBGnXpEpN7CmflLKmLV  
+
+[750 rows x 7 columns]
+17-Nov-24 19:42:24 [INFO] Playlists data saved to ./data/preprocessed/playlists.csv
