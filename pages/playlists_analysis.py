@@ -323,8 +323,6 @@ with tab3:
     st.plotly_chart(fig_popularity)
 
 with tab4:
-    # st.subheader("Map of Countries for Selected Top 10 Track")
-
     selected_track = st.selectbox(
         "Select a Track",
         options=top_10_tracks['Track Name']
