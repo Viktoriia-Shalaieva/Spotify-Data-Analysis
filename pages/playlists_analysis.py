@@ -274,4 +274,83 @@ with tab2_interpretation:
     Shaded regions in the chart show these ranges, helping assess data normality and identify trends or anomalies.
     """)
 
+track_counts = merged_playlists_tracks['track_name'].value_counts().reset_index()
+track_counts.columns = ['Track Name', 'Count']
+top_10_tracks = track_counts.head(10)
 
+# fig_top_10_tracks = px.bar(top_10_tracks,
+#                            x='Count',
+#                            y='Track Name',
+#                            orientation='h',
+#                            title='Top 10 Tracks by Frequency in Playlists',
+#                            labels={'Count': 'Frequency', 'Track Name': 'Track Name'},
+#                            color='Count')
+#
+# fig.update_layout(yaxis={'categoryorder': 'total ascending'})
+# st.plotly_chart(fig_top_10_tracks)
+
+st.subheader("Top 10 Tracks by Frequency in Playlists")
+tab1, tab2, tab3, tab4 = st.tabs(["Bar Plot", "Data Table", "Popularity Graph", "Map"])
+
+with tab1:
+    fig = px.bar(top_10_tracks,
+                 x='Count',
+                 y='Track Name',
+                 orientation='h',
+                 title='Top 10 Tracks by Frequency in Playlists',
+                 labels={'Count': 'Frequency', 'Track Name': 'Track Name'},
+                 color='Count')
+    fig.update_layout(yaxis={'categoryorder': 'total ascending'})
+    st.plotly_chart(fig)
+
+with tab2:
+    st.subheader("Data Table of Top 10 Tracks")
+    top_10_tracks.columns = ['Track Name', 'Frequency in Playlists']
+    st.dataframe(top_10_tracks, hide_index=True)
+
+with tab3:
+    # st.subheader("Track Popularity Graph for Top 10 Tracks")
+    top_tracks_popularity = merged_playlists_tracks[merged_playlists_tracks['track_name'].isin(top_10_tracks['Track Name'])]
+    popularity_data = top_tracks_popularity[['track_name', 'track_popularity']].drop_duplicates().reset_index(drop=True)
+    popularity_data.columns = ['Track Name', 'Popularity']
+
+    fig_popularity = px.bar(popularity_data,
+                            x='Track Name',
+                            y='Popularity',
+                            title='Popularity of Top 10 Tracks',
+                            labels={'Popularity': 'Track Popularity', 'Track Name': 'Track Name'},
+                            color='Popularity')
+    fig_popularity.update_layout(xaxis={'categoryorder': 'total descending'})
+    st.plotly_chart(fig_popularity)
+
+with tab4:
+    # st.subheader("Map of Countries for Selected Top 10 Track")
+
+    selected_track = st.selectbox(
+        "Select a Track",
+        options=top_10_tracks['Track Name']
+    )
+
+    # Filter data for the selected track
+    track_countries = merged_playlists_tracks[merged_playlists_tracks['track_name'] == selected_track]['country'].unique()
+    filtered_countries = country_coords_df[country_coords_df['country'].isin(track_countries)]
+    # Create a choropleth map showing countries where the selected track appears in playlists
+    fig_map = px.choropleth(
+        filtered_countries,
+        locations='country',
+        locationmode='country names',
+        color='country',  # Coloring by country name for unique colors
+        hover_name='country',
+        title=f'Countries with Playlists Containing "{selected_track}"'
+    )
+
+    fig_map.update_layout(
+        legend_title_text='Country',
+        # geo=dict(
+        #     showcountries=True,
+        #     countrycolor="LightGray",
+        #     showcoastlines=True,
+        #     coastlinecolor="RebeccaPurple"
+        # )
+    )
+    st.plotly_chart(fig_map)
