@@ -49,7 +49,9 @@ fig = px.choropleth(
     hover_name="country",
     # title="Countries for Playlist Analysis"
 )
-
+fig.update_layout(
+    legend_title_text='Country'
+)
 st.plotly_chart(fig)
 
 with open('config/path_config.yaml', 'r') as config_file:
@@ -133,6 +135,7 @@ fig_violin = px.violin(
     x='country',
     y='track_popularity',
     points="all",
+    box=True,
     title='Distribution of Track Popularity Across Playlists',
     labels={'country': 'Country', 'track_popularity': 'Track Popularity'},
     color='country',
@@ -147,6 +150,8 @@ fig_violin.update_layout(
 
 st.plotly_chart(fig_violin)
 
+st.subheader("Country-wise Track Popularity Analysis", help=help_input)
+
 selected_country = st.selectbox("Select a Country", countries_for_map)
 filtered_data = merged_playlists_tracks[merged_playlists_tracks['country'] == selected_country]
 
@@ -154,6 +159,7 @@ filtered_data = merged_playlists_tracks[merged_playlists_tracks['country'] == se
 # st.dataframe(filtered_data, height=210, hide_index=True)
 
 mean_popularity = filtered_data['track_popularity'].mean()
+median_popularity = filtered_data['track_popularity'].median()
 std_popularity = filtered_data['track_popularity'].std()
 
 one_std_dev = (mean_popularity - std_popularity, mean_popularity + std_popularity)
@@ -171,79 +177,101 @@ within_three_std_dev = len(filtered_data
                            [(filtered_data['track_popularity'] >= three_std_dev[0]) &
                             (filtered_data['track_popularity'] <= three_std_dev[1])]) / total_values * 100
 
-fig_track_popularity = px.histogram(
-    filtered_data,
-    x='track_popularity',
-    nbins=20,
-    labels={'track_popularity': 'Track Popularity'},
-    title=f"Track Popularity Distribution in Top 50 - {selected_country}",
-    opacity=0.7,
-    # marginal="box"
-)
+tab1_histogram, tab2_interpretation = st.tabs(["Histogram", "Interpretation"])
 
-mean_popularity = filtered_data['track_popularity'].mean()
-fig_track_popularity.add_vline(
-    x=mean_popularity,
-    line_dash="dash",
-    line_color="red",
-    annotation_text=f"Mean: {mean_popularity:.2f}",
-    annotation_position="top left",
-    annotation_font_color="blue"
-)
+with tab1_histogram:
+    fig_track_popularity = px.histogram(
+        filtered_data,
+        x='track_popularity',
+        nbins=20,
+        labels={'track_popularity': 'Track Popularity'},
+        title=f"Track Popularity Distribution in Top 50 - {selected_country}",
+        opacity=0.7,
+        # marginal="box"
+        )
 
-median_popularity = filtered_data['track_popularity'].median()
-fig_track_popularity.add_vline(
-    x=median_popularity,
-    line_dash="dot",
-    line_color="green",
-    annotation_text=f"Median: {median_popularity:.2f}",
-    annotation_position="top right",
-    annotation_font_color="blue",
-)
+    fig_track_popularity.add_vline(
+        x=mean_popularity,
+        line_dash="dash",
+        line_color="red",
+        annotation_text=f"Mean: {mean_popularity:.2f}",
+        annotation_position="top left",
+        annotation_font_color="blue"
+    )
 
-fig_track_popularity.update_layout(
-    xaxis_title="Track Popularity",
-    yaxis_title="Count",
-    bargap=0.1,
-    template="plotly_dark"
-)
+    fig_track_popularity.add_vline(
+        x=median_popularity,
+        line_dash="dot",
+        line_color="green",
+        annotation_text=f"Median: {median_popularity:.2f}",
+        annotation_position="top right",
+        annotation_font_color="blue",
+    )
 
-fig_track_popularity.add_vrect(
-    x0=one_std_dev[0], x1=one_std_dev[1],
-    fillcolor="blue", opacity=0.1,
-    layer="below", line_width=0,
-    annotation_text="1 Std Dev",
-    annotation_position="top left",
-    annotation_font_color = "blue",
-)
-fig_track_popularity.add_vrect(
-    x0=two_std_dev[0], x1=two_std_dev[1],
-    fillcolor="green", opacity=0.1,
-    layer="below", line_width=0,
-    annotation_text="2 Std Dev",
-    annotation_position="top left",
-    annotation_font_color="blue",
-)
-fig_track_popularity.add_vrect(
-    x0=three_std_dev[0], x1=three_std_dev[1],
-    fillcolor="yellow", opacity=0.1,
-    layer="below", line_width=0,
-    annotation_text="3 Std Dev",
-    annotation_position="top left",
-    annotation_font_color="blue",
-)
+    fig_track_popularity.update_layout(
+        xaxis_title="Track Popularity",
+        yaxis_title="Count",
+        bargap=0.1,
+        template="plotly_dark"
+    )
 
-st.plotly_chart(fig_track_popularity)
+    fig_track_popularity.add_vrect(
+        x0=one_std_dev[0], x1=one_std_dev[1],
+        fillcolor="blue", opacity=0.1,
+        layer="below", line_width=0,
+        annotation_text="1 Std Dev",
+        annotation_position="top left",
+        annotation_font_color="blue",
+    )
+    fig_track_popularity.add_vrect(
+        x0=two_std_dev[0], x1=two_std_dev[1],
+        fillcolor="green", opacity=0.1,
+        layer="below", line_width=0,
+        annotation_text="2 Std Dev",
+        annotation_position="top left",
+        annotation_font_color="blue",
+    )
+    fig_track_popularity.add_vrect(
+        x0=three_std_dev[0], x1=three_std_dev[1],
+        fillcolor="yellow", opacity=0.1,
+        layer="below", line_width=0,
+        annotation_text="3 Std Dev",
+        annotation_position="top left",
+        annotation_font_color="blue",
+    )
 
-st.write(f"Percentage of data within 1 standard deviation: {within_one_std_dev:.2f}%")
-st.write(f"Percentage of data within 2 standard deviations: {within_two_std_dev:.2f}%")
-st.write(f"Percentage of data within 3 standard deviations: {within_three_std_dev:.2f}%")
+    st.plotly_chart(fig_track_popularity)
 
-st.subheader("Interpretation of Results")
-st.markdown("""
-If the percentage of data within 1, 2, and 3 standard deviations is approximately 68%, 95%, and 99.7%, respectively, 
-this indicates that the data is approximately normally distributed.
+with tab2_interpretation:
+    # st.write(f"Percentage of data within 1 standard deviation: {within_one_std_dev:.2f}%")
+    # st.write(f"Percentage of data within 2 standard deviations: {within_two_std_dev:.2f}%")
+    # st.write(f"Percentage of data within 3 standard deviations: {within_three_std_dev:.2f}%")
+    #
+    # st.subheader("Interpretation of Results")
+    # st.markdown("""
+    # If the percentage of data within 1, 2, and 3 standard deviations is approximately 68%, 95%, and 99.7%, respectively,
+    # this indicates that the data is approximately normally distributed.
+    #
+    # Significant deviations from these values may indicate that the data is skewed, has outliers,
+    # or other anomalies in its distribution.
+    # """)
+    st.subheader("Interpretation of Results")
+    st.write(f"Percentage of data within 1 standard deviation: {within_one_std_dev:.2f}%")
+    st.write(f"Percentage of data within 2 standard deviations: {within_two_std_dev:.2f}%")
+    st.write(f"Percentage of data within 3 standard deviations: {within_three_std_dev:.2f}%")
+    st.markdown("""
+    If the percentage of data within 1, 2, and 3 standard deviations is approximately 68%, 95%, 
+    and 99.7%, it suggests a normal distribution (Empirical Rule):
 
-Significant deviations from these values may indicate that the data is skewed, has outliers, 
-or other anomalies in its distribution.
-""")
+    - **1 Std Dev (68%)**: About 68% of data falls within 1 standard deviation of the mean.
+    - **2 Std Dev (95%)**: Around 95% of data lies within 2 standard deviations.
+    - **3 Std Dev (99.7%)**: Nearly all data falls within 3 standard deviations.
+
+    Significant deviations may indicate skewness, outliers, or other anomalies:
+    - **Skewness**: Data may have a long tail if heavily skewed.
+    - **Outliers**: Extreme values far from the mean may indicate rare cases.
+
+    Shaded regions in the chart show these ranges, helping assess data normality and identify trends or anomalies.
+    """)
+
+
