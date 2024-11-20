@@ -195,7 +195,7 @@ with tab1_histogram:
         line_dash="dash",
         line_color="red",
         annotation_text=f"Mean: {mean_popularity:.2f}",
-        annotation_position="top left",
+        annotation_position="top right",
         annotation_font_color="blue"
     )
 
@@ -204,7 +204,7 @@ with tab1_histogram:
         line_dash="dot",
         line_color="green",
         annotation_text=f"Median: {median_popularity:.2f}",
-        annotation_position="top right",
+        annotation_position="bottom left",
         annotation_font_color="blue",
     )
 
@@ -331,12 +331,12 @@ with tab4:
     # Filter data for the selected track
     track_countries = merged_playlists_tracks[merged_playlists_tracks['track_name'] == selected_track]['country'].unique()
     filtered_countries = country_coords_df[country_coords_df['country'].isin(track_countries)]
-    # Create a choropleth map showing countries where the selected track appears in playlists
+
     fig_map = px.choropleth(
         filtered_countries,
         locations='country',
         locationmode='country names',
-        color='country',  # Coloring by country name for unique colors
+        color='country',
         hover_name='country',
         title=f'Countries with Playlists Containing "{selected_track}"'
     )
