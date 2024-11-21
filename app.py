@@ -39,17 +39,19 @@ tracks_path = str(file_paths['tracks.csv'])
 tracks_audio_features_path = str(file_paths['tracks_audio_features.csv'])
 tracks_genres_discogs_path = str(file_paths['tracks_genres_discogs.csv'])
 
-playlist_data = spotify.get_save_playlist(spotify_api_token, playlists_all, raw_dir)
-
-playlists_ids = list(playlists_all.values())
-playlists = data_prep.create_all_playlists_table(spotify_api_token, playlists_ids)
-logger.debug(playlists)
-
-playlists.to_csv(playlists_path, index=False, sep="~")
-logger.info(f"Playlists data saved to {playlists_path}")
+# playlist_data = spotify.get_save_playlist(spotify_api_token, playlists_all, raw_dir)
 #
+# playlists_ids = list(playlists_all.values())
+# playlists = data_prep.create_all_playlists_table(spotify_api_token, playlists_ids)
+# logger.debug(playlists)
+#
+#
+# playlists.to_csv(playlists_path, index=False, sep="~")
+# logger.info(f"Playlists data saved to {playlists_path}")
+
 playlists_table = pd.read_csv(playlists_path, sep="~")
-#
+logger.debug(type(playlists_table['artist_id']))
+
 album_ids = set(playlists_table['album_id'])
 artist_ids = set(playlists_table['artist_id'])
 track_ids = set(playlists_table['track_id'])

@@ -62,8 +62,11 @@ raw_dir = path_config['raw_dir'][0]
 file_paths = {file_name: os.path.join(data_dir, file_name) for file_name in path_config['files_names']}
 
 playlists_path = str(file_paths['playlists.csv'])
+artists_genres_full_unknown_path = str(file_paths['artists_genres_full_unknown.csv'])
 tracks_path = str(file_paths['tracks.csv'])
+
 playlists_table = pd.read_csv(playlists_path, sep="~")
+artists_genres_full_unknown = pd.read_csv(artists_genres_full_unknown_path, sep='~')
 tracks_table = pd.read_csv(tracks_path, sep='~')
 
 playlist_names = playlists_table['playlist_name'].unique()
@@ -351,3 +354,22 @@ with tab4:
         # )
     )
     st.plotly_chart(fig_map)
+
+st.subheader("Top 10 Artists by Frequency in Playlists")
+
+playlists_table['artist_id'] = playlists_table['artist_id'].str.split(', ')
+st.dataframe(playlists_table)
+
+expanded_playlists = playlists_table.explode('artist_id')
+st.dataframe(expanded_playlists)
+
+artist_counts = expanded_playlists['artist_id'].value_counts().reset_index()
+artist_counts.columns = ['artist_id', 'Count']
+
+top_10_artists = artist_counts.head(10).merge(
+    artists_genres_full_unknown[['artist_id', 'artist_name']],
+    on='artist_id',
+    how='left'
+)
+
+st.dataframe(top_10_artists, hide_index=True)
