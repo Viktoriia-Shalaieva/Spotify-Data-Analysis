@@ -326,8 +326,13 @@ with tab4_tracks:
         options=top_10_tracks['Track Name']
     )
 
-    # Filter data for the selected track
-    track_countries = merged_playlists_tracks[merged_playlists_tracks['track_name'] == selected_track]['country'].unique()
+    # Filter the data to include only rows for the selected track
+    filtered_tracks = merged_playlists_tracks[merged_playlists_tracks['track_name'] == selected_track]
+
+    # Extract the unique list of countries where the track is present
+    track_countries = filtered_tracks['country'].unique()
+
+    # Filter the country coordinates table to include only countries from the track_countries list
     filtered_countries = country_coords_df[country_coords_df['country'].isin(track_countries)]
 
     fig_map = px.choropleth(
@@ -360,8 +365,8 @@ st.dataframe(expanded_playlists_artists)
 
 artist_per_playlist = expanded_playlists_artists.groupby(['country', 'artist_id'])['artist_id'].count().reset_index(name='count')
 st.dataframe(artist_per_playlist)
-artist_per_playlist_sorted = artist_per_playlist.sort_values(by='count', ascending=False)
-st.dataframe(artist_per_playlist_sorted.head(10))
+# artist_per_playlist_sorted = artist_per_playlist.sort_values(by='count', ascending=False)
+# st.dataframe(artist_per_playlist_sorted.head(10))
 
 st.write('-1111111---------')
 artist_counts = expanded_playlists_artists['artist_id'].value_counts().reset_index()
@@ -412,31 +417,91 @@ with tab3_artists:
     st.plotly_chart(fig_popularity)
 
 with tab4_artists:
+    # Select an artist from the top 10 list
     selected_artist = st.selectbox(
         "Select an Artist",
         options=top_10_artists_full['Artist']
     )
 
-    # Filter data for the selected track
-    artist_countries = merged_playlists_tracks[merged_playlists_tracks['track_name'] == selected_artist]['country'].unique()
-    filtered_countries = country_coords_df[country_coords_df['country'].isin(artist_countries)]
+    # Filter the data for the selected artist
+    artist_data = expanded_playlists_artists.merge(
+        artists_genres_full_unknown[['artist_id', 'artist_name']],
+        on='artist_id',
+        how='left'
+    )
+    filtered_artist_data = artist_data[artist_data['artist_name'] == selected_artist]
+
+    # Group by country and count occurrences of the artist in each country
+    artist_country_counts = (
+        filtered_artist_data.groupby('country')['artist_id']
+        .count()
+        .reset_index(name='Count')
+    )
+
+    # Merge with the country coordinates for mapping
+    artist_country_map_data = artist_country_counts.merge(
+        country_coords_df,
+        left_on='country',
+        right_on='country',
+        how='left'
+    )
+
+    # Create a string of countries for the legend
+    country_list = ', '.join(artist_country_counts['country'].tolist())
 
     fig_map = px.choropleth(
-        filtered_countries,
+        artist_country_map_data,
         locations='country',
         locationmode='country names',
-        color='country',
+        color='Count',
         hover_name='country',
-        title=f'Countries with Playlists Containing "{selected_artist}"'
+        title=f'Countries with Playlists Containing "{selected_artist}"',
+        labels={'Count': 'Frequency'},
+        # color_continuous_scale=px.colors.sequential.Plasma
     )
 
+    # Update layout for better display
     fig_map.update_layout(
-        legend_title_text='Country',
-        # geo=dict(
-        #     showcountries=True,
-        #     countrycolor="LightGray",
-        #     showcoastlines=True,
-        #     coastlinecolor="RebeccaPurple"
-        # )
+        legend_title_text='Frequency',
+        # geo=dict(showframe=False, showcoastlines=True, projection_type='equirectangular'),
     )
+
+    # Display the map
     st.plotly_chart(fig_map)
+
+    countries_list = ', '.join(artist_country_counts['country'].tolist())
+    st.markdown(f"**Countries where the artist is present:** {countries_list}")
+
+    # selected_artist = st.selectbox(
+    #     "Select an Artist",
+    #     options=top_10_artists_full['Artist']
+    # )
+    #
+    # # Filter the data to include only rows for the selected artist
+    # filtered_artists = merged_playlists_tracks[merged_playlists_tracks['track_name'] == selected_artist]
+    #
+    # # Extract the unique list of countries where the artist is present
+    # artist_countries = filtered_artists['country'].unique()
+    #
+    # # Filter the country coordinates table to include only countries from the artist_countries list
+    # filtered_countries = country_coords_df[country_coords_df['country'].isin(artist_countries)]
+    #
+    # fig_map = px.choropleth(
+    #     filtered_countries,
+    #     locations='country',
+    #     locationmode='country names',
+    #     color='country',
+    #     hover_name='country',
+    #     title=f'Countries with Playlists Containing "{selected_artist}"'
+    # )
+    #
+    # fig_map.update_layout(
+    #     legend_title_text='Country',
+    #     # geo=dict(
+    #     #     showcountries=True,
+    #     #     countrycolor="LightGray",
+    #     #     showcoastlines=True,
+    #     #     coastlinecolor="RebeccaPurple"
+    #     # )
+    # )
+    # st.plotly_chart(fig_map)
