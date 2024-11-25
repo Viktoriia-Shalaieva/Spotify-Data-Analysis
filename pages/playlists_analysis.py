@@ -277,39 +277,49 @@ with tab2_interpretation:
     Shaded regions in the chart show these ranges, helping assess data normality and identify trends or anomalies.
     """)
 
-track_counts = merged_playlists_tracks['track_name'].value_counts().reset_index()
+st.dataframe(merged_playlists_tracks)
+# playlists_tracks_data_tab = merged_playlists_tracks['track_name']
+track_counts = merged_playlists_tracks['track_id'].value_counts().reset_index()
 st.dataframe(track_counts)
-track_counts.columns = ['Track Name', 'Count']
-top_10_tracks = track_counts.head(10)
+
+tracks_data_tab = track_counts.merge(
+    tracks_table[['track_id', 'track_name', 'track_popularity', 'track_explicit']],
+    on='track_id',
+    how='left'
+)
+st.dataframe(tracks_data_tab)
+
+tracks_data_tab = tracks_data_tab[['track_name', 'count', 'track_popularity', 'track_explicit']]
+top_10_tracks = tracks_data_tab.head(10)
+top_10_tracks.columns = ['Track Name', 'Frequency in Playlists', 'Popularity', 'Explicit']
+top_10_tracks = top_10_tracks.sort_values(by='Frequency in Playlists', ascending=True)
+st.dataframe(top_10_tracks, hide_index=True)
 
 
 st.subheader("Top 10 Tracks by Frequency in Playlists")
 tab1_tracks, tab2_tracks, tab3_tracks, tab4_tracks = st.tabs(["Bar Plot", "Data Table", "Popularity Graph", "Map"])
 
 with tab1_tracks:
-    fig = px.bar(top_10_tracks,
-                 x='Count',
-                 y='Track Name',
-                 orientation='h',
-                 title='Top 10 Tracks by Frequency in Playlists',
-                 labels={'Count': 'Frequency', 'Track Name': 'Track Name'},
-                 color='Count')
-    fig.update_layout(yaxis={'categoryorder': 'total ascending'})
+    fig = px.bar(
+        top_10_tracks,
+        x='Frequency in Playlists',
+        y='Track Name',
+        orientation='h',
+        title='Top 10 Tracks by Frequency in Playlists',
+        color='Frequency in Playlists',
+    )
     st.plotly_chart(fig)
 
 with tab2_tracks:
     st.subheader("Data Table of Top 10 Tracks")
-    top_10_tracks.columns = ['Track Name', 'Frequency in Playlists']
-    st.dataframe(top_10_tracks, hide_index=True)
+    top_10_tracks_data_tab = top_10_tracks.sort_values(by='Frequency in Playlists', ascending=False)
+    st.dataframe(top_10_tracks_data_tab, hide_index=True)
 
 with tab3_tracks:
-    top_tracks_popularity = merged_playlists_tracks[merged_playlists_tracks['track_name'].isin(top_10_tracks['Track Name'])]
-    popularity_artist = top_tracks_popularity[['track_name', 'track_popularity']].drop_duplicates().reset_index(drop=True)
-    popularity_artist.columns = ['Track Name', 'Popularity']
-    min_y_popularity_track = popularity_artist['Popularity'].min() - 5
-    max_y_popularity_track = popularity_artist['Popularity'].max()
+    min_y_popularity_track = top_10_tracks['Popularity'].min() - 5
+    max_y_popularity_track = top_10_tracks['Popularity'].max()
 
-    fig_popularity = px.bar(popularity_artist,
+    fig_popularity = px.bar(top_10_tracks,
                             x='Track Name',
                             y='Popularity',
                             title='Popularity of Top 10 Tracks',
@@ -360,19 +370,21 @@ st.subheader("Top 10 Artists by Frequency in Playlists")
 playlists_table['artist_id'] = playlists_table['artist_id'].str.split(', ')
 st.dataframe(playlists_table)
 
+st.write('-expanded_playlists_artists---------')
 expanded_playlists_artists = playlists_table.explode('artist_id')
 st.dataframe(expanded_playlists_artists)
 
+st.write('-artist_per_playlist---------')
 artist_per_playlist = expanded_playlists_artists.groupby(['country', 'artist_id'])['artist_id'].count().reset_index(name='count')
 st.dataframe(artist_per_playlist)
-# artist_per_playlist_sorted = artist_per_playlist.sort_values(by='count', ascending=False)
-# st.dataframe(artist_per_playlist_sorted.head(10))
 
-st.write('-1111111---------')
+
+st.write('-artist_counts---------')
 artist_counts = expanded_playlists_artists['artist_id'].value_counts().reset_index()
 artist_counts.columns = ['artist_id', 'Count']
+st.dataframe(artist_counts)
 
-st.write('-----------------')
+st.write('top_10_artists-----------------')
 top_10_artists = artist_counts.head(10)
 top_10_artists = top_10_artists.merge(
     artists_genres_full_unknown[['artist_id', 'artist_name', 'artist_followers', 'artist_popularity', 'artist_genres']],
@@ -381,21 +393,24 @@ top_10_artists = top_10_artists.merge(
 )
 
 st.dataframe(top_10_artists, hide_index=True)
+
+st.write('top_10_artists_full-----------------')
 top_10_artists_full = top_10_artists[['artist_name', 'Count', 'artist_followers', 'artist_popularity', 'artist_genres']]
 st.dataframe(top_10_artists_full, hide_index=True)
-top_10_artists_full.columns = ['Artist', 'Count in Playlists',  'Followers', 'Popularity', 'Genres']
+
+st.write(' renamed columns top_10_artists_full-----------------')
+top_10_artists_full.columns = ['Artist', 'Frequency in Playlists',  'Followers', 'Popularity', 'Genres']
 st.dataframe(top_10_artists_full, hide_index=True)
 
 tab1_artists, tab2_artists, tab3_artists, tab4_artists = st.tabs(["Bar Plot", "Data Table", "Popularity Graph", "Map"])
 
 with tab1_artists:
     fig = px.bar(top_10_artists_full,
-                 x='Count in Playlists',
+                 x='Frequency in Playlists',
                  y='Artist',
                  orientation='h',
                  title='Top 10 Artists by Frequency in Playlists',
-                 labels={'Count': 'Frequency'},
-                 color='Count in Playlists')
+                 color='Frequency in Playlists')
     fig.update_layout(yaxis={'categoryorder': 'total ascending'})
     st.plotly_chart(fig)
 
@@ -405,11 +420,11 @@ with tab2_artists:
 with tab3_artists:
     min_y_popularity_art = top_10_artists_full['Popularity'].min()-5
     max_y_popularity_art = top_10_artists_full['Popularity'].max()
+
     fig_popularity = px.bar(top_10_artists_full,
                             x='Artist',
                             y='Popularity',
                             title='Popularity of Top 10 Artists',
-                            # labels={'Popularity': 'Track Popularity', 'Track Name': 'Track Name'},
                             color='Popularity',
                             range_y=[min_y_popularity_art, max_y_popularity_art],
                             )
@@ -417,91 +432,46 @@ with tab3_artists:
     st.plotly_chart(fig_popularity)
 
 with tab4_artists:
-    # Select an artist from the top 10 list
     selected_artist = st.selectbox(
         "Select an Artist",
         options=top_10_artists_full['Artist']
     )
 
-    # Filter the data for the selected artist
-    artist_data = expanded_playlists_artists.merge(
+    artist_data = artist_per_playlist.merge(
         artists_genres_full_unknown[['artist_id', 'artist_name']],
         on='artist_id',
         how='left'
     )
+
     filtered_artist_data = artist_data[artist_data['artist_name'] == selected_artist]
 
-    # Group by country and count occurrences of the artist in each country
-    artist_country_counts = (
-        filtered_artist_data.groupby('country')['artist_id']
-        .count()
-        .reset_index(name='Count')
-    )
-
-    # Merge with the country coordinates for mapping
-    artist_country_map_data = artist_country_counts.merge(
+    artist_country_map_data = filtered_artist_data.merge(
         country_coords_df,
-        left_on='country',
-        right_on='country',
+        on='country',
         how='left'
     )
-
-    # Create a string of countries for the legend
-    country_list = ', '.join(artist_country_counts['country'].tolist())
 
     fig_map = px.choropleth(
         artist_country_map_data,
         locations='country',
         locationmode='country names',
-        color='Count',
+        color='count',
         hover_name='country',
         title=f'Countries with Playlists Containing "{selected_artist}"',
-        labels={'Count': 'Frequency'},
-        # color_continuous_scale=px.colors.sequential.Plasma
+        labels={'count': 'Frequency'},
+        color_continuous_scale=px.colors.sequential.Plasma,
     )
 
-    # Update layout for better display
     fig_map.update_layout(
         legend_title_text='Frequency',
-        # geo=dict(showframe=False, showcoastlines=True, projection_type='equirectangular'),
     )
 
-    # Display the map
     st.plotly_chart(fig_map)
 
-    countries_list = ', '.join(artist_country_counts['country'].tolist())
-    st.markdown(f"**Countries where the artist is present:** {countries_list}")
+    countries_list = ', '.join(filtered_artist_data['country'].tolist())
+    st.write("**Countries where the artist is present:**")
 
-    # selected_artist = st.selectbox(
-    #     "Select an Artist",
-    #     options=top_10_artists_full['Artist']
-    # )
-    #
-    # # Filter the data to include only rows for the selected artist
-    # filtered_artists = merged_playlists_tracks[merged_playlists_tracks['track_name'] == selected_artist]
-    #
-    # # Extract the unique list of countries where the artist is present
-    # artist_countries = filtered_artists['country'].unique()
-    #
-    # # Filter the country coordinates table to include only countries from the artist_countries list
-    # filtered_countries = country_coords_df[country_coords_df['country'].isin(artist_countries)]
-    #
-    # fig_map = px.choropleth(
-    #     filtered_countries,
-    #     locations='country',
-    #     locationmode='country names',
-    #     color='country',
-    #     hover_name='country',
-    #     title=f'Countries with Playlists Containing "{selected_artist}"'
-    # )
-    #
-    # fig_map.update_layout(
-    #     legend_title_text='Country',
-    #     # geo=dict(
-    #     #     showcountries=True,
-    #     #     countrycolor="LightGray",
-    #     #     showcoastlines=True,
-    #     #     coastlinecolor="RebeccaPurple"
-    #     # )
-    # )
-    # st.plotly_chart(fig_map)
+    filtered_artist_data_map = filtered_artist_data[['country', 'count']].sort_values(['count'], ascending=False)
+    filtered_artist_data_map.columns = ['Country', 'Frequency in Playlists']
+
+    st.dataframe(filtered_artist_data_map, hide_index=True)
