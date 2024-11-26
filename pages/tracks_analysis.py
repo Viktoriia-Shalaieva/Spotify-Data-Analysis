@@ -7,6 +7,9 @@ import plotly.express as px
 import plotly.graph_objects as go
 import seaborn as sns
 import matplotlib.pyplot as plt
+from scipy.stats import pearsonr
+from scipy import stats
+from scipy.stats import ttest_ind
 
 
 st.set_page_config(
@@ -32,6 +35,34 @@ file_paths = {file_name: os.path.join(data_dir, file_name) for file_name in path
 tracks_path = str(file_paths['tracks.csv'])
 tracks_table = pd.read_csv(tracks_path, sep='~')
 
+
+fig_popularity_distribution = px.histogram(
+    tracks_table,
+    x='track_popularity',
+    title='Distribution of Track Popularity',
+    labels={'track_popularity': 'Popularity'},
+    nbins=10,
+)
+
+st.plotly_chart(fig_popularity_distribution)
+
+top_10_tracks_popularity = (
+    tracks_table.nlargest(n=10, columns='track_popularity')
+    .sort_values(by='track_popularity', ascending=True)
+)
+
+fig_top_10 = px.bar(
+    top_10_tracks_popularity,
+    x='track_popularity',
+    y='track_name',
+    orientation='h',
+    title='Top 10 Most Popular Tracks',
+    labels={'track_popularity': 'Popularity', 'track_name': 'Track Name'},
+    text='track_popularity'
+)
+fig_top_10.update_traces(textposition='outside')
+st.plotly_chart(fig_top_10)
+
 fig_pie_explicit = px.pie(tracks_table,
                           names='track_explicit',
                           title='Distribution of Explicit and Non-Explicit Tracks')
@@ -42,27 +73,86 @@ fig_pie_explicit.update_layout(
 
 st.plotly_chart(fig_pie_explicit)
 
-fig_histogram = px.histogram(tracks_table,
-                             x='track_popularity',
-                             color='track_explicit',
-                             barmode='overlay',
-                             title='Track Popularity Distribution for Explicit and Non-Explicit Tracks',
-                             labels={'track_popularity': 'Track Popularity'},
-                             )
-fig_histogram.update_layout(
-    legend_title_text='Explicit Status'
-)
-st.plotly_chart(fig_histogram)
+# st.subheader('Track Popularity Distribution for Explicit and Non-Explicit Tracks')
+# tab1_tracks, tab2_tracks = st.tabs(['Bar Plot', 'Histogram'])
+#
+# with tab1_tracks:
+#     fig_box = px.box(tracks_table,
+#                      x='track_explicit',
+#                      y='track_popularity',
+#                      color='track_explicit',
+#                      # title='Track Popularity Distribution for Explicit and Non-Explicit Tracks',
+#                      labels={'track_popularity': 'Track Popularity', 'track_explicit': 'Explicit Status'},
+#                      )
+#
+#     st.plotly_chart(fig_box)
+#
+# with tab2_tracks:
+#     fig_histogram = px.histogram(tracks_table,
+#                                  x='track_popularity',
+#                                  color='track_explicit',
+#                                  barmode='overlay',
+#                                  # title='Track Popularity Distribution for Explicit and Non-Explicit Tracks',
+#                                  labels={'track_popularity': 'Track Popularity'},
+#                                  )
+#     fig_histogram.update_layout(
+#         legend_title_text='Explicit Status'
+#     )
+#     st.plotly_chart(fig_histogram)
 
-fig_box = px.box(tracks_table,
-                 x='track_explicit',
-                 y='track_popularity',
-                 color='track_explicit',
-                 title='Track Popularity Distribution for Explicit and Non-Explicit Tracks',
-                 labels={'track_popularity': 'Track Popularity', 'track_explicit': 'Explicit Status'},
-                 )
+st.subheader('Analysis of Track Popularity for Explicit and Non-Explicit Tracks')
 
-st.plotly_chart(fig_box)
+explicit_popularity = tracks_table[tracks_table['track_explicit']]['track_popularity']
+non_explicit_popularity = tracks_table[~tracks_table['track_explicit']]['track_popularity']
+
+t_stat, p_value = ttest_ind(explicit_popularity, non_explicit_popularity)
+
+tab1_visualizations, tab2_results, tab3_interpretation = st.tabs(
+    ['Visualizations', 'Statistical Results',  'Interpretation'])
+
+with tab1_visualizations:
+    st.subheader("Visualizations")
+    tab1_boxplot, tab2_histogram = st.tabs(['Box Plot', 'Histogram'])
+
+    with tab1_boxplot:
+        fig_box = px.box(
+            tracks_table,
+            x='track_explicit',
+            y='track_popularity',
+            color='track_explicit',
+            labels={'track_popularity': 'Track Popularity', 'track_explicit': 'Explicit Status'}
+        )
+        st.plotly_chart(fig_box)
+
+    with tab2_histogram:
+        fig_histogram = px.histogram(
+            tracks_table,
+            x='track_popularity',
+            color='track_explicit',
+            barmode='overlay',
+            labels={'track_popularity': 'Track Popularity'}
+        )
+        fig_histogram.update_layout(legend_title_text='Explicit Status')
+        st.plotly_chart(fig_histogram)
+
+with tab2_results:
+    st.subheader("Statistical Results")
+    st.write(f"T-statistic: {t_stat:.2f}")
+    st.write(f"P-value: {p_value:.2f}")
+
+with tab3_interpretation:
+    st.subheader("Interpretation")
+    st.write("""
+        **Key Insights:**
+        **T-statistic:** Indicates the magnitude of the difference between the mean popularity of tracks with explicit content and those without.
+
+        **P-value:** If the P-value is less than 0.05, the difference in popularity between the two groups is considered statistically significant.
+
+        **Conclusion:**
+        - If the results show statistical significance and a noticeable difference in the visualizations, explicit content could play a role in track popularity. 
+        Otherwise, its impact might be negligible.
+    """)
+
 
 # fig_violin = px.violin(tracks_table,
 #                        x='track_explicit',
@@ -120,3 +210,33 @@ fig_scatter.update_layout(
     legend_title_text='Explicit Status'
 )
 st.plotly_chart(fig_scatter)
+
+st.subheader("Analysis of Correlation Between Track Duration and Popularity")
+
+correlation, p_value = pearsonr(tracks_table['track_duration_ms'], tracks_table['track_popularity'])
+
+tab1_correlation, tab2_correlation = st.tabs(["Results", "Interpretation"])
+
+with tab1_correlation:
+    st.write(f"Pearson Correlation Coefficient: {correlation:.2f}")
+    st.write(f"P-value: {p_value:.2f}")
+with tab2_correlation:
+    st.write("""
+        **Pearson Correlation Coefficient:**
+        - Values range between -1 and 1.
+        - A value close to 1 indicates a strong positive correlation.
+        - A value close to -1 indicates a strong negative correlation.
+        - A value close to 0 indicates no correlation.
+
+        **P-value:**
+        - Indicates the significance of the correlation.
+        - A p-value less than 0.05 typically suggests a statistically significant correlation.
+
+        **What this means:**
+        - Use the correlation coefficient to determine the strength and direction of the relationship.
+        - The p-value helps assess whether the relationship is statistically significant.
+    """)
+
+# res = stats.pearsonr(tracks_table['track_duration_ms'], tracks_table['track_popularity'])
+# st.write(res)
+

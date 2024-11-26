@@ -463,8 +463,11 @@ with tab1_artists:
                  y='Artist',
                  orientation='h',
                  title='Top 10 Artists by Frequency in Playlists',
-                 color='Frequency in Playlists')
+                 color='Frequency in Playlists',
+                 text='Frequency in Playlists',
+                 )
     fig.update_layout(yaxis={'categoryorder': 'total ascending'})
+    fig.update_traces(textposition='outside')
     st.plotly_chart(fig)
 
 with tab2_artists:
@@ -472,7 +475,7 @@ with tab2_artists:
 
 with tab3_artists:
     min_y_popularity_art = top_10_artists_full['Popularity'].min()-5
-    max_y_popularity_art = top_10_artists_full['Popularity'].max()
+    max_y_popularity_art = top_10_artists_full['Popularity'].max()+3
 
     fig_popularity = px.bar(top_10_artists_full,
                             x='Artist',
@@ -480,8 +483,10 @@ with tab3_artists:
                             title='Popularity of Top 10 Artists',
                             color='Popularity',
                             range_y=[min_y_popularity_art, max_y_popularity_art],
+                            text='Popularity',
                             )
     fig_popularity.update_layout(xaxis={'categoryorder': 'total descending'})
+    fig_popularity.update_traces(textposition='outside')
     st.plotly_chart(fig_popularity)
 
 with tab4_artists:
