@@ -1,6 +1,45 @@
-21-Nov-24 19:13:27 [DEBUG] Starting new HTTPS connection (1): accounts.spotify.com:443
-21-Nov-24 19:13:27 [DEBUG] https://accounts.spotify.com:443 "POST /api/token HTTP/11" 200 None
-21-Nov-24 19:13:27 [INFO] Access token retrieved successfully
-21-Nov-24 19:13:27 [INFO] Spotify API token: BQBZe261Nhwuzq8XBZhGOyhaqYYbxgJCWAcdzOMzXrPkv7MROtq-NqB_BHRGkJpiWzb4OQJJI6li1xz30qWCo28gxB6YV8LnVD0oj2UWGr4D8CgEuEc
-21-Nov-24 19:13:27 [INFO] Discogs API token: EaALIPVnUVkCSfqeUhhWzcdXZfgXNvERIHfabBFh
-21-Nov-24 19:13:27 [DEBUG] <class 'pandas.core.series.Series'>
+26-Nov-24 10:30:34 [DEBUG] Starting new HTTPS connection (1): accounts.spotify.com:443
+26-Nov-24 10:30:34 [DEBUG] https://accounts.spotify.com:443 "POST /api/token HTTP/11" 200 None
+26-Nov-24 10:30:34 [INFO] Access token retrieved successfully
+26-Nov-24 10:30:34 [INFO] Spotify API token: BQAPoLkwhmzu9AMsDqBqwln9gM45G-k9IADC5C8HQuNmuCVh4WeEkwwVRZeuyozuoC-M0foNe6XpWkf2UcaridkIbIKHq_elEDsddVk4rkqGjy_HV1o
+26-Nov-24 10:30:34 [INFO] Discogs API token: EaALIPVnUVkCSfqeUhhWzcdXZfgXNvERIHfabBFh
+26-Nov-24 10:30:34 [DEBUG] None
+26-Nov-24 10:30:34 [DEBUG] None
+26-Nov-24 10:30:34 [DEBUG] None
+26-Nov-24 10:30:34 [DEBUG] None
+26-Nov-24 10:30:34 [DEBUG] None
+26-Nov-24 10:30:34 [DEBUG] None
+26-Nov-24 10:30:34 [DEBUG] None
+26-Nov-24 10:30:34 [DEBUG] None
+26-Nov-24 10:30:34 [DEBUG] None
+26-Nov-24 10:30:34 [DEBUG] ['5th gen k-pop', 'Blues', "Children's", 'Classical', 'Electronic', 'Folk, World, & Country', 'Funk / Soul', 'Hip Hop', 'Jazz', 'Latin', 'Non-Music', 'Pop', 'Reggae', 'Rock', 'Stage & Screen', 'a cappella', 'adult standards', 'afro drill', 'afro house', 'afro soul', 'afrobeats', 'afropop', 'afroswing', 'agronejo', 'alt z', 'alternative dance', 'alternative metal', 'alternative r&b', 'amapiano', 'argentine hip hop', 'argentine telepop', 'arrocha', 'art pop', 'atl hip hop', 'australian hip hop', 'azonto', 'azontobeats', 'bachata', 'barcadi', 'bases de freestyle', 'bedroom pop', 'bedroom r&b', 'belgian hip hop', 'belgian pop', 'bhojpuri pop', 'big room', 'bolobedu house', 'boy band', 'brill building pop', 'cali rap', 'canadian contemporary r&b', 'canadian pop', 'candy pop', 'cdo indie', 'celtic punk', 'celtic rock', 'chamber pop', 'chill drill', 'classic girl group', 'classic kollywood', 'classic oklahoma country', 'classic pakistani pop', 'classic rock', 'classic russian rock', 'classic texas country', 'classic uk pop', 'cloud rap', 'cloud rap francais', 'colombian pop', 'conscious hip hop', 'contemporary country', 'contemporary r&b', 'corrido', 'corridos tumbados', 'country dawn', 'cruise', 'cuarteto', 'cumbia paraguaya', 'cumbia pop', 'cumbia santafesina', 'cumbia villera', 'dance pop', 'dancehall', 'deboxe', 'deep adult standards', 'deep underground hip hop', 'desi hip hop', 'desi pop', 'desi trap', 'dfw rap', 'drill espanol', 'drill francais', 'easy listening', 'edm', 'electronic trap', 'emo trap en espanol', 'europop', 'experimental', 'experimental pop', 'filmi', 'filter house', 'flamenco urbano', 'folk punk', 'folklore argentino', 'forro', 'frauenrap', 'french hip hop', 'french pop', 'funk bh', 'funk carioca', 'funk consciente', 'funk mtg', 'funk ostentacao', 'funk paulista', 'funk pop', 'funk rj', 'funk viral', 'g-house', 'gaming dubstep', 'garage rock', 'german alternative rap', 'german drill', 'german hip hop', 'german pop', 'german r&b', 'ghanaian hip hop', 'glam rock', 'gqom', 'gruperas inmortales', 'gujarati pop', 'gym phonk', 'hamburg hip hop', 'haryanvi hip hop', 'haryanvi pop', 'hindi hip hop', 'hindi indie', 'hip hop', 'hip pop', 'indian folk', 'indian indie', 'indian instrumental', 'indian singer-songwriter', 'indie folk', 'indie pop', 'indie rock', 'irish singer-songwriter', 'italian adult pop', 'j-division', 'jazz pop', 'k-pop', 'k-pop boy group', 'k-pop girl group', 'k-rap', 'kashmiri pop', 'kasi rap', 'kavkaz', 'kentucky hip hop', 'kindermusik', 'kollywood', 'korean ost', 'korean pop', 'korean r&b', 'la indie', 'latin alternative', 'latin arena pop', 'latin hip hop', 'latin pop', 'latin talent show', 'latin viral pop', 'light music', 'london rap', 'lounge', 'mambo chileno', "man's orchestra", 'maskandi', 'mega funk', 'mellow gold', 'melodic house', 'melodic rap', 'metropopolis', 'mexican pop', 'miami hip hop', 'modern alternative rock', 'modern bhajan', 'modern bollywood', 'modern country pop', 'modern rock', 'mollywood', 'motown', 'musica mexicana', 'musica tocantinense', 'neo soul', 'neoperreo', 'new jack smooth', 'new jack swing', 'new orleans rap', 'new rave', 'new romantic', 'new wave', 'new wave pop', 'nigerian hip hop', 'nigerian pop', 'nouvelle chanson francaise', 'nu metal', 'nu-cumbia', 'old school rap francais', 'opm', 'orchestral soundtrack', 'pagode', 'pagode baiano', 'pagode novo', 'pakistani pop', 'panamanian pop', 'permanent wave', 'persian electronic', 'piano rock', 'pinoy singer-songwriter', 'plugg', 'pluggnb', 'pop', 'pop argentino', 'pop dance', 'pop lgbtq+ brasileira', 'pop nacional', 'pop rap', 'pop reggaeton', 'pop soul', 'pop urbaine', 'pop venezolano', 'post-grunge', 'post-teen pop', 'pov: indie', 'previa', 'puerto rican pop', 'punjabi hip hop', 'punjabi lo-fi', 'punjabi pop', 'punk', 'qawwali', 'queens hip hop', 'r&b', 'r&b argentino', 'r&b en espanol', 'r&b francais', 'rage rap', 'ranchera', 'rap', 'rap antillais', 'rap belge', 'rap canario', 'rap catala', 'rap conciencia', 'rap conscient', 'rap espanol', 'rap francais', 'rap latina', 'rap marseille', 'rap metal', 'rap underground argentino', 'rave funk', 'reggae uruguayo', 'reggaeton', 'reggaeton chileno', 'reggaeton colombiano', 'reggaeton flow', 'rkt', 'rock', 'rock en espanol', 'rock independant francais', 'rock uruguayo', 'rock-and-roll', 'rockabilly', 'russian alt pop', 'russian drain', 'russian electronic', 'russian emo rap', 'russian gangster rap', 'russian grime', 'russian hip hop', 'russian pop', 'russian punk', 'russian trap', 'sad sierreno', 'sepedi pop', 'sertanejo', 'sertanejo pop', 'sertanejo universitario', 'sgija', 'sheffield indie', 'shimmer pop', 'sierreno', 'singer-songwriter pop', 'slap house', 'soft rock', 'sophisti-pop', 'soul', 'soundtrack', 'south african hip hop', 'south african house', 'south african pop', 'south african trap', 'southern hip hop', 'spanish hip hop', 'spanish pop', 'speedrun', 'stomp and holler', 'sufi', 'swedish hip hop', 'swing', 'talent show', 'tamil hip hop', 'tamil pop', 'trap', 'trap antillais', 'trap argentino', 'trap boricua', 'trap brasileiro', 'trap catala', 'trap colombiano', 'trap funk', 'trap latino', 'trap queen', 'trap triste', 'tropical', 'uk hip hop', 'uk pop', 'ukrainian indie', 'ukrainian pop', 'ukrainian post-punk', 'ukrainian rock', 'ukrainian viral pop', 'underground amapiano', 'urban contemporary', 'urbano chileno', 'urbano espanol', 'urbano latino', 'urdu hip hop', 'variete francaise', 'video game music', 'viral afropop', 'viral pop', 'vocal harmony group', 'vocal jazz', 'west coast rap', 'westcoast flow']
+26-Nov-24 10:30:34 [DEBUG] 345
+26-Nov-24 10:30:34 [DEBUG] canadian pop
+26-Nov-24 10:30:34 [DEBUG]                   artist_id     artist_name  artist_followers  \
+0    1DxLCyH42yaHKGK3cl5bvG   Maria Becerra           7234698   
+1    34PYzJSu4DHKEyhdBfsn0E         TORRRES              9923   
+2    58UBmhZzNl22EI94dh9Gx0            OSTY             15373   
+3    7iK8PXO48WeuP03g8YR51W     Myke Towers          17347444   
+4    1QvyquqkuuwUzdszyoKIy4      Haricharan           3427291   
+..                      ...             ...               ...   
+590  7K78lVZ8XzkjfRSI7570FF  José Feliciano            414621   
+591  3S4T8XtipStwl34odXn1YS  Scotts Maphuma            284681   
+592  26dSoYclwsYLMAKD3tpOr4  Britney Spears          15580584   
+593  2FKWNmZWDBZR4dE5KX4plR  Diljit Dosanjh          25958912   
+594  3PpjqSKBer3obW6lDflOBx     Ram Sampath            578971   
+
+                               artist_genres  artist_popularity  
+0             [pop argentino, urbano latino]                 82  
+1                                light music                 62  
+2               [Non-Music, Pop, Electronic]                 52  
+3    [reggaeton, trap latino, urbano latino]                 90  
+4                                    [filmi]                 73  
+..                                       ...                ...  
+590            [latin pop, puerto rican pop]                 70  
+591                                    Blues                 66  
+592                         [dance pop, pop]                 83  
+593   [filmi, modern bollywood, punjabi pop]                 82  
+594                [filmi, modern bollywood]                 67  
+
+[595 rows x 5 columns]
+26-Nov-24 10:30:34 [DEBUG] None

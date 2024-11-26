@@ -277,49 +277,102 @@ with tab2_interpretation:
     Shaded regions in the chart show these ranges, helping assess data normality and identify trends or anomalies.
     """)
 
-st.dataframe(merged_playlists_tracks)
+
+st.write('track_counts')
 # playlists_tracks_data_tab = merged_playlists_tracks['track_name']
-track_counts = merged_playlists_tracks['track_id'].value_counts().reset_index()
+track_counts = playlists_table['track_id'].value_counts().reset_index()
 st.dataframe(track_counts)
 
-tracks_data_tab = track_counts.merge(
+st.write('track_counts_sorted')
+track_counts_sorted = track_counts.sort_values(by='count', ascending=False)
+st.dataframe(track_counts_sorted)
+
+st.write('top_track_counts_sorted')
+top_track_counts_sorted = track_counts_sorted.head(10)
+st.dataframe(top_track_counts_sorted)
+
+st.write('track_data')
+tracks_data = top_track_counts_sorted.merge(
     tracks_table[['track_id', 'track_name', 'track_popularity', 'track_explicit']],
     on='track_id',
     how='left'
 )
-st.dataframe(tracks_data_tab)
+st.dataframe(tracks_data)
 
-tracks_data_tab = tracks_data_tab[['track_name', 'count', 'track_popularity', 'track_explicit']]
-top_10_tracks = tracks_data_tab.head(10)
-top_10_tracks.columns = ['Track Name', 'Frequency in Playlists', 'Popularity', 'Explicit']
-top_10_tracks = top_10_tracks.sort_values(by='Frequency in Playlists', ascending=True)
-st.dataframe(top_10_tracks, hide_index=True)
+st.write('tracks_artists')
+tracks_artists = tracks_data.merge(
+    playlists_table[['track_id', 'artist_id']],
+    on='track_id',
+    how='left'
+)
+st.dataframe(tracks_artists)
+
+st.write('tracks_artists_cleaned')
+tracks_artists_cleaned = tracks_artists.drop_duplicates(subset=['track_id'])
+st.dataframe(tracks_artists_cleaned)
+
+tracks_artists_cleaned.loc[:, 'artist_id'] = tracks_artists_cleaned['artist_id'].str.split(', ')
+# tracks_artists_cleaned['artist_id'] = tracks_artists_cleaned['artist_id'].str.split(', ')
+st.dataframe(tracks_artists_cleaned)
+
+st.write('-expanded_tracks_artists---------')
+expanded_tracks_artists = tracks_artists_cleaned.explode('artist_id')
+st.dataframe(expanded_tracks_artists)
+
+st.write('tracks_artists_name---------')
+tracks_artists_name = expanded_tracks_artists.merge(
+    artists_genres_full_unknown[['artist_id', 'artist_name']],
+    on='artist_id',
+    how='left'
+)
+st.dataframe(tracks_artists_name)
+
+st.write('tracks_artists_grouped---------')
+# Grouping the data by 'track_id' and aggregating values
+tracks_artists_grouped = tracks_artists_name.groupby('track_id').agg({
+    'track_name': 'first',   # Keep the first occurrence of the track name
+    'artist_name': lambda x: ', '.join(x.dropna().unique()),  # Concatenate unique artist names, separated by commas
+    'count': 'first',
+    'track_popularity': 'first',
+    'track_explicit': 'first'
+}).reset_index()
+st.dataframe(tracks_artists_grouped)
+
+st.write('tracks_full---------')
+tracks_full = tracks_artists_grouped[['track_name', 'artist_name', 'count', 'track_popularity', 'track_explicit']]
+st.dataframe(tracks_full)
+
+tracks_full.columns = ['Track Name', 'Artists', 'Frequency in Playlists', 'Popularity', 'Explicit']
+st.dataframe(tracks_full)
+
+# tracks_full = tracks_full.sort_values(by='Frequency in Playlists', ascending=False)
 
 
 st.subheader("Top 10 Tracks by Frequency in Playlists")
 tab1_tracks, tab2_tracks, tab3_tracks, tab4_tracks = st.tabs(["Bar Plot", "Data Table", "Popularity Graph", "Map"])
 
 with tab1_tracks:
+    tracks_full = tracks_full.sort_values(by='Frequency in Playlists', ascending=True)
     fig = px.bar(
-        top_10_tracks,
+        tracks_full,
         x='Frequency in Playlists',
         y='Track Name',
         orientation='h',
-        title='Top 10 Tracks by Frequency in Playlists',
+        # title='Top 10 Tracks by Frequency in Playlists',
         color='Frequency in Playlists',
     )
     st.plotly_chart(fig)
 
 with tab2_tracks:
-    st.subheader("Data Table of Top 10 Tracks")
-    top_10_tracks_data_tab = top_10_tracks.sort_values(by='Frequency in Playlists', ascending=False)
-    st.dataframe(top_10_tracks_data_tab, hide_index=True)
+    # st.subheader("Data Table of Top 10 Tracks")
+    tracks_full = tracks_full.sort_values(by='Frequency in Playlists', ascending=False)
+    st.dataframe(tracks_full, hide_index=True)
 
 with tab3_tracks:
-    min_y_popularity_track = top_10_tracks['Popularity'].min() - 5
-    max_y_popularity_track = top_10_tracks['Popularity'].max()
+    min_y_popularity_track = tracks_full['Popularity'].min() - 5
+    max_y_popularity_track = tracks_full['Popularity'].max()
 
-    fig_popularity = px.bar(top_10_tracks,
+    fig_popularity = px.bar(tracks_full,
                             x='Track Name',
                             y='Popularity',
                             title='Popularity of Top 10 Tracks',
@@ -333,7 +386,7 @@ with tab3_tracks:
 with tab4_tracks:
     selected_track = st.selectbox(
         "Select a Track",
-        options=top_10_tracks['Track Name']
+        options=tracks_full['Track Name']
     )
 
     # Filter the data to include only rows for the selected track
