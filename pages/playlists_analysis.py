@@ -420,40 +420,56 @@ with tab4_tracks:
 
 st.subheader("Top 10 Artists by Frequency in Playlists")
 
+st.write('playlists_table---------')
+# Split the 'artist_id' column values (which are strings of comma-separated IDs) into lists of IDs
 playlists_table['artist_id'] = playlists_table['artist_id'].str.split(', ')
 st.dataframe(playlists_table)
 
 st.write('-expanded_playlists_artists---------')
+# Expand the playlists table so that each artist in the 'artist_id' list gets its own row
 expanded_playlists_artists = playlists_table.explode('artist_id')
 st.dataframe(expanded_playlists_artists)
 
 st.write('-artist_per_playlist---------')
-artist_per_playlist = expanded_playlists_artists.groupby(['country', 'artist_id'])['artist_id'].count().reset_index(name='count')
+# Group by country and artist_id to count how often each artist appears in playlists for each country
+artist_per_playlist = (
+    expanded_playlists_artists
+    .groupby('country')['artist_id']
+    .value_counts()
+    .reset_index()
+)
 st.dataframe(artist_per_playlist)
 
 
 st.write('-artist_counts---------')
 artist_counts = expanded_playlists_artists['artist_id'].value_counts().reset_index()
-artist_counts.columns = ['artist_id', 'Count']
 st.dataframe(artist_counts)
 
+st.write('artist_counts_sorted')
+artist_counts_sorted = artist_counts.sort_values(by='count', ascending=False)
+st.dataframe(artist_counts_sorted)
+
 st.write('top_10_artists-----------------')
-top_10_artists = artist_counts.head(10)
-top_10_artists = top_10_artists.merge(
+top_10_artists = artist_counts_sorted.head(10)
+st.dataframe(top_10_artists)
+
+st.write('top_10_artists_full-----------------')
+top_10_artists_full = top_10_artists.merge(
     artists_genres_full_unknown[['artist_id', 'artist_name', 'artist_followers', 'artist_popularity', 'artist_genres']],
     on='artist_id',
     how='left'
 )
+st.dataframe(top_10_artists_full)
 
-st.dataframe(top_10_artists, hide_index=True)
-
-st.write('top_10_artists_full-----------------')
-top_10_artists_full = top_10_artists[['artist_name', 'Count', 'artist_followers', 'artist_popularity', 'artist_genres']]
-st.dataframe(top_10_artists_full, hide_index=True)
+st.write('top_10_artists_full-2---------------')
+top_10_artists_full = top_10_artists_full[
+    ['artist_name', 'count', 'artist_followers', 'artist_popularity', 'artist_genres']
+]
+st.dataframe(top_10_artists_full)
 
 st.write(' renamed columns top_10_artists_full-----------------')
 top_10_artists_full.columns = ['Artist', 'Frequency in Playlists',  'Followers', 'Popularity', 'Genres']
-st.dataframe(top_10_artists_full, hide_index=True)
+st.dataframe(top_10_artists_full)
 
 tab1_artists, tab2_artists, tab3_artists, tab4_artists = st.tabs(["Bar Plot", "Data Table", "Popularity Graph", "Map"])
 
