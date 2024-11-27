@@ -50,6 +50,8 @@ top_10_tracks_popularity = (
     tracks_table.nlargest(n=10, columns='track_popularity')
     .sort_values(by='track_popularity', ascending=True)
 )
+min_x = top_10_tracks_popularity['track_popularity'].min() - 3
+max_x = top_10_tracks_popularity['track_popularity'].max() + 1
 
 fig_top_10 = px.bar(
     top_10_tracks_popularity,
@@ -58,7 +60,8 @@ fig_top_10 = px.bar(
     orientation='h',
     title='Top 10 Most Popular Tracks',
     labels={'track_popularity': 'Popularity', 'track_name': 'Track Name'},
-    text='track_popularity'
+    text='track_popularity',
+    range_x=[min_x, max_x],
 )
 fig_top_10.update_traces(textposition='outside')
 st.plotly_chart(fig_top_10)
