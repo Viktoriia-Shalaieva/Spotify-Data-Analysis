@@ -1,6 +1,7 @@
 from pprint import pprint
 import pandas as pd
 from source.api import spotify
+from source.web_scraping import chosic
 from source.preprocessing import data_prep
 import yaml
 from logs.logger_config import logger
@@ -26,6 +27,7 @@ with open('config/path_config.yaml', 'r') as config_file:
 #
 data_dir = path_config['data_dir'][0]
 raw_dir = path_config['raw_dir'][0]
+genres_dir = path_config['genres_dir'][0]
 file_paths = {file_name: os.path.join(data_dir, file_name) for file_name in path_config['files_names']}
 
 playlists_path = str(file_paths['playlists.csv'])
@@ -38,6 +40,8 @@ artists_genres_full_unknown_path = str(file_paths['artists_genres_full_unknown.c
 tracks_path = str(file_paths['tracks.csv'])
 tracks_audio_features_path = str(file_paths['tracks_audio_features.csv'])
 tracks_genres_discogs_path = str(file_paths['tracks_genres_discogs.csv'])
+
+genres_path = os.path.join(genres_dir, 'genres.yaml')
 
 # playlist_data = spotify.get_save_playlist(spotify_api_token, playlists_all, raw_dir)
 #
@@ -119,8 +123,8 @@ artists_genres_discogs = pd.read_csv(artists_genres_discogs_path, sep="~")
 # logger.debug(artists)
 #
 artists_genres_full_unknown = pd.read_csv(artists_genres_full_unknown_path, sep="~")
-# empty_genre_count_art = (artists_genres_full_unknown['artist_genres'] == 'unknown genre').sum()
-# logger.info(f"Number of empty artist genres in artists_genre_full.csv: {empty_genre_count_art}")
+empty_genre_count_art = (artists_genres_full_unknown['artist_genres'] == 'unknown genre').sum()
+logger.info(f"Number of empty artist genres in artists_genre_full.csv: {empty_genre_count_art}")
 
 albums_table = pd.read_csv(albums_path, sep='~')
 artists_genres_full = pd.read_csv(artists_genres_full_path, sep='~')
@@ -140,25 +144,31 @@ logger.debug(tracks_genres_discogs_table.info())
 
 # Use the .apply() method to apply the eval function to each element in the 'artist_genres' column
 # The eval function converts the string representation of lists back into actual Python lists
-artists_genres_full['artist_genres'] = artists_genres_full['artist_genres'].apply(eval)
+# artists_genres_full['artist_genres'] = artists_genres_full['artist_genres'].apply(eval)
+#
+# unique_genres = set()
+# for genres in artists_genres_full['artist_genres'].dropna():
+#     unique_genres.update(genres)
+#
+# unique_genres_list = sorted(unique_genres)
+#
+# logger.debug(unique_genres_list)
+# num_unique_genres = len(unique_genres_list)
+# logger.debug(num_unique_genres)
+#
+# logger.debug(random.choice(unique_genres_list))
+#
+#
+# artists_genres_full['artist_genres'] = artists_genres_full['artist_genres'].apply(
+#     lambda x: random.choice(unique_genres_list) if (isinstance(x, list) and len(x) == 0) else x
+# )
+# logger.debug(artists_genres_full)
+# logger.debug(artists_genres_full.info())
+#
+# artists_genres_full.to_csv(artists_genres_full_random_path, index=False, sep="~")
 
-unique_genres = set()
-for genres in artists_genres_full['artist_genres'].dropna():
-    unique_genres.update(genres)
+genres = chosic.get_genres()
+logger.debug(genres)
 
-unique_genres_list = sorted(unique_genres)
-
-logger.debug(unique_genres_list)
-num_unique_genres = len(unique_genres_list)
-logger.debug(num_unique_genres)
-
-logger.debug(random.choice(unique_genres_list))
-
-
-artists_genres_full['artist_genres'] = artists_genres_full['artist_genres'].apply(
-    lambda x: random.choice(unique_genres_list) if (isinstance(x, list) and len(x) == 0) else x
-)
-logger.debug(artists_genres_full)
-logger.debug(artists_genres_full.info())
-
-artists_genres_full.to_csv(artists_genres_full_random_path, index=False, sep="~")
+with open(genres_path, 'w', encoding='utf-8') as file:
+    yaml.dump(genres, file, default_flow_style=False, allow_unicode=True)

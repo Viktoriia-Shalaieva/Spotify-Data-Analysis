@@ -7,6 +7,8 @@ import plotly.express as px
 import re
 import requests
 from bs4 import BeautifulSoup
+import plotly.graph_objects as go
+
 
 st.set_page_config(
     page_title="Spotify Data Analysis",
@@ -32,6 +34,9 @@ file_paths = {file_name: os.path.join(data_dir, file_name) for file_name in path
 artists_genres_full_unknown_path = str(file_paths['artists_genres_full_unknown.csv'])
 
 artists_genres_full_unknown = pd.read_csv(artists_genres_full_unknown_path, sep='~')
+
+with open('./data/genres/genres.yaml', 'r', encoding='utf-8') as file:
+    all_genres_with_subgenres = yaml.safe_load(file)
 
 st.dataframe(artists_genres_full_unknown)
 
@@ -153,65 +158,70 @@ expanded_artists_genres['artist_genres'] = expanded_artists_genres['artist_genre
 st.dataframe(expanded_artists_genres)
 
 
-url = 'https://www.chosic.com/list-of-music-genres/'
-
-
-headers = {
-    'User-Agent': (
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
-        '(KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
-    )
-}
-
-response = requests.get(url, headers=headers)
-print(response)
-
-soup = BeautifulSoup(response.text, 'html.parser')
-
-
-def get_parent_genres(soup_response):
-    genres_parent = {}
-    d = 1
-    for i in soup_response.select(".genre-term-basic"):
-        genres_parent[i.text] = d
-        d += 1
-    return genres_parent
-
-
-def get_all_subgenres(soup_response, parent_genres_number):
-    genre_subgenres = {}
-
-    for main_genre, data_parent_value in parent_genres_number.items():
-        subgenre_list = soup_response.find('ul', {'data-parent': str(data_parent_value)})
-
-        subgenres = []
-        if subgenre_list:
-            # Iterate through all <a> tags with the href attribute in subgenre_list
-            for subgenre in subgenre_list.select('.capital-letter.genre-term'):
-            # for subgenre in subgenre_list.find_all('a', href=True):
-                # Extract the text from the element and remove any extra spaces
-                subgenre_name = subgenre.text.strip()
-                subgenres.append(subgenre_name)
-
-        genre_subgenres[main_genre] = subgenres
-
-    return genre_subgenres
-
-
-parent_genres = get_parent_genres(soup)
-all_genres_with_subgenres = get_all_subgenres(soup, parent_genres)
-print(all_genres_with_subgenres)
+# url = 'https://www.chosic.com/list-of-music-genres/'
+#
+#
+# headers = {
+#     'User-Agent': (
+#         'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
+#         '(KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
+#     )
+# }
+#
+# response = requests.get(url, headers=headers)
+# print(response)
+#
+# soup = BeautifulSoup(response.text, 'html.parser')
+#
+#
+# def get_parent_genres(soup_response):
+#     genres_parent = {}
+#     d = 1
+#     for i in soup_response.select(".genre-term-basic"):
+#         genres_parent[i.text] = d
+#         d += 1
+#     return genres_parent
+#
+#
+# def get_all_subgenres(soup_response, parent_genres_number):
+#     genre_subgenres = {}
+#
+#     for main_genre, data_parent_value in parent_genres_number.items():
+#         subgenre_list = soup_response.find('ul', {'data-parent': str(data_parent_value)})
+#
+#         subgenres = []
+#         if subgenre_list:
+#             # Iterate through all <a> tags with the href attribute in subgenre_list
+#             for subgenre in subgenre_list.select('.capital-letter.genre-term'):
+#             # for subgenre in subgenre_list.find_all('a', href=True):
+#                 # Extract the text from the element and remove any extra spaces
+#                 subgenre_name = subgenre.text.strip()
+#                 subgenres.append(subgenre_name)
+#
+#         genre_subgenres[main_genre] = subgenres
+#
+#     return genre_subgenres
+#
+#
+# parent_genres = get_parent_genres(soup)
+# all_genres_with_subgenres = get_all_subgenres(soup, parent_genres)
+# print(all_genres_with_subgenres)
 
 
 # Update classification logic based on the provided detailed genre structure
 def classify_genres_detailed_structure(genre):
-    genre = genre.lower().strip()
+    # genre = genre.lower().strip()
     for parent_genre, subgenres in all_genres_with_subgenres.items():
-        if any(subgenre.lower() in genre.lower() for subgenre in subgenres):
+        if genre in subgenres:
             return parent_genre
     return 'Other'
 
 
+expanded_artists_genres['artist_genres'] = (expanded_artists_genres['artist_genres']
+                                            .str.replace(r'&\s*country', 'country', regex=True))
+
+genre_counts = expanded_artists_genres['artist_genres'].value_counts(sort=False).reset_index()
+st.dataframe(genre_counts)
 expanded_artists_genres['parent_genre'] = (expanded_artists_genres['artist_genres']
                                            .apply(classify_genres_detailed_structure))
 
@@ -222,7 +232,6 @@ main_genre_counts.columns = ['parent_genre', 'artist_count']
 st.dataframe(expanded_artists_genres)
 st.dataframe(main_genre_counts)
 
-# main_genre_counts['theta'] = main_genre_counts['main_genre']
 
 # Create the line polar chart
 fig_polar = px.line_polar(
@@ -237,11 +246,37 @@ fig_polar = px.line_polar(
 # Customize layout
 fig_polar.update_layout(
     polar=dict(
-        radialaxis=dict(title="Artist Count", showticklabels=True)
+        radialaxis=dict(visible=True, title="Artist Count", showticklabels=True)
     )
 )
 
-# Display the polar chart
+fig_polar.update_traces(fill='toself')
+
 st.plotly_chart(fig_polar)
 
 
+categories = main_genre_counts["parent_genre"]
+values = main_genre_counts["artist_count"]
+
+
+fig_spider = go.Figure()
+
+fig_spider.add_trace(go.Scatterpolar(
+    r=values,
+    theta=categories,
+    fill='toself',
+    name='Artist Count'
+))
+
+fig_spider.update_layout(
+    polar=dict(
+        radialaxis=dict(
+            visible=True,
+            title="Artist Count",
+            showticklabels=True
+        )
+    ),
+    title="Genres Distribution",
+)
+
+st.plotly_chart(fig_spider)

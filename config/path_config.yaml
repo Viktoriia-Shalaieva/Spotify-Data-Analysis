@@ -4,6 +4,9 @@ data_dir:
 raw_dir:
   - './data/raw/playlists/'
 
+genres_dir:
+  - './data/genres/'
+
 files_names:
   - 'albums.csv'
   - 'artists.csv'
@@ -16,3 +19,4 @@ files_names:
   - 'tracks_audio_features.csv'
   - 'tracks_genres_discogs.csv'
   - 'tracks_genres_theaudiodb.csv'
+  - 'genres.yaml'
