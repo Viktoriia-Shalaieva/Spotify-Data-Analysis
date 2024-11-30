@@ -6,3 +6,5 @@ streamlit
 matplotlib
 plotly
 seaborn
+scipy
+beautifulsoup4

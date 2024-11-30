@@ -21,6 +21,7 @@ def create_playlist_table(playlist):
             'country': country,
             'playlist_followers_total': playlist_followers_total,
             'track_id': track.get('id'),
+            # 'track_popularity': track.get('popularity'),
         }
         album = track.get('album', {})
 

@@ -1,6 +1,7 @@
 from pprint import pprint
 import pandas as pd
 from source.api import spotify
+from source.web_scraping import chosic
 from source.preprocessing import data_prep
 import yaml
 from logs.logger_config import logger
@@ -26,6 +27,7 @@ with open('config/path_config.yaml', 'r') as config_file:
 #
 data_dir = path_config['data_dir'][0]
 raw_dir = path_config['raw_dir'][0]
+genres_dir = path_config['genres_dir'][0]
 file_paths = {file_name: os.path.join(data_dir, file_name) for file_name in path_config['files_names']}
 
 playlists_path = str(file_paths['playlists.csv'])
@@ -39,27 +41,31 @@ tracks_path = str(file_paths['tracks.csv'])
 tracks_audio_features_path = str(file_paths['tracks_audio_features.csv'])
 tracks_genres_discogs_path = str(file_paths['tracks_genres_discogs.csv'])
 
-playlist_data = spotify.get_save_playlist(spotify_api_token, playlists_all, raw_dir)
+genres_path = os.path.join(genres_dir, 'genres.yaml')
 
-playlists_ids = list(playlists_all.values())
-playlists = data_prep.create_all_playlists_table(spotify_api_token, playlists_ids)
-logger.debug(playlists)
-
-playlists.to_csv(playlists_path, index=False, sep="~")
-logger.info(f"Playlists data saved to {playlists_path}")
+# playlist_data = spotify.get_save_playlist(spotify_api_token, playlists_all, raw_dir)
+#
+# playlists_ids = list(playlists_all.values())
+# playlists = data_prep.create_all_playlists_table(spotify_api_token, playlists_ids)
+# logger.debug(playlists)
+#
+#
+# playlists.to_csv(playlists_path, index=False, sep="~")
+# logger.info(f"Playlists data saved to {playlists_path}")
 #
 playlists_table = pd.read_csv(playlists_path, sep="~")
+# logger.debug(type(playlists_table['artist_id']))
 #
-album_ids = set(playlists_table['album_id'])
-artist_ids = set(playlists_table['artist_id'])
-track_ids = set(playlists_table['track_id'])
-
+# album_ids = set(playlists_table['album_id'])
+# artist_ids = set(playlists_table['artist_id'])
+# track_ids = set(playlists_table['track_id'])
+#
 # albums = data_prep.create_albums_table(spotify_api_token, album_ids)
 # logger.debug(albums)
 #
 # albums.to_csv(albums_path, index=False, sep="~")
 # logger.info(f"Albums data saved to {albums_path}")
-
+#
 # artists = data_prep.create_artists_table(spotify_api_token, artist_ids)
 # logger.debug(artists)
 #
@@ -78,18 +84,16 @@ track_ids = set(playlists_table['track_id'])
 # tracks_audio_features.to_csv(tracks_audio_features_path, index=False, sep="~")
 # logger.info(f"Track audio features saved to {tracks_audio_features_path}")
 
+# Need to fix if I will use it. Can be deleted!!!!!!!!!!
 # tracks_genres_discogs = data_prep.create_track_genre_table(playlists_table, discogs_api_token)
 # logger.debug(tracks_genres_discogs)
-#
 # tracks_genres_discogs.to_csv(tracks_genres_discogs_path, index=False, sep="~")
 # logger.info(f"Track genres saved to {tracks_genres_discogs_path}")
-
 # tracks_genres_discogs = pd.read_csv(tracks_genres_discogs_path, sep="~")
-#
 # empty_tracks_genres_discogs = (tracks_genres_discogs['track_genre'] == '[]').sum()
 # logger.info(f"Number of empty track genres in tracks_genres.csv: {empty_tracks_genres_discogs}")
 
-# artists = pd.read_csv(artists_path, sep="~")
+artists = pd.read_csv(artists_path, sep="~")
 # logger.debug(artists)
 #
 # empty_genre_count_art = (artists['artist_genres'] == '[]').sum()
@@ -100,7 +104,7 @@ track_ids = set(playlists_table['track_id'])
 #
 # artists_genres_discogs.to_csv(artists_genres_discogs_path, index=False, sep="~")
 #
-# artists_genres_discogs = pd.read_csv(artists_genres_discogs_path, sep="~")
+artists_genres_discogs = pd.read_csv(artists_genres_discogs_path, sep="~")
 #
 # empty_artists_genres_count = (artists_genres_discogs['artist_genre'] == '[]').sum()
 # logger.info(f"Number of empty genres in artists_genres_discogs.csv: {empty_artists_genres_count}")
@@ -118,25 +122,25 @@ track_ids = set(playlists_table['track_id'])
 # artists.to_csv(artists_genres_full_unknown_path, index=False, sep="~")
 # logger.debug(artists)
 #
-# artists_genres_full_unknown = pd.read_csv(artists_genres_full_unknown_path, sep="~")
-# empty_genre_count_art = (artists_genres_full_unknown['artist_genres'] == 'unknown genre').sum()
-# logger.info(f"Number of empty artist genres in artists_genre_full.csv: {empty_genre_count_art}")
-#
-# albums_table = pd.read_csv(albums_path, sep='~')
-# artists_genres_full = pd.read_csv(artists_genres_full_path, sep='~')
-# tracks_table = pd.read_csv(tracks_path, sep='~')
-# tracks_audio_features_table = pd.read_csv(tracks_audio_features_path, sep='~')
-# tracks_genres_discogs_table = pd.read_csv(tracks_genres_discogs_path, sep='~')
-#
-# logger.debug(albums_table.info())
-# logger.debug(artists.info())
-# logger.debug(artists_genres_discogs.info())
-# logger.debug(artists_genres_full.info())
-# logger.debug(artists_genres_full_unknown.info())
-# logger.debug(playlists_table.info())
-# logger.debug(tracks_table.info())
-# logger.debug(tracks_audio_features_table.info())
-# logger.debug(tracks_genres_discogs_table.info())
+artists_genres_full_unknown = pd.read_csv(artists_genres_full_unknown_path, sep="~")
+empty_genre_count_art = (artists_genres_full_unknown['artist_genres'] == 'unknown genre').sum()
+logger.info(f"Number of empty artist genres in artists_genre_full.csv: {empty_genre_count_art}")
+
+albums_table = pd.read_csv(albums_path, sep='~')
+artists_genres_full = pd.read_csv(artists_genres_full_path, sep='~')
+tracks_table = pd.read_csv(tracks_path, sep='~')
+tracks_audio_features_table = pd.read_csv(tracks_audio_features_path, sep='~')
+tracks_genres_discogs_table = pd.read_csv(tracks_genres_discogs_path, sep='~')
+
+logger.debug(albums_table.info())
+logger.debug(artists.info())
+logger.debug(artists_genres_discogs.info())
+logger.debug(artists_genres_full.info())
+logger.debug(artists_genres_full_unknown.info())
+logger.debug(playlists_table.info())
+logger.debug(tracks_table.info())
+logger.debug(tracks_audio_features_table.info())
+logger.debug(tracks_genres_discogs_table.info())
 
 # Use the .apply() method to apply the eval function to each element in the 'artist_genres' column
 # The eval function converts the string representation of lists back into actual Python lists
@@ -162,3 +166,9 @@ track_ids = set(playlists_table['track_id'])
 # logger.debug(artists_genres_full.info())
 #
 # artists_genres_full.to_csv(artists_genres_full_random_path, index=False, sep="~")
+
+genres = chosic.get_genres()
+logger.debug(genres)
+
+with open(genres_path, 'w', encoding='utf-8') as file:
+    yaml.dump(genres, file, default_flow_style=False, allow_unicode=True)
