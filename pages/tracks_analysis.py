@@ -32,6 +32,9 @@ data_dir = path_config['data_dir'][0]
 raw_dir = path_config['raw_dir'][0]
 file_paths = {file_name: os.path.join(data_dir, file_name) for file_name in path_config['files_names']}
 
+playlists_path = str(file_paths['playlists.csv'])
+playlists_table = pd.read_csv(playlists_path, sep="~")
+
 tracks_path = str(file_paths['tracks.csv'])
 tracks_table = pd.read_csv(tracks_path, sep='~')
 
@@ -243,3 +246,62 @@ with tab2_correlation:
 # res = stats.pearsonr(tracks_table['track_duration_ms'], tracks_table['track_popularity'])
 # st.write(res)
 
+# Calculate the number of artists for each track in the playlist table
+playlists_table['num_artists'] = playlists_table['artist_id'].apply(lambda x: len(x.split(',')))
+st.dataframe(playlists_table)
+
+# Merge the number of artists from playlists_table with the tracks_table
+tracks_with_artists = tracks_table.merge(
+    playlists_table[['track_id', 'num_artists']],
+    on='track_id',
+    how='left'
+)
+
+st.dataframe(tracks_with_artists)
+
+tracks_with_artists = tracks_with_artists.drop_duplicates(subset=['track_id'])
+
+st.dataframe(tracks_with_artists)
+
+# correlation = tracks_with_artists[['num_artists', 'track_popularity']].corr().iloc[0, 1]
+
+# Calculate the Pearson correlation coefficient and p-value between the number of artists and track popularity
+correlation, p_value = pearsonr(tracks_with_artists['num_artists'], tracks_with_artists['track_popularity'])
+st.write(f"Pearson Correlation Coefficient: {correlation:.2f}")
+st.write(f"P-value: {p_value:.2f}")
+
+# Calculate the average popularity of tracks grouped by the number of artists
+popularity_by_artists = tracks_with_artists.groupby('num_artists')['track_popularity'].mean().reset_index()
+popularity_by_artists.rename(columns={'track_popularity': 'avg_track_popularity'}, inplace=True)
+st.dataframe(popularity_by_artists)
+min_y = popularity_by_artists['avg_track_popularity'].min() - 5
+max_y = popularity_by_artists['avg_track_popularity'].max()
+
+fig = px.bar(
+    popularity_by_artists,
+    x='num_artists',
+    y='avg_track_popularity',
+    title='Average Track Popularity by Number of Artists',
+    labels={'num_artists': 'Number of Artists', 'track_popularity': 'Average Popularity'},
+    range_y=[min_y, max_y],
+)
+
+st.plotly_chart(fig)
+
+# Analyze the distribution of tracks by the number of artists
+artist_distribution = tracks_with_artists['num_artists'].value_counts().reset_index()
+artist_distribution.columns = ['num_artists', 'track_count']
+
+artist_distribution.sort_values(by='num_artists', inplace=True)
+
+st.dataframe(artist_distribution)
+
+fig = px.bar(
+    artist_distribution,
+    x='num_artists',
+    y='track_count',
+    title='Distribution of Tracks by Number of Artists',
+    labels={'num_artists': 'Number of Artists', 'track_count': 'Number of Tracks'},
+)
+
+st.plotly_chart(fig)
