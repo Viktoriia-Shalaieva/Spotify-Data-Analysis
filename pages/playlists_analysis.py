@@ -50,7 +50,7 @@ fig = px.choropleth(
     # title="Countries for Playlist Analysis"
 )
 fig.update_layout(
-    legend_title_text='Country'
+    legend_title_text='Country',
 )
 st.plotly_chart(fig)
 
@@ -549,3 +549,4 @@ with tab4_artists:
     filtered_artist_data_map.columns = ['Country', 'Frequency in Playlists']
 
     st.dataframe(filtered_artist_data_map, hide_index=True)
+

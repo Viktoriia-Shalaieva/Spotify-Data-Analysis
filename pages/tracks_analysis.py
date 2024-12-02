@@ -32,12 +32,21 @@ data_dir = path_config['data_dir'][0]
 raw_dir = path_config['raw_dir'][0]
 file_paths = {file_name: os.path.join(data_dir, file_name) for file_name in path_config['files_names']}
 
-playlists_path = str(file_paths['playlists.csv'])
-playlists_table = pd.read_csv(playlists_path, sep="~")
 
-tracks_path = str(file_paths['tracks.csv'])
-tracks_table = pd.read_csv(tracks_path, sep='~')
+@st.cache_data
+def load_playlists_data():
+    playlists_path = str(file_paths['playlists.csv'])
+    return pd.read_csv(playlists_path, sep="~")
 
+
+@st.cache_data
+def load_tracks_data():
+    tracks_path = str(file_paths['tracks.csv'])
+    return pd.read_csv(tracks_path, sep='~')
+
+
+playlists_table = load_playlists_data()
+tracks_table = load_tracks_data()
 
 fig_popularity_distribution = px.histogram(
     tracks_table,
