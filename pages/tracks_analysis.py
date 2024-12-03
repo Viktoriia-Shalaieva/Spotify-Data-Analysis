@@ -78,13 +78,18 @@ fig_top_10 = px.bar(
 fig_top_10.update_traces(textposition='outside')
 st.plotly_chart(fig_top_10)
 
-fig_pie_explicit = px.pie(tracks_table,
-                          names='track_explicit',
-                          title='Distribution of Explicit and Non-Explicit Tracks')
+tracks_table['explicit_label'] = tracks_table['track_explicit'].map({True: 'Explicit', False: 'Non-Explicit'})
 
-fig_pie_explicit.update_layout(
-    legend_title_text='Explicit Status'
+
+fig_pie_explicit = px.pie(tracks_table,
+                          names='explicit_label',
+                          title='Distribution of Explicit and Non-Explicit Tracks',
+                          )
+
+fig_pie_explicit.update_traces(
+    textinfo='percent+label',
 )
+fig_pie_explicit.update_layout(showlegend=False)
 
 st.plotly_chart(fig_pie_explicit)
 
@@ -117,8 +122,8 @@ st.plotly_chart(fig_pie_explicit)
 
 st.subheader('Analysis of Track Popularity for Explicit and Non-Explicit Tracks')
 
-explicit_popularity = tracks_table[tracks_table['track_explicit']]['track_popularity']
-non_explicit_popularity = tracks_table[~tracks_table['track_explicit']]['track_popularity']
+explicit_popularity = tracks_table[tracks_table['explicit_label'] == 'Explicit']['track_popularity']
+non_explicit_popularity = tracks_table[tracks_table['explicit_label'] == 'Non-Explicit']['track_popularity']
 
 t_stat, p_value = ttest_ind(explicit_popularity, non_explicit_popularity)
 
@@ -132,9 +137,9 @@ with tab1_visualizations:
     with tab1_boxplot:
         fig_box = px.box(
             tracks_table,
-            x='track_explicit',
+            x='explicit_label',
             y='track_popularity',
-            color='track_explicit',
+            # color='explicit_label',
             labels={'track_popularity': 'Track Popularity', 'track_explicit': 'Explicit Status'}
         )
         st.plotly_chart(fig_box)
@@ -143,7 +148,7 @@ with tab1_visualizations:
         fig_histogram = px.histogram(
             tracks_table,
             x='track_popularity',
-            color='track_explicit',
+            color='explicit_label',
             barmode='overlay',
             labels={'track_popularity': 'Track Popularity'}
         )
@@ -216,7 +221,7 @@ fig_scatter = px.scatter(
     tracks_table,
     x='track_duration_minutes',
     y='track_popularity',
-    color='track_explicit',
+    color='explicit_label',
     title='Track Popularity vs. Duration',
     labels={'track_duration_minutes': 'Track Duration (minutes)', 'track_popularity': 'Track Popularity'},
     hover_data=['track_name']
