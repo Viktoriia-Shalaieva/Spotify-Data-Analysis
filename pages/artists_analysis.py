@@ -32,8 +32,10 @@ raw_dir = path_config['raw_dir'][0]
 file_paths = {file_name: os.path.join(data_dir, file_name) for file_name in path_config['files_names']}
 
 artists_genres_full_unknown_path = str(file_paths['artists_genres_full_unknown.csv'])
-
 artists_genres_full_unknown = pd.read_csv(artists_genres_full_unknown_path, sep='~')
+
+playlists_path = str(file_paths['playlists.csv'])
+playlists_table = pd.read_csv(playlists_path, sep="~")
 
 with open('./data/genres/genres.yaml', 'r', encoding='utf-8') as file:
     all_genres_with_subgenres = yaml.safe_load(file)
@@ -280,3 +282,87 @@ fig_spider.update_layout(
 )
 
 st.plotly_chart(fig_spider)
+
+
+expanded_artists_genres = expanded_artists_genres.merge(
+    playlists_table[['artist_id', 'country']],
+    on='artist_id',
+    how='left'
+)
+
+# Group data by country and parent_genre
+genre_country_counts = expanded_artists_genres.groupby(['country', 'parent_genre']).size().reset_index(name='count')
+st.dataframe(genre_country_counts)
+
+select_all = st.checkbox("Select All Countries", value=True)
+all_countries = genre_country_counts['country'].unique()
+
+selected_countries = st.multiselect(
+    "Select Countries",
+    options=all_countries,
+    default=all_countries if select_all else []
+)
+
+select_all_genres = st.checkbox("Select All Genres", value=True)
+all_genres = genre_country_counts['parent_genre'].unique()
+
+selected_genres = st.multiselect(
+    "Select Genres",
+    options=all_genres,
+    default=all_genres if select_all_genres else []
+)
+
+filtered_genre_country_counts = genre_country_counts[
+    (genre_country_counts['country'].isin(selected_countries)) &
+    (genre_country_counts['parent_genre'].isin(selected_genres))
+]
+
+# filtered_genre_country_counts = genre_country_counts[genre_country_counts['country'].isin(selected_countries)]
+
+fig_heatmap = px.density_heatmap(
+    filtered_genre_country_counts,
+    x='parent_genre',
+    y='country',
+    z='count',
+    title='Genre Frequency Across Countries',
+    labels={'parent_genre': 'Genre', 'country': 'Country', 'count': 'Frequency'},
+)
+
+fig_heatmap.update_layout(
+    xaxis=dict(tickangle=45),
+    height=600,
+    coloraxis_colorbar=dict(title="Frequency"),
+)
+
+st.plotly_chart(fig_heatmap)
+
+fig_stacked_bar = px.bar(
+    filtered_genre_country_counts,
+    x='country',
+    y='count',
+    color='parent_genre',
+    title='Genre Frequency Across Countries',
+    labels={'country': 'Country', 'count': 'Frequency', 'parent_genre': 'Genre'},
+    text='count',
+)
+
+fig_stacked_bar.update_layout(
+    height=600,
+)
+
+st.plotly_chart(fig_stacked_bar)
+
+
+fig_bubble = px.scatter(
+    filtered_genre_country_counts,
+    x='country',
+    y='parent_genre',
+    size='count',
+    color='parent_genre',
+    title='Genre Frequency Across Countries',
+    labels={'country': 'Country', 'parent_genre': 'Genre', 'count': 'Frequency'},
+)
+fig_bubble.update_layout(
+    height=600,
+)
+st.plotly_chart(fig_bubble)
