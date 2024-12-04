@@ -3,7 +3,7 @@ from modules.nav import navbar
 import pandas as pd
 import yaml
 import os
-import plotly.express as px
+
 
 st.set_page_config(
     page_title="Spotify Data Analysis",
