@@ -1,5 +1,5 @@
 import streamlit as st
-from modules.nav import navbar
+from modules import components
 import pandas as pd
 import yaml
 import os
@@ -12,18 +12,11 @@ from scipy import stats
 from scipy.stats import ttest_ind
 
 
-st.set_page_config(
-    page_title="Spotify Data Analysis",
-    page_icon="🎵")
+components.set_page_layout()
+st.sidebar.markdown("**Tracks Analysis** 🎵")
 
-st.sidebar.image("images/music.png", width=150)
+components.set_page_header("Tracks Analysis", "🎵")
 
-navbar()
-st.sidebar.divider()
-st.sidebar.markdown("# **Tracks Analysis** 🎵 ")
-
-st.title("Tracks Analysis 🎵 ")
-st.divider()
 
 with open('config/path_config.yaml', 'r') as config_file:
     path_config = yaml.safe_load(config_file)

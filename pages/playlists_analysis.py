@@ -1,5 +1,5 @@
 import streamlit as st
-from modules.nav import navbar
+from modules import components
 import pandas as pd
 import yaml
 import os
@@ -7,19 +7,12 @@ import plotly.express as px
 import numpy as np
 
 
-st.set_page_config(
-    page_title="Spotify Data Analysis",
-    page_icon="🎵")
-
-st.sidebar.image("images/music.png", width=150)
-
-navbar()
-st.sidebar.divider()
+components.set_page_layout()
 st.sidebar.markdown("# **Playlists Analysis** 📋️ ")
 
-st.title("Playlists Analysis 📋️ ")
-st.divider()
+components.set_page_header("Playlists Analysis", "📋️")
 
+st.info('message')
 
 with open('config/country_coords.yaml', 'r') as config_file:
     country_coords = yaml.safe_load(config_file)
@@ -85,13 +78,26 @@ st.subheader("Playlist with Minimum Followers")
 st.write(f"Playlist Name: {min_followers_playlist['playlist_name']}")
 st.write(f"Number of Followers: {min_followers_playlist['playlist_followers_total']}")
 
-select_all = st.checkbox("Select All", value=True)
+# select_all = st.checkbox("Select All", value=True)
+#
+# selected_countries = st.multiselect(
+#     "Select Countries",
+#     options=countries_for_map,
+#     default=countries_for_map if select_all else []
+# )
 
-selected_countries = st.multiselect(
-    "Select Countries",
-    options=countries_for_map,
-    default=countries_for_map if select_all else []
-)
+
+with st.popover("Select countries for analysis", icon="🌍"):
+    select_all = st.checkbox("Select All", value=True, help="Check to select all countries. Uncheck to choose specific ones.")
+
+    if select_all:
+        selected_countries = countries_for_map
+    else:
+        selected_countries = st.multiselect(
+            "Select Specific Countries",
+            options=countries_for_map,
+            default=[]
+        )
 
 followers_data = playlists_table[['country', 'playlist_followers_total']].drop_duplicates()
 followers_data.columns = ['Country', 'Number of Followers']
@@ -105,6 +111,32 @@ fig_followers = px.bar(followers_data,
                        title='Number of Followers per Playlist',
                        log_y=True)
 st.plotly_chart(fig_followers)
+
+with st.expander('See explanation'):
+    # st.caption(
+    st.info(
+        """
+        This chart displays the **Number of Followers per Playlist** for selected countries.
+
+        **How to interpret:**
+        - The x-axis represents the **countries**.
+        - The y-axis (logarithmic scale) shows the **total number of followers** for playlists originating from each 
+        country.
+        - Countries with higher bars indicate playlists with larger followings, reflecting their popularity.
+
+        **Logarithmic Scale:**
+        - A logarithmic scale is used for the y-axis to better represent the data when there is a significant 
+        difference between the highest and lowest values.
+        - This helps visualize countries with smaller follower counts more effectively.
+
+        **Filtering Options:**
+        - Use the 'Select All' checkbox to choose all countries.
+        - If you want to analyze specific countries, uncheck 'Select All' and use the dropdown to select 
+        individual countries.
+
+        **Purpose:**
+        - This chart displays the number of followers for different countries and the Global playlist.
+        """)
 
 merged_playlists_tracks = pd.merge(
     playlists_table,

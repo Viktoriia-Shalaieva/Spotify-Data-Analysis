@@ -1,19 +1,11 @@
 import streamlit as st
-from modules.nav import navbar
+from modules import components
 
-
-st.set_page_config(
-    page_title="Spotify Data Analysis",
-    page_icon="🎵")
-
-st.sidebar.image("images/music.png", width=150)
-
-navbar()
-st.sidebar.divider()
+components.set_page_layout()
 st.sidebar.markdown("# Home 🏘️ ")
 
-st.title("Welcome to the Spotify Data Analysis App 👋")
-st.divider()
+components.set_page_header("Welcome to the Spotify Data Analysis App", "👋")
+
 st.write("""
 This application provides interactive visualizations and analyses of Spotify data,
 including track popularity, audio features, artist genres, and more.

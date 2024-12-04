@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from modules.nav import navbar
+from modules import components
 import yaml
 import os
 import plotly.express as px
@@ -10,18 +10,10 @@ from bs4 import BeautifulSoup
 import plotly.graph_objects as go
 
 
-st.set_page_config(
-    page_title="Spotify Data Analysis",
-    page_icon="🎵")
-
-st.sidebar.image("images/music.png", width=150)
-
-navbar()
-st.sidebar.divider()
+components.set_page_layout()
 st.sidebar.markdown("# **Artists Analysis** 👩‍🎤 ")
 
-st.title("Artists Analysis 👩‍🎤 ")
-st.divider()
+components.set_page_header("Artists Analysis", " 👩‍🎤")
 
 
 with open('config/path_config.yaml', 'r') as config_file:

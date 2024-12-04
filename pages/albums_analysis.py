@@ -1,24 +1,15 @@
 import streamlit as st
 import pandas as pd
-from modules.nav import navbar
+from modules import components
 import yaml
 import os
 import plotly.express as px
 
 
-
-st.set_page_config(
-    page_title="Spotify Data Analysis",
-    page_icon="🎵")
-
-st.sidebar.image("images/music.png", width=150)
-
-navbar()
-st.sidebar.divider()
+components.set_page_layout()
 st.sidebar.markdown("# **Albums Analysis** 📀️ ")
 
-st.title("Albums Analysis 📀️ ")
-st.divider()
+components.set_page_header("Albums Analysis", "📀️")
 
 with open('config/path_config.yaml', 'r') as config_file:
     path_config = yaml.safe_load(config_file)
