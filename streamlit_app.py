@@ -1,5 +1,7 @@
 import streamlit as st
 from modules import components
+import plotly.express as px
+
 
 components.set_page_layout()
 st.sidebar.markdown("# Home 🏘️ ")
@@ -12,7 +14,8 @@ including track popularity, audio features, artist genres, and more.
 
 **👈 Use the navigation menu** to explore different sections.
 """)
-
+fig = px.colors.sequential.swatches_continuous()
+st.plotly_chart(fig)
 
 # import pandas as pd
 # import yaml

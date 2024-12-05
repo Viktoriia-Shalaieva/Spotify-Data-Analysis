@@ -43,6 +43,7 @@ fig_popularity_distribution = px.histogram(
     nbins=10,
 )
 
+
 st.plotly_chart(fig_popularity_distribution)
 
 top_10_artists_popularity = (

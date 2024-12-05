@@ -1,5 +1,6 @@
 import streamlit as st
 from modules import components
+from modules import plots
 import pandas as pd
 import yaml
 import os
@@ -33,19 +34,48 @@ country_coords_df = pd.DataFrame({
 })
 
 st.subheader("Map of Countries for Playlist Analysis")
+# country_coords_df['random_value'] = np.random.rand(len(country_coords_df))
+unique_countries = country_coords_df['country'].unique()
+n_countries = len(unique_countries)
 
-fig = px.choropleth(
-    country_coords_df,
-    locations='country',  # Name of the column containing country names
-    locationmode='country names',  # This mode allows country names to be used for mapping
+# https://plotly.com/python-api-reference/generated/plotly.express.colors.html
+colors = px.colors.sample_colorscale("speed", n_countries)
+# The zip() function returns a zip object, which is an iterator of tuples where the first item in each passed
+# iterator is paired together, and then the second item in each passed iterator are paired together etc.
+# zip combines two lists (unique_countries and colors) into pairs, e.g.
+# dict converts these pairs into a dictionary where the keys are unique_countries and values are colors.
+color_map = dict(zip(unique_countries, colors))
+
+plots.create_choropleth_map(
+    data=country_coords_df,
+    locations='country',
+    location_mode='country names',
     color='country',
-    hover_name="country",
-    # title="Countries for Playlist Analysis"
+    color_discrete_map=color_map,
+    hover_name='country',
+    title='Countries for Playlist Analysis',
+    legend_title='Country'
 )
-fig.update_layout(
-    legend_title_text='Country',
-)
-st.plotly_chart(fig)
+# fig = px.choropleth(
+#     country_coords_df,
+#     locations='country',  # Name of the column containing country names
+#     locationmode='country names',  # This mode allows country names to be used for mapping
+#     color='country',
+#     # color='random_value',
+#     # color_discrete_sequence=px.colors.qualitative.Set3,
+#     color_discrete_map=color_map,
+#     hover_name="country",
+#     # title="Countries for Playlist Analysis"
+# )
+# fig.update_layout(
+#     legend_title_text='Country',
+#     legend=dict(
+#         y=0.5,
+#     ),
+#     width=1000,
+#     height=700,
+# )
+# st.plotly_chart(fig)
 
 with open('config/path_config.yaml', 'r') as config_file:
     path_config = yaml.safe_load(config_file)
@@ -122,13 +152,21 @@ followers_data.columns = ['Country', 'Number of Followers']
 followers_data = followers_data[followers_data['Country'].isin(selected_countries)]
 followers_data = followers_data.sort_values(by='Number of Followers', ascending=False)
 
-fig_followers = px.bar(followers_data,
-                       x='Country',
-                       y='Number of Followers',
-                       # color="Country",
-                       # title='Number of Followers per Playlist',
-                       log_y=True)
-st.plotly_chart(fig_followers)
+plots.create_bar_plot(
+    data=followers_data,
+    x='Country',
+    y='Number of Followers',
+    text='Number of Followers',
+    log_y=True
+)
+#
+# fig_followers = px.bar(followers_data,
+#                        x='Country',
+#                        y='Number of Followers',
+#                        # color="Country",
+#                        # title='Number of Followers per Playlist',
+#                        log_y=True)
+# st.plotly_chart(fig_followers)
 
 with st.expander('See explanation'):
     # st.caption(
@@ -173,13 +211,20 @@ avg_popularity = avg_popularity.sort_values(by='Average Popularity', ascending=F
 min_y = avg_popularity['Average Popularity'].min() - 5
 max_y = avg_popularity['Average Popularity'].max() + 5
 
-fig = px.bar(avg_popularity,
-             x='Country',
-             y='Average Popularity',
-             # title='Average Track Popularity Across Playlists',
-             range_y=[min_y, max_y])
+plots.create_bar_plot(
+    data=avg_popularity,
+    x='Country',
+    y='Average Popularity',
+    text='Average Popularity',
+    range_y=[min_y, max_y])
 
-st.plotly_chart(fig)
+# fig = px.bar(avg_popularity,
+#              x='Country',
+#              y='Average Popularity',
+#              # title='Average Track Popularity Across Playlists',
+#              range_y=[min_y, max_y])
+#
+# st.plotly_chart(fig)
 
 fig_violin = px.violin(
     merged_playlists_tracks,
@@ -401,15 +446,23 @@ tab1_tracks, tab2_tracks, tab3_tracks, tab4_tracks = st.tabs(["Bar Plot", "Data 
 
 with tab1_tracks:
     tracks_full = tracks_full.sort_values(by='Frequency in Playlists', ascending=True)
-    fig = px.bar(
-        tracks_full,
+    plots.create_bar_plot(
+        data=tracks_full,
         x='Frequency in Playlists',
         y='Track Name',
         orientation='h',
-        # title='Top 10 Tracks by Frequency in Playlists',
-        color='Frequency in Playlists',
+        text='Frequency in Playlists',
+        # color='Frequency in Playlists',
     )
-    st.plotly_chart(fig)
+    # fig = px.bar(
+    #     tracks_full,
+    #     x='Frequency in Playlists',
+    #     y='Track Name',
+    #     orientation='h',
+    #     # title='Top 10 Tracks by Frequency in Playlists',
+    #     color='Frequency in Playlists',
+    # )
+    # st.plotly_chart(fig)
 
 with tab2_tracks:
     # st.subheader("Data Table of Top 10 Tracks")
@@ -417,19 +470,34 @@ with tab2_tracks:
     st.dataframe(tracks_full, hide_index=True)
 
 with tab3_tracks:
+    tracks_full = tracks_full.sort_values(by='Popularity', ascending=False)
+    # tracks_full['Track Name'] = tracks_full['Track Name'].astype('category')
+    # tracks_full['Track Name'] = tracks_full['Track Name'].cat.set_categories(tracks_full['Track Name'].unique())
+
     min_y_popularity_track = tracks_full['Popularity'].min() - 5
     max_y_popularity_track = tracks_full['Popularity'].max()
 
-    fig_popularity = px.bar(tracks_full,
-                            x='Track Name',
-                            y='Popularity',
-                            title='Popularity of Top 10 Tracks',
-                            labels={'Popularity': 'Track Popularity', 'Track Name': 'Track Name'},
-                            color='Popularity',
-                            range_y=[min_y_popularity_track, max_y_popularity_track],
-                            )
-    fig_popularity.update_layout(xaxis={'categoryorder': 'total descending'})
-    st.plotly_chart(fig_popularity)
+    plots.create_bar_plot(
+        data=tracks_full,
+        x='Track Name',
+        y='Popularity',
+        title='Popularity of Top 10 Tracks',
+        labels={'Popularity': 'Track Popularity', 'Track Name': 'Track Name'},
+        text='Popularity',
+        # color='Popularity',
+        range_y=[min_y_popularity_track, max_y_popularity_track],
+    )
+
+    # fig_popularity = px.bar(tracks_full,
+    #                         x='Track Name',
+    #                         y='Popularity',
+    #                         title='Popularity of Top 10 Tracks',
+    #                         labels={'Popularity': 'Track Popularity', 'Track Name': 'Track Name'},
+    #                         color='Popularity',
+    #                         range_y=[min_y_popularity_track, max_y_popularity_track],
+    #                         )
+    # fig_popularity.update_layout(xaxis={'categoryorder': 'total descending'})
+    # st.plotly_chart(fig_popularity)
 
 with tab4_tracks:
     selected_track = st.selectbox(
@@ -446,25 +514,35 @@ with tab4_tracks:
     # Filter the country coordinates table to include only countries from the track_countries list
     filtered_countries = country_coords_df[country_coords_df['country'].isin(track_countries)]
 
-    fig_map = px.choropleth(
-        filtered_countries,
+    plots.create_choropleth_map(
+        data=filtered_countries,
         locations='country',
-        locationmode='country names',
+        location_mode='country names',
         color='country',
+        color_discrete_map=color_map,
         hover_name='country',
-        title=f'Countries with Playlists Containing "{selected_track}"'
+        title=f'Countries with Playlists Containing "{selected_track}"',
+        legend_title='Country'
     )
-
-    fig_map.update_layout(
-        legend_title_text='Country',
-        # geo=dict(
-        #     showcountries=True,
-        #     countrycolor="LightGray",
-        #     showcoastlines=True,
-        #     coastlinecolor="RebeccaPurple"
-        # )
-    )
-    st.plotly_chart(fig_map)
+    # fig_map = px.choropleth(
+    #     filtered_countries,
+    #     locations='country',
+    #     locationmode='country names',
+    #     color='country',
+    #     color_discrete_map=color_map,
+    #     hover_name='country',
+    #     title=f'Countries with Playlists Containing "{selected_track}"'
+    # )
+    #
+    # fig_map.update_layout(
+    #     legend_title_text='Country',
+    #     legend=dict(
+    #         y=0.5,
+    #     ),
+    #     width=1200,
+    #     height=600,
+    # )
+    # st.plotly_chart(fig_map)
 
 st.subheader("Top 10 Artists by Frequency in Playlists")
 
@@ -522,36 +600,57 @@ st.dataframe(top_10_artists_full)
 tab1_artists, tab2_artists, tab3_artists, tab4_artists = st.tabs(["Bar Plot", "Data Table", "Popularity Graph", "Map"])
 
 with tab1_artists:
-    fig = px.bar(top_10_artists_full,
-                 x='Frequency in Playlists',
-                 y='Artist',
-                 orientation='h',
-                 title='Top 10 Artists by Frequency in Playlists',
-                 color='Frequency in Playlists',
-                 text='Frequency in Playlists',
-                 )
-    fig.update_layout(yaxis={'categoryorder': 'total ascending'})
-    fig.update_traces(textposition='outside')
-    st.plotly_chart(fig)
+    top_10_artists_full=top_10_artists_full.sort_values(by='Frequency in Playlists', ascending=True)
+    plots.create_bar_plot(
+        data=top_10_artists_full,
+        x='Frequency in Playlists',
+        y='Artist',
+        orientation='h',
+        title='Top 10 Artists by Frequency in Playlists',
+        # color='Frequency in Playlists',
+        text='Frequency in Playlists',
+        )
+
+    # fig = px.bar(top_10_artists_full,
+    #              x='Frequency in Playlists',
+    #              y='Artist',
+    #              orientation='h',
+    #              title='Top 10 Artists by Frequency in Playlists',
+    #              color='Frequency in Playlists',
+    #              text='Frequency in Playlists',
+    #              )
+    # fig.update_layout(yaxis={'categoryorder': 'total ascending'})
+    # fig.update_traces(textposition='outside')
+    # st.plotly_chart(fig)
 
 with tab2_artists:
     st.dataframe(top_10_artists_full, hide_index=True)
 
 with tab3_artists:
+    top_10_artists_full = top_10_artists_full.sort_values(by='Popularity', ascending=False)
     min_y_popularity_art = top_10_artists_full['Popularity'].min()-5
     max_y_popularity_art = top_10_artists_full['Popularity'].max()+3
 
-    fig_popularity = px.bar(top_10_artists_full,
-                            x='Artist',
-                            y='Popularity',
-                            title='Popularity of Top 10 Artists',
-                            color='Popularity',
-                            range_y=[min_y_popularity_art, max_y_popularity_art],
-                            text='Popularity',
-                            )
-    fig_popularity.update_layout(xaxis={'categoryorder': 'total descending'})
-    fig_popularity.update_traces(textposition='outside')
-    st.plotly_chart(fig_popularity)
+    plots.create_bar_plot(
+        data=top_10_artists_full,
+        x='Artist',
+        y='Popularity',
+        title='Popularity of Top 10 Artists',
+        # color='Popularity',
+        range_y=[min_y_popularity_art, max_y_popularity_art],
+        text='Popularity',
+    )
+    # fig_popularity = px.bar(top_10_artists_full,
+    #                         x='Artist',
+    #                         y='Popularity',
+    #                         title='Popularity of Top 10 Artists',
+    #                         color='Popularity',
+    #                         range_y=[min_y_popularity_art, max_y_popularity_art],
+    #                         text='Popularity',
+    #                         )
+    # fig_popularity.update_layout(xaxis={'categoryorder': 'total descending'})
+    # fig_popularity.update_traces(textposition='outside')
+    # st.plotly_chart(fig_popularity)
 
 with tab4_artists:
     selected_artist = st.selectbox(
@@ -572,24 +671,41 @@ with tab4_artists:
         on='country',
         how='left'
     )
-    col1, col2 = st.columns([0.75, 0.25])
+    col1, col2 = st.columns([0.75, 0.25], vertical_alignment="center")
     with col1:
-        fig_map = px.choropleth(
-            artist_country_map_data,
-            locations='country',
-            locationmode='country names',
-            color='count',
-            hover_name='country',
-            title=f'Countries with Playlists Containing "{selected_artist}"',
-            labels={'count': 'Frequency'},
-            color_continuous_scale=px.colors.sequential.Plasma,
-        )
+        plots.create_choropleth_map(
+                data=artist_country_map_data,
+                locations='country',
+                location_mode='country names',
+                color='count',
+                color_continuous_scale='speed',
+                hover_name='country',
+                title=f'Countries with Playlists Containing "{selected_artist}"',
+                labels={'count': 'Frequency'},
+                legend_title='Frequency'
+            )
 
-        fig_map.update_layout(
-            legend_title_text='Frequency',
-        )
+        #     fig_map = px.choropleth(
+        #     artist_country_map_data,
+        #     locations='country',
+        #     locationmode='country names',
+        #     color='count',
+        #     color_continuous_scale='speed',
+        #     hover_name='country',
+        #     title=f'Countries with Playlists Containing "{selected_artist}"',
+        #     labels={'count': 'Frequency'},
+        # )
+        #
+        # fig_map.update_layout(
+        #     legend_title_text='Frequency',
+        #     legend=dict(
+        #         y=0.5,
+        #     ),
+        #     width=1000,
+        #     height=600,
+        # )
 
-        st.plotly_chart(fig_map)
+        # st.plotly_chart(fig_map)
 
     with col2:
         countries_list = ', '.join(filtered_artist_data['country'].tolist())
