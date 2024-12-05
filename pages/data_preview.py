@@ -45,10 +45,28 @@ min_followers_playlist = playlists_table.sort_values(by='playlist_followers_tota
 
 st.subheader("Playlists Analysis - Overview Statistics")
 
-st.metric(label="Total Number of Playlists", value=total_playlists)
-st.metric(label="Average Number of Followers per Playlist", value=f"{average_followers:.0f}")
-st.metric(label="Total Number of Unique Tracks", value=total_unique_tracks)
+# st.metric(label="Total Number of Playlists", value=total_playlists)
+# st.metric(label="Average Number of Followers per Playlist", value=f"{average_followers:.0f}")
+# st.metric(label="Total Number of Unique Tracks", value=total_unique_tracks)
 
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    with st.container(border=True):
+        st.metric(label="🎶 Total Playlists", value=total_playlists)
+        st.caption("Represents the total number of playlists analyzed.")
+
+with col2:
+    with st.container(border=True):
+        st.metric(label="👥 Avg. Followers/Playlist", value=f"{average_followers:.0f}")
+        st.caption("Average number of followers across all playlists.")
+
+with col3:
+    with st.container(border=True):
+        st.metric(label="🎵 Unique Tracks", value=total_unique_tracks)
+        st.caption("Number of unique tracks included in the playlists.")
+
+st.divider()
 
 with st.expander("Playlists"):
     st.dataframe(playlists_table, width=750, height=210, hide_index=True)
@@ -61,10 +79,14 @@ st.subheader("Playlists:")
 tab1_playlists, tab2_playlists = st.tabs(["Data", "Descriptive Statistics"])
 
 with tab1_playlists:
-    st.dataframe(playlists_table, width=750, height=210, hide_index=True)
+    st.dataframe(playlists_table,  hide_index=True)
 with tab2_playlists:
-    st.dataframe(playlists_table.describe(), width=750)
-    st.dataframe(playlists_table.describe(include=['object']), width=750)
+    col1, col2 = st.columns([0.22, 0.78])
+    with col1:
+        st.dataframe(playlists_table.describe())
+
+    with col2:
+        st.dataframe(playlists_table.describe(include=['object']))
 
 st.subheader("Albums:")
 tab1_albums, tab2_albums = st.tabs(["Data", "Descriptive Statistics"])

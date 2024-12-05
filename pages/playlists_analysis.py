@@ -70,13 +70,29 @@ max_followers = playlists_table['playlist_followers_total'].max()
 max_followers_playlist = playlists_table.sort_values(by='playlist_followers_total', ascending=False).iloc[0]
 min_followers_playlist = playlists_table.sort_values(by='playlist_followers_total').iloc[0]
 
-st.subheader("Playlist with Maximum Followers")
-st.write(f"Playlist Name: {max_followers_playlist['playlist_name']}")
-st.write(f"Number of Followers: {max_followers_playlist['playlist_followers_total']}")
+# st.subheader("Playlist with Maximum Followers")
+# st.write(f"Playlist Name: {max_followers_playlist['playlist_name']}")
+# st.write(f"Number of Followers: {max_followers_playlist['playlist_followers_total']}")
+#
+# st.subheader("Playlist with Minimum Followers")
+# st.write(f"Playlist Name: {min_followers_playlist['playlist_name']}")
+# st.write(f"Number of Followers: {min_followers_playlist['playlist_followers_total']}")
 
-st.subheader("Playlist with Minimum Followers")
-st.write(f"Playlist Name: {min_followers_playlist['playlist_name']}")
-st.write(f"Number of Followers: {min_followers_playlist['playlist_followers_total']}")
+col1, col2 = st.columns(2)
+
+with col1:
+    with st.container(border=True):
+        st.markdown("### 🏆 Playlist with Maximum Followers")
+        st.write(f"🎶**Playlist Name:** {max_followers_playlist['playlist_name']}")
+        st.write(f"👥**Number of Followers:** {max_followers_playlist['playlist_followers_total']}")
+
+with col2:
+    with st.container(border=True):
+        st.markdown("### 🛑 Playlist with Minimum Followers")
+        st.write(f"🎶**Playlist Name:** {min_followers_playlist['playlist_name']}")
+        st.write(f"👥**Number of Followers:** {min_followers_playlist['playlist_followers_total']}")
+
+st.divider()
 
 # select_all = st.checkbox("Select All", value=True)
 #
@@ -86,9 +102,11 @@ st.write(f"Number of Followers: {min_followers_playlist['playlist_followers_tota
 #     default=countries_for_map if select_all else []
 # )
 
+st.subheader('Number of Followers per Playlist')
 
 with st.popover("Select countries for analysis", icon="🌍"):
-    select_all = st.checkbox("Select All", value=True, help="Check to select all countries. Uncheck to choose specific ones.")
+    select_all = st.checkbox("Select All", value=True,
+                             help="Check to select all countries. Uncheck to choose specific ones.")
 
     if select_all:
         selected_countries = countries_for_map
@@ -108,7 +126,7 @@ fig_followers = px.bar(followers_data,
                        x='Country',
                        y='Number of Followers',
                        # color="Country",
-                       title='Number of Followers per Playlist',
+                       # title='Number of Followers per Playlist',
                        log_y=True)
 st.plotly_chart(fig_followers)
 
@@ -145,11 +163,9 @@ merged_playlists_tracks = pd.merge(
     how='left'
 )
 
-help_input = (
-    '''The popularity of the track across different countries. 
-    The value will be between 0 and 100, with 100 being the most popular.'''
-)
-st.subheader("Average Track Popularity Across Playlists", help=help_input)
+help_popularity = 'The value will be between 0 and 100, with 100 being the most popular'
+
+st.subheader("Average Track Popularity Across Playlists", help=help_popularity)
 
 avg_popularity = merged_playlists_tracks.groupby('country')['track_popularity'].mean().reset_index()
 avg_popularity.columns = ['Country', 'Average Popularity']
@@ -185,7 +201,7 @@ fig_violin.update_layout(
 
 st.plotly_chart(fig_violin)
 
-st.subheader("Country-wise Track Popularity Analysis", help=help_input)
+st.subheader("Country-wise Track Popularity Analysis", help=help_popularity)
 
 selected_country = st.selectbox("Select a Country", countries_for_map)
 filtered_data = merged_playlists_tracks[merged_playlists_tracks['country'] == selected_country]
@@ -556,29 +572,32 @@ with tab4_artists:
         on='country',
         how='left'
     )
+    col1, col2 = st.columns([0.75, 0.25])
+    with col1:
+        fig_map = px.choropleth(
+            artist_country_map_data,
+            locations='country',
+            locationmode='country names',
+            color='count',
+            hover_name='country',
+            title=f'Countries with Playlists Containing "{selected_artist}"',
+            labels={'count': 'Frequency'},
+            color_continuous_scale=px.colors.sequential.Plasma,
+        )
 
-    fig_map = px.choropleth(
-        artist_country_map_data,
-        locations='country',
-        locationmode='country names',
-        color='count',
-        hover_name='country',
-        title=f'Countries with Playlists Containing "{selected_artist}"',
-        labels={'count': 'Frequency'},
-        color_continuous_scale=px.colors.sequential.Plasma,
-    )
+        fig_map.update_layout(
+            legend_title_text='Frequency',
+        )
 
-    fig_map.update_layout(
-        legend_title_text='Frequency',
-    )
+        st.plotly_chart(fig_map)
 
-    st.plotly_chart(fig_map)
+    with col2:
+        countries_list = ', '.join(filtered_artist_data['country'].tolist())
+        st.write("**Countries where the artist is present:**")
 
-    countries_list = ', '.join(filtered_artist_data['country'].tolist())
-    st.write("**Countries where the artist is present:**")
+        filtered_artist_data_map = filtered_artist_data[['country', 'count']].sort_values(['count'], ascending=False)
+        filtered_artist_data_map.columns = ['Country', 'Frequency in Playlists']
 
-    filtered_artist_data_map = filtered_artist_data[['country', 'count']].sort_values(['count'], ascending=False)
-    filtered_artist_data_map.columns = ['Country', 'Frequency in Playlists']
+        st.dataframe(filtered_artist_data_map, hide_index=True)
 
-    st.dataframe(filtered_artist_data_map, hide_index=True)
 
