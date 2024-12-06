@@ -13,10 +13,10 @@ def create_bar_plot(data, x, y, orientation="v",  **kwargs):
         color=y if orientation == "v" else x,
         color_continuous_scale='speed',
         # color_continuous_scale='algae',
-        # color_continuous_scale='Greens',
-        # color_continuous_scale='YlGn',
+        # color_continuous_scale='Viridis',
+        # color_continuous_scale='Plasma',
+        # color_continuous_scale='Aggrnyl',
         **kwargs
-
     )
     fig.update_traces(
         textfont_size=14,
@@ -27,9 +27,10 @@ def create_bar_plot(data, x, y, orientation="v",  **kwargs):
 
     fig.update_layout(xaxis_title=None, yaxis_title=None)
 
-    mean_value = int(round(data[y].mean())) if orientation == "v" else int(round(data[x].mean()))
-    median_value = int(round(data[y].median())) if orientation == "v" else int(round(data[x].median()))
-
+    # mean_value = int(round(data[y].mean())) if orientation == "v" else int(round(data[x].mean()))
+    # median_value = int(round(data[y].median())) if orientation == "v" else int(round(data[x].median()))
+    mean_value = data[y].mean() if orientation == "v" else data[x].mean()
+    median_value = data[y].median() if orientation == "v" else data[x].median()
     if orientation == "v":
         fig.add_hline(
             y=mean_value,

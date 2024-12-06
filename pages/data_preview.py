@@ -69,17 +69,17 @@ with col3:
 st.divider()
 
 with st.expander("Playlists"):
-    st.dataframe(playlists_table, width=750, height=210, hide_index=True)
+    st.dataframe(playlists_table, height=210, hide_index=True)
     st.write("Descriptive Statistics for Playlists:")
-    st.dataframe(playlists_table.describe(), width=750)
-    st.dataframe(playlists_table.describe(include=['object']), width=750)
+    st.dataframe(playlists_table.describe(), width=1200)
+    st.dataframe(playlists_table.describe(include=['object']), width=1200)
 
 st.subheader("Playlists:")
 
 tab1_playlists, tab2_playlists = st.tabs(["Data", "Descriptive Statistics"])
 
 with tab1_playlists:
-    st.dataframe(playlists_table,  hide_index=True)
+    st.dataframe(playlists_table, height=210,  hide_index=True)
 with tab2_playlists:
     col1, col2 = st.columns([0.22, 0.78])
     with col1:
@@ -91,7 +91,7 @@ with tab2_playlists:
 st.subheader("Albums:")
 tab1_albums, tab2_albums = st.tabs(["Data", "Descriptive Statistics"])
 with tab1_albums:
-    st.dataframe(albums_table, width=750, height=210, hide_index=True)
+    st.dataframe(albums_table, width=1200, height=210, hide_index=True)
 with tab2_albums:
     st.dataframe(albums_table.describe(), width=750)
     st.dataframe(albums_table.describe(include=['object']), width=750)

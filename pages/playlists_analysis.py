@@ -152,6 +152,8 @@ followers_data.columns = ['Country', 'Number of Followers']
 followers_data = followers_data[followers_data['Country'].isin(selected_countries)]
 followers_data = followers_data.sort_values(by='Number of Followers', ascending=False)
 
+st.dataframe(followers_data)
+
 plots.create_bar_plot(
     data=followers_data,
     x='Country',

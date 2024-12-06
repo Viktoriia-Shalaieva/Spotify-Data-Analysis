@@ -228,32 +228,34 @@ st.dataframe(expanded_artists_genres)
 st.dataframe(main_genre_counts)
 
 
-# Create the line polar chart
 fig_polar = px.line_polar(
     main_genre_counts,
     r='artist_count',      # Radius is the count of artists
     theta='parent_genre',         # Theta is the main genre
     title="Genres Distribution",  # Chart title
     line_close=True,       # Close the line to form a complete loop
-    # template="plotly_dark"
+    # template="plotly_dark",
+    # hover_data={'artist_count': True, 'parent_genre': True},
+    # text='artist_count',
+)
+fig_polar.update_traces(
+    mode='lines+markers',
+    fill='toself',
+    marker=dict(size=8)
 )
 
-# Customize layout
 fig_polar.update_layout(
     polar=dict(
         radialaxis=dict(visible=True, title="Artist Count", showticklabels=True)
     )
 )
 
-fig_polar.update_traces(fill='toself')
-
 st.plotly_chart(fig_polar)
-
 
 categories = main_genre_counts["parent_genre"]
 values = main_genre_counts["artist_count"]
 
-
+# plotly.graph_objects
 fig_spider = go.Figure()
 
 fig_spider.add_trace(go.Scatterpolar(
