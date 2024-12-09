@@ -124,8 +124,8 @@ with col2:
 
 st.divider()
 
-# select_all = st.checkbox("Select All", value=True)
-#
+select_all = st.checkbox("Select All", value=True)
+
 # selected_countries = st.multiselect(
 #     "Select Countries",
 #     options=countries_for_map,

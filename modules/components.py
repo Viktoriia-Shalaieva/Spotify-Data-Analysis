@@ -17,4 +17,3 @@ def set_page_layout(page_title="Spotify Data Analysis", page_icon="🎵"):
 def set_page_header(header_title: str, header_icon: str = "🏠"):
     st.title(f"{header_title} {header_icon}")
     st.divider()
-
