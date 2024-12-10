@@ -68,12 +68,6 @@ with col3:
 
 st.divider()
 
-with st.expander("Playlists"):
-    st.dataframe(playlists_table, height=210, hide_index=True)
-    st.write("Descriptive Statistics for Playlists:")
-    st.dataframe(playlists_table.describe(), width=1200)
-    st.dataframe(playlists_table.describe(include=['object']), width=1200)
-
 st.subheader("Playlists:")
 
 tab1_playlists, tab2_playlists = st.tabs(["Data", "Descriptive Statistics"])

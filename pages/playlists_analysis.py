@@ -13,8 +13,6 @@ st.sidebar.markdown("# **Playlists Analysis** 📋️ ")
 
 components.set_page_header("Playlists Analysis", "📋️")
 
-st.info('message')
-
 with open('config/country_coords.yaml', 'r') as config_file:
     country_coords = yaml.safe_load(config_file)
 
@@ -114,13 +112,13 @@ with col1:
     with st.container(border=True):
         st.markdown("### 🏆 Playlist with Maximum Followers")
         st.write(f"🎶**Playlist Name:** {max_followers_playlist['playlist_name']}")
-        st.write(f"👥**Number of Followers:** {max_followers_playlist['playlist_followers_total']}")
+        st.write(f"👥**Number of Followers:** {max_followers_playlist['playlist_followers_total']:,}")
 
 with col2:
     with st.container(border=True):
         st.markdown("### 🛑 Playlist with Minimum Followers")
         st.write(f"🎶**Playlist Name:** {min_followers_playlist['playlist_name']}")
-        st.write(f"👥**Number of Followers:** {min_followers_playlist['playlist_followers_total']}")
+        st.write(f"👥**Number of Followers:** {min_followers_playlist['playlist_followers_total']:,}")
 
 st.divider()
 
@@ -161,6 +159,18 @@ plots.create_bar_plot(
     text='Number of Followers',
     log_y=True
 )
+
+plots.create_bubble_plot(
+    data=followers_data,
+    x='Country',
+    y='Number of Followers',
+    size='Number of Followers',
+    text='Number of Followers',
+    log_y=True,
+)
+
+
+
 #
 # fig_followers = px.bar(followers_data,
 #                        x='Country',

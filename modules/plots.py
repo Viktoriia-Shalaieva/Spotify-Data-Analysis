@@ -27,66 +27,6 @@ def create_bar_plot(data, x, y, orientation="v",  **kwargs):
 
     fig.update_layout(xaxis_title=None, yaxis_title=None)
 
-    # mean_value = int(round(data[y].mean())) if orientation == "v" else int(round(data[x].mean()))
-    # median_value = int(round(data[y].median())) if orientation == "v" else int(round(data[x].median()))
-    mean_value = data[y].mean() if orientation == "v" else data[x].mean()
-    median_value = data[y].median() if orientation == "v" else data[x].median()
-    if orientation == "v":
-        fig.add_hline(
-            y=mean_value,
-            line_dash="dot",
-            line_color="orange",
-            line_width=2,
-            opacity=0.5,
-            label=dict(
-                text=f"Mean: {mean_value}",
-                textposition="end",
-                # textposition="start" if mean_value > median_value else "end",
-                font=dict(size=15, color="orange"),
-                yanchor="bottom",
-            )
-        )
-        fig.add_hline(
-            y=median_value,
-            line_dash="dash",
-            line_color="green",
-            line_width=2,
-            opacity=0.5,
-            label=dict(
-                text=f"Median: {median_value}",
-                textposition="end",
-                # textposition="start" if median_value > mean_value else "end",
-                font=dict(size=15, color="green"),
-                yanchor="top",
-            )
-        )
-    else:
-        fig.add_vline(
-            x=mean_value,
-            line_dash="dot",
-            line_color="orange",
-            line_width=2,
-            opacity=0.5,
-            label=dict(
-                text=f"Mean: {int(round(mean_value))}",
-                textposition="end",
-                font=dict(size=15, color="orange"),
-                xanchor="right" if mean_value < median_value else "left",
-            ),
-        )
-        fig.add_vline(
-            x=median_value,
-            line_dash="dash",
-            line_color="green",
-            line_width=2,
-            opacity=0.5,
-            label=dict(
-                text=f"Median: {int(round(median_value))}",
-                textposition="start",
-                font=dict(size=15, color="green"),
-                xanchor="left" if mean_value < median_value else "right",
-            ),
-        )
     st.plotly_chart(fig)
 
 
@@ -106,7 +46,6 @@ def create_choropleth_map(data, locations, location_mode, color, title=None, hov
         **kwargs
     )
 
-    # Update layout for consistent styling
     fig.update_layout(
         legend_title_text=legend_title,
         legend=dict(
@@ -114,6 +53,43 @@ def create_choropleth_map(data, locations, location_mode, color, title=None, hov
         ),
         width=width,
         height=height,
+    )
+
+    st.plotly_chart(fig)
+
+
+def create_bubble_plot(data, x, y, size, color=None, text=None, **kwargs):
+    if text:
+        data['formatted_text'] = data[text].apply(
+            lambda x: f"{x / 1e6:.1f}M" if x >= 1e6 else (f"{x / 1e3:.1f}K" if x >= 1e3 else str(x))
+        )
+    else:
+        data['formatted_text'] = None
+    fig = px.scatter(
+        data,
+        x=x,
+        y=y,
+        size=size,
+        color=color,
+        text='formatted_text',
+        size_max=100,
+        color_continuous_scale='speed',
+        **kwargs
+    )
+
+    fig.update_traces(
+        textfont_size=12,
+        textposition='bottom center',
+    )
+
+    fig.update_xaxes(showgrid=False)
+    fig.update_yaxes(showgrid=False)
+
+    fig.update_layout(
+        xaxis_title=None,
+        yaxis_title=None,
+        height=600,
+        margin=dict(l=20, r=20, t=20, b=20)
     )
 
     st.plotly_chart(fig)
