@@ -5,7 +5,8 @@ import pandas as pd
 import yaml
 import os
 import plotly.express as px
-import numpy as np
+from modules import data_processing
+from scipy.stats import shapiro, skew
 
 
 components.set_page_layout()
@@ -122,8 +123,6 @@ with col2:
 
 st.divider()
 
-select_all = st.checkbox("Select All", value=True)
-
 # selected_countries = st.multiselect(
 #     "Select Countries",
 #     options=countries_for_map,
@@ -131,6 +130,7 @@ select_all = st.checkbox("Select All", value=True)
 # )
 
 st.subheader('Number of Followers per Playlist')
+select_all = st.checkbox("Select All", value=True)
 
 with st.popover("Select countries for analysis", icon="🌍"):
     select_all = st.checkbox("Select All", value=True,
@@ -145,28 +145,31 @@ with st.popover("Select countries for analysis", icon="🌍"):
             default=[]
         )
 
+
 followers_data = playlists_table[['country', 'playlist_followers_total']].drop_duplicates()
 followers_data.columns = ['Country', 'Number of Followers']
 followers_data = followers_data[followers_data['Country'].isin(selected_countries)]
 followers_data = followers_data.sort_values(by='Number of Followers', ascending=False)
+followers_data['Number of Followers (formatted)'] = data_processing.format_number_text(followers_data['Number of Followers'])
 
 st.dataframe(followers_data)
 
-plots.create_bar_plot(
-    data=followers_data,
-    x='Country',
-    y='Number of Followers',
-    text='Number of Followers',
-    log_y=True
-)
+# plots.create_bar_plot(
+#     data=followers_data,
+#     x='Country',
+#     y='Number of Followers',
+#     text='Number of Followers',
+#     log_y=True
+# )
 
 plots.create_bubble_plot(
     data=followers_data,
     x='Country',
     y='Number of Followers',
     size='Number of Followers',
-    text='Number of Followers',
+    text='Number of Followers (formatted)',
     log_y=True,
+    hover_data={'Number of Followers (formatted)': False},
 )
 
 
@@ -180,8 +183,9 @@ plots.create_bubble_plot(
 #                        log_y=True)
 # st.plotly_chart(fig_followers)
 
-with st.expander('See explanation'):
-    # st.caption(
+show_explanation = st.checkbox('Show explanation', value=False)
+
+if show_explanation:
     st.info(
         """
         This chart displays the **Number of Followers per Playlist** for selected countries.
@@ -213,13 +217,14 @@ merged_playlists_tracks = pd.merge(
     how='left'
 )
 
-help_popularity = 'The value will be between 0 and 100, with 100 being the most popular'
+help_popularity = 'The value of popularity will be between 0 and 100, with 100 being the most popular'
 
 st.subheader("Average Track Popularity Across Playlists", help=help_popularity)
 
 avg_popularity = merged_playlists_tracks.groupby('country')['track_popularity'].mean().reset_index()
 avg_popularity.columns = ['Country', 'Average Popularity']
 avg_popularity = avg_popularity.sort_values(by='Average Popularity', ascending=False)
+avg_popularity['Average Popularity (formatted)'] = avg_popularity['Average Popularity'].round(1)
 min_y = avg_popularity['Average Popularity'].min() - 5
 max_y = avg_popularity['Average Popularity'].max() + 5
 
@@ -227,8 +232,10 @@ plots.create_bar_plot(
     data=avg_popularity,
     x='Country',
     y='Average Popularity',
-    text='Average Popularity',
-    range_y=[min_y, max_y])
+    text='Average Popularity (formatted)',
+    range_y=[min_y, max_y],
+    hover_data={'Average Popularity (formatted)': False},
+)
 
 # fig = px.bar(avg_popularity,
 #              x='Country',
@@ -270,6 +277,10 @@ mean_popularity = filtered_data['track_popularity'].mean()
 median_popularity = filtered_data['track_popularity'].median()
 std_popularity = filtered_data['track_popularity'].std()
 
+# Shapiro-Wilk Test for normality
+shapiro_stat, shapiro_p_value = shapiro(filtered_data['track_popularity'])
+skewness = skew(filtered_data['track_popularity'])
+
 one_std_dev = (mean_popularity - std_popularity, mean_popularity + std_popularity)
 two_std_dev = (mean_popularity - 2 * std_popularity, mean_popularity + 2 * std_popularity)
 three_std_dev = (mean_popularity - 3 * std_popularity, mean_popularity + 3 * std_popularity)
@@ -285,103 +296,144 @@ within_three_std_dev = len(filtered_data
                            [(filtered_data['track_popularity'] >= three_std_dev[0]) &
                             (filtered_data['track_popularity'] <= three_std_dev[1])]) / total_values * 100
 
-tab1_histogram, tab2_interpretation = st.tabs(["Histogram", "Interpretation"])
 
-with tab1_histogram:
-    fig_track_popularity = px.histogram(
-        filtered_data,
-        x='track_popularity',
-        nbins=20,
-        labels={'track_popularity': 'Track Popularity'},
-        title=f"Track Popularity Distribution in Top 50 - {selected_country}",
-        opacity=0.7,
-        # marginal="box"
-        )
-
-    fig_track_popularity.add_vline(
-        x=mean_popularity,
-        line_dash="dash",
-        line_color="red",
-        annotation_text=f"Mean: {mean_popularity:.2f}",
-        annotation_position="top right",
-        annotation_font_color="blue"
+fig_track_popularity = px.histogram(
+    filtered_data,
+    x='track_popularity',
+    nbins=20,
+    labels={'track_popularity': 'Track Popularity'},
+    title=f"Track Popularity Distribution in Top 50 - {selected_country}",
+    opacity=0.7,
+    # marginal="box"
     )
 
-    fig_track_popularity.add_vline(
-        x=median_popularity,
-        line_dash="dot",
-        line_color="green",
-        annotation_text=f"Median: {median_popularity:.2f}",
-        annotation_position="bottom left",
-        annotation_font_color="blue",
-    )
+fig_track_popularity.add_vline(
+    x=mean_popularity,
+    line_dash="dash",
+    line_color="red",
+    annotation_text=f"Mean: {mean_popularity:.2f}",
+    annotation_position="top right",
+    annotation_font_color="blue"
+)
 
-    fig_track_popularity.update_layout(
-        xaxis_title="Track Popularity",
-        yaxis_title="Count",
-        bargap=0.1,
-        template="plotly_dark"
-    )
+fig_track_popularity.add_vline(
+    x=median_popularity,
+    line_dash="dot",
+    line_color="green",
+    annotation_text=f"Median: {median_popularity:.2f}",
+    annotation_position="bottom left",
+    annotation_font_color="blue",
+)
 
-    fig_track_popularity.add_vrect(
-        x0=one_std_dev[0], x1=one_std_dev[1],
-        fillcolor="blue", opacity=0.1,
-        layer="below", line_width=0,
-        annotation_text="1 Std Dev",
-        annotation_position="top left",
-        annotation_font_color="blue",
-    )
-    fig_track_popularity.add_vrect(
-        x0=two_std_dev[0], x1=two_std_dev[1],
-        fillcolor="green", opacity=0.1,
-        layer="below", line_width=0,
-        annotation_text="2 Std Dev",
-        annotation_position="top left",
-        annotation_font_color="blue",
-    )
-    fig_track_popularity.add_vrect(
-        x0=three_std_dev[0], x1=three_std_dev[1],
-        fillcolor="yellow", opacity=0.1,
-        layer="below", line_width=0,
-        annotation_text="3 Std Dev",
-        annotation_position="top left",
-        annotation_font_color="blue",
-    )
+fig_track_popularity.update_layout(
+    xaxis_title="Track Popularity",
+    yaxis_title="Count",
+    bargap=0.1,
+    template="plotly_dark"
+)
 
-    st.plotly_chart(fig_track_popularity)
+fig_track_popularity.add_vrect(
+    x0=one_std_dev[0], x1=one_std_dev[1],
+    fillcolor="blue", opacity=0.1,
+    layer="below", line_width=0,
+    annotation_text="1 Std Dev",
+    annotation_position="top left",
+    annotation_font_color="blue",
+)
+fig_track_popularity.add_vrect(
+    x0=two_std_dev[0], x1=two_std_dev[1],
+    fillcolor="green", opacity=0.1,
+    layer="below", line_width=0,
+    annotation_text="2 Std Dev",
+    annotation_position="top left",
+    annotation_font_color="blue",
+)
+fig_track_popularity.add_vrect(
+    x0=three_std_dev[0], x1=three_std_dev[1],
+    fillcolor="yellow", opacity=0.1,
+    layer="below", line_width=0,
+    annotation_text="3 Std Dev",
+    annotation_position="top left",
+    annotation_font_color="blue",
+)
 
-with tab2_interpretation:
-    # st.write(f"Percentage of data within 1 standard deviation: {within_one_std_dev:.2f}%")
-    # st.write(f"Percentage of data within 2 standard deviations: {within_two_std_dev:.2f}%")
-    # st.write(f"Percentage of data within 3 standard deviations: {within_three_std_dev:.2f}%")
-    #
-    # st.subheader("Interpretation of Results")
-    # st.markdown("""
-    # If the percentage of data within 1, 2, and 3 standard deviations is approximately 68%, 95%, and 99.7%, respectively,
-    # this indicates that the data is approximately normally distributed.
-    #
-    # Significant deviations from these values may indicate that the data is skewed, has outliers,
-    # or other anomalies in its distribution.
-    # """)
-    st.subheader("Interpretation of Results")
-    st.write(f"Percentage of data within 1 standard deviation: {within_one_std_dev:.2f}%")
-    st.write(f"Percentage of data within 2 standard deviations: {within_two_std_dev:.2f}%")
-    st.write(f"Percentage of data within 3 standard deviations: {within_three_std_dev:.2f}%")
-    st.markdown("""
-    If the percentage of data within 1, 2, and 3 standard deviations is approximately 68%, 95%, 
-    and 99.7%, it suggests a normal distribution (Empirical Rule):
+st.plotly_chart(fig_track_popularity)
 
-    - **1 Std Dev (68%)**: About 68% of data falls within 1 standard deviation of the mean.
-    - **2 Std Dev (95%)**: Around 95% of data lies within 2 standard deviations.
-    - **3 Std Dev (99.7%)**: Nearly all data falls within 3 standard deviations.
+# show_explanation = st.checkbox('Show explanation', value=False, key='histogram_explanation_checkbox')
+#
+# if show_explanation:
+#     st.info(f"""
+#         ### Interpretation of Results
+#         - Percentage of data within 1 standard deviation: **{within_one_std_dev:.2f}%**"
+#         - Percentage of data within 2 standard deviations: **{within_two_std_dev:.2f}%**"
+#         - Percentage of data within 3 standard deviations: **{within_three_std_dev:.2f}%**"
+#         If the percentage of data within 1, 2, and 3 standard deviations is approximately 68%, 95%,
+#         and 99.7%, it suggests a normal distribution (Empirical Rule):
+#
+#         - **1 Std Dev (68%)**: About 68% of data falls within 1 standard deviation of the mean.
+#         - **2 Std Dev (95%)**: Around 95% of data lies within 2 standard deviations.
+#         - **3 Std Dev (99.7%)**: Nearly all data falls within 3 standard deviations.
+#
+#         Significant deviations may indicate skewness, outliers, or other anomalies:
+#         - **Skewness**: Data may have a long tail if heavily skewed.
+#         - **Outliers**: Extreme values far from the mean may indicate rare cases.
+#
+#         Shaded regions in the chart show these ranges, helping assess data normality and identify trends or anomalies.
+#         """
+#             )
 
-    Significant deviations may indicate skewness, outliers, or other anomalies:
-    - **Skewness**: Data may have a long tail if heavily skewed.
-    - **Outliers**: Extreme values far from the mean may indicate rare cases.
+# if show_explanation:
+#     mean_median_difference = abs(mean_popularity - median_popularity)
+#
+#     normal_distribution_message = (
+#         "It suggests a normal distribution (Empirical Rule):"
+#         if mean_median_difference < 0.1 * mean_popularity
+#         else "It may not follow a normal distribution due to significant difference between mean and median."
+#     )
+#
+#     st.info(f"""
+#         ### Interpretation of Results
+#         - Percentage of data within 1 standard deviation: **{within_one_std_dev:.2f}%**
+#         - Percentage of data within 2 standard deviations: **{within_two_std_dev:.2f}%**
+#         - Percentage of data within 3 standard deviations: **{within_three_std_dev:.2f}%**
+#
+#         If the percentage of data within 1, 2, and 3 standard deviations is approximately 68%, 95%, and 99.7%, {normal_distribution_message}
+#
+#         - **1 Std Dev (68%)**: About 68% of data falls within 1 standard deviation of the mean.
+#         - **2 Std Dev (95%)**: Around 95% of data lies within 2 standard deviations.
+#         - **3 Std Dev (99.7%)**: Nearly all data falls within 3 standard deviations.
+#
+#         **Mean and Median Analysis:**
+#         - **Mean**: {mean_popularity:.2f}
+#         - **Median**: {median_popularity:.2f}
+#         - Difference between mean and median: {mean_median_difference:.2f}
+#
+#         Significant deviations may indicate skewness, outliers, or other anomalies:
+#         - **Skewness**: Data may have a long tail if heavily skewed.
+#         - **Outliers**: Extreme values far from the mean may indicate rare cases.
+#
+#         Shaded regions in the chart show these ranges, helping assess data normality and identify trends or anomalies.
+#     """)
 
-    Shaded regions in the chart show these ranges, helping assess data normality and identify trends or anomalies.
-    """)
+show_explanation = st.checkbox('Show explanation', value=False, key='histogram_explanation_checkbox')
 
+if show_explanation:
+    if shapiro_p_value >= 0.05 and abs(skewness) <= 0.5:
+        st.success("The data is approximately normally distributed. Proceeding with the Empirical Rule.")
+        st.info(f"""
+            ### Interpretation of Results
+            - Percentage of data within 1 standard deviation: **{within_one_std_dev:.2f}%**
+            - Percentage of data within 2 standard deviations: **{within_two_std_dev:.2f}%**
+            - Percentage of data within 3 standard deviations: **{within_three_std_dev:.2f}%**
+
+            **Empirical Rule**:
+            - **68%** of data is within 1 standard deviation.
+            - **95%** of data is within 2 standard deviations.
+            - **99.7%** of data is within 3 standard deviations.
+        """)
+    else:
+        st.warning("The data does not appear to follow a normal distribution. The Empirical Rule may not be applicable.")
+        st.write("Consider transformations or alternative visualizations to assess the distribution.")
 
 st.write('track_counts')
 # playlists_tracks_data_tab = merged_playlists_tracks['track_name']
@@ -454,7 +506,8 @@ st.dataframe(tracks_full)
 
 
 st.subheader("Top 10 Tracks by Frequency in Playlists")
-tab1_tracks, tab2_tracks, tab3_tracks, tab4_tracks = st.tabs(["Bar Plot", "Data Table", "Popularity Graph", "Map"])
+tab1_tracks, tab2_tracks, tab3_tracks, tab4_tracks = st.tabs(["Frequency Distribution",
+                                                              "Data Table", "Popularity Plot", "Map"])
 
 with tab1_tracks:
     tracks_full = tracks_full.sort_values(by='Frequency in Playlists', ascending=True)
@@ -464,6 +517,8 @@ with tab1_tracks:
         y='Track Name',
         orientation='h',
         text='Frequency in Playlists',
+        hover_data={'Artists': True},
+
         # color='Frequency in Playlists',
     )
     # fig = px.bar(
@@ -498,6 +553,7 @@ with tab3_tracks:
         text='Popularity',
         # color='Popularity',
         range_y=[min_y_popularity_track, max_y_popularity_track],
+        hover_data={'Artists': True},
     )
 
     # fig_popularity = px.bar(tracks_full,
@@ -525,6 +581,9 @@ with tab4_tracks:
 
     # Filter the country coordinates table to include only countries from the track_countries list
     filtered_countries = country_coords_df[country_coords_df['country'].isin(track_countries)]
+    artists_for_selected_track = tracks_full.loc[
+        tracks_full["Track Name"] == selected_track, "Artists"
+    ].iloc[0]
 
     plots.create_choropleth_map(
         data=filtered_countries,
@@ -533,8 +592,10 @@ with tab4_tracks:
         color='country',
         color_discrete_map=color_map,
         hover_name='country',
-        title=f'Countries with Playlists Containing "{selected_track}"',
-        legend_title='Country'
+        title=f'Countries with Playlists Containing "{selected_track}" ({artists_for_selected_track})',
+        legend_title='Country',
+        hover_data={'country': False},
+
     )
     # fig_map = px.choropleth(
     #     filtered_countries,
@@ -606,21 +667,22 @@ top_10_artists_full = top_10_artists_full[
 st.dataframe(top_10_artists_full)
 
 st.write(' renamed columns top_10_artists_full-----------------')
-top_10_artists_full.columns = ['Artist', 'Frequency in Playlists',  'Followers', 'Popularity', 'Genres']
+top_10_artists_full.columns = ['Artist', 'Number of songs in playlists',  'Followers', 'Popularity', 'Genres']
 st.dataframe(top_10_artists_full)
 
-tab1_artists, tab2_artists, tab3_artists, tab4_artists = st.tabs(["Bar Plot", "Data Table", "Popularity Graph", "Map"])
+tab1_artists, tab2_artists, tab3_artists, tab4_artists = st.tabs(["Frequency Distribution", "Data Table",
+                                                                  "Popularity Plot", "Map"])
 
 with tab1_artists:
-    top_10_artists_full=top_10_artists_full.sort_values(by='Frequency in Playlists', ascending=True)
+    top_10_artists_full = top_10_artists_full.sort_values(by='Number of songs in playlists', ascending=True)
     plots.create_bar_plot(
         data=top_10_artists_full,
-        x='Frequency in Playlists',
+        x='Number of songs in playlists',
         y='Artist',
         orientation='h',
         title='Top 10 Artists by Frequency in Playlists',
         # color='Frequency in Playlists',
-        text='Frequency in Playlists',
+        text='Number of songs in playlists',
         )
 
     # fig = px.bar(top_10_artists_full,
@@ -683,6 +745,7 @@ with tab4_artists:
         on='country',
         how='left'
     )
+
     col1, col2 = st.columns([0.75, 0.25], vertical_alignment="center")
     with col1:
         plots.create_choropleth_map(
@@ -692,9 +755,9 @@ with tab4_artists:
                 color='count',
                 color_continuous_scale='speed',
                 hover_name='country',
-                title=f'Countries with Playlists Containing "{selected_artist}"',
-                labels={'count': 'Frequency'},
-                legend_title='Frequency'
+                title=f'Playlists Containing "{selected_artist}"',
+                labels={'count': 'Songs in playlist'},
+                hover_data={'country': False},
             )
 
         #     fig_map = px.choropleth(
@@ -724,7 +787,7 @@ with tab4_artists:
         st.write("**Countries where the artist is present:**")
 
         filtered_artist_data_map = filtered_artist_data[['country', 'count']].sort_values(['count'], ascending=False)
-        filtered_artist_data_map.columns = ['Country', 'Frequency in Playlists']
+        filtered_artist_data_map.columns = ['Country', 'Number of songs in playlist']
 
         st.dataframe(filtered_artist_data_map, hide_index=True)
 

@@ -1,17 +1,19 @@
 import plotly.express as px
 import pandas as pd
 import streamlit as st
+from modules import data_processing
 
 
-def create_bar_plot(data, x, y, orientation="v",  **kwargs):
+def create_bar_plot(data, x, y, orientation="v", text=None, **kwargs):
+
     fig = px.bar(
         data,
         x=x,
         y=y,
         orientation=orientation,
-        text_auto=True,
-        color=y if orientation == "v" else x,
-        color_continuous_scale='speed',
+        text=text,
+        # color=y if orientation == "v" else x,
+        # color_continuous_scale='speed',
         # color_continuous_scale='algae',
         # color_continuous_scale='Viridis',
         # color_continuous_scale='Plasma',
@@ -19,7 +21,7 @@ def create_bar_plot(data, x, y, orientation="v",  **kwargs):
         **kwargs
     )
     fig.update_traces(
-        textfont_size=14,
+        textfont_size=12,
         textangle=0,
     )
     fig.update_xaxes(showgrid=False)
@@ -59,21 +61,14 @@ def create_choropleth_map(data, locations, location_mode, color, title=None, hov
 
 
 def create_bubble_plot(data, x, y, size, color=None, text=None, **kwargs):
-    if text:
-        data['formatted_text'] = data[text].apply(
-            lambda x: f"{x / 1e6:.1f}M" if x >= 1e6 else (f"{x / 1e3:.1f}K" if x >= 1e3 else str(x))
-        )
-    else:
-        data['formatted_text'] = None
     fig = px.scatter(
         data,
         x=x,
         y=y,
         size=size,
         color=color,
-        text='formatted_text',
+        text=text,
         size_max=100,
-        color_continuous_scale='speed',
         **kwargs
     )
 
