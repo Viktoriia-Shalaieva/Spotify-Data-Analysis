@@ -87,50 +87,6 @@ fig.update_traces(textposition='outside')
 
 st.plotly_chart(fig)
 
-
-def determine_season(month):
-    if month in [12, 1, 2]:
-        return 'Winter'
-    elif month in [3, 4, 5]:
-        return 'Spring'
-    elif month in [6, 7, 8]:
-        return 'Summer'
-    elif month in [9, 10, 11]:
-        return 'Autumn'
-
-
-albums['release_season'] = albums['release_month'].apply(determine_season)
-
-seasonal_releases = albums['release_season'].value_counts().reset_index()
-seasonal_releases.columns = ['Season', 'Release Count']
-
-# Convert the 'Season' column to a categorical variable with a specific order
-# 'categories' sets the order of seasons, and 'ordered=True' ensures they are treated as ordered categories
-season_order = ['Winter', 'Spring', 'Summer', 'Autumn']
-seasonal_releases['Season'] = pd.Categorical(seasonal_releases['Season'], categories=season_order, ordered=True)
-seasonal_releases = seasonal_releases.sort_values(by='Season')
-
-season_emojis = {
-    'Winter': '❄️ Winter',
-    'Spring': '🌸 Spring',
-    'Summer': '☀️ Summer',
-    'Autumn': '🍂 Autumn'
-}
-
-seasonal_releases['Season'] = seasonal_releases['Season'].map(season_emojis)
-
-fig_seasonal = px.bar(
-    seasonal_releases,
-    x='Season',
-    y='Release Count',
-    title='Number of Album Releases by Season',
-    labels={'Season': 'Season', 'Release Count': 'Number of Releases'},
-    text='Release Count',
-)
-fig_seasonal.update_traces(textposition='outside')
-
-st.plotly_chart(fig_seasonal)
-
 albums['release_year'] = albums['album_release_date'].dt.year
 
 yearly_releases = albums['release_year'].value_counts().sort_index().reset_index()
@@ -150,22 +106,6 @@ fig_yearly = px.line(
 fig_yearly.update_traces(textposition='top center')
 
 st.plotly_chart(fig_yearly)
-
-albums['release_decade'] = (albums['release_year'] // 10) * 10
-decade_releases = albums['release_decade'].value_counts().sort_index().reset_index()
-decade_releases.columns = ['Decade', 'Release Count']
-
-fig_decade = px.bar(
-    decade_releases,
-    x='Decade',
-    y='Release Count',
-    title='Number of Album Releases by Decade',
-    labels={'Decade': 'Release Decade', 'Release Count': 'Number of Releases'},
-    text='Release Count'
-)
-fig_decade.update_traces(textposition='outside')
-
-st.plotly_chart(fig_decade)
 
 fig_pie_album_type = px.pie(
     albums,
@@ -201,35 +141,4 @@ fig_tracks_vs_popularity = px.scatter(
         'album_total_tracks': 'Total Tracks',
         'album_popularity': 'Album Popularity'
     },
-    color='album_type',
 )
-
-st.plotly_chart(fig_tracks_vs_popularity)
-albums['track_bin'] = pd.cut(
-    albums['album_total_tracks'],
-    bins=[0, 5, 10, 20, 50, 100, 150],
-    labels=['1-5', '6-10', '11-20', '21-50', '51-100', '>100'],
-    right=False
-)
-
-fig_box = px.box(
-    albums,
-    x='track_bin',
-    y='album_popularity',
-    title='Album Popularity by Track Count Range',
-    labels={
-        'track_bin': 'Track Count Range',
-        'album_popularity': 'Album Popularity (0-100)'
-    },
-)
-
-fig_box.update_layout(
-    showlegend=False,
-    xaxis=dict(
-        title='Track Count Range',
-        categoryorder='array',
-        categoryarray=['1-5', '6-10', '11-20', '21-50', '51-100', '>100']
-    ),
-)
-
-st.plotly_chart(fig_box)

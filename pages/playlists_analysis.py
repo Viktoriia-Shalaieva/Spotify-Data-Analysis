@@ -5,6 +5,8 @@ import pandas as pd
 import yaml
 import os
 import plotly.express as px
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
 from modules import data_processing
 from scipy.stats import shapiro, skew
 
@@ -245,25 +247,121 @@ plots.create_bar_plot(
 #
 # st.plotly_chart(fig)
 
-fig_violin = px.violin(
-    merged_playlists_tracks,
-    x='country',
-    y='track_popularity',
-    points="all",
-    box=True,
-    title='Distribution of Track Popularity Across Playlists',
-    labels={'country': 'Country', 'track_popularity': 'Track Popularity'},
-    color='country',
+fig = make_subplots(
+    rows=1, cols=2,
+    shared_yaxes=True,
+    horizontal_spacing=0.02,
+    column_widths=[0.94, 0.06],
+)
+
+fig.add_trace(
+    go.Violin(
+        x=merged_playlists_tracks['country'],
+        y=merged_playlists_tracks['track_popularity'],
+        # name=merged_playlists_tracks['country'],
+        box=dict(visible=True),
+        meanline=dict(visible=True),
+        points="all",
+    ),
+    row=1, col=1
+)
+
+fig.add_trace(
+    go.Violin(
+        y=tracks_table['track_popularity'],
+        name="Overall",
+        box=dict(visible=True),
+        meanline=dict(visible=True),
+        points="all",
+    ),
+    row=1, col=2
+)
+
+fig.update_layout(
     height=700,
+    showlegend=False,
+    title_text="Distribution of Track Popularity by Country and Overall",
+    yaxis=dict(title="Track Popularity"),
+)
+st.plotly_chart(fig)
+
+fig = make_subplots(
+    rows=1, cols=2,  # Один рядок, дві колонки
+    shared_yaxes=True,  # Спільна вісь Y
+    horizontal_spacing=0.02,  # Відстань між графіками
+    column_widths=[0.94, 0.06],
+
 )
 
-fig_violin.update_layout(
-    xaxis_title='Country',
-    yaxis_title='Track Popularity',
-    showlegend=False
+fig.add_trace(
+    go.Box(
+        x=merged_playlists_tracks['country'],
+        y=merged_playlists_tracks['track_popularity'],
+    ),
+    row=1, col=1
 )
 
-st.plotly_chart(fig_violin)
+fig.add_trace(
+    go.Box(
+        y=tracks_table['track_popularity'],
+        name="Overall",
+    ),
+    row=1, col=2
+)
+
+fig.update_layout(
+    height=700,
+    showlegend=False,
+    title_text="Distribution of Track Popularity by Country and Overall",
+    yaxis=dict(title="Track Popularity"),
+)
+
+st.plotly_chart(fig)
+
+col1, col2 = st.columns([0.75, 0.25])
+
+with col1:
+    fig_violin = px.violin(
+        merged_playlists_tracks,
+        x='country',
+        y='track_popularity',
+        points="all",
+        box=True,
+        title='Distribution of Track Popularity Across Playlists',
+        labels={'country': 'Country', 'track_popularity': 'Track Popularity'},
+        color='country',
+        height=700,
+    )
+
+    fig_violin.update_layout(
+        xaxis_title='Country',
+        yaxis_title='Track Popularity',
+        showlegend=False
+    )
+
+    st.plotly_chart(fig_violin)
+
+with col2:
+    fig_popularity_distribution = px.violin(
+        tracks_table,
+        y='track_popularity',
+        title='Distribution of Track Popularity',
+        labels={'track_popularity': 'Popularity'},
+        box=True,  # Додаємо відображення коробчастого графіка (опціонально)
+        points='all',  # Відображення всіх точок (опціонально)
+        color_discrete_sequence=["#636EFA"],  # Колір для графіка
+        height=700,
+    )
+
+    # Налаштування макета
+    fig_popularity_distribution.update_layout(
+        yaxis_title='Popularity',  # Підпис осі Y
+        xaxis_title='',  # Видаляємо підпис осі X
+        violingap=0,  # Відстань між скрипками (неактуально для одного графіка)
+        violingroupgap=0.1  # Проміжок між групами
+    )
+
+    st.plotly_chart(fig_popularity_distribution)
 
 st.subheader("Country-wise Track Popularity Analysis", help=help_popularity)
 
@@ -436,7 +534,7 @@ if show_explanation:
         st.write("Consider transformations or alternative visualizations to assess the distribution.")
 
 st.write('track_counts')
-# playlists_tracks_data_tab = merged_playlists_tracks['track_name']
+
 track_counts = playlists_table['track_id'].value_counts().reset_index()
 st.dataframe(track_counts)
 
