@@ -22,26 +22,59 @@ playlists_path = str(file_paths['playlists.csv'])
 albums_path = str(file_paths['albums.csv'])
 artists_genres_full_unknown_path = str(file_paths['artists_genres_full_unknown.csv'])
 tracks_path = str(file_paths['tracks.csv'])
-tracks_audio_features_path = str(file_paths['tracks_audio_features.csv'])
 
 playlists_table = pd.read_csv(playlists_path, sep="~")
 albums_table = pd.read_csv(albums_path, sep='~')
 artists_genres_full_unknown = pd.read_csv(artists_genres_full_unknown_path, sep='~')
 tracks_table = pd.read_csv(tracks_path, sep='~')
-tracks_audio_features_table = pd.read_csv(tracks_audio_features_path, sep='~')
 
-playlists_table['playlist_id'] = playlists_table['playlist_id'].astype(str)
-albums_table['album_id'] = albums_table['album_id'].astype(str)
-artists_genres_full_unknown['artist_id'] = artists_genres_full_unknown['artist_id'].astype(str)
-tracks_table['track_id'] = tracks_table['track_id'].astype(str)
-tracks_audio_features_table['track_id'] = tracks_audio_features_table['track_id'].astype(str)
+playlists_table = playlists_table.rename(columns={
+    'playlist_id': 'Playlist ID',
+    'playlist_name': 'Playlist Name',
+    'country': 'Country',
+    'playlist_followers_total': 'Total Followers',
+    'track_id': 'Track ID',
+    'album_id': 'Album ID',
+    'artist_id': 'Artist ID'
+})
 
-total_playlists = playlists_table['playlist_id'].nunique()
-average_followers = playlists_table['playlist_followers_total'].mean()
-total_unique_tracks = playlists_table['track_id'].nunique()
+albums_table = albums_table.rename(columns={
+    'album_id': 'Album ID',
+    'album_name': 'Album Name',
+    'album_type': 'Album Type',
+    'album_release_date': 'Release Date',
+    'album_total_tracks': 'Total Tracks',
+    'album_label': 'Label',
+    'album_popularity': 'Popularity'
+})
 
-max_followers_playlist = playlists_table.sort_values(by='playlist_followers_total', ascending=False).iloc[0]
-min_followers_playlist = playlists_table.sort_values(by='playlist_followers_total').iloc[0]
+artists_table = artists_genres_full_unknown.rename(columns={
+    'artist_id': 'Artist ID',
+    'artist_name': 'Artist Name',
+    'artist_followers': 'Total Followers',
+    'artist_genres': 'Genres',
+    'artist_popularity': 'Popularity'
+})
+
+tracks_table = tracks_table.rename(columns={
+    'track_id': 'Track ID',
+    'track_name': 'Track Name',
+    'track_duration_ms': 'Duration (ms)',
+    'track_explicit': 'Explicit Content',
+    'track_popularity': 'Popularity'
+})
+
+playlists_table['Playlist ID'] = playlists_table['Playlist ID'].astype(str)
+albums_table['Album ID'] = albums_table['Album ID'].astype(str)
+artists_table['Artist ID'] = artists_table['Artist ID'].astype(str)
+tracks_table['Track ID'] = tracks_table['Track ID'].astype(str)
+
+total_playlists = playlists_table['Playlist ID'].nunique()
+average_followers = playlists_table['Total Followers'].mean()
+total_unique_tracks = playlists_table['Track ID'].nunique()
+
+max_followers_playlist = playlists_table.sort_values(by='Total Followers', ascending=False).iloc[0]
+min_followers_playlist = playlists_table.sort_values(by='Total Followers').iloc[0]
 
 st.subheader("Playlists Analysis - Overview Statistics")
 
@@ -78,35 +111,35 @@ with tab2_playlists:
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
-        max_followers = playlists_table['playlist_followers_total'].max()
+        max_followers = playlists_table['Total Followers'].max()
         most_followed_playlist = playlists_table.loc[
-            playlists_table['playlist_followers_total'].idxmax(), 'country'
+            playlists_table['Total Followers'].idxmax(), 'Country'
         ]
-        avg_followers = playlists_table['playlist_followers_total'].mean()
+        avg_followers = playlists_table['Total Followers'].mean()
 
         with st.container(border=True):
             st.metric(label="🏆 Most Followers", value=f"{max_followers:,.0f}")
             st.metric(label="🎶 Playlist with Most Followers", value=most_followed_playlist)
 
     with col2:
-        total_tracks = len(playlists_table['track_id'])
-        unique_tracks = playlists_table['track_id'].nunique()
+        total_tracks = len(playlists_table['Track ID'])
+        unique_tracks = playlists_table['Track ID'].nunique()
 
         with st.container(border=True):
             st.metric(label="🎵 Total Tracks", value=total_tracks)
             st.metric(label="🎵 Unique Tracks", value=unique_tracks)
 
     with col3:
-        total_artists = len(playlists_table['artist_id'])
-        unique_artists = playlists_table['artist_id'].nunique()
+        total_artists = len(playlists_table['Artist ID'])
+        unique_artists = playlists_table['Artist ID'].nunique()
 
         with st.container(border=True):
             st.metric(label="🎤 Total Artists", value=total_artists)
             st.metric(label="🎤 Unique Artists", value=unique_artists)
 
     with col4:
-        total_albums = len(playlists_table['album_id'])
-        unique_albums = playlists_table['album_id'].nunique()
+        total_albums = len(playlists_table['Album ID'])
+        unique_albums = playlists_table['Album ID'].nunique()
 
         with st.container(border=True):
             st.metric(label="💿 Total Albums", value=total_albums)
@@ -120,22 +153,22 @@ with tab2_albums:
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        avg_popularity = albums_table['album_popularity'].mean()
-        max_popularity = albums_table['album_popularity'].max()
+        avg_popularity = albums_table['Popularity'].mean()
+        max_popularity = albums_table['Popularity'].max()
 
         st.metric(label="🔥 Avg. Album Popularity", value=f"{avg_popularity:.1f}")
         st.metric(label="🎉 Max Album Popularity", value=max_popularity)
 
     with col2:
-        avg_tracks = albums_table['album_total_tracks'].mean()
-        max_tracks = albums_table['album_total_tracks'].max()
+        avg_tracks = albums_table['Total Tracks'].mean()
+        max_tracks = albums_table['Total Tracks'].max()
 
         st.metric(label="🎵 Avg. Tracks/Album", value=f"{avg_tracks:.0f}")
         st.metric(label="🎵 Max Tracks/Album", value=max_tracks)
 
     with col3:
-        earliest_release = albums_table['album_release_date'].min()
-        latest_release = albums_table['album_release_date'].max()
+        earliest_release = albums_table['Release Date'].min()
+        latest_release = albums_table['Release Date'].max()
 
         st.metric(label="📅 Earliest Release", value=earliest_release)
         st.metric(label="📅 Latest Release", value=latest_release)
@@ -146,30 +179,30 @@ with tab2_albums:
 st.subheader("Artists:")
 tab1_artists, tab2_artists = st.tabs(["Data", "Descriptive Statistics"])
 with tab1_artists:
-    st.dataframe(artists_genres_full_unknown, width=1200, height=210, hide_index=True)
+    st.dataframe(artists_table, width=1200, height=210, hide_index=True)
 with tab2_artists:
     col1, col2 = st.columns(2)
 
     with col1:
-        avg_popularity = artists_genres_full_unknown['artist_popularity'].mean()
-        most_popular_artist = artists_genres_full_unknown.loc[artists_genres_full_unknown['artist_popularity'].idxmax(), 'artist_name']
-        max_popularity = artists_genres_full_unknown['artist_popularity'].max()
+        avg_popularity = artists_table['Popularity'].mean()
+        most_popular_artist = artists_table.loc[artists_table['Popularity'].idxmax(), 'Artist Name']
+        max_popularity = artists_table['Popularity'].max()
 
         st.metric(label="🔥 Avg. Artist Popularity", value=f"{avg_popularity:.1f}")
         st.metric(label="🏆 Most Popular Artist", value=most_popular_artist)
         st.metric(label="🎉 Max Artist Popularity", value=max_popularity)
 
     with col2:
-        avg_followers_artist = artists_genres_full_unknown['artist_followers'].mean()
-        max_followers = artists_genres_full_unknown['artist_followers'].max()
-        most_followed_artist = artists_genres_full_unknown.loc[artists_genres_full_unknown['artist_followers'].idxmax(), 'artist_name']
+        avg_followers_artist = artists_table['Total Followers'].mean()
+        max_followers = artists_table['Total Followers'].max()
+        most_followed_artist = artists_table.loc[artists_table['Total Followers'].idxmax(), 'Artist Name']
 
         st.metric(label="👥 Avg. Followers/Artist", value=f"{avg_followers_artist:,.0f}")
         st.metric(label="🌟 Max Followers", value=f"{max_followers:,.0f}")
         st.metric(label="🏅 Most Followed Artist", value=most_followed_artist)
 
-    st.dataframe(artists_genres_full_unknown.describe(), width=750)
-    st.dataframe(artists_genres_full_unknown.describe(include=['object']), width=750)
+    st.dataframe(artists_table.describe(), width=750)
+    st.dataframe(artists_table.describe(include=['object']), width=750)
 
 st.subheader("Tracks:")
 tab1_tracks, tab2_tracks = st.tabs(["Data", "Descriptive Statistics"])
@@ -179,20 +212,20 @@ with tab2_tracks:
     col1, col2 = st.columns(2)
 
     with col1:
-        avg_popularity_track = tracks_table['track_popularity'].mean()
-        max_popularity_track = tracks_table['track_popularity'].max()
+        avg_popularity_track = tracks_table['Popularity'].mean()
+        max_popularity_track = tracks_table['Popularity'].max()
         most_popular_track = tracks_table.loc[
-            tracks_table['track_popularity'].idxmax(), 'track_name']
-        max_popularity = tracks_table['track_popularity'].max()
+            tracks_table['Popularity'].idxmax(), 'Track Name']
+        max_popularity = tracks_table['Popularity'].max()
 
         st.metric(label="🔥 Avg. Track Popularity", value=f"{avg_popularity_track:.1f}")
         st.metric(label="🏆 Most Popular Track", value=most_popular_track)
         st.metric(label="🎉 Max Track Popularity", value=max_popularity_track)
 
     with col2:
-        avg_duration = (tracks_table['track_duration_ms'].mean() / 60000).round(2)
-        max_duration = (tracks_table['track_duration_ms'].max() / 60000).round(2)
-        min_duration = (tracks_table['track_duration_ms'].min() / 60000).round(2)
+        avg_duration = (tracks_table['Duration (ms)'].mean() / 60000).round(2)
+        max_duration = (tracks_table['Duration (ms)'].max() / 60000).round(2)
+        min_duration = (tracks_table['Duration (ms)'].min() / 60000).round(2)
 
         st.metric(label="⏱️ Avg. Duration (min)", value=f"{avg_duration}")
         st.metric(label="⏳ Max Duration (min)", value=f"{avg_duration}")
@@ -200,41 +233,3 @@ with tab2_tracks:
 
     st.dataframe(tracks_table.describe(), width=750)
     st.dataframe(tracks_table.describe(include=['object']), width=750)
-
-st.subheader("Tracks Audio Features:")
-tab1_tracks_af, tab2_tracks_af = st.tabs(["Data", "Descriptive Statistics"])
-with tab1_tracks_af:
-    st.dataframe(tracks_audio_features_table, width=1200, height=210, hide_index=True)
-with tab2_tracks_af:
-    st.dataframe(tracks_audio_features_table.describe(), width=750)
-    st.dataframe(tracks_audio_features_table.describe(include=['object']), width=750)
-#
-# st.subheader("Playlists:")
-# st.dataframe(playlists_table, width=750, height=210, hide_index=True)
-# st.write("Descriptive Statistics for Playlists:")
-# st.dataframe(playlists_table.describe())
-# st.dataframe(playlists_table.describe(include=['object']))
-#
-# st.subheader("Albums:")
-# st.dataframe(albums_table, width=750, height=210, hide_index=True)
-# st.write("Descriptive Statistics for Albums:")
-# st.dataframe(albums_table.describe())
-# st.dataframe(albums_table.describe(include=['object']))
-#
-# st.subheader("Artists:")
-# st.dataframe(artists_genres_full_unknown, width=750, height=210, hide_index=True)
-# st.write("Descriptive Statistics for Artists:")
-# st.dataframe(artists_genres_full_unknown.describe(), width=750, height=210)
-# st.dataframe(artists_genres_full_unknown.describe(include=['object']), width=750)
-#
-# st.subheader("Tracks:")
-# st.dataframe(tracks_table, width=750, height=210, hide_index=True)
-# st.write("Descriptive Statistics for Tracks:")
-# st.dataframe(tracks_table.describe(), width=750, height=210)
-# st.dataframe(tracks_table.describe(include=['object']), width=750)
-#
-# st.subheader("Tracks Audio Features:")
-# st.dataframe(tracks_audio_features_table, width=750, height=210, hide_index=True)
-# st.write("Descriptive Statistics for Tracks Audio Features:")
-# st.dataframe(tracks_audio_features_table.describe())
-# st.dataframe(tracks_audio_features_table.describe(include=['object']))

@@ -93,6 +93,32 @@ playlists_table = pd.read_csv(playlists_path, sep="~")
 artists_genres_full_unknown = pd.read_csv(artists_genres_full_unknown_path, sep='~')
 tracks_table = pd.read_csv(tracks_path, sep='~')
 
+# playlists_table = playlists_table.rename(columns={
+#     'playlist_id': 'Playlist ID',
+#     'playlist_name': 'Playlist Name',
+#     'country': 'Country',
+#     'playlist_followers_total': 'Total Followers',
+#     'track_id': 'Track ID',
+#     'album_id': 'Album ID',
+#     'artist_id': 'Artist ID'
+# })
+#
+# artists_table = artists_genres_full_unknown.rename(columns={
+#     'artist_id': 'Artist ID',
+#     'artist_name': 'Artist Name',
+#     'artist_followers': 'Total Followers',
+#     'artist_genres': 'Genres',
+#     'artist_popularity': 'Popularity'
+# })
+#
+# tracks_table = tracks_table.rename(columns={
+#     'track_id': 'Track ID',
+#     'track_name': 'Track Name',
+#     'track_duration_ms': 'Duration (ms)',
+#     'track_explicit': 'Explicit Content',
+#     'track_popularity': 'Popularity'
+# })
+
 playlist_names = playlists_table['playlist_name'].unique()
 countries_for_map = playlists_table['country'].unique()
 min_followers = playlists_table['playlist_followers_total'].min()
@@ -888,5 +914,4 @@ with tab4_artists:
         filtered_artist_data_map.columns = ['Country', 'Number of songs in playlist']
 
         st.dataframe(filtered_artist_data_map, hide_index=True)
-
 
