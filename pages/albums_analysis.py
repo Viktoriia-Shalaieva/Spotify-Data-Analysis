@@ -19,16 +19,23 @@ raw_dir = path_config['raw_dir'][0]
 file_paths = {file_name: os.path.join(data_dir, file_name) for file_name in path_config['files_names']}
 
 albums_path = str(file_paths['albums.csv'])
-albums = pd.read_csv(albums_path, sep='~')
+albums_table = pd.read_csv(albums_path, sep='~')
 
-playlists_path = str(file_paths['playlists.csv'])
-playlists_table = pd.read_csv(playlists_path, sep="~")
+albums_table = albums_table.rename(columns={
+    'album_id': 'Album ID',
+    'album_name': 'Album Name',
+    'album_type': 'Album Type',
+    'album_release_date': 'Release Date',
+    'album_total_tracks': 'Total Tracks',
+    'album_label': 'Label',
+    'album_popularity': 'Album Popularity'
+})
 
 fig_histogram = px.histogram(
-    albums,
-    x='album_popularity',
+    albums_table,
+    x='Album Popularity',
     title='Distribution of Album Popularity',
-    labels={'album_popularity': 'Album Popularity'},
+    # labels={'album_popularity': 'Album Popularity'},
     nbins=20,
 )
 fig_histogram.update_layout(
@@ -37,20 +44,20 @@ fig_histogram.update_layout(
 st.plotly_chart(fig_histogram)
 
 top_10_albums_popularity = (
-    albums.nlargest(n=10, columns='album_popularity')
-    .sort_values(by='album_popularity', ascending=True)
+    albums_table.nlargest(n=10, columns='Album Popularity')
+    .sort_values(by='Album Popularity', ascending=True)
 )
-min_x = top_10_albums_popularity['album_popularity'].min() - 3
-max_x = top_10_albums_popularity['album_popularity'].max() + 1
+min_x = top_10_albums_popularity['Album Popularity'].min() - 3
+max_x = top_10_albums_popularity['Album Popularity'].max() + 1
 
 fig_top_10_popularity = px.bar(
     top_10_albums_popularity,
-    x='album_popularity',
-    y='album_name',
+    x='Album Popularity',
+    y='Album Name',
     orientation='h',
     title='Top 10 Most Popular Albums',
-    labels={'album_popularity': 'Popularity', 'album_name': 'Album'},
-    text='album_popularity',
+    # labels={'album_popularity': 'Popularity', 'album_name': 'Album'},
+    text='Album Popularity',
     range_x=[min_x, max_x],
 )
 fig_top_10_popularity.update_traces(textposition='outside')
@@ -58,11 +65,11 @@ st.plotly_chart(fig_top_10_popularity)
 
 # The 'errors="coerce"' argument replaces invalid date entries with NaT (Not a Time),
 # ensuring the column can be processed without raising errors for incorrect formats.
-albums['album_release_date'] = pd.to_datetime(albums['album_release_date'], errors='coerce')
+albums_table['Release Date'] = pd.to_datetime(albums_table['Release Date'], errors='coerce')
 
-albums['release_month'] = albums['album_release_date'].dt.month
+albums_table['release_month'] = albums_table['Release Date'].dt.month
 
-monthly_releases = albums['release_month'].value_counts().reset_index()
+monthly_releases = albums_table['release_month'].value_counts().reset_index()
 monthly_releases.columns = ['Month', 'Release Count']
 
 month_names = {
@@ -87,9 +94,9 @@ fig.update_traces(textposition='outside')
 
 st.plotly_chart(fig)
 
-albums['release_year'] = albums['album_release_date'].dt.year
+albums_table['release_year'] = albums_table['Release Date'].dt.year
 
-yearly_releases = albums['release_year'].value_counts().sort_index().reset_index()
+yearly_releases = albums_table['release_year'].value_counts().sort_index().reset_index()
 yearly_releases.columns = ['Year', 'Release Count']
 
 fig_yearly = px.line(
@@ -108,8 +115,8 @@ fig_yearly.update_traces(textposition='top center')
 st.plotly_chart(fig_yearly)
 
 fig_pie_album_type = px.pie(
-    albums,
-    names='album_type',
+    albums_table,
+    names='Album Type',
     title='Distribution of Album Types',
 )
 
@@ -121,24 +128,24 @@ fig_pie_album_type.update_layout(showlegend=False)
 st.plotly_chart(fig_pie_album_type)
 
 fig_box = px.box(
-    albums,
-    x='album_type',
-    y='album_popularity',
+    albums_table,
+    x='Album Type',
+    y='Album Popularity',
     title='Distribution of Album Popularity by Album Type',
-    labels={
-        'album_type': 'Album Type',
-        'album_popularity': 'Album Popularity'
-    },
+    # labels={
+    #     'album_type': 'Album Type',
+    #     'album_popularity': 'Album Popularity'
+    # },
 )
 st.plotly_chart(fig_box)
 
 fig_tracks_vs_popularity = px.scatter(
-    albums,
-    x='album_total_tracks',
-    y='album_popularity',
+    albums_table,
+    x='Total Tracks',
+    y='Album Popularity',
     title='Impact of Track Count on Album Popularity',
     labels={
-        'album_total_tracks': 'Total Tracks',
-        'album_popularity': 'Album Popularity'
+        'Total Tracks': 'Total Tracks',
+        'Album Popularity': 'Album Popularity'
     },
 )
