@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 from modules import components
+from modules import plots
+from modules import data_processing
 import yaml
 import os
 import plotly.express as px
@@ -69,20 +71,30 @@ top_10_artists_popularity = (
     .sort_values(by='Artist Popularity', ascending=True)
 )
 min_x = top_10_artists_popularity['Artist Popularity'].min() - 3
-max_x = top_10_artists_popularity['Artist Popularity'].max() + 1
+max_x = top_10_artists_popularity['Artist Popularity'].max()
 
-fig_top_10_popularity = px.bar(
-    top_10_artists_popularity,
+# fig_top_10_popularity = px.bar(
+#     top_10_artists_popularity,
+#     x='Artist Popularity',
+#     y='Artist Name',
+#     orientation='h',
+#     title='Top 10 Most Popular Artists',
+#     # labels={'artist_popularity': 'Popularity', 'artist_name': 'Artist'},
+#     text='Artist Popularity',
+#     range_x=[min_x, max_x],
+# )
+# fig_top_10_popularity.update_traces(textposition='outside')
+# st.plotly_chart(fig_top_10_popularity)
+
+st.subheader('Top 10 Most Popular Artists')
+plots.create_bar_plot(
+    data=top_10_artists_popularity,
     x='Artist Popularity',
     y='Artist Name',
     orientation='h',
-    title='Top 10 Most Popular Artists',
-    # labels={'artist_popularity': 'Popularity', 'artist_name': 'Artist'},
     text='Artist Popularity',
     range_x=[min_x, max_x],
 )
-fig_top_10_popularity.update_traces(textposition='outside')
-st.plotly_chart(fig_top_10_popularity)
 
 top_10_artists_followers = (
     artists_table.nlargest(n=10, columns='Artist Total Followers')
@@ -91,43 +103,66 @@ top_10_artists_followers = (
 # min_x = top_10_artists_followers['artist_followers'].min()
 # max_x = top_10_artists_followers['artist_followers'].max()
 
-fig_top_10_followers = px.bar(
-    top_10_artists_followers,
-    x='Artist Total Followers',
-    y='Artist Name',
-    orientation='h',
-    title='Top 10 Artists by Followers',
+# fig_top_10_followers = px.bar(
+#     top_10_artists_followers,
+#     x='Artist Total Followers',
+#     y='Artist Name',
+#     orientation='h',
+#     title='Top 10 Artists by Followers',
     # labels={'artist_followers': 'Followers', 'artist_name': 'Artist'},
     # text='artist_followers',
     # range_x=[min_x, max_x],
-)
+# )
 # fig_top_10_followers.update_traces(textposition='outside')
-st.plotly_chart(fig_top_10_followers)
+# st.plotly_chart(fig_top_10_followers)
 
-artists_table['followers_bin'] = pd.cut(
+top_10_artists_followers['Artist Total Followers (formatted)'] = (
+    data_processing.format_number_text(
+        top_10_artists_followers['Artist Total Followers']
+    )
+)
+
+st.subheader('Top 10 Artists by Followers')
+plots.create_bar_plot(
+    data=top_10_artists_followers,
+    x='Artist Total Followers',
+    y='Artist Name',
+    orientation='h',
+    text='Artist Total Followers (formatted)',
+)
+
+artists_table['Follower Group'] = pd.cut(
     artists_table['Artist Total Followers'],
     bins=[0, 1e6, 5e6, 10e6, 50e6, 100e6, 150e6],
     labels=['<1M', '1-5M', '5-10M', '10-50M', '50-100M', '>100M'],
     ordered=True
 )
 
-bin_counts = artists_table['followers_bin'].value_counts(sort=False)
+bin_counts = artists_table['Follower Group'].value_counts(sort=False)
 st.dataframe(bin_counts)
 st.dataframe(artists_table)
-fig = px.bar(
-    bin_counts,
+# fig = px.bar(
+#     bin_counts,
+#     x=bin_counts.index,
+#     y=bin_counts.values,
+#     title='Artists by Follower Groups',
+#     labels={'x': 'Follower Group', 'y': 'Number of Artists'},
+# )
+#
+# fig.update_layout(
+#     xaxis_title='Follower Group',
+#     yaxis_title='Number of Artists',
+# )
+#
+# st.plotly_chart(fig)
+
+st.subheader('Number of Artists by Follower Groups')
+plots.create_bar_plot(
+    data=bin_counts,
     x=bin_counts.index,
     y=bin_counts.values,
-    title='Artists by Follower Groups',
-    labels={'x': 'Follower Group', 'y': 'Number of Artists'},
+    labels={'y': 'Number of Artists'},
 )
-
-fig.update_layout(
-    xaxis_title='Follower Group',
-    yaxis_title='Number of Artists',
-)
-
-st.plotly_chart(fig)
 
 # artists_genres_full_unknown['artist_genres'] = artists_genres_full_unknown['artist_genres'] \
 #     .str.lower() \

@@ -1,5 +1,6 @@
 import streamlit as st
 from modules import components
+from modules import plots
 import pandas as pd
 import yaml
 import os
@@ -48,67 +49,105 @@ playlists_table = load_playlists_data()
 tracks_table = load_tracks_data()
 artists_table = load_artists_data()
 
+playlists_table = playlists_table.rename(columns={
+    'playlist_id': 'Playlist ID',
+    'playlist_name': 'Playlist Name',
+    'country': 'Country',
+    'playlist_followers_total': 'Playlist Total Followers',
+    'track_id': 'Track ID',
+    'album_id': 'Album ID',
+    'artist_id': 'Artist ID'
+})
+
+artists_table = artists_table.rename(columns={
+    'artist_id': 'Artist ID',
+    'artist_name': 'Artist Name',
+    'artist_followers': 'Artist Total Followers',
+    'artist_genres': 'Artist Genres',
+    'artist_popularity': 'Artist Popularity'
+})
+
+tracks_table = tracks_table.rename(columns={
+    'track_id': 'Track ID',
+    'track_name': 'Track Name',
+    'track_duration_ms': 'Duration (ms)',
+    'track_explicit': 'Explicit Content',
+    'track_popularity': 'Track Popularity'
+})
+
 fig_popularity_distribution = px.histogram(
     tracks_table,
-    x='track_popularity',
+    x='Track Popularity',
     title='Distribution of Track Popularity',
-    labels={'track_popularity': 'Popularity'},
+    labels={'Track Popularity': 'Popularity'},
     nbins=10,
 )
 
 st.plotly_chart(fig_popularity_distribution)
 
 merged_playlists_tracks = pd.merge(
-    playlists_table[['track_id', 'artist_id']],
+    playlists_table[['Track ID', 'Artist ID']],
     tracks_table,
-    on='track_id',
+    on='Track ID',
     how='left'
 )
-merged_playlists_tracks.loc[:, 'artist_id'] = merged_playlists_tracks['artist_id'].str.split(', ')
-expanded_tracks_artists = merged_playlists_tracks.explode('artist_id')
+merged_playlists_tracks.loc[:, 'Artist ID'] = merged_playlists_tracks['Artist ID'].str.split(', ')
+expanded_tracks_artists = merged_playlists_tracks.explode('Artist ID')
 tracks_artists_name = expanded_tracks_artists.merge(
-    artists_table[['artist_id', 'artist_name']],
-    on='artist_id',
+    artists_table[['Artist ID', 'Artist Name']],
+    on='Artist ID',
     how='left'
 )
 
-tracks_artists_grouped = tracks_artists_name.groupby('track_id').agg({
-    'track_name': 'first',   # Keep the first occurrence of the track name
-    'artist_name': lambda x: ', '.join(x.dropna().unique()),  # Concatenate unique artist names, separated by commas
-    'track_duration_ms': 'first',
-    'track_explicit': 'first',
-    'track_popularity': 'first',
+tracks_artists_grouped = tracks_artists_name.groupby('Track ID').agg({
+    'Track Name': 'first',   # Keep the first occurrence of the track name
+    'Artist Name': lambda x: ', '.join(x.dropna().unique()),  # Concatenate unique artist names, separated by commas
+    'Duration (ms)': 'first',
+    'Explicit Content': 'first',
+    'Track Popularity': 'first',
 }).reset_index()
 
-tracks_artists_grouped = tracks_artists_grouped.rename(columns={
-    'track_id': 'Track ID',
-    'track_name': 'Track Name',
-    'artist_name': 'Artists',
-    'track_duration_ms': 'Duration (ms)',
-    'track_explicit': 'Explicit Content',
-    'track_popularity': 'Popularity'
-})
+# tracks_artists_grouped = tracks_artists_grouped.rename(columns={
+#     'Track ID': 'Track ID',
+#     'Track Name': 'Track Name',
+#     'Artist Name': 'Artists',
+#     'Duration (ms)': 'Duration (ms)',
+#     'Explicit Content': 'Explicit Content',
+#     'Track Popularity': 'Popularity'
+# })
 
 top_10_tracks_popularity = (
-    tracks_artists_grouped.nlargest(n=10, columns='Popularity')
-    .sort_values(by='Popularity', ascending=True)
+    tracks_artists_grouped.nlargest(n=10, columns='Track Popularity')
+    .sort_values(by='Track Popularity', ascending=True)
 )
 
-min_x = top_10_tracks_popularity['Popularity'].min() - 3
-max_x = top_10_tracks_popularity['Popularity'].max() + 1
+min_x = top_10_tracks_popularity['Track Popularity'].min() - 3
+max_x = top_10_tracks_popularity['Track Popularity'].max()
 
-fig_top_10 = px.bar(
-    top_10_tracks_popularity,
-    x='Popularity',
+# fig_top_10 = px.bar(
+#     top_10_tracks_popularity,
+#     x='Track Popularity',
+#     y='Track Name',
+#     orientation='h',
+#     title='Top 10 Most Popular Tracks',
+#     text='Track Popularity',
+#     range_x=[min_x, max_x],
+#     hover_data={'Artist Name': True},
+# )
+#
+# fig_top_10.update_traces(textposition='outside')
+# st.plotly_chart(fig_top_10)
+
+st.subheader('Top 10 Most Popular Tracks')
+plots.create_bar_plot(
+    data=top_10_tracks_popularity,
+    x='Track Popularity',
     y='Track Name',
     orientation='h',
-    title='Top 10 Most Popular Tracks',
-    text='Popularity',
+    text='Track Popularity',
     range_x=[min_x, max_x],
-    hover_data={'Artists': True},
+    hover_data={'Artist Name': True},
 )
-fig_top_10.update_traces(textposition='outside')
-st.plotly_chart(fig_top_10)
 
 tracks_artists_grouped['Explicit Status'] = tracks_artists_grouped['Explicit Content'].map({True: 'Explicit', False: 'Non-Explicit'})
 
@@ -153,8 +192,8 @@ st.plotly_chart(fig_pie_explicit)
 
 st.subheader('Analysis of Track Popularity for Explicit and Non-Explicit Tracks')
 
-explicit_popularity = tracks_artists_grouped[tracks_artists_grouped['Explicit Status'] == 'Explicit']['Popularity']
-non_explicit_popularity = tracks_artists_grouped[tracks_artists_grouped['Explicit Status'] == 'Non-Explicit']['Popularity']
+explicit_popularity = tracks_artists_grouped[tracks_artists_grouped['Explicit Status'] == 'Explicit']['Track Popularity']
+non_explicit_popularity = tracks_artists_grouped[tracks_artists_grouped['Explicit Status'] == 'Non-Explicit']['Track Popularity']
 
 t_stat, p_value = ttest_ind(explicit_popularity, non_explicit_popularity)
 
@@ -169,7 +208,7 @@ with tab1_visualizations:
         fig_box = px.box(
             tracks_artists_grouped,
             x='Explicit Status',
-            y='Popularity',
+            y='Track Popularity',
             # color='explicit_label',
             # labels={'track_popularity': 'Track Popularity', 'track_explicit': 'Explicit Status'}
         )
@@ -178,10 +217,10 @@ with tab1_visualizations:
     with tab2_histogram:
         fig_histogram = px.histogram(
             tracks_artists_grouped,
-            x='Popularity',
+            x='Track Popularity',
             color='Explicit Status',
             barmode='overlay',
-            labels={'track_popularity': 'Track Popularity'}
+            # labels={'track_popularity': 'Track Popularity'}
         )
         fig_histogram.update_layout(legend_title_text='Explicit Status')
         st.plotly_chart(fig_histogram)
@@ -209,10 +248,10 @@ tracks_artists_grouped['Track Duration (minutes)'] = tracks_artists_grouped['Dur
 fig_scatter = px.scatter(
     tracks_artists_grouped,
     x='Track Duration (minutes)',
-    y='Popularity',
+    y='Track Popularity',
     color='Explicit Status',
     title='Track Popularity vs. Duration',
-    labels={'track_duration_minutes': 'Track Duration (minutes)', 'track_popularity': 'Track Popularity'},
+    # labels={'track_duration_minutes': 'Track Duration (minutes)', 'track_popularity': 'Track Popularity'},
     hover_data=['Track Name']
 )
 
@@ -223,7 +262,7 @@ st.plotly_chart(fig_scatter)
 
 st.subheader("Analysis of Correlation Between Track Duration and Popularity")
 
-correlation, p_value = pearsonr(tracks_table['track_duration_ms'], tracks_table['track_popularity'])
+correlation, p_value = pearsonr(tracks_table['Duration (ms)'], tracks_table['Track Popularity'])
 
 tab1_correlation, tab2_correlation = st.tabs(["Results", "Interpretation"])
 
