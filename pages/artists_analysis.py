@@ -29,17 +29,35 @@ artists_genres_full_unknown = pd.read_csv(artists_genres_full_unknown_path, sep=
 playlists_path = str(file_paths['playlists.csv'])
 playlists_table = pd.read_csv(playlists_path, sep="~")
 
+artists_table = artists_genres_full_unknown.rename(columns={
+    'artist_id': 'Artist ID',
+    'artist_name': 'Artist Name',
+    'artist_followers': 'Artist Total Followers',
+    'artist_genres': 'Artist Genres',
+    'artist_popularity': 'Artist Popularity'
+})
+
+playlists_table = playlists_table.rename(columns={
+    'playlist_id': 'Playlist ID',
+    'playlist_name': 'Playlist Name',
+    'country': 'Country',
+    'playlist_followers_total': 'Playlist Total Followers',
+    'track_id': 'Track ID',
+    'album_id': 'Album ID',
+    'artist_id': 'Artist ID'
+})
+
 with open('./data/genres/genres.yaml', 'r', encoding='utf-8') as file:
     all_genres_with_subgenres = yaml.safe_load(file)
 
-st.dataframe(artists_genres_full_unknown)
+st.dataframe(artists_table)
 
 
 fig_popularity_distribution = px.histogram(
-    artists_genres_full_unknown,
-    x='artist_popularity',
+    artists_table,
+    x='Artist Popularity',
     title='Distribution of Artist Popularity',
-    labels={'artist_popularity': 'Popularity'},
+    # labels={'artist_popularity': 'Popularity'},
     nbins=10,
 )
 
@@ -47,55 +65,55 @@ fig_popularity_distribution = px.histogram(
 st.plotly_chart(fig_popularity_distribution)
 
 top_10_artists_popularity = (
-    artists_genres_full_unknown.nlargest(n=10, columns='artist_popularity')
-    .sort_values(by='artist_popularity', ascending=True)
+    artists_table.nlargest(n=10, columns='Artist Popularity')
+    .sort_values(by='Artist Popularity', ascending=True)
 )
-min_x = top_10_artists_popularity['artist_popularity'].min() - 3
-max_x = top_10_artists_popularity['artist_popularity'].max() + 1
+min_x = top_10_artists_popularity['Artist Popularity'].min() - 3
+max_x = top_10_artists_popularity['Artist Popularity'].max() + 1
 
 fig_top_10_popularity = px.bar(
     top_10_artists_popularity,
-    x='artist_popularity',
-    y='artist_name',
+    x='Artist Popularity',
+    y='Artist Name',
     orientation='h',
     title='Top 10 Most Popular Artists',
-    labels={'artist_popularity': 'Popularity', 'artist_name': 'Artist'},
-    text='artist_popularity',
+    # labels={'artist_popularity': 'Popularity', 'artist_name': 'Artist'},
+    text='Artist Popularity',
     range_x=[min_x, max_x],
 )
 fig_top_10_popularity.update_traces(textposition='outside')
 st.plotly_chart(fig_top_10_popularity)
 
 top_10_artists_followers = (
-    artists_genres_full_unknown.nlargest(n=10, columns='artist_followers')
-    .sort_values(by='artist_followers', ascending=True)
+    artists_table.nlargest(n=10, columns='Artist Total Followers')
+    .sort_values(by='Artist Total Followers', ascending=True)
 )
 # min_x = top_10_artists_followers['artist_followers'].min()
 # max_x = top_10_artists_followers['artist_followers'].max()
 
 fig_top_10_followers = px.bar(
     top_10_artists_followers,
-    x='artist_followers',
-    y='artist_name',
+    x='Artist Total Followers',
+    y='Artist Name',
     orientation='h',
     title='Top 10 Artists by Followers',
-    labels={'artist_followers': 'Followers', 'artist_name': 'Artist'},
+    # labels={'artist_followers': 'Followers', 'artist_name': 'Artist'},
     # text='artist_followers',
     # range_x=[min_x, max_x],
 )
 # fig_top_10_followers.update_traces(textposition='outside')
 st.plotly_chart(fig_top_10_followers)
 
-artists_genres_full_unknown['followers_bin'] = pd.cut(
-    artists_genres_full_unknown['artist_followers'],
+artists_table['followers_bin'] = pd.cut(
+    artists_table['Artist Total Followers'],
     bins=[0, 1e6, 5e6, 10e6, 50e6, 100e6, 150e6],
     labels=['<1M', '1-5M', '5-10M', '10-50M', '50-100M', '>100M'],
     ordered=True
 )
 
-bin_counts = artists_genres_full_unknown['followers_bin'].value_counts(sort=False)
+bin_counts = artists_table['followers_bin'].value_counts(sort=False)
 st.dataframe(bin_counts)
-st.dataframe(artists_genres_full_unknown)
+st.dataframe(artists_table)
 fig = px.bar(
     bin_counts,
     x=bin_counts.index,
@@ -117,19 +135,19 @@ st.plotly_chart(fig)
 #
 # st.dataframe(artists_genres_full_unknown)
 
-artists_genres_full_unknown['artist_genres'] = artists_genres_full_unknown['artist_genres'].str.split(', ')
-st.dataframe(artists_genres_full_unknown)
+artists_table['Artist Genres'] = artists_table['Artist Genres'].str.split(', ')
+st.dataframe(artists_table)
 
 st.write('-expanded__artists---------')
-expanded_artists_genres = artists_genres_full_unknown.explode('artist_genres')
+expanded_artists_genres = artists_table.explode('Artist Genres')
 
 # r"[\"\'\[\]]": Regular expression to match the characters.
 # regex=True : Indicates using a regular expression for matching.
-expanded_artists_genres['artist_genres'] = (expanded_artists_genres['artist_genres']
+expanded_artists_genres['Artist Genres'] = (expanded_artists_genres['Artist Genres']
                                             .str.replace(r"[\"\'\[\]]", '', regex=True))
 
 
-expanded_artists_genres['artist_genres'] = expanded_artists_genres['artist_genres'].str.lower()
+expanded_artists_genres['Artist Genres'] = expanded_artists_genres['Artist Genres'].str.lower()
 st.dataframe(expanded_artists_genres)
 
 
@@ -142,12 +160,12 @@ def classify_genres_detailed_structure(genre):
     return 'Other'
 
 
-expanded_artists_genres['artist_genres'] = (expanded_artists_genres['artist_genres']
+expanded_artists_genres['Artist Genres'] = (expanded_artists_genres['Artist Genres']
                                             .str.replace(r'&\s*country', 'country', regex=True))
 
-genre_counts = expanded_artists_genres['artist_genres'].value_counts(sort=False).reset_index()
+genre_counts = expanded_artists_genres['Artist Genres'].value_counts(sort=False).reset_index()
 st.dataframe(genre_counts)
-expanded_artists_genres['parent_genre'] = (expanded_artists_genres['artist_genres']
+expanded_artists_genres['parent_genre'] = (expanded_artists_genres['Artist Genres']
                                            .apply(classify_genres_detailed_structure))
 
 # Group by main genres and count occurrences
@@ -182,14 +200,14 @@ fig_polar.update_layout(
 st.plotly_chart(fig_polar)
 
 expanded_artists_genres = expanded_artists_genres.merge(
-    playlists_table[['artist_id', 'country']],
-    on='artist_id',
+    playlists_table[['Artist ID', 'Country']],
+    on='Artist ID',
     how='left'
 )
 
 st.subheader('Genre Frequency Across Countries')
 # Group data by country and parent_genre
-genre_country_counts = expanded_artists_genres.groupby(['country', 'parent_genre']).size().reset_index(name='count')
+genre_country_counts = expanded_artists_genres.groupby(['Country', 'parent_genre']).size().reset_index(name='count')
 st.dataframe(genre_country_counts)
 
 # select_all = st.checkbox("Select All Countries", value=True)
@@ -208,11 +226,11 @@ with st.popover("Select countries for analysis", icon="🌍"):
                              help="Check to select all countries. Uncheck to choose specific ones.")
 
     if select_all:
-        selected_countries = genre_country_counts['country'].unique()
+        selected_countries = genre_country_counts['Country'].unique()
     else:
         selected_countries = st.multiselect(
             "Select Specific Countries",
-            options=genre_country_counts['country'].unique(),
+            options=genre_country_counts['Country'].unique(),
             default=[]
         )
 
@@ -239,16 +257,16 @@ with st.popover("Select genres for analysis", icon="🎵"):
         )
 
 filtered_genre_country_counts = genre_country_counts[
-    (genre_country_counts['country'].isin(selected_countries)) &
+    (genre_country_counts['Country'].isin(selected_countries)) &
     (genre_country_counts['parent_genre'].isin(selected_genres))
 ]
 
 fig_heatmap = px.density_heatmap(
     filtered_genre_country_counts,
     x='parent_genre',
-    y='country',
+    y='Country',
     z='count',
-    labels={'parent_genre': 'Genre', 'country': 'Country', 'count': 'Frequency'},
+    labels={'parent_genre': 'Genre', 'Country': 'Country', 'count': 'Frequency'},
 )
 
 fig_heatmap.update_layout(
