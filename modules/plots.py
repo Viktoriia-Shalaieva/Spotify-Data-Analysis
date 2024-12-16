@@ -12,12 +12,8 @@ def create_bar_plot(data, x, y, orientation="v", text=None, **kwargs):
         y=y,
         orientation=orientation,
         text=text,
-        # color=y if orientation == "v" else x,
-        # color_continuous_scale='speed',
-        # color_continuous_scale='algae',
-        # color_continuous_scale='Viridis',
-        # color_continuous_scale='Plasma',
-        # color_continuous_scale='Aggrnyl',
+        color=y if orientation == "v" else x,
+        color_continuous_scale='Turbo',
         **kwargs
     )
     fig.update_traces(
@@ -27,7 +23,11 @@ def create_bar_plot(data, x, y, orientation="v", text=None, **kwargs):
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False)
 
-    fig.update_layout(xaxis_title=None, yaxis_title=None)
+    fig.update_layout(
+        xaxis_title=None,
+        yaxis_title=None,
+        coloraxis_showscale=False,
+    )
 
     st.plotly_chart(fig)
 
@@ -66,9 +66,11 @@ def create_bubble_plot(data, x, y, size, color=None, text=None, **kwargs):
         x=x,
         y=y,
         size=size,
-        color=color,
+        # color=color,
+        color=y,
+        color_continuous_scale='Turbo',
         text=text,
-        size_max=100,
+        size_max=80,
         **kwargs
     )
 
@@ -84,7 +86,8 @@ def create_bubble_plot(data, x, y, size, color=None, text=None, **kwargs):
         xaxis_title=None,
         yaxis_title=None,
         height=600,
-        margin=dict(l=20, r=20, t=20, b=20)
+        margin=dict(l=20, r=20, t=20, b=20),
+        coloraxis_showscale=False,
     )
 
     st.plotly_chart(fig)
@@ -99,6 +102,7 @@ def create_histogram(data, x, nbins=10, color=None, labels=None, yaxis_title='Co
         nbins=nbins,
         labels=labels,
         barmode='overlay' if color else 'group',
+        color_discrete_sequence=['#109618'],
         # range_x=[0, 100],
         **kwargs
     )
@@ -106,6 +110,78 @@ def create_histogram(data, x, nbins=10, color=None, labels=None, yaxis_title='Co
     fig.update_layout(
         yaxis_title=yaxis_title,
         legend_title_text=legend_title if legend_title else color,
+    )
+
+    st.plotly_chart(fig)
+
+
+def create_pie_chart(data, names, **kwargs):
+    fig = px.pie(
+        data,
+        names=names,
+        color_discrete_sequence=px.colors.qualitative.Vivid,
+        **kwargs
+    )
+    fig.update_traces(
+        textinfo='percent+label',
+    )
+    fig.update_layout(
+        showlegend=False
+    )
+    st.plotly_chart(fig)
+
+
+def create_boxplot(data, x, y, **kwargs):
+    fig = px.box(
+        data,
+        x=x,
+        y=y,
+        color=x,
+        color_discrete_sequence=px.colors.qualitative.Set1,
+        **kwargs
+    )
+    st.plotly_chart(fig)
+
+
+def create_polar_chart(data, r, theta, height=550):
+    fig = px.line_polar(
+        data,
+        r=r,
+        theta=theta,
+        line_close=True,
+        color_discrete_sequence=['#109618'],
+    )
+    fig.update_traces(
+        mode='lines+markers',
+        fill='toself',
+        marker=dict(size=8, line=dict(color='black', width=1))
+    )
+    fig.update_layout(
+        autosize=True,
+        height=height,
+        polar=dict(
+            radialaxis=dict(visible=True, title=r, showticklabels=True)
+        )
+    )
+    st.plotly_chart(fig)
+
+
+def create_heatmap(data, x, y, z, label_z, height=600):
+    fig = px.density_heatmap(
+        data,
+        x=x,
+        y=y,
+        z=z,
+        labels={z: label_z},
+        color_continuous_scale='Turbo',
+    )
+
+    fig.update_layout(
+        xaxis_title=None,
+        yaxis_title=None,
+        xaxis=dict(tickangle=45),
+        height=height,
+        coloraxis_colorbar=dict(title="Frequency"),
     )
 
     st.plotly_chart(fig)

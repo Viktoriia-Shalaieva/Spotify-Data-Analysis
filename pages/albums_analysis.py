@@ -5,6 +5,8 @@ import yaml
 import os
 import plotly.express as px
 from modules import plots
+import numpy as np
+import plotly.graph_objects as go
 
 
 components.set_page_layout()
@@ -186,38 +188,82 @@ fig_yearly.update_traces(textposition='top center')
 
 st.plotly_chart(fig_yearly)
 
-fig_pie_album_type = px.pie(
-    albums_table,
+# fig_pie_album_type = px.pie(
+#     albums_table,
+#     names='Album Type',
+#     title='Distribution of Album Types',
+# )
+#
+# fig_pie_album_type.update_traces(
+#     textinfo='percent+label',
+# )
+# fig_pie_album_type.update_layout(showlegend=False)
+#
+# st.plotly_chart(fig_pie_album_type)
+
+st.subheader('Distribution of Album Types')
+plots.create_pie_chart(
+    data=albums_table,
     names='Album Type',
-    title='Distribution of Album Types',
 )
 
-fig_pie_album_type.update_traces(
-    textinfo='percent+label',
-)
-fig_pie_album_type.update_layout(showlegend=False)
+# fig_box = px.box(
+#     albums_table,
+#     x='Album Type',
+#     y='Album Popularity',
+#     title='Distribution of Album Popularity by Album Type',
+#     # labels={
+#     #     'album_type': 'Album Type',
+#     #     'album_popularity': 'Album Popularity'
+#     # },
+# )
+# st.plotly_chart(fig_box)
 
-st.plotly_chart(fig_pie_album_type)
-
-fig_box = px.box(
-    albums_table,
+st.subheader('Distribution of Album Popularity by Album Type')
+plots.create_boxplot(
+    data=albums_table,
     x='Album Type',
     y='Album Popularity',
-    title='Distribution of Album Popularity by Album Type',
-    # labels={
-    #     'album_type': 'Album Type',
-    #     'album_popularity': 'Album Popularity'
-    # },
 )
-st.plotly_chart(fig_box)
+
+# fig_tracks_vs_popularity = px.scatter(
+#     albums_table,
+#     x='Total Tracks',
+#     y='Album Popularity',
+#     title='Impact of Track Count on Album Popularity',
+#     labels={
+#         'Total Tracks': 'Total Tracks',
+#         'Album Popularity': 'Album Popularity'
+#     },
+# )
+# st.plotly_chart(fig_tracks_vs_popularity)
+
 
 fig_tracks_vs_popularity = px.scatter(
     albums_table,
     x='Total Tracks',
     y='Album Popularity',
+    size='Total Tracks',
+    # color='Album Popularity',
     title='Impact of Track Count on Album Popularity',
-    labels={
-        'Total Tracks': 'Total Tracks',
-        'Album Popularity': 'Album Popularity'
-    },
+    # labels={
+    #     'Total Tracks': 'Total Number of Tracks',
+    #     'Album Popularity': 'Album Popularity Score'
+    # },
+    hover_data=['Album Name', 'Label'],
+    # template="plotly_white",
+    trendline="ols"
 )
+
+fig_tracks_vs_popularity.update_traces(
+    marker=dict(opacity=0.7, line=dict(width=0.5, color='DarkSlateGrey'))
+)
+
+fig_tracks_vs_popularity.update_layout(
+    # xaxis=dict(title='Total Tracks', gridcolor='lightgray'),
+    # yaxis=dict(title='Album Popularity', gridcolor='lightgray'),
+    # coloraxis_colorbar=dict(title='Popularity'),
+    height=700,
+)
+
+st.plotly_chart(fig_tracks_vs_popularity)

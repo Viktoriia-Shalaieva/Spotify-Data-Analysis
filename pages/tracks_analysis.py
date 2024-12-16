@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 from scipy.stats import pearsonr
 from scipy import stats
 from scipy.stats import ttest_ind
+import numpy as np
 
 
 components.set_page_layout()
@@ -157,17 +158,23 @@ plots.create_bar_plot(
 
 tracks_artists_grouped['Explicit Status'] = tracks_artists_grouped['Explicit Content'].map({True: 'Explicit', False: 'Non-Explicit'})
 
-fig_pie_explicit = px.pie(tracks_artists_grouped,
-                          names='Explicit Status',
-                          title='Distribution of Explicit and Non-Explicit Tracks',
-                          )
+# fig_pie_explicit = px.pie(tracks_artists_grouped,
+#                           names='Explicit Status',
+#                           title='Distribution of Explicit and Non-Explicit Tracks',
+#                           )
+#
+# fig_pie_explicit.update_traces(
+#     textinfo='percent+label',
+# )
+# fig_pie_explicit.update_layout(showlegend=False)
+#
+# st.plotly_chart(fig_pie_explicit)
 
-fig_pie_explicit.update_traces(
-    textinfo='percent+label',
+st.subheader('Distribution of Explicit and Non-Explicit Tracks')
+plots.create_pie_chart(
+    data=tracks_artists_grouped,
+    names='Explicit Status',
 )
-fig_pie_explicit.update_layout(showlegend=False)
-
-st.plotly_chart(fig_pie_explicit)
 
 # st.subheader('Track Popularity Distribution for Explicit and Non-Explicit Tracks')
 # tab1_tracks, tab2_tracks = st.tabs(['Bar Plot', 'Histogram'])
@@ -211,14 +218,20 @@ with tab1_visualizations:
     tab1_boxplot, tab2_histogram = st.tabs(['Box Plot', 'Histogram'])
 
     with tab1_boxplot:
-        fig_box = px.box(
-            tracks_artists_grouped,
+        # fig_box = px.box(
+        #     tracks_artists_grouped,
+        #     x='Explicit Status',
+        #     y='Track Popularity',
+        #     # color='explicit_label',
+        #     # labels={'track_popularity': 'Track Popularity', 'track_explicit': 'Explicit Status'}
+        # )
+        # st.plotly_chart(fig_box)
+
+        plots.create_boxplot(
+            data=tracks_artists_grouped,
             x='Explicit Status',
             y='Track Popularity',
-            # color='explicit_label',
-            # labels={'track_popularity': 'Track Popularity', 'track_explicit': 'Explicit Status'}
         )
-        st.plotly_chart(fig_box)
 
     with tab2_histogram:
         fig_histogram = px.histogram(
@@ -265,13 +278,88 @@ fig_scatter = px.scatter(
     color='Explicit Status',
     title='Track Popularity vs. Duration',
     # labels={'track_duration_minutes': 'Track Duration (minutes)', 'track_popularity': 'Track Popularity'},
-    hover_data=['Track Name']
+    hover_data=['Track Name'],
+    symbol='Explicit Status',
+    marginal_x="histogram",
+    # marginal_y="rug",
+    trendline="ols",
+    opacity=0.8,
 )
 
 fig_scatter.update_layout(
-    legend_title_text='Explicit Status'
+    # legend_title_text='Explicit Status',
+    height=700,
 )
+
 st.plotly_chart(fig_scatter)
+
+fig_facet = px.scatter(
+    tracks_artists_grouped,
+    x='Track Duration (minutes)',
+    y='Track Popularity',
+    facet_col='Explicit Status',
+    color='Explicit Status',
+    title='Track Popularity vs. Duration (Separated by Explicit Status)',
+    trendline='ols'
+)
+st.plotly_chart(fig_facet)
+
+fig_violin = px.violin(
+    tracks_artists_grouped,
+    x='Explicit Status',
+    y='Track Popularity',
+    color='Explicit Status',
+    box=True,
+    points='all',
+    title='Track Popularity Distribution with Density by Explicit Status'
+)
+
+fig_violin.update_layout(
+    # legend_title_text='Explicit Status',
+    height=700,
+)
+
+st.plotly_chart(fig_violin)
+
+fig_scatter = px.scatter(
+    tracks_artists_grouped,
+    x='Track Duration (minutes)',
+    y='Track Popularity',
+    color='Explicit Status',
+    title='Track Popularity vs. Duration',
+    hover_data=['Track Name'],
+    opacity=0.6,
+    size_max=8,
+    symbol='Explicit Status',
+)
+
+
+x = tracks_artists_grouped['Track Duration (minutes)']
+y = tracks_artists_grouped['Track Popularity']
+z = np.polyfit(x, y, 1)
+p = np.poly1d(z)
+
+fig_scatter.add_trace(
+    go.Scatter(
+        x=x,
+        y=p(x),
+        mode='lines',
+        name='Trend Line',
+        line=dict(color='red', width=2, dash='dot')
+    )
+)
+
+fig_scatter.update_traces(marker=dict(size=6, line=dict(width=1, color='DarkSlateGrey')))
+fig_scatter.update_layout(
+    xaxis=dict(title='Track Duration (minutes)', gridcolor='lightgray'),
+    yaxis=dict(title='Track Popularity', gridcolor='lightgray'),
+    legend_title_text='Explicit Status',
+    height=600,
+    template='simple_white'
+)
+
+st.plotly_chart(fig_scatter)
+
 
 st.subheader("Analysis of Correlation Between Track Duration and Popularity")
 

@@ -52,7 +52,7 @@ plots.create_choropleth_map(
     locations='Country',
     location_mode='country names',
     color='Country',
-    color_discrete_map=color_map,
+    # color_discrete_map='G10',
     hover_name='Country',
     title='Countries for Playlist Analysis',
     legend_title='Country',
@@ -344,50 +344,50 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig)
-
-col1, col2 = st.columns([0.75, 0.25])
-
-with col1:
-    fig_violin = px.violin(
-        merged_playlists_tracks,
-        x='Country',
-        y='Track Popularity',
-        points="all",
-        box=True,
-        title='Distribution of Track Popularity Across Playlists',
-        # labels={'Country': 'Country', 'Track Popularity': 'Track Popularity'},
-        color='Country',
-        height=700,
-    )
-
-    fig_violin.update_layout(
-        xaxis_title='Country',
-        yaxis_title='Track Popularity',
-        showlegend=False
-    )
-
-    st.plotly_chart(fig_violin)
-
-with col2:
-    fig_popularity_distribution = px.violin(
-        tracks_table,
-        y='Track Popularity',
-        title='Distribution of Track Popularity',
-        # labels={'Track Popularity': 'Popularity'},
-        box=True,
-        points='all',
-        color_discrete_sequence=["#636EFA"],
-        height=700,
-    )
-
-    fig_popularity_distribution.update_layout(
-        yaxis_title='Popularity',
-        xaxis_title='',
-        violingap=0,
-        violingroupgap=0.1
-    )
-
-    st.plotly_chart(fig_popularity_distribution)
+#
+# col1, col2 = st.columns([0.75, 0.25])
+#
+# with col1:
+#     fig_violin = px.violin(
+#         merged_playlists_tracks,
+#         x='Country',
+#         y='Track Popularity',
+#         points="all",
+#         box=True,
+#         title='Distribution of Track Popularity Across Playlists',
+#         # labels={'Country': 'Country', 'Track Popularity': 'Track Popularity'},
+#         color='Country',
+#         height=700,
+#     )
+#
+#     fig_violin.update_layout(
+#         xaxis_title='Country',
+#         yaxis_title='Track Popularity',
+#         showlegend=False
+#     )
+#
+#     st.plotly_chart(fig_violin)
+#
+# with col2:
+#     fig_popularity_distribution = px.violin(
+#         tracks_table,
+#         y='Track Popularity',
+#         title='Distribution of Track Popularity',
+#         # labels={'Track Popularity': 'Popularity'},
+#         box=True,
+#         points='all',
+#         color_discrete_sequence=["#636EFA"],
+#         height=700,
+#     )
+#
+#     fig_popularity_distribution.update_layout(
+#         yaxis_title='Popularity',
+#         xaxis_title='',
+#         violingap=0,
+#         violingroupgap=0.1
+#     )
+#
+#     st.plotly_chart(fig_popularity_distribution)
 
 st.subheader("Country-wise Track Popularity Analysis", help=help_popularity)
 
@@ -877,7 +877,7 @@ with tab4_artists:
                 locations='Country',
                 location_mode='country names',
                 color='count',
-                color_continuous_scale='speed',
+                color_continuous_scale='Turbo',
                 hover_name='Country',
                 title=f'Playlists Containing "{selected_artist}"',
                 labels={'count': 'Songs in playlist'},

@@ -205,39 +205,47 @@ expanded_artists_genres['Artist Genres'] = (expanded_artists_genres['Artist Genr
 
 genre_counts = expanded_artists_genres['Artist Genres'].value_counts(sort=False).reset_index()
 st.dataframe(genre_counts)
-expanded_artists_genres['parent_genre'] = (expanded_artists_genres['Artist Genres']
+expanded_artists_genres['Parent Genre'] = (expanded_artists_genres['Artist Genres']
                                            .apply(classify_genres_detailed_structure))
 
 # Group by main genres and count occurrences
-main_genre_counts = expanded_artists_genres['parent_genre'].value_counts(sort=False).reset_index()
-main_genre_counts.columns = ['parent_genre', 'artist_count']
+main_genre_counts = expanded_artists_genres['Parent Genre'].value_counts(sort=False).reset_index()
+main_genre_counts.columns = ['Parent Genre', 'Number of Artists']
 
 st.dataframe(expanded_artists_genres)
 st.dataframe(main_genre_counts)
 
+# st.subheader('Genres Distribution')
+# fig_polar = px.line_polar(
+#     main_genre_counts,
+#     r='Number of Artists',
+#     theta='Parent genre',
+#     line_close=True,
+#     color_discrete_sequence=['#109618'],
+# )
+#
+# fig_polar.update_traces(
+#     mode='lines+markers',
+#     fill='toself',
+#     marker=dict(size=8, line=dict(color='black', width=1))
+# )
+#
+# fig_polar.update_layout(
+#     autosize=True,
+#     height=550,
+#     polar=dict(
+#         radialaxis=dict(visible=True, title="Number of Artists", showticklabels=True)
+#     )
+# )
+#
+# st.plotly_chart(fig_polar)
+
 st.subheader('Genres Distribution')
-fig_polar = px.line_polar(
-    main_genre_counts,
-    r='artist_count',
-    theta='parent_genre',
-    line_close=True,
-    # template="plotly_dark",
-    # hover_data={'artist_count': True, 'parent_genre': True},
-    # text='artist_count',
+plots.create_polar_chart(
+    data=main_genre_counts,
+    r='Number of Artists',
+    theta='Parent Genre',
 )
-fig_polar.update_traces(
-    mode='lines+markers',
-    fill='toself',
-    marker=dict(size=8)
-)
-
-fig_polar.update_layout(
-    polar=dict(
-        radialaxis=dict(visible=True, title="Artist Count", showticklabels=True)
-    )
-)
-
-st.plotly_chart(fig_polar)
 
 expanded_artists_genres = expanded_artists_genres.merge(
     playlists_table[['Artist ID', 'Country']],
@@ -247,7 +255,7 @@ expanded_artists_genres = expanded_artists_genres.merge(
 
 st.subheader('Genre Frequency Across Countries')
 # Group data by country and parent_genre
-genre_country_counts = expanded_artists_genres.groupby(['Country', 'parent_genre']).size().reset_index(name='count')
+genre_country_counts = expanded_artists_genres.groupby(['Country', 'Parent Genre']).size().reset_index(name='count')
 st.dataframe(genre_country_counts)
 
 # select_all = st.checkbox("Select All Countries", value=True)
@@ -288,31 +296,43 @@ with st.popover("Select genres for analysis", icon="🎵"):
                              help="Check to select all genres. Uncheck to choose specific ones.")
 
     if select_all:
-        selected_genres = genre_country_counts['parent_genre'].unique()
+        selected_genres = genre_country_counts['Parent Genre'].unique()
     else:
         selected_genres = st.multiselect(
             "Select Specific Countries",
-            options=genre_country_counts['parent_genre'].unique(),
+            options=genre_country_counts['Parent Genre'].unique(),
             default=[]
         )
 
 filtered_genre_country_counts = genre_country_counts[
     (genre_country_counts['Country'].isin(selected_countries)) &
-    (genre_country_counts['parent_genre'].isin(selected_genres))
+    (genre_country_counts['Parent Genre'].isin(selected_genres))
 ]
 
-fig_heatmap = px.density_heatmap(
-    filtered_genre_country_counts,
-    x='parent_genre',
+# fig_heatmap = px.density_heatmap(
+#     filtered_genre_country_counts,
+#     x='Parent Genre',
+#     y='Country',
+#     z='count',
+#     labels={'count': 'Genre Count'},
+#     color_continuous_scale='Turbo',
+# )
+# # fig_heatmap.update_traces(
+# #     hovertemplate="Parent Genre=%{x}<br>Country=%{y}<br>Frequency in All Playlists=%{z}"
+# # )
+# fig_heatmap.update_layout(
+#     xaxis_title=None,
+#     yaxis_title=None,
+#     xaxis=dict(tickangle=45),
+#     height=600,
+#     coloraxis_colorbar=dict(title="Frequency"),
+# )
+# st.plotly_chart(fig_heatmap)
+
+plots.create_heatmap(
+    data=filtered_genre_country_counts,
+    x='Parent Genre',
     y='Country',
     z='count',
-    labels={'parent_genre': 'Genre', 'Country': 'Country', 'count': 'Frequency'},
+    label_z='Genre Count'
 )
-
-fig_heatmap.update_layout(
-    xaxis=dict(tickangle=45),
-    height=600,
-    coloraxis_colorbar=dict(title="Frequency"),
-)
-
-st.plotly_chart(fig_heatmap)

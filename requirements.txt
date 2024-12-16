@@ -8,3 +8,4 @@ plotly
 seaborn
 scipy
 beautifulsoup4
+statsmodels # for trendline. Check if I leave it in the final version of the scatter plot
