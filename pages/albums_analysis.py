@@ -56,17 +56,23 @@ artists_table = artists_genres_full_unknown.rename(columns={
     'artist_popularity': 'Artist Popularity'
 })
 
-fig_histogram = px.histogram(
-    albums_table,
-    x='Album Popularity',
-    title='Distribution of Album Popularity',
-    # labels={'album_popularity': 'Album Popularity'},
-    nbins=20,
-)
-fig_histogram.update_layout(
-    yaxis_title='Count',
-)
-st.plotly_chart(fig_histogram)
+# fig_histogram = px.histogram(
+#     albums_table,
+#     x='Album Popularity',
+#     title='Distribution of Album Popularity',
+#     # labels={'album_popularity': 'Album Popularity'},
+#     nbins=20,
+# )
+# fig_histogram.update_layout(
+#     yaxis_title='Count',
+# )
+# st.plotly_chart(fig_histogram)
+
+st.subheader('Distribution of Album Popularity',)
+plots.create_histogram(
+            data=albums_table,
+            x='Album Popularity',
+        )
 
 top_10_albums_popularity = (
     albums_table.nlargest(n=10, columns='Album Popularity')

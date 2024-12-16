@@ -89,3 +89,23 @@ def create_bubble_plot(data, x, y, size, color=None, text=None, **kwargs):
 
     st.plotly_chart(fig)
 
+
+def create_histogram(data, x, nbins=10, color=None, labels=None, yaxis_title='Count',
+                     legend_title=None, **kwargs):
+    fig = px.histogram(
+        data,
+        x=x,
+        color=color,
+        nbins=nbins,
+        labels=labels,
+        barmode='overlay' if color else 'group',
+        # range_x=[0, 100],
+        **kwargs
+    )
+
+    fig.update_layout(
+        yaxis_title=yaxis_title,
+        legend_title_text=legend_title if legend_title else color,
+    )
+
+    st.plotly_chart(fig)

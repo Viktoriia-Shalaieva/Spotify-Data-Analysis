@@ -75,15 +75,21 @@ tracks_table = tracks_table.rename(columns={
     'track_popularity': 'Track Popularity'
 })
 
-fig_popularity_distribution = px.histogram(
-    tracks_table,
-    x='Track Popularity',
-    title='Distribution of Track Popularity',
-    labels={'Track Popularity': 'Popularity'},
-    nbins=10,
-)
+# fig_popularity_distribution = px.histogram(
+#     tracks_table,
+#     x='Track Popularity',
+#     title='Distribution of Track Popularity',
+#     labels={'Track Popularity': 'Popularity'},
+#     nbins=10,
+# )
+#
+# st.plotly_chart(fig_popularity_distribution)
 
-st.plotly_chart(fig_popularity_distribution)
+st.subheader('Distribution of Track Popularity')
+plots.create_histogram(
+    data=tracks_table,
+    x='Track Popularity',
+)
 
 merged_playlists_tracks = pd.merge(
     playlists_table[['Track ID', 'Artist ID']],
@@ -224,6 +230,13 @@ with tab1_visualizations:
         )
         fig_histogram.update_layout(legend_title_text='Explicit Status')
         st.plotly_chart(fig_histogram)
+
+        plots.create_histogram(
+            data=tracks_artists_grouped,
+            x='Track Popularity',
+            color='Explicit Status',
+            legend_title='Explicit Status',
+        )
 
 with tab2_results:
     st.subheader("Statistical Results")

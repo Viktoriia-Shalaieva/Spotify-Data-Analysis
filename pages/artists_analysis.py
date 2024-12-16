@@ -55,16 +55,21 @@ with open('./data/genres/genres.yaml', 'r', encoding='utf-8') as file:
 st.dataframe(artists_table)
 
 
-fig_popularity_distribution = px.histogram(
-    artists_table,
-    x='Artist Popularity',
-    title='Distribution of Artist Popularity',
-    # labels={'artist_popularity': 'Popularity'},
-    nbins=10,
-)
+# fig_popularity_distribution = px.histogram(
+#     artists_table,
+#     x='Artist Popularity',
+#     title='Distribution of Artist Popularity',
+#     # labels={'artist_popularity': 'Popularity'},
+#     nbins=10,
+# )
+#
+# st.plotly_chart(fig_popularity_distribution)
 
-
-st.plotly_chart(fig_popularity_distribution)
+st.subheader('Distribution of Artist Popularity',)
+plots.create_histogram(
+            data=artists_table,
+            x='Artist Popularity',
+        )
 
 top_10_artists_popularity = (
     artists_table.nlargest(n=10, columns='Artist Popularity')
