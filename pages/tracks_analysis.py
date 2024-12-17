@@ -248,7 +248,10 @@ with tab1_visualizations:
             data=tracks_artists_grouped,
             x='Track Popularity',
             color='Explicit Status',
-            legend_title='Explicit Status',
+            color_discrete_map={
+                'Explicit': '#ff7f0e',
+                'Non-Explicit': '#109618'
+            },
         )
 
 with tab2_results:

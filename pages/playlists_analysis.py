@@ -199,6 +199,7 @@ plots.create_bubble_plot(
     text='Playlist Total Followers (formatted)',
     log_y=True,
     hover_data={'Playlist Total Followers (formatted)': False},
+    yaxis_title="Total Followers (log scale)",
 )
 
 

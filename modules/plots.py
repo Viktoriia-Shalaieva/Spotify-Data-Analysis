@@ -5,7 +5,6 @@ from modules import data_processing
 
 
 def create_bar_plot(data, x, y, orientation="v", text=None, **kwargs):
-
     fig = px.bar(
         data,
         x=x,
@@ -28,7 +27,6 @@ def create_bar_plot(data, x, y, orientation="v", text=None, **kwargs):
         yaxis_title=None,
         coloraxis_showscale=False,
     )
-
     st.plotly_chart(fig)
 
 
@@ -47,7 +45,6 @@ def create_choropleth_map(data, locations, location_mode, color, title=None, hov
         title=title,
         **kwargs
     )
-
     fig.update_layout(
         legend_title_text=legend_title,
         legend=dict(
@@ -56,11 +53,10 @@ def create_choropleth_map(data, locations, location_mode, color, title=None, hov
         width=width,
         height=height,
     )
-
     st.plotly_chart(fig)
 
 
-def create_bubble_plot(data, x, y, size, color=None, text=None, **kwargs):
+def create_bubble_plot(data, x, y, size, color=None, text=None, yaxis_title=None, **kwargs):
     fig = px.scatter(
         data,
         x=x,
@@ -73,28 +69,26 @@ def create_bubble_plot(data, x, y, size, color=None, text=None, **kwargs):
         size_max=80,
         **kwargs
     )
-
     fig.update_traces(
         textfont_size=12,
         textposition='bottom center',
+        textfont_color='black',
     )
-
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False)
 
     fig.update_layout(
         xaxis_title=None,
-        yaxis_title=None,
+        yaxis_title=yaxis_title,
         height=600,
         margin=dict(l=20, r=20, t=20, b=20),
         coloraxis_showscale=False,
     )
-
     st.plotly_chart(fig)
 
 
 def create_histogram(data, x, nbins=10, color=None, labels=None, yaxis_title='Count',
-                     legend_title=None, **kwargs):
+                     **kwargs):
     fig = px.histogram(
         data,
         x=x,
@@ -106,12 +100,9 @@ def create_histogram(data, x, nbins=10, color=None, labels=None, yaxis_title='Co
         # range_x=[0, 100],
         **kwargs
     )
-
     fig.update_layout(
         yaxis_title=yaxis_title,
-        legend_title_text=legend_title if legend_title else color,
     )
-
     st.plotly_chart(fig)
 
 
@@ -175,7 +166,6 @@ def create_heatmap(data, x, y, z, label_z, height=600):
         labels={z: label_z},
         color_continuous_scale='Turbo',
     )
-
     fig.update_layout(
         xaxis_title=None,
         yaxis_title=None,
@@ -183,5 +173,26 @@ def create_heatmap(data, x, y, z, label_z, height=600):
         height=height,
         coloraxis_colorbar=dict(title="Frequency"),
     )
+    st.plotly_chart(fig)
 
+
+def create_line_chart(data, x, y, text=None, log_y=True, yaxis_title=None, **kwargs):
+    fig = px.line(
+        data,
+        x=x,
+        y=y,
+        text=text,
+        log_y=log_y,
+        color_discrete_sequence=['#109618'],
+        **kwargs
+    )
+    fig.update_traces(
+        textposition='top center',
+        textfont=dict(size=12, color='black'),
+        line=dict(width=3, color='rgba(0, 0, 255, 0.3)'),
+        marker=dict(size=8, color='green', opacity=1),
+    )
+    fig.update_layout(
+        yaxis_title=yaxis_title,
+    )
     st.plotly_chart(fig)

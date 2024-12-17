@@ -171,23 +171,39 @@ plots.create_bar_plot(
 albums_table['release_year'] = albums_table['Release Date'].dt.year
 
 yearly_releases = albums_table['release_year'].value_counts().sort_index().reset_index()
-yearly_releases.columns = ['Year', 'Release Count']
+yearly_releases.columns = ['Release Year', 'Release Count']
 
-fig_yearly = px.line(
-    yearly_releases,
-    x='Year',
+st.subheader('Number of Album Releases by Year')
+# fig_yearly = px.line(
+#     yearly_releases,
+#     x='Release Year',
+#     y='Release Count',
+#     # labels={'Year': 'Release Year', 'Release Count': 'Number of Releases'},
+#     markers=True,
+#     text='Release Count',
+#     log_y=True,
+#     color_discrete_sequence=['#109618'],
+# )
+#
+# fig_yearly.update_traces(
+#     textposition='top center',
+#     textfont=dict(size=12, color='black'),
+#     line=dict(width=3, color='rgba(0, 0, 255, 0.3)'),
+#     marker=dict(size=8, color='green', opacity=1),
+# )
+# fig_yearly.update_layout(
+#     yaxis_title='Number of Releases (log scale)',
+# )
+# st.plotly_chart(fig_yearly)
+
+plots.create_line_chart(
+    data=yearly_releases,
+    x='Release Year',
     y='Release Count',
-    title='Number of Album Releases by Year',
-    labels={'Year': 'Release Year', 'Release Count': 'Number of Releases'},
-    markers=True,  # Add markers to the line for better visualization
     text='Release Count',
+    yaxis_title='Number of Releases (log scale)',
     log_y=True,
 )
-
-fig_yearly.update_traces(textposition='top center')
-
-st.plotly_chart(fig_yearly)
-
 # fig_pie_album_type = px.pie(
 #     albums_table,
 #     names='Album Type',
