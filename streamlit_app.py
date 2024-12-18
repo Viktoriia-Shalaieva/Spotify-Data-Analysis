@@ -1,6 +1,5 @@
 import streamlit as st
 from modules import components
-import plotly.express as px
 
 
 components.set_page_layout()
@@ -10,12 +9,11 @@ components.set_page_header("Welcome to the Spotify Data Analysis App", "👋")
 
 st.write("""
 This application provides interactive visualizations and analyses of Spotify data,
-including track popularity, audio features, artist genres, and more.
+including track popularity, artist genres, and more.
 
 **👈 Use the navigation menu** to explore different sections.
 """)
-fig = px.colors.sequential.swatches_continuous()
-st.plotly_chart(fig)
+
 
 # import pandas as pd
 # import yaml

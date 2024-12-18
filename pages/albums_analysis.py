@@ -108,7 +108,7 @@ albums_artists_name = expanded_albums_artists.merge(
     on='Artist ID',
     how='left'
 )
-st.dataframe(merged_playlists_albums)
+# st.dataframe(merged_playlists_albums)
 
 top_10_albums_artists_grouped = albums_artists_name.groupby('Album ID').agg({
     'Album Name': 'first',   # Keep the first occurrence of the track name
@@ -240,6 +240,7 @@ plots.create_boxplot(
     data=albums_table,
     x='Album Type',
     y='Album Popularity',
+    color_discrete_sequence=px.colors.qualitative.Vivid,
 )
 
 # fig_tracks_vs_popularity = px.scatter(
@@ -266,7 +267,7 @@ fig_tracks_vs_popularity = px.scatter(
     #     'Total Tracks': 'Total Number of Tracks',
     #     'Album Popularity': 'Album Popularity Score'
     # },
-    hover_data=['Album Name', 'Label'],
+    hover_data=['Album Name'],
     # template="plotly_white",
     trendline="ols"
 )

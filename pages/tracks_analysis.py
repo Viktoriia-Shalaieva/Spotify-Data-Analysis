@@ -12,7 +12,7 @@ from scipy.stats import pearsonr
 from scipy import stats
 from scipy.stats import ttest_ind
 import numpy as np
-
+from scipy.stats import shapiro, skew
 
 components.set_page_layout()
 st.sidebar.markdown("**Tracks Analysis** 🎵")
@@ -85,6 +85,7 @@ tracks_table = tracks_table.rename(columns={
 # )
 #
 # st.plotly_chart(fig_popularity_distribution)
+
 
 st.subheader('Distribution of Track Popularity')
 plots.create_histogram(
@@ -231,26 +232,31 @@ with tab1_visualizations:
             data=tracks_artists_grouped,
             x='Explicit Status',
             y='Track Popularity',
+            # color='Explicit Status',
+            color_discrete_map={
+                'Explicit': 'red',
+                'Non-Explicit': 'green'
+            },
         )
 
     with tab2_histogram:
-        fig_histogram = px.histogram(
-            tracks_artists_grouped,
-            x='Track Popularity',
-            color='Explicit Status',
-            barmode='overlay',
-            # labels={'track_popularity': 'Track Popularity'}
-        )
-        fig_histogram.update_layout(legend_title_text='Explicit Status')
-        st.plotly_chart(fig_histogram)
+        # fig_histogram = px.histogram(
+        #     tracks_artists_grouped,
+        #     x='Track Popularity',
+        #     color='Explicit Status',
+        #     barmode='overlay',
+        #     # labels={'track_popularity': 'Track Popularity'}
+        # )
+        # fig_histogram.update_layout(legend_title_text='Explicit Status')
+        # st.plotly_chart(fig_histogram)
 
         plots.create_histogram(
             data=tracks_artists_grouped,
             x='Track Popularity',
             color='Explicit Status',
             color_discrete_map={
-                'Explicit': '#ff7f0e',
-                'Non-Explicit': '#109618'
+                'Explicit': 'red',
+                'Non-Explicit': 'green'
             },
         )
 
@@ -274,26 +280,30 @@ with tab3_interpretation:
 
 tracks_artists_grouped['Track Duration (minutes)'] = tracks_artists_grouped['Duration (ms)'] / 60000
 
+st.subheader('Track Popularity vs. Duration')
 fig_scatter = px.scatter(
     tracks_artists_grouped,
     x='Track Duration (minutes)',
     y='Track Popularity',
     color='Explicit Status',
-    title='Track Popularity vs. Duration',
+    # title='Track Popularity vs. Duration',
     # labels={'track_duration_minutes': 'Track Duration (minutes)', 'track_popularity': 'Track Popularity'},
     hover_data=['Track Name'],
     symbol='Explicit Status',
     marginal_x="histogram",
     # marginal_y="rug",
-    trendline="ols",
-    opacity=0.8,
+    # trendline="ols",
+    trendline="lowess",
+    opacity=0.5,
+    color_discrete_map={
+                'Explicit': 'red',
+                'Non-Explicit': 'green'
+            },
 )
-
 fig_scatter.update_layout(
     # legend_title_text='Explicit Status',
     height=700,
 )
-
 st.plotly_chart(fig_scatter)
 
 fig_facet = px.scatter(

@@ -6,6 +6,7 @@ from modules import data_processing
 import yaml
 import os
 import plotly.express as px
+from scipy.stats import shapiro, skew
 import re
 import requests
 from bs4 import BeautifulSoup
@@ -52,7 +53,7 @@ playlists_table = playlists_table.rename(columns={
 with open('./data/genres/genres.yaml', 'r', encoding='utf-8') as file:
     all_genres_with_subgenres = yaml.safe_load(file)
 
-st.dataframe(artists_table)
+# st.dataframe(artists_table)
 
 
 # fig_popularity_distribution = px.histogram(
@@ -144,8 +145,8 @@ artists_table['Follower Group'] = pd.cut(
 )
 
 bin_counts = artists_table['Follower Group'].value_counts(sort=False)
-st.dataframe(bin_counts)
-st.dataframe(artists_table)
+# st.dataframe(bin_counts)
+# st.dataframe(artists_table)
 # fig = px.bar(
 #     bin_counts,
 #     x=bin_counts.index,
@@ -176,9 +177,9 @@ plots.create_bar_plot(
 # st.dataframe(artists_genres_full_unknown)
 
 artists_table['Artist Genres'] = artists_table['Artist Genres'].str.split(', ')
-st.dataframe(artists_table)
-
-st.write('-expanded__artists---------')
+# st.dataframe(artists_table)
+#
+# st.write('-expanded__artists---------')
 expanded_artists_genres = artists_table.explode('Artist Genres')
 
 # r"[\"\'\[\]]": Regular expression to match the characters.
@@ -188,7 +189,7 @@ expanded_artists_genres['Artist Genres'] = (expanded_artists_genres['Artist Genr
 
 
 expanded_artists_genres['Artist Genres'] = expanded_artists_genres['Artist Genres'].str.lower()
-st.dataframe(expanded_artists_genres)
+# st.dataframe(expanded_artists_genres)
 
 
 # Update classification logic based on the provided detailed genre structure
@@ -204,7 +205,7 @@ expanded_artists_genres['Artist Genres'] = (expanded_artists_genres['Artist Genr
                                             .str.replace(r'&\s*country', 'country', regex=True))
 
 genre_counts = expanded_artists_genres['Artist Genres'].value_counts(sort=False).reset_index()
-st.dataframe(genre_counts)
+# st.dataframe(genre_counts)
 expanded_artists_genres['Parent Genre'] = (expanded_artists_genres['Artist Genres']
                                            .apply(classify_genres_detailed_structure))
 
@@ -212,8 +213,8 @@ expanded_artists_genres['Parent Genre'] = (expanded_artists_genres['Artist Genre
 main_genre_counts = expanded_artists_genres['Parent Genre'].value_counts(sort=False).reset_index()
 main_genre_counts.columns = ['Parent Genre', 'Number of Artists']
 
-st.dataframe(expanded_artists_genres)
-st.dataframe(main_genre_counts)
+# st.dataframe(expanded_artists_genres)
+# st.dataframe(main_genre_counts)
 
 # st.subheader('Genres Distribution')
 # fig_polar = px.line_polar(
@@ -256,7 +257,7 @@ expanded_artists_genres = expanded_artists_genres.merge(
 st.subheader('Genre Frequency Across Countries')
 # Group data by country and parent_genre
 genre_country_counts = expanded_artists_genres.groupby(['Country', 'Parent Genre']).size().reset_index(name='count')
-st.dataframe(genre_country_counts)
+# st.dataframe(genre_country_counts)
 
 # select_all = st.checkbox("Select All Countries", value=True)
 # all_countries = genre_country_counts['country'].unique()

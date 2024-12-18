@@ -9,4 +9,4 @@ def navbar():
         st.page_link('pages/tracks_analysis.py', label='Tracks Analysis', icon='🎵')
         st.page_link('pages/artists_analysis.py', label='Artists Analysis', icon='👩‍🎤')
         st.page_link('pages/albums_analysis.py', label='Albums Analysis', icon='📀')
-        st.page_link('pages/recommendations.py', label='Recommendations', icon='💡')
+

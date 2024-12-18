@@ -30,19 +30,20 @@ def create_bar_plot(data, x, y, orientation="v", text=None, **kwargs):
     st.plotly_chart(fig)
 
 
-def create_choropleth_map(data, locations, location_mode, color, title=None, hover_name=None, color_discrete_map=None,
-                          color_continuous_scale=None, labels=None, legend_title=None, width=1200, height=600,
-                          **kwargs):
+def create_choropleth_map(data, locations, location_mode, color, title=None, hover_name=None,
+                          color_discrete_sequence=None, color_continuous_scale=None, labels=None,
+                          legend_title=None, width=1200, height=600, **kwargs):
     fig = px.choropleth(
         data,
         locations=locations,
         locationmode=location_mode,
         color=color,
         hover_name=hover_name,
-        color_discrete_map=color_discrete_map,
+        color_discrete_sequence=color_discrete_sequence,
         color_continuous_scale=color_continuous_scale,
         labels=labels,
         title=title,
+        hover_data={'Country': False},
         **kwargs
     )
     fig.update_layout(
@@ -122,13 +123,14 @@ def create_pie_chart(data, names, **kwargs):
     st.plotly_chart(fig)
 
 
-def create_boxplot(data, x, y, **kwargs):
+def create_boxplot(data, x, y, color_discrete_map=None, color_discrete_sequence=None, **kwargs):
     fig = px.box(
         data,
         x=x,
         y=y,
         color=x,
-        color_discrete_sequence=px.colors.qualitative.Set1,
+        color_discrete_map=color_discrete_map,
+        color_discrete_sequence=color_discrete_sequence,
         **kwargs
     )
     st.plotly_chart(fig)
