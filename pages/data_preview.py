@@ -82,7 +82,7 @@ st.subheader("Playlists Analysis - Overview Statistics")
 # st.metric(label="Average Number of Followers per Playlist", value=f"{average_followers:.0f}")
 # st.metric(label="Total Number of Unique Tracks", value=total_unique_tracks)
 
-col1, col2, col3 = st.columns(3)
+col1, col2 = st.columns(2)
 
 with col1:
     with st.container(border=True):
@@ -94,10 +94,10 @@ with col2:
         st.metric(label="👥 Avg. Followers/Playlist", value=f"{average_followers:,.0f}")
         st.caption("Average number of followers across all playlists.")
 
-with col3:
-    with st.container(border=True):
-        st.metric(label="🎵 Unique Tracks", value=total_unique_tracks)
-        st.caption("Number of unique tracks included in the playlists.")
+# with col3:
+#     with st.container(border=True):
+#         st.metric(label="🎵 Unique Tracks", value=total_unique_tracks)
+#         st.caption("Number of unique tracks included in the playlists.")
 
 st.divider()
 
@@ -117,33 +117,29 @@ with tab2_playlists:
         ]
         avg_followers = playlists_table['Total Followers'].mean()
 
-        with st.container(border=True):
-            st.metric(label="🏆 Most Followers", value=f"{max_followers:,.0f}")
-            st.metric(label="🎶 Playlist with Most Followers", value=most_followed_playlist)
+        st.metric(label="🏆 Most Followers", value=f"{max_followers:,.0f}")
+        st.metric(label="🎶 Playlist with Most Followers", value=most_followed_playlist)
 
     with col2:
         total_tracks = len(playlists_table['Track ID'])
         unique_tracks = playlists_table['Track ID'].nunique()
 
-        with st.container(border=True):
-            st.metric(label="🎵 Total Tracks", value=total_tracks)
-            st.metric(label="🎵 Unique Tracks", value=unique_tracks)
+        st.metric(label="🎵 Total Tracks", value=total_tracks)
+        st.metric(label="🎵 Unique Tracks", value=unique_tracks)
 
     with col3:
         total_artists = len(playlists_table['Artist ID'])
         unique_artists = playlists_table['Artist ID'].nunique()
 
-        with st.container(border=True):
-            st.metric(label="🎤 Total Artists", value=total_artists)
-            st.metric(label="🎤 Unique Artists", value=unique_artists)
+        st.metric(label="🎤 Total Artists", value=total_artists)
+        st.metric(label="🎤 Unique Artists", value=unique_artists)
 
     with col4:
         total_albums = len(playlists_table['Album ID'])
         unique_albums = playlists_table['Album ID'].nunique()
 
-        with st.container(border=True):
-            st.metric(label="💿 Total Albums", value=total_albums)
-            st.metric(label="💿 Unique Albums", value=unique_albums)
+        st.metric(label="💿 Total Albums", value=total_albums)
+        st.metric(label="💿 Unique Albums", value=unique_albums)
 
 st.subheader("Albums:")
 tab1_albums, tab2_albums = st.tabs(["Data", "Descriptive Statistics"])
@@ -198,8 +194,8 @@ with tab2_artists:
         most_followed_artist = artists_table.loc[artists_table['Total Followers'].idxmax(), 'Artist Name']
 
         st.metric(label="👥 Avg. Followers/Artist", value=f"{avg_followers_artist:,.0f}")
-        st.metric(label="🌟 Max Followers", value=f"{max_followers:,.0f}")
         st.metric(label="🏅 Most Followed Artist", value=most_followed_artist)
+        st.metric(label="🌟 Max Followers", value=f"{max_followers:,.0f}")
 
     st.dataframe(artists_table.describe(), width=750)
     st.dataframe(artists_table.describe(include=['object']), width=750)

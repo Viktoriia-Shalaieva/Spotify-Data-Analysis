@@ -47,10 +47,9 @@ colors = px.colors.sample_colorscale("speed", n_countries)
 # dict converts these pairs into a dictionary where the keys are unique_countries and values are colors.
 color_map = dict(zip(unique_countries, colors))
 
-color_palette = px.colors.qualitative.Light24
+# color_palette = px.colors.qualitative.Light24
 # color_palette = px.colors.qualitative.Dark24
 # color_palette = px.colors.qualitative.Alphabet
-color_discrete_map = {country: color_palette[i % len(color_palette)] for i, country in enumerate(unique_countries)}
 
 plots.create_choropleth_map(
     data=country_coords_df,
@@ -253,8 +252,6 @@ merged_playlists_tracks = pd.merge(
 
 help_popularity = 'The value of popularity will be between 0 and 100, with 100 being the most popular'
 
-st.subheader("Average Track Popularity Across Playlists", help=help_popularity)
-
 avg_popularity = merged_playlists_tracks.groupby('Country')['Track Popularity'].mean().reset_index()
 avg_popularity.columns = ['Country', 'Average Popularity']
 avg_popularity = avg_popularity.sort_values(by='Average Popularity', ascending=False)
@@ -262,14 +259,15 @@ avg_popularity['Average Popularity (formatted)'] = avg_popularity['Average Popul
 min_y = avg_popularity['Average Popularity'].min() - 5
 max_y = avg_popularity['Average Popularity'].max() + 5
 
-plots.create_bar_plot(
-    data=avg_popularity,
-    x='Country',
-    y='Average Popularity',
-    text='Average Popularity (formatted)',
-    range_y=[min_y, max_y],
-    hover_data={'Average Popularity (formatted)': False},
-)
+# st.subheader("Average Track Popularity Across Playlists", help=help_popularity)
+# plots.create_bar_plot(
+#     data=avg_popularity,
+#     x='Country',
+#     y='Average Popularity',
+#     text='Average Popularity (formatted)',
+#     range_y=[min_y, max_y],
+#     hover_data={'Average Popularity (formatted)': False},
+# )
 
 # fig = px.bar(avg_popularity,
 #              x='Country',
@@ -278,76 +276,87 @@ plots.create_bar_plot(
 #              range_y=[min_y, max_y])
 #
 # st.plotly_chart(fig)
+#
+# fig = make_subplots(
+#     rows=1, cols=2,
+#     shared_yaxes=True,
+#     horizontal_spacing=0.02,
+#     column_widths=[0.94, 0.06],
+# )
+#
+# fig.add_trace(
+#     go.Violin(
+#         x=merged_playlists_tracks['Country'],
+#         y=merged_playlists_tracks['Track Popularity'],
+#         # name=merged_playlists_tracks['country'],
+#         box=dict(visible=True),
+#         meanline=dict(visible=True),
+#         points="all",
+#     ),
+#     row=1, col=1
+# )
+#
+# fig.add_trace(
+#     go.Violin(
+#         y=tracks_table['Track Popularity'],
+#         name="Overall",
+#         box=dict(visible=True),
+#         meanline=dict(visible=True),
+#         points="all",
+#     ),
+#     row=1, col=2
+# )
+#
+# fig.update_layout(
+#     height=700,
+#     showlegend=False,
+#     title_text="Distribution of Track Popularity by Country and Overall",
+#     yaxis=dict(title="Track Popularity"),
+# )
+# st.plotly_chart(fig)
 
+median_popularity = merged_playlists_tracks.groupby('Country')['Track Popularity'].median().sort_values(ascending=False)
+
+sorted_countries = median_popularity.index.tolist()
+
+colors = px.colors.qualitative.Light24
+
+country_colors = {country: colors[i % len(colors)] for i, country in enumerate(sorted_countries)}
+
+st.subheader('Distribution of Track Popularity by Country and Overall (Sorted by Median, Descending Order)')
 fig = make_subplots(
     rows=1, cols=2,
     shared_yaxes=True,
     horizontal_spacing=0.02,
     column_widths=[0.94, 0.06],
-)
-
-fig.add_trace(
-    go.Violin(
-        x=merged_playlists_tracks['Country'],
-        y=merged_playlists_tracks['Track Popularity'],
-        # name=merged_playlists_tracks['country'],
-        box=dict(visible=True),
-        meanline=dict(visible=True),
-        points="all",
-    ),
-    row=1, col=1
-)
-
-fig.add_trace(
-    go.Violin(
-        y=tracks_table['Track Popularity'],
-        name="Overall",
-        box=dict(visible=True),
-        meanline=dict(visible=True),
-        points="all",
-    ),
-    row=1, col=2
-)
-
-fig.update_layout(
-    height=700,
-    showlegend=False,
-    title_text="Distribution of Track Popularity by Country and Overall",
-    yaxis=dict(title="Track Popularity"),
-)
-st.plotly_chart(fig)
-
-fig = make_subplots(
-    rows=1, cols=2,
-    shared_yaxes=True,
-    horizontal_spacing=0.02,
-    column_widths=[0.94, 0.06],
 
 )
-
 fig.add_trace(
     go.Box(
         x=merged_playlists_tracks['Country'],
         y=merged_playlists_tracks['Track Popularity'],
+        marker=dict(color='#109618'),
     ),
     row=1, col=1
 )
-
 fig.add_trace(
     go.Box(
         y=tracks_table['Track Popularity'],
         name="Overall",
+        marker=dict(color='orange'),
     ),
     row=1, col=2
 )
-
 fig.update_layout(
     height=700,
     showlegend=False,
-    title_text="Distribution of Track Popularity by Country and Overall",
+    # title_text='Distribution of Track Popularity by Country and Overall (Sorted by Median, Descending Order)',
     yaxis=dict(title="Track Popularity"),
+    xaxis=dict(
+        categoryorder='array',
+        categoryarray=sorted_countries
+    )
 )
-
 st.plotly_chart(fig)
 #
 # col1, col2 = st.columns([0.75, 0.25])
@@ -436,7 +445,7 @@ if shapiro_p_value >= 0.05 and abs(skewness) <= 0.5:
         labels={'Track Popularity': 'Track Popularity'},
         title=f"Track Popularity Distribution in Top 50 - {selected_country}",
         opacity=0.7,
-        # marginal="box"
+        color_discrete_sequence=['#109618'],
         )
 
     fig_track_popularity.add_vline(
@@ -445,23 +454,21 @@ if shapiro_p_value >= 0.05 and abs(skewness) <= 0.5:
         line_color="red",
         annotation_text=f"Mean: {mean_popularity:.2f}",
         annotation_position="top right",
-        annotation_font_color="blue"
+        annotation_font_color="black"
     )
 
     fig_track_popularity.add_vline(
         x=median_popularity,
         line_dash="dot",
-        line_color="green",
+        line_color="orange",
         annotation_text=f"Median: {median_popularity:.2f}",
         annotation_position="bottom left",
-        annotation_font_color="blue",
+        annotation_font_color="black",
     )
 
     fig_track_popularity.update_layout(
-        xaxis_title="Track Popularity",
-        yaxis_title="Count",
-        bargap=0.1,
-        template="plotly_dark"
+        bargap=0.05,
+        yaxis=dict(showgrid=False),
     )
 
     fig_track_popularity.add_vrect(
@@ -470,7 +477,7 @@ if shapiro_p_value >= 0.05 and abs(skewness) <= 0.5:
         layer="below", line_width=0,
         annotation_text="1 Std Dev",
         annotation_position="top left",
-        annotation_font_color="blue",
+        annotation_font_color="black",
     )
     fig_track_popularity.add_vrect(
         x0=two_std_dev[0], x1=two_std_dev[1],
@@ -478,7 +485,7 @@ if shapiro_p_value >= 0.05 and abs(skewness) <= 0.5:
         layer="below", line_width=0,
         annotation_text="2 Std Dev",
         annotation_position="top left",
-        annotation_font_color="blue",
+        annotation_font_color="black",
     )
     fig_track_popularity.add_vrect(
         x0=three_std_dev[0], x1=three_std_dev[1],
@@ -486,7 +493,7 @@ if shapiro_p_value >= 0.05 and abs(skewness) <= 0.5:
         layer="below", line_width=0,
         annotation_text="3 Std Dev",
         annotation_position="top left",
-        annotation_font_color="blue",
+        annotation_font_color="black",
     )
 
     st.plotly_chart(fig_track_popularity)
@@ -498,7 +505,12 @@ else:
         x='Track Popularity',
         nbins=20,
         title=f"Track Popularity Distribution in Top 50 - {selected_country}",
-        opacity=0.7,
+        # opacity=0.7,
+        color_discrete_sequence=['#109618'],
+    )
+    fig_tracks_popularity.update_layout(
+        bargap=0.05,
+        yaxis=dict(showgrid=False),
     )
     st.plotly_chart(fig_tracks_popularity)
 

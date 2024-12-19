@@ -301,7 +301,6 @@ fig_scatter = px.scatter(
             },
 )
 fig_scatter.update_layout(
-    # legend_title_text='Explicit Status',
     height=700,
 )
 st.plotly_chart(fig_scatter)

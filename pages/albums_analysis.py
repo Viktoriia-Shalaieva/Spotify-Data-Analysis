@@ -261,26 +261,16 @@ fig_tracks_vs_popularity = px.scatter(
     x='Total Tracks',
     y='Album Popularity',
     size='Total Tracks',
-    # color='Album Popularity',
     title='Impact of Track Count on Album Popularity',
-    # labels={
-    #     'Total Tracks': 'Total Number of Tracks',
-    #     'Album Popularity': 'Album Popularity Score'
-    # },
     hover_data=['Album Name'],
-    # template="plotly_white",
-    trendline="ols"
+    marginal_x="histogram",
+    # marginal_y="rug",
+    # trendline="ols",
+    trendline="lowess",
+    # opacity=0.5,
+    color_discrete_sequence=['#008000']
 )
-
-fig_tracks_vs_popularity.update_traces(
-    marker=dict(opacity=0.7, line=dict(width=0.5, color='DarkSlateGrey'))
-)
-
 fig_tracks_vs_popularity.update_layout(
-    # xaxis=dict(title='Total Tracks', gridcolor='lightgray'),
-    # yaxis=dict(title='Album Popularity', gridcolor='lightgray'),
-    # coloraxis_colorbar=dict(title='Popularity'),
     height=700,
 )
-
 st.plotly_chart(fig_tracks_vs_popularity)

@@ -103,6 +103,8 @@ def create_histogram(data, x, nbins=10, color=None, labels=None, yaxis_title='Co
     )
     fig.update_layout(
         yaxis_title=yaxis_title,
+        bargap=0.05,
+        yaxis=dict(showgrid=False),
     )
     st.plotly_chart(fig)
 
