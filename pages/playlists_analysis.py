@@ -19,6 +19,9 @@ components.set_page_header("Playlists Analysis", "📋️")
 with open('config/country_coords.yaml', 'r') as config_file:
     country_coords = yaml.safe_load(config_file)
 
+with open('./data/genres/genres.yaml', 'r', encoding='utf-8') as file:
+    all_genres_with_subgenres = yaml.safe_load(file)
+
 countries_for_map = []
 latitudes = []
 longitudes = []
@@ -35,21 +38,8 @@ country_coords_df = pd.DataFrame({
 })
 
 st.subheader("Map of Countries for Playlist Analysis")
-# country_coords_df['random_value'] = np.random.rand(len(country_coords_df))
 unique_countries = country_coords_df['Country'].unique()
 n_countries = len(unique_countries)
-
-# https://plotly.com/python-api-reference/generated/plotly.express.colors.html
-colors = px.colors.sample_colorscale("speed", n_countries)
-# The zip() function returns a zip object, which is an iterator of tuples where the first item in each passed
-# iterator is paired together, and then the second item in each passed iterator are paired together etc.
-# zip combines two lists (unique_countries and colors) into pairs, e.g.
-# dict converts these pairs into a dictionary where the keys are unique_countries and values are colors.
-color_map = dict(zip(unique_countries, colors))
-
-# color_palette = px.colors.qualitative.Light24
-# color_palette = px.colors.qualitative.Dark24
-# color_palette = px.colors.qualitative.Alphabet
 
 plots.create_choropleth_map(
     data=country_coords_df,
@@ -58,30 +48,8 @@ plots.create_choropleth_map(
     color='Country',
     color_discrete_sequence=px.colors.qualitative.Light24,
     hover_name='Country',
-    # title='Countries for Playlist Analysis',
     legend_title='Country',
 )
-
-# fig = px.choropleth(
-#     country_coords_df,
-#     locations='country',  # Name of the column containing country names
-#     locationmode='country names',  # This mode allows country names to be used for mapping
-#     color='country',
-#     # color='random_value',
-#     # color_discrete_sequence=px.colors.qualitative.Set3,
-#     color_discrete_map=color_map,
-#     hover_name="country",
-#     # title="Countries for Playlist Analysis"
-# )
-# fig.update_layout(
-#     legend_title_text='Country',
-#     legend=dict(
-#         y=0.5,
-#     ),
-#     width=1000,
-#     height=700,
-# )
-# st.plotly_chart(fig)
 
 with open('config/path_config.yaml', 'r') as config_file:
     path_config = yaml.safe_load(config_file)
@@ -132,14 +100,6 @@ max_followers = playlists_table['Playlist Total Followers'].max()
 max_followers_playlist = playlists_table.sort_values(by='Playlist Total Followers', ascending=False).iloc[0]
 min_followers_playlist = playlists_table.sort_values(by='Playlist Total Followers').iloc[0]
 
-# st.subheader("Playlist with Maximum Followers")
-# st.write(f"Playlist Name: {max_followers_playlist['playlist_name']}")
-# st.write(f"Number of Followers: {max_followers_playlist['playlist_followers_total']}")
-#
-# st.subheader("Playlist with Minimum Followers")
-# st.write(f"Playlist Name: {min_followers_playlist['playlist_name']}")
-# st.write(f"Number of Followers: {min_followers_playlist['playlist_followers_total']}")
-
 col1, col2 = st.columns(2)
 
 with col1:
@@ -155,12 +115,6 @@ with col2:
         st.write(f"👥**Number of Followers:** {min_followers_playlist['Playlist Total Followers']:,}")
 
 st.divider()
-
-# selected_countries = st.multiselect(
-#     "Select Countries",
-#     options=countries_for_map,
-#     default=countries_for_map if select_all else []
-# )
 
 st.subheader('Number of Followers per Playlist')
 select_all = st.checkbox("Select All", value=True)
@@ -178,21 +132,12 @@ with st.popover("Select countries for analysis", icon="🌍"):
             default=[]
         )
 
-
 followers_data = playlists_table[['Country', 'Playlist Total Followers']].drop_duplicates()
 followers_data = followers_data[followers_data['Country'].isin(selected_countries)]
 followers_data = followers_data.sort_values(by='Playlist Total Followers', ascending=False)
-followers_data['Playlist Total Followers (formatted)'] = data_processing.format_number_text(followers_data['Playlist Total Followers'])
-
-# st.dataframe(followers_data)
-
-# plots.create_bar_plot(
-#     data=followers_data,
-#     x='Country',
-#     y='Number of Followers',
-#     text='Number of Followers',
-#     log_y=True
-# )
+followers_data['Playlist Total Followers (formatted)'] = (
+    data_processing.format_number_text(followers_data['Playlist Total Followers'])
+)
 
 plots.create_bubble_plot(
     data=followers_data,
@@ -204,17 +149,6 @@ plots.create_bubble_plot(
     hover_data={'Playlist Total Followers (formatted)': False},
     yaxis_title="Total Followers (log scale)",
 )
-
-
-
-#
-# fig_followers = px.bar(followers_data,
-#                        x='Country',
-#                        y='Number of Followers',
-#                        # color="Country",
-#                        # title='Number of Followers per Playlist',
-#                        log_y=True)
-# st.plotly_chart(fig_followers)
 
 show_explanation = st.checkbox('Show explanation', value=False)
 
@@ -252,76 +186,18 @@ merged_playlists_tracks = pd.merge(
 
 help_popularity = 'The value of popularity will be between 0 and 100, with 100 being the most popular'
 
-avg_popularity = merged_playlists_tracks.groupby('Country')['Track Popularity'].mean().reset_index()
-avg_popularity.columns = ['Country', 'Average Popularity']
-avg_popularity = avg_popularity.sort_values(by='Average Popularity', ascending=False)
-avg_popularity['Average Popularity (formatted)'] = avg_popularity['Average Popularity'].round(1)
-min_y = avg_popularity['Average Popularity'].min() - 5
-max_y = avg_popularity['Average Popularity'].max() + 5
+median_popularity = (
+    merged_playlists_tracks
+    .groupby('Country')['Track Popularity']
+    .median()
+)
+median_popularity_df = median_popularity.reset_index()
 
-# st.subheader("Average Track Popularity Across Playlists", help=help_popularity)
-# plots.create_bar_plot(
-#     data=avg_popularity,
-#     x='Country',
-#     y='Average Popularity',
-#     text='Average Popularity (formatted)',
-#     range_y=[min_y, max_y],
-#     hover_data={'Average Popularity (formatted)': False},
-# )
+median_popularity_df.columns = ['Country', 'Median Popularity']
 
-# fig = px.bar(avg_popularity,
-#              x='Country',
-#              y='Average Popularity',
-#              # title='Average Track Popularity Across Playlists',
-#              range_y=[min_y, max_y])
-#
-# st.plotly_chart(fig)
-#
-# fig = make_subplots(
-#     rows=1, cols=2,
-#     shared_yaxes=True,
-#     horizontal_spacing=0.02,
-#     column_widths=[0.94, 0.06],
-# )
-#
-# fig.add_trace(
-#     go.Violin(
-#         x=merged_playlists_tracks['Country'],
-#         y=merged_playlists_tracks['Track Popularity'],
-#         # name=merged_playlists_tracks['country'],
-#         box=dict(visible=True),
-#         meanline=dict(visible=True),
-#         points="all",
-#     ),
-#     row=1, col=1
-# )
-#
-# fig.add_trace(
-#     go.Violin(
-#         y=tracks_table['Track Popularity'],
-#         name="Overall",
-#         box=dict(visible=True),
-#         meanline=dict(visible=True),
-#         points="all",
-#     ),
-#     row=1, col=2
-# )
-#
-# fig.update_layout(
-#     height=700,
-#     showlegend=False,
-#     title_text="Distribution of Track Popularity by Country and Overall",
-#     yaxis=dict(title="Track Popularity"),
-# )
-# st.plotly_chart(fig)
+median_popularity_df = median_popularity_df.sort_values(by='Median Popularity', ascending=False)
 
-median_popularity = merged_playlists_tracks.groupby('Country')['Track Popularity'].median().sort_values(ascending=False)
-
-sorted_countries = median_popularity.index.tolist()
-
-colors = px.colors.qualitative.Light24
-
-country_colors = {country: colors[i % len(colors)] for i, country in enumerate(sorted_countries)}
+sorted_countries = median_popularity_df['Country'].tolist()
 
 st.subheader('Distribution of Track Popularity by Country and Overall (Sorted by Median, Descending Order)')
 fig = make_subplots(
@@ -329,7 +205,6 @@ fig = make_subplots(
     shared_yaxes=True,
     horizontal_spacing=0.02,
     column_widths=[0.94, 0.06],
-
 )
 fig.add_trace(
     go.Box(
@@ -350,7 +225,6 @@ fig.add_trace(
 fig.update_layout(
     height=700,
     showlegend=False,
-    # title_text='Distribution of Track Popularity by Country and Overall (Sorted by Median, Descending Order)',
     yaxis=dict(title="Track Popularity"),
     xaxis=dict(
         categoryorder='array',
@@ -358,58 +232,11 @@ fig.update_layout(
     )
 )
 st.plotly_chart(fig)
-#
-# col1, col2 = st.columns([0.75, 0.25])
-#
-# with col1:
-#     fig_violin = px.violin(
-#         merged_playlists_tracks,
-#         x='Country',
-#         y='Track Popularity',
-#         points="all",
-#         box=True,
-#         title='Distribution of Track Popularity Across Playlists',
-#         # labels={'Country': 'Country', 'Track Popularity': 'Track Popularity'},
-#         color='Country',
-#         height=700,
-#     )
-#
-#     fig_violin.update_layout(
-#         xaxis_title='Country',
-#         yaxis_title='Track Popularity',
-#         showlegend=False
-#     )
-#
-#     st.plotly_chart(fig_violin)
-#
-# with col2:
-#     fig_popularity_distribution = px.violin(
-#         tracks_table,
-#         y='Track Popularity',
-#         title='Distribution of Track Popularity',
-#         # labels={'Track Popularity': 'Popularity'},
-#         box=True,
-#         points='all',
-#         color_discrete_sequence=["#636EFA"],
-#         height=700,
-#     )
-#
-#     fig_popularity_distribution.update_layout(
-#         yaxis_title='Popularity',
-#         xaxis_title='',
-#         violingap=0,
-#         violingroupgap=0.1
-#     )
-#
-#     st.plotly_chart(fig_popularity_distribution)
 
 st.subheader("Country-wise Track Popularity Analysis", help=help_popularity)
 
 selected_country = st.selectbox("Select a Country", countries_for_map)
 filtered_data = merged_playlists_tracks[merged_playlists_tracks['Country'] == selected_country]
-
-# st.write(f"Data for {selected_playlist}:")
-# st.dataframe(filtered_data, height=210, hide_index=True)
 
 mean_popularity = filtered_data['Track Popularity'].mean()
 median_popularity = filtered_data['Track Popularity'].median()
@@ -447,7 +274,6 @@ if shapiro_p_value >= 0.05 and abs(skewness) <= 0.5:
         opacity=0.7,
         color_discrete_sequence=['#109618'],
         )
-
     fig_track_popularity.add_vline(
         x=mean_popularity,
         line_dash="dash",
@@ -456,7 +282,6 @@ if shapiro_p_value >= 0.05 and abs(skewness) <= 0.5:
         annotation_position="top right",
         annotation_font_color="black"
     )
-
     fig_track_popularity.add_vline(
         x=median_popularity,
         line_dash="dot",
@@ -465,12 +290,10 @@ if shapiro_p_value >= 0.05 and abs(skewness) <= 0.5:
         annotation_position="bottom left",
         annotation_font_color="black",
     )
-
     fig_track_popularity.update_layout(
         bargap=0.05,
         yaxis=dict(showgrid=False),
     )
-
     fig_track_popularity.add_vrect(
         x0=one_std_dev[0], x1=one_std_dev[1],
         fillcolor="blue", opacity=0.1,
@@ -505,7 +328,6 @@ else:
         x='Track Popularity',
         nbins=20,
         title=f"Track Popularity Distribution in Top 50 - {selected_country}",
-        # opacity=0.7,
         color_discrete_sequence=['#109618'],
     )
     fig_tracks_popularity.update_layout(
@@ -514,72 +336,21 @@ else:
     )
     st.plotly_chart(fig_tracks_popularity)
 
-# show_explanation = st.checkbox('Show explanation', value=False, key='histogram_explanation_checkbox')
-#
-# if show_explanation:
-#     st.info(f"""
-#         ### Interpretation of Results
-#         - Percentage of data within 1 standard deviation: **{within_one_std_dev:.2f}%**"
-#         - Percentage of data within 2 standard deviations: **{within_two_std_dev:.2f}%**"
-#         - Percentage of data within 3 standard deviations: **{within_three_std_dev:.2f}%**"
-#         If the percentage of data within 1, 2, and 3 standard deviations is approximately 68%, 95%,
-#         and 99.7%, it suggests a normal distribution (Empirical Rule):
-#
-#         - **1 Std Dev (68%)**: About 68% of data falls within 1 standard deviation of the mean.
-#         - **2 Std Dev (95%)**: Around 95% of data lies within 2 standard deviations.
-#         - **3 Std Dev (99.7%)**: Nearly all data falls within 3 standard deviations.
-#
-#         Significant deviations may indicate skewness, outliers, or other anomalies:
-#         - **Skewness**: Data may have a long tail if heavily skewed.
-#         - **Outliers**: Extreme values far from the mean may indicate rare cases.
-#
-#         Shaded regions in the chart show these ranges, helping assess data normality and identify trends or anomalies.
-#         """
-#             )
-
-# if show_explanation:
-#     mean_median_difference = abs(mean_popularity - median_popularity)
-#
-#     normal_distribution_message = (
-#         "It suggests a normal distribution (Empirical Rule):"
-#         if mean_median_difference < 0.1 * mean_popularity
-#         else "It may not follow a normal distribution due to significant difference between mean and median."
-#     )
-#
-#     st.info(f"""
-#         ### Interpretation of Results
-#         - Percentage of data within 1 standard deviation: **{within_one_std_dev:.2f}%**
-#         - Percentage of data within 2 standard deviations: **{within_two_std_dev:.2f}%**
-#         - Percentage of data within 3 standard deviations: **{within_three_std_dev:.2f}%**
-#
-#         If the percentage of data within 1, 2, and 3 standard deviations is approximately 68%, 95%, and 99.7%, {normal_distribution_message}
-#
-#         - **1 Std Dev (68%)**: About 68% of data falls within 1 standard deviation of the mean.
-#         - **2 Std Dev (95%)**: Around 95% of data lies within 2 standard deviations.
-#         - **3 Std Dev (99.7%)**: Nearly all data falls within 3 standard deviations.
-#
-#         **Mean and Median Analysis:**
-#         - **Mean**: {mean_popularity:.2f}
-#         - **Median**: {median_popularity:.2f}
-#         - Difference between mean and median: {mean_median_difference:.2f}
-#
-#         Significant deviations may indicate skewness, outliers, or other anomalies:
-#         - **Skewness**: Data may have a long tail if heavily skewed.
-#         - **Outliers**: Extreme values far from the mean may indicate rare cases.
-#
-#         Shaded regions in the chart show these ranges, helping assess data normality and identify trends or anomalies.
-#     """)
-
 show_explanation = st.checkbox('Show explanation', value=False, key='histogram_explanation_checkbox')
 
 if show_explanation:
     if shapiro_p_value >= 0.05 and abs(skewness) <= 0.5:
         st.success("The data is approximately normally distributed. Proceeding with the Empirical Rule.")
         st.info(f"""
-            ### Statistical Analysis of Artist Popularity
-            - **Shapiro-Wilk Test for Normality**:  
-              p-value = **{shapiro_p_value:.4f}**  
-              - A p-value ≥ 0.05 suggests that the data does not significantly deviate from a normal distribution.
+            ### Statistical Analysis of Track Popularity
+            
+            - **Shapiro-Wilk Test for Normality**:
+              - **Statistic (`shapiro_stat`)**: {shapiro_stat:.4f}
+                - Values close to **1** indicate that the data closely follows a normal distribution.
+                - Values close to **0** suggest significant deviations from normality.
+                
+              - **p-value**: {shapiro_p_value:.4f}
+                - A p-value ≥ 0.05 implies that the data does not significantly deviate from a normal distribution.
 
             - **Skewness**: **{skewness:.2f}**  
               - Skewness close to 0 (between -0.5 and 0.5) indicates symmetric data.  
@@ -607,10 +378,14 @@ if show_explanation:
     else:
         st.warning("The data does not appear to follow a normal distribution.")
         st.info(f"""
-            ### Statistical Analysis of Artist Popularity
-            - **Shapiro-Wilk Test for Normality**:  
-              p-value = **{shapiro_p_value:.4f}**  
-              - A p-value < 0.05 indicates significant deviation from a normal distribution.
+            ### Statistical Analysis of Track Popularity
+            - **Shapiro-Wilk Test for Normality**:
+              - **Statistic (`shapiro_stat`)**: {shapiro_stat:.4f}
+                - Values close to **1** indicate that the data closely follows a normal distribution.
+                - Values close to **0** suggest significant deviations from normality.
+                
+              - **p-value**: {shapiro_p_value:.4f}
+                - A p-value < 0.05 indicates significant deviation from normality.
 
             - **Skewness**: **{skewness:.2f}**  
               - Positive skewness (> 0.5): Data is right-skewed.  
@@ -622,56 +397,33 @@ if show_explanation:
               - Standard Deviation: **{std_popularity:.2f}**  
         """)
 
-# st.write('track_counts')
-
 track_counts = playlists_table['Track ID'].value_counts().reset_index()
-# st.dataframe(track_counts)
 
-# st.write('track_counts_sorted')
 track_counts_sorted = track_counts.sort_values(by='count', ascending=False)
-# st.dataframe(track_counts_sorted)
 
-# st.write('top_track_counts_sorted')
 top_track_counts_sorted = track_counts_sorted.head(10)
-# st.dataframe(top_track_counts_sorted)
 
-# st.write('track_data')
 tracks_data = top_track_counts_sorted.merge(
     tracks_table[['Track ID', 'Track Name', 'Track Popularity', 'Explicit Content']],
     on='Track ID',
     how='left'
 )
-# st.dataframe(tracks_data)
-
-# st.write('tracks_artists')
 tracks_artists = tracks_data.merge(
     playlists_table[['Track ID', 'Artist ID']],
     on='Track ID',
     how='left'
 )
-# st.dataframe(tracks_artists)
-
-# st.write('tracks_artists_cleaned')
 tracks_artists_cleaned = tracks_artists.drop_duplicates(subset=['Track ID'])
-# st.dataframe(tracks_artists_cleaned)
 
 tracks_artists_cleaned.loc[:, 'Artist ID'] = tracks_artists_cleaned['Artist ID'].str.split(', ')
-# tracks_artists_cleaned['artist_id'] = tracks_artists_cleaned['artist_id'].str.split(', ')
-# st.dataframe(tracks_artists_cleaned)
 
-# st.write('-expanded_tracks_artists---------')
 expanded_tracks_artists = tracks_artists_cleaned.explode('Artist ID')
-# st.dataframe(expanded_tracks_artists)
 
-# st.write('tracks_artists_name---------')
 tracks_artists_name = expanded_tracks_artists.merge(
     artists_table[['Artist ID', 'Artist Name']],
     on='Artist ID',
     how='left'
 )
-# st.dataframe(tracks_artists_name)
-
-# st.write('tracks_artists_grouped---------')
 
 # Grouping the data by 'track_id' and aggregating values
 tracks_artists_grouped = tracks_artists_name.groupby('Track ID').agg({
@@ -681,17 +433,10 @@ tracks_artists_grouped = tracks_artists_name.groupby('Track ID').agg({
     'Track Popularity': 'first',
     'Explicit Content': 'first'
 }).reset_index()
-# st.dataframe(tracks_artists_grouped)
-#
-# st.write('tracks_full---------')
+
 tracks_full = tracks_artists_grouped[['Track Name', 'Artist Name', 'count', 'Track Popularity', 'Explicit Content']]
-# st.dataframe(tracks_full)
 
 tracks_full.columns = ['Track Name', 'Artists', 'Frequency in Playlists', 'Popularity', 'Explicit']
-# st.dataframe(tracks_full)
-
-# tracks_full = tracks_full.sort_values(by='Frequency in Playlists', ascending=False)
-
 
 st.subheader("Top 10 Tracks by Frequency in Playlists")
 tab1_tracks, tab2_tracks, tab3_tracks, tab4_tracks = st.tabs(["Frequency Distribution",
@@ -706,61 +451,30 @@ with tab1_tracks:
         orientation='h',
         text='Frequency in Playlists',
         hover_data={'Artists': True},
-
-        # color='Frequency in Playlists',
     )
-    # fig = px.bar(
-    #     tracks_full,
-    #     x='Frequency in Playlists',
-    #     y='Track Name',
-    #     orientation='h',
-    #     # title='Top 10 Tracks by Frequency in Playlists',
-    #     color='Frequency in Playlists',
-    # )
-    # st.plotly_chart(fig)
-
 with tab2_tracks:
-    # st.subheader("Data Table of Top 10 Tracks")
     tracks_full = tracks_full.sort_values(by='Frequency in Playlists', ascending=False)
-    st.dataframe(tracks_full, hide_index=True)
+    st.dataframe(tracks_full, width=680, hide_index=True)
 
 with tab3_tracks:
     tracks_full = tracks_full.sort_values(by='Popularity', ascending=False)
-    # tracks_full['Track Name'] = tracks_full['Track Name'].astype('category')
-    # tracks_full['Track Name'] = tracks_full['Track Name'].cat.set_categories(tracks_full['Track Name'].unique())
-
     min_y_popularity_track = tracks_full['Popularity'].min() - 5
     max_y_popularity_track = tracks_full['Popularity'].max()
-
     plots.create_bar_plot(
         data=tracks_full,
         x='Track Name',
         y='Popularity',
         title='Popularity of Top 10 Tracks',
-        # labels={'Popularity': 'Track Popularity', 'Track Name': 'Track Name'},
         text='Popularity',
-        # color='Popularity',
         range_y=[min_y_popularity_track, max_y_popularity_track],
         hover_data={'Artists': True},
+        showticklabels=True,
     )
-
-    # fig_popularity = px.bar(tracks_full,
-    #                         x='Track Name',
-    #                         y='Popularity',
-    #                         title='Popularity of Top 10 Tracks',
-    #                         labels={'Popularity': 'Track Popularity', 'Track Name': 'Track Name'},
-    #                         color='Popularity',
-    #                         range_y=[min_y_popularity_track, max_y_popularity_track],
-    #                         )
-    # fig_popularity.update_layout(xaxis={'categoryorder': 'total descending'})
-    # st.plotly_chart(fig_popularity)
-
 with tab4_tracks:
     selected_track = st.selectbox(
         "Select a Track",
         options=tracks_full['Track Name']
     )
-
     # Filter the data to include only rows for the selected track
     filtered_tracks = merged_playlists_tracks[merged_playlists_tracks['Track Name'] == selected_track]
 
@@ -783,41 +497,13 @@ with tab4_tracks:
         title=f'Countries with Playlists Containing "{selected_track}" ({artists_for_selected_track})',
         legend_title='Country',
     )
-    # fig_map = px.choropleth(
-    #     filtered_countries,
-    #     locations='country',
-    #     locationmode='country names',
-    #     color='country',
-    #     color_discrete_map=color_map,
-    #     hover_name='country',
-    #     title=f'Countries with Playlists Containing "{selected_track}"'
-    # )
-    #
-    # fig_map.update_layout(
-    #     legend_title_text='Country',
-    #     legend=dict(
-    #         y=0.5,
-    #     ),
-    #     width=1200,
-    #     height=600,
-    # )
-    # st.plotly_chart(fig_map)
 
 st.subheader("Top 10 Artists by Frequency in Playlists")
 
-# st.write('playlists_table---------')
-
-# Split the 'artist_id' column values (which are strings of comma-separated IDs) into lists of IDs
 playlists_table['Artist ID'] = playlists_table['Artist ID'].str.split(', ')
-# st.dataframe(playlists_table)
-
-# st.write('-expanded_playlists_artists---------')
 
 # Expand the playlists table so that each artist in the 'artist_id' list gets its own row
 expanded_playlists_artists = playlists_table.explode('Artist ID')
-# st.dataframe(expanded_playlists_artists)
-
-# st.write('-artist_per_playlist---------')
 
 # Group by country and artist_id to count how often each artist appears in playlists for each country
 artist_per_playlist = (
@@ -826,38 +512,58 @@ artist_per_playlist = (
     .value_counts()
     .reset_index()
 )
-# st.dataframe(artist_per_playlist)
 
-
-# st.write('-artist_counts---------')
 artist_counts = expanded_playlists_artists['Artist ID'].value_counts().reset_index()
-# st.dataframe(artist_counts)
 
-# st.write('artist_counts_sorted')
 artist_counts_sorted = artist_counts.sort_values(by='count', ascending=False)
-# st.dataframe(artist_counts_sorted)
 
-# st.write('top_10_artists-----------------')
 top_10_artists = artist_counts_sorted.head(10)
-# st.dataframe(top_10_artists)
 
-# st.write('top_10_artists_full-----------------')
 top_10_artists_full = top_10_artists.merge(
     artists_table[['Artist ID', 'Artist Name', 'Artist Total Followers', 'Artist Popularity', 'Artist Genres']],
     on='Artist ID',
     how='left'
 )
-# st.dataframe(top_10_artists_full)
 
-# st.write('top_10_artists_full-2---------------')
 top_10_artists_full = top_10_artists_full[
     ['Artist Name', 'count', 'Artist Total Followers', 'Artist Popularity', 'Artist Genres']
 ]
-# st.dataframe(top_10_artists_full)
 
-# st.write(' renamed columns top_10_artists_full-----------------')
-top_10_artists_full.columns = ['Artist', 'Number of songs in playlists',  'Followers', 'Artist Popularity', 'Artist Genres']
-# st.dataframe(top_10_artists_full)
+top_10_artists_full.columns = ['Artist Name', 'Number of songs in playlists',
+                               'Followers', 'Artist Popularity', 'Artist Genres']
+
+top_10_artists_full['Artist Genres'] = top_10_artists_full['Artist Genres'].str.split(', ')
+
+expanded_artists_genres = top_10_artists_full.explode('Artist Genres')
+
+# r"[\"\'\[\]]": Regular expression to match the characters.
+# regex=True : Indicates using a regular expression for matching.
+expanded_artists_genres['Artist Genres'] = (expanded_artists_genres['Artist Genres']
+                                            .str.replace(r"[\"\'\[\]]", '', regex=True))
+
+expanded_artists_genres['Artist Genres'] = expanded_artists_genres['Artist Genres'].str.lower()
+
+
+# Update classification logic based on the provided detailed genre structure
+def classify_genres_detailed_structure(genre):
+    for parent_genre, subgenres in all_genres_with_subgenres.items():
+        if genre in subgenres:
+            return parent_genre
+    return 'Other'
+
+
+expanded_artists_genres['Artist Genres'] = (expanded_artists_genres['Artist Genres']
+                                            .str.replace(r'&\s*country', 'country', regex=True))
+expanded_artists_genres['Parent Genre'] = (expanded_artists_genres['Artist Genres']
+                                           .apply(classify_genres_detailed_structure))
+
+# Grouping the data by 'Artist Name' and aggregating values
+top_10_artists_grouped = expanded_artists_genres.groupby('Artist Name').agg({
+    'Number of songs in playlists': 'first',
+    'Followers': 'first',
+    'Artist Popularity': 'first',
+    'Parent Genre': lambda x: ', '.join(x.dropna().unique()),  # Concatenate genres, separated by commas
+}).reset_index(drop=False)
 
 tab1_artists, tab2_artists, tab3_artists, tab4_artists = st.tabs(["Frequency Distribution", "Data Table",
                                                                   "Popularity Plot", "Map"])
@@ -867,27 +573,15 @@ with tab1_artists:
     plots.create_bar_plot(
         data=top_10_artists_full,
         x='Number of songs in playlists',
-        y='Artist',
+        y='Artist Name',
         orientation='h',
         title='Top 10 Artists by Frequency in Playlists',
-        # color='Frequency in Playlists',
         text='Number of songs in playlists',
         )
 
-    # fig = px.bar(top_10_artists_full,
-    #              x='Frequency in Playlists',
-    #              y='Artist',
-    #              orientation='h',
-    #              title='Top 10 Artists by Frequency in Playlists',
-    #              color='Frequency in Playlists',
-    #              text='Frequency in Playlists',
-    #              )
-    # fig.update_layout(yaxis={'categoryorder': 'total ascending'})
-    # fig.update_traces(textposition='outside')
-    # st.plotly_chart(fig)
-
 with tab2_artists:
-    st.dataframe(top_10_artists_full, hide_index=True)
+    top_10_artists_grouped = top_10_artists_grouped.sort_values(by='Number of songs in playlists', ascending=False)
+    st.dataframe(top_10_artists_grouped, width=680, hide_index=True)
 
 with tab3_artists:
     top_10_artists_full = top_10_artists_full.sort_values(by='Artist Popularity', ascending=False)
@@ -896,45 +590,30 @@ with tab3_artists:
 
     plots.create_bar_plot(
         data=top_10_artists_full,
-        x='Artist',
+        x='Artist Name',
         y='Artist Popularity',
         title='Popularity of Top 10 Artists',
-        # color='Popularity',
         range_y=[min_y_popularity_art, max_y_popularity_art],
         text='Artist Popularity',
+        showticklabels=True
     )
-    # fig_popularity = px.bar(top_10_artists_full,
-    #                         x='Artist',
-    #                         y='Popularity',
-    #                         title='Popularity of Top 10 Artists',
-    #                         color='Popularity',
-    #                         range_y=[min_y_popularity_art, max_y_popularity_art],
-    #                         text='Popularity',
-    #                         )
-    # fig_popularity.update_layout(xaxis={'categoryorder': 'total descending'})
-    # fig_popularity.update_traces(textposition='outside')
-    # st.plotly_chart(fig_popularity)
 
 with tab4_artists:
     selected_artist = st.selectbox(
         "Select an Artist",
-        options=top_10_artists_full['Artist']
+        options=top_10_artists_full['Artist Name']
     )
-
     artist_data = artist_per_playlist.merge(
         artists_table[['Artist ID', 'Artist Name']],
         on='Artist ID',
         how='left'
     )
-
     filtered_artist_data = artist_data[artist_data['Artist Name'] == selected_artist]
-
     artist_country_map_data = filtered_artist_data.merge(
         country_coords_df,
         on='Country',
         how='left'
     )
-
     col1, col2 = st.columns([0.75, 0.25], vertical_alignment="center")
     with col1:
         plots.create_choropleth_map(
@@ -947,29 +626,6 @@ with tab4_artists:
                 title=f'Playlists Containing "{selected_artist}"',
                 labels={'count': 'Songs in playlist'},
             )
-
-        #     fig_map = px.choropleth(
-        #     artist_country_map_data,
-        #     locations='country',
-        #     locationmode='country names',
-        #     color='count',
-        #     color_continuous_scale='speed',
-        #     hover_name='country',
-        #     title=f'Countries with Playlists Containing "{selected_artist}"',
-        #     labels={'count': 'Frequency'},
-        # )
-        #
-        # fig_map.update_layout(
-        #     legend_title_text='Frequency',
-        #     legend=dict(
-        #         y=0.5,
-        #     ),
-        #     width=1000,
-        #     height=600,
-        # )
-
-        # st.plotly_chart(fig_map)
-
     with col2:
         countries_list = ', '.join(filtered_artist_data['Country'].tolist())
         st.write("**Countries where the artist is present:**")

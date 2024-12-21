@@ -5,12 +5,6 @@ from modules import plots
 from modules import data_processing
 import yaml
 import os
-import plotly.express as px
-from scipy.stats import shapiro, skew
-import re
-import requests
-from bs4 import BeautifulSoup
-import plotly.graph_objects as go
 
 
 components.set_page_layout()
@@ -53,19 +47,6 @@ playlists_table = playlists_table.rename(columns={
 with open('./data/genres/genres.yaml', 'r', encoding='utf-8') as file:
     all_genres_with_subgenres = yaml.safe_load(file)
 
-# st.dataframe(artists_table)
-
-
-# fig_popularity_distribution = px.histogram(
-#     artists_table,
-#     x='Artist Popularity',
-#     title='Distribution of Artist Popularity',
-#     # labels={'artist_popularity': 'Popularity'},
-#     nbins=10,
-# )
-#
-# st.plotly_chart(fig_popularity_distribution)
-
 st.subheader('Distribution of Artist Popularity',)
 plots.create_histogram(
             data=artists_table,
@@ -78,19 +59,6 @@ top_10_artists_popularity = (
 )
 min_x = top_10_artists_popularity['Artist Popularity'].min() - 3
 max_x = top_10_artists_popularity['Artist Popularity'].max()
-
-# fig_top_10_popularity = px.bar(
-#     top_10_artists_popularity,
-#     x='Artist Popularity',
-#     y='Artist Name',
-#     orientation='h',
-#     title='Top 10 Most Popular Artists',
-#     # labels={'artist_popularity': 'Popularity', 'artist_name': 'Artist'},
-#     text='Artist Popularity',
-#     range_x=[min_x, max_x],
-# )
-# fig_top_10_popularity.update_traces(textposition='outside')
-# st.plotly_chart(fig_top_10_popularity)
 
 st.subheader('Top 10 Most Popular Artists')
 plots.create_bar_plot(
@@ -106,21 +74,6 @@ top_10_artists_followers = (
     artists_table.nlargest(n=10, columns='Artist Total Followers')
     .sort_values(by='Artist Total Followers', ascending=True)
 )
-# min_x = top_10_artists_followers['artist_followers'].min()
-# max_x = top_10_artists_followers['artist_followers'].max()
-
-# fig_top_10_followers = px.bar(
-#     top_10_artists_followers,
-#     x='Artist Total Followers',
-#     y='Artist Name',
-#     orientation='h',
-#     title='Top 10 Artists by Followers',
-    # labels={'artist_followers': 'Followers', 'artist_name': 'Artist'},
-    # text='artist_followers',
-    # range_x=[min_x, max_x],
-# )
-# fig_top_10_followers.update_traces(textposition='outside')
-# st.plotly_chart(fig_top_10_followers)
 
 top_10_artists_followers['Artist Total Followers (formatted)'] = (
     data_processing.format_number_text(
@@ -145,22 +98,6 @@ artists_table['Follower Group'] = pd.cut(
 )
 
 bin_counts = artists_table['Follower Group'].value_counts(sort=False)
-# st.dataframe(bin_counts)
-# st.dataframe(artists_table)
-# fig = px.bar(
-#     bin_counts,
-#     x=bin_counts.index,
-#     y=bin_counts.values,
-#     title='Artists by Follower Groups',
-#     labels={'x': 'Follower Group', 'y': 'Number of Artists'},
-# )
-#
-# fig.update_layout(
-#     xaxis_title='Follower Group',
-#     yaxis_title='Number of Artists',
-# )
-#
-# st.plotly_chart(fig)
 
 st.subheader('Number of Artists by Follower Groups')
 plots.create_bar_plot(
@@ -168,18 +105,11 @@ plots.create_bar_plot(
     x=bin_counts.index,
     y=bin_counts.values,
     labels={'y': 'Number of Artists'},
+    showticklabels=True
 )
 
-# artists_genres_full_unknown['artist_genres'] = artists_genres_full_unknown['artist_genres'] \
-#     .str.lower() \
-#     .str.strip()
-#
-# st.dataframe(artists_genres_full_unknown)
-
 artists_table['Artist Genres'] = artists_table['Artist Genres'].str.split(', ')
-# st.dataframe(artists_table)
-#
-# st.write('-expanded__artists---------')
+
 expanded_artists_genres = artists_table.explode('Artist Genres')
 
 # r"[\"\'\[\]]": Regular expression to match the characters.
@@ -189,12 +119,10 @@ expanded_artists_genres['Artist Genres'] = (expanded_artists_genres['Artist Genr
 
 
 expanded_artists_genres['Artist Genres'] = expanded_artists_genres['Artist Genres'].str.lower()
-# st.dataframe(expanded_artists_genres)
 
 
 # Update classification logic based on the provided detailed genre structure
 def classify_genres_detailed_structure(genre):
-    # genre = genre.lower().strip()
     for parent_genre, subgenres in all_genres_with_subgenres.items():
         if genre in subgenres:
             return parent_genre
@@ -205,41 +133,13 @@ expanded_artists_genres['Artist Genres'] = (expanded_artists_genres['Artist Genr
                                             .str.replace(r'&\s*country', 'country', regex=True))
 
 genre_counts = expanded_artists_genres['Artist Genres'].value_counts(sort=False).reset_index()
-# st.dataframe(genre_counts)
+
 expanded_artists_genres['Parent Genre'] = (expanded_artists_genres['Artist Genres']
                                            .apply(classify_genres_detailed_structure))
 
 # Group by main genres and count occurrences
 main_genre_counts = expanded_artists_genres['Parent Genre'].value_counts(sort=False).reset_index()
 main_genre_counts.columns = ['Parent Genre', 'Number of Artists']
-
-# st.dataframe(expanded_artists_genres)
-# st.dataframe(main_genre_counts)
-
-# st.subheader('Genres Distribution')
-# fig_polar = px.line_polar(
-#     main_genre_counts,
-#     r='Number of Artists',
-#     theta='Parent genre',
-#     line_close=True,
-#     color_discrete_sequence=['#109618'],
-# )
-#
-# fig_polar.update_traces(
-#     mode='lines+markers',
-#     fill='toself',
-#     marker=dict(size=8, line=dict(color='black', width=1))
-# )
-#
-# fig_polar.update_layout(
-#     autosize=True,
-#     height=550,
-#     polar=dict(
-#         radialaxis=dict(visible=True, title="Number of Artists", showticklabels=True)
-#     )
-# )
-#
-# st.plotly_chart(fig_polar)
 
 st.subheader('Genres Distribution')
 plots.create_polar_chart(
@@ -257,18 +157,6 @@ expanded_artists_genres = expanded_artists_genres.merge(
 st.subheader('Genre Frequency Across Countries')
 # Group data by country and parent_genre
 genre_country_counts = expanded_artists_genres.groupby(['Country', 'Parent Genre']).size().reset_index(name='count')
-# st.dataframe(genre_country_counts)
-
-# select_all = st.checkbox("Select All Countries", value=True)
-# all_countries = genre_country_counts['country'].unique()
-#
-# selected_countries = st.multiselect(
-#     "Select Countries",
-#     options=all_countries,
-#     default=all_countries if select_all else []
-# )
-#
-# select_all = st.checkbox("Select All", value=True)
 
 with st.popover("Select countries for analysis", icon="🌍"):
     select_all = st.checkbox("Select All Countries", value=True,
@@ -282,15 +170,6 @@ with st.popover("Select countries for analysis", icon="🌍"):
             options=genre_country_counts['Country'].unique(),
             default=[]
         )
-
-# select_all_genres = st.checkbox("Select All Genres", value=True)
-# all_genres = genre_country_counts['parent_genre'].unique()
-#
-# selected_genres = st.multiselect(
-#     "Select Genres",
-#     options=all_genres,
-#     default=all_genres if select_all_genres else []
-# )
 
 with st.popover("Select genres for analysis", icon="🎵"):
     select_all = st.checkbox("Select All Genres", value=True,
@@ -309,26 +188,6 @@ filtered_genre_country_counts = genre_country_counts[
     (genre_country_counts['Country'].isin(selected_countries)) &
     (genre_country_counts['Parent Genre'].isin(selected_genres))
 ]
-
-# fig_heatmap = px.density_heatmap(
-#     filtered_genre_country_counts,
-#     x='Parent Genre',
-#     y='Country',
-#     z='count',
-#     labels={'count': 'Genre Count'},
-#     color_continuous_scale='Turbo',
-# )
-# # fig_heatmap.update_traces(
-# #     hovertemplate="Parent Genre=%{x}<br>Country=%{y}<br>Frequency in All Playlists=%{z}"
-# # )
-# fig_heatmap.update_layout(
-#     xaxis_title=None,
-#     yaxis_title=None,
-#     xaxis=dict(tickangle=45),
-#     height=600,
-#     coloraxis_colorbar=dict(title="Frequency"),
-# )
-# st.plotly_chart(fig_heatmap)
 
 plots.create_heatmap(
     data=filtered_genre_country_counts,

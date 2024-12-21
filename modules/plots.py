@@ -1,10 +1,8 @@
 import plotly.express as px
-import pandas as pd
 import streamlit as st
-from modules import data_processing
 
 
-def create_bar_plot(data, x, y, orientation="v", text=None, **kwargs):
+def create_bar_plot(data, x, y, orientation="v", text=None, showticklabels=False, **kwargs):
     fig = px.bar(
         data,
         x=x,
@@ -26,7 +24,7 @@ def create_bar_plot(data, x, y, orientation="v", text=None, **kwargs):
         yaxis_title=None,
         coloraxis_showscale=False,
         xaxis=dict(
-            showticklabels=False,
+            showticklabels=showticklabels,
             title=None,
         )
     )
@@ -66,7 +64,6 @@ def create_bubble_plot(data, x, y, size, color=None, text=None, yaxis_title=None
         x=x,
         y=y,
         size=size,
-        # color=color,
         color=y,
         color_continuous_scale='Turbo',
         text=text,
@@ -101,7 +98,6 @@ def create_histogram(data, x, nbins=10, color=None, labels=None, yaxis_title='Co
         labels=labels,
         barmode='overlay' if color else 'group',
         color_discrete_sequence=['#109618'],
-        # range_x=[0, 100],
         **kwargs
     )
     fig.update_layout(
