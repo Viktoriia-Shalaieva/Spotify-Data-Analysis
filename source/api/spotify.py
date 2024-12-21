@@ -9,8 +9,6 @@ from logs.logger_config import logger
 def get_spotify_access_token():
     client_id = 'ac3eaf00cb0845a8a8a2f60c134c328e'
     client_secret = 'bc63f9adbb3a4bea8e5c7ba13b951e8e'
-    # client_id = '006b68972ac94b28809d4ac95523f1a9'
-    # client_secret = '36a5adc076454483a57fcc3c370a5e24'
 
     token_url = "https://accounts.spotify.com/api/token"
 
@@ -38,9 +36,7 @@ def get_spotify_access_token():
 
 def get_playlist(access_token, playlist_id):
     playlist_info = None
-    # url = f"https://api.spotify.com/v1/playlists/{playlist_id}"
     url_base = "https://api.spotify.com/v1/playlists/"
-    # url = os.path.join(url_base, playlist_id)
     url = urljoin(url_base, playlist_id)
     headers = {
         "Authorization": f"Bearer {access_token}"
@@ -101,7 +97,6 @@ def get_track(access_token, track_id):
 
 def get_album(access_token, album_id):
     album_info = None
-    # url = f"https://api.spotify.com/v1/albums/{album_id}"
     url_base = "https://api.spotify.com/v1/albums/"
     url = urljoin(url_base, album_id)
     headers = {
@@ -115,23 +110,6 @@ def get_album(access_token, album_id):
         logger.error(f"Failed to retrieve album {album_id}: {error_message}")
 
     return album_info
-
-
-def get_track_audio_features(access_token, track_id):
-    track_audio_info = None
-    url_base = "https://api.spotify.com/v1/audio-features/"
-    url = urljoin(url_base, track_id)
-    headers = {
-        "Authorization": f"Bearer {access_token}"
-    }
-    try:
-        response = requests.get(url, headers=headers)
-        track_audio_info = response.json()
-        logger.info("Track audio features retrieved successfully")
-    except Exception as error_message:
-        logger.error(f"Failed to retrieve audio features for track {track_id}: {error_message}")
-
-    return track_audio_info
 
 
 def get_artist(access_token, artist_id):

@@ -21,7 +21,6 @@ def create_playlist_table(playlist):
             'country': country,
             'playlist_followers_total': playlist_followers_total,
             'track_id': track.get('id'),
-            # 'track_popularity': track.get('popularity'),
         }
         album = track.get('album', {})
 
@@ -105,39 +104,6 @@ def create_albums_table(access_token, album_ids):
     return albums
 
 
-def create_tracks_af_table(access_token, track_ids):
-    rows = []
-
-    for track_id in track_ids:
-        track_info = spotify.get_track_audio_features(access_token, track_id)
-        time.sleep(0.4)
-
-        if track_info:
-            row = {
-                'track_id': track_info.get('id'),
-                'track_acousticness': track_info.get('acousticness'),
-                'track_danceability': track_info.get('danceability'),
-                'track_duration_ms': track_info.get('duration_ms'),
-                'track_energy': track_info.get('energy'),
-                'track_instrumentalness': track_info.get('instrumentalness'),
-                'track_key': track_info.get('key'),
-                'track_liveness': track_info.get('liveness'),
-                'track_loudness': track_info.get('loudness'),
-                'track_mode': track_info.get('mode'),
-                'track_speechiness': track_info.get('speechiness'),
-                'track_tempo': track_info.get('tempo'),
-                'track_time_signature': track_info.get('time_signature'),
-                'track_valence': track_info.get('valence'),
-            }
-            rows.append(row)
-            logger.info(f"Audio features retrieved for track ID: {track_id}")
-        else:
-            logger.error(f"Audio features not found for track ID: {track_id}")
-
-    tracks_af = pd.DataFrame(rows)
-    return tracks_af
-
-
 def create_artists_table(access_token, artist_ids):
     rows = []
     unique_artist_ids = set()
@@ -168,28 +134,6 @@ def create_artists_table(access_token, artist_ids):
     return artists
 
 
-def create_track_genre_table(file, discogs_api_token):
-    rows = []
-
-    for _, row in file.iterrows():  # Using _ indicates that the index value is not important and will not be used.
-        track_name = row['track_name']
-        artists = row['artist_name']
-
-        genres = discogs.get_genre(discogs_api_token, track_name, artists)
-        time.sleep(0.7)
-
-        rows.append({
-                'track_name': track_name,
-                'artist_name': artists,
-                'track_genre': genres,
-        })
-        logger.info(f"Genre data retrieved for track '{track_name}' by artist '{artists}'")
-
-    track_genre = pd.DataFrame(rows, columns=['track_name', 'artist_name', 'track_genre'])
-    logger.info("All track genre data processed successfully.")
-    return track_genre
-
-
 def create_artist_genre_table(file, discogs_api_token):
     rows = []
 
@@ -207,26 +151,3 @@ def create_artist_genre_table(file, discogs_api_token):
     artist_genre = pd.DataFrame(rows, columns=['artist_name', 'artist_genre'])
     logger.info("All artist genre data processed successfully.")
     return artist_genre
-
-#
-# def create_track_genre_theaudiodb(file):
-#     rows = []
-#
-#     for _, row in file.iterrows():  # Using _ indicates that the index value is not important and will not be used.
-#         track_name = row['track_name']
-#         artists = row['artist_name']
-#
-#         genres = theaudiodb.get_track_genre_theaudiodb(track_name, artists)
-#
-#         time.sleep(0.7)
-#
-#         rows.append({
-#                 'track_name': track_name,
-#                 'artist_name': artists,
-#                 'track_genre': genres,
-#         })
-#         logger.info(f"Genre data retrieved for track '{track_name}' by artist '{artists}'")
-#
-#     track_genre = pd.DataFrame(rows, columns=['track_name', 'artist_name', 'track_genre'])
-#     logger.info("All track genre data processed successfully.")
-#     return track_genre

@@ -16,7 +16,4 @@ files_names:
   - 'artists_genres_full_unknown.csv'
   - 'playlists.csv'
   - 'tracks.csv'
-  - 'tracks_audio_features.csv'
-  - 'tracks_genres_discogs.csv'
-  - 'tracks_genres_theaudiodb.csv'
   - 'genres.yaml'

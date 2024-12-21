@@ -28,7 +28,7 @@ def get_genres():
         if subgenre_list:
             # Iterate through all <a> tags with the href attribute in subgenre_list
             for subgenre in subgenre_list.select('.capital-letter.genre-term'):
-            # for subgenre in subgenre_list.find_all('a', href=True):
+                # for subgenre in subgenre_list.find_all('a', href=True):
                 # Extract the text from the element and remove any extra spaces
                 subgenre_name = subgenre.text.strip()
                 subgenres.append(subgenre_name)
