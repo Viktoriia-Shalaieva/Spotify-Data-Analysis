@@ -23,9 +23,12 @@ def create_bar_plot(data, x, y, orientation="v", text=None, **kwargs):
     fig.update_yaxes(showgrid=False)
 
     fig.update_layout(
-        xaxis_title=None,
         yaxis_title=None,
         coloraxis_showscale=False,
+        xaxis=dict(
+            showticklabels=False,
+            title=None,
+        )
     )
     st.plotly_chart(fig)
 

@@ -9,6 +9,8 @@ from logs.logger_config import logger
 def get_spotify_access_token():
     client_id = 'ac3eaf00cb0845a8a8a2f60c134c328e'
     client_secret = 'bc63f9adbb3a4bea8e5c7ba13b951e8e'
+    # client_id = '006b68972ac94b28809d4ac95523f1a9'
+    # client_secret = '36a5adc076454483a57fcc3c370a5e24'
 
     token_url = "https://accounts.spotify.com/api/token"
 

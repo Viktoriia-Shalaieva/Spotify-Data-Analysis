@@ -169,8 +169,8 @@ with tab2_albums:
         st.metric(label="📅 Earliest Release", value=earliest_release)
         st.metric(label="📅 Latest Release", value=latest_release)
 
-    st.dataframe(albums_table.describe(), width=750)
-    st.dataframe(albums_table.describe(include=['object']), width=750)
+    # st.dataframe(albums_table.describe(), width=750)
+    # st.dataframe(albums_table.describe(include=['object']), width=750)
 
 st.subheader("Artists:")
 tab1_artists, tab2_artists = st.tabs(["Data", "Descriptive Statistics"])
@@ -197,8 +197,8 @@ with tab2_artists:
         st.metric(label="🏅 Most Followed Artist", value=most_followed_artist)
         st.metric(label="🌟 Max Followers", value=f"{max_followers:,.0f}")
 
-    st.dataframe(artists_table.describe(), width=750)
-    st.dataframe(artists_table.describe(include=['object']), width=750)
+    # st.dataframe(artists_table.describe(), width=750)
+    # st.dataframe(artists_table.describe(include=['object']), width=750)
 
 st.subheader("Tracks:")
 tab1_tracks, tab2_tracks = st.tabs(["Data", "Descriptive Statistics"])
@@ -226,6 +226,6 @@ with tab2_tracks:
         st.metric(label="⏱️ Avg. Duration (min)", value=f"{avg_duration}")
         st.metric(label="⏳ Max Duration (min)", value=f"{avg_duration}")
         st.metric(label="⏱️ Min Duration (min)", value=f"{avg_duration}")
-
-    st.dataframe(tracks_table.describe(), width=750)
-    st.dataframe(tracks_table.describe(include=['object']), width=750)
+    #
+    # st.dataframe(tracks_table.describe(), width=750)
+    # st.dataframe(tracks_table.describe(include=['object']), width=750)
