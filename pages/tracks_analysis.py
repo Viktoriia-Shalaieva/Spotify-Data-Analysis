@@ -160,28 +160,18 @@ help_trendline = ("""Trendlines show the overall relationship between track dura
                   for Explicit and Non-Explicit tracks.""")
 
 st.subheader('Relationship Between Track Duration and Popularity with Trendlines', help=help_trendline)
-fig_scatter = px.scatter(
-    tracks_artists_grouped,
+plots.create_scatter_plot(
+    data=tracks_artists_grouped,
     x='Track Duration (minutes)',
     y='Track Popularity',
     color='Explicit Status',
     hover_data=['Track Name'],
     symbol='Explicit Status',
-    # marginal_x="histogram",
-    # marginal_y="rug",
-    # trendline="ols",
-    trendline="lowess",
-    opacity=0.5,
-    color_discrete_map={
+    color_map={
                 'Explicit': 'red',
                 'Non-Explicit': 'green'
             },
 )
-fig_scatter.update_traces(showlegend=True)
-fig_scatter.update_layout(
-    height=600,
-)
-st.plotly_chart(fig_scatter)
 
 show_explanation = st.checkbox('Show explanation', value=False)
 

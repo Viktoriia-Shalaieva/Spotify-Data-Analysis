@@ -264,77 +264,24 @@ within_three_std_dev = len(filtered_data
 
 if shapiro_p_value >= 0.05 and abs(skewness) <= 0.5:
     st.success("The data is approximately normally distributed. Building a histogram with standard deviations.")
-
-    fig_track_popularity = px.histogram(
-        filtered_data,
+    plots.create_histogram_normal_distribution(
+        data=filtered_data,
         x='Track Popularity',
-        nbins=20,
-        labels={'Track Popularity': 'Track Popularity'},
-        title=f"Track Popularity Distribution in Top 50 - {selected_country}",
-        opacity=0.7,
-        color_discrete_sequence=['#109618'],
-        )
-    fig_track_popularity.add_vline(
-        x=mean_popularity,
-        line_dash="dash",
-        line_color="red",
-        annotation_text=f"Mean: {mean_popularity:.2f}",
-        annotation_position="top right",
-        annotation_font_color="black"
-    )
-    fig_track_popularity.add_vline(
-        x=median_popularity,
-        line_dash="dot",
-        line_color="orange",
-        annotation_text=f"Median: {median_popularity:.2f}",
-        annotation_position="bottom left",
-        annotation_font_color="black",
-    )
-    fig_track_popularity.update_layout(
-        bargap=0.05,
-        yaxis=dict(showgrid=False),
-    )
-    fig_track_popularity.add_vrect(
-        x0=one_std_dev[0], x1=one_std_dev[1],
-        fillcolor="blue", opacity=0.1,
-        layer="below", line_width=0,
-        annotation_text="1 Std Dev",
-        annotation_position="top left",
-        annotation_font_color="black",
-    )
-    fig_track_popularity.add_vrect(
-        x0=two_std_dev[0], x1=two_std_dev[1],
-        fillcolor="green", opacity=0.1,
-        layer="below", line_width=0,
-        annotation_text="2 Std Dev",
-        annotation_position="top left",
-        annotation_font_color="black",
-    )
-    fig_track_popularity.add_vrect(
-        x0=three_std_dev[0], x1=three_std_dev[1],
-        fillcolor="yellow", opacity=0.1,
-        layer="below", line_width=0,
-        annotation_text="3 Std Dev",
-        annotation_position="top left",
-        annotation_font_color="black",
+        country=selected_country,
+        mean=mean_popularity,
+        median=median_popularity,
+        one_std_dev=one_std_dev,
+        two_std_dev=two_std_dev,
+        three_std_dev=three_std_dev,
     )
 
-    st.plotly_chart(fig_track_popularity)
 else:
     st.warning("The data is not normally distributed. Building a standard histogram.")
-
-    fig_tracks_popularity = px.histogram(
-        filtered_data,
+    plots.create_histogram(
+        data=filtered_data,
         x='Track Popularity',
-        nbins=20,
         title=f"Track Popularity Distribution in Top 50 - {selected_country}",
-        color_discrete_sequence=['#109618'],
     )
-    fig_tracks_popularity.update_layout(
-        bargap=0.05,
-        yaxis=dict(showgrid=False),
-    )
-    st.plotly_chart(fig_tracks_popularity)
 
 show_explanation = st.checkbox('Show explanation', value=False, key='histogram_explanation_checkbox')
 
@@ -345,7 +292,7 @@ if show_explanation:
             ### Statistical Analysis of Track Popularity
             
             - **Shapiro-Wilk Test for Normality**:
-              - **Statistic (`shapiro_stat`)**: {shapiro_stat:.4f}
+              - **Test Statistic (W)**: {shapiro_stat:.4f}
                 - Values close to **1** indicate that the data closely follows a normal distribution.
                 - Values close to **0** suggest significant deviations from normality.
                 
@@ -380,7 +327,7 @@ if show_explanation:
         st.info(f"""
             ### Statistical Analysis of Track Popularity
             - **Shapiro-Wilk Test for Normality**:
-              - **Statistic (`shapiro_stat`)**: {shapiro_stat:.4f}
+              - **Test Statistic (W)**: {shapiro_stat:.4f}
                 - Values close to **1** indicate that the data closely follows a normal distribution.
                 - Values close to **0** suggest significant deviations from normality.
                 

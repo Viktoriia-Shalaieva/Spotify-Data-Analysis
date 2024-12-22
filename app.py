@@ -24,7 +24,7 @@ playlists_all = config['playlists']
 
 with open('config/path_config.yaml', 'r') as config_file:
     path_config = yaml.safe_load(config_file)
-#
+
 data_dir = path_config['data_dir'][0]
 raw_dir = path_config['raw_dir'][0]
 genres_dir = path_config['genres_dir'][0]

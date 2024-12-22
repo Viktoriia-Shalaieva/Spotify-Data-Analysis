@@ -33,7 +33,7 @@ def create_bar_plot(data, x, y, orientation="v", text=None, showticklabels=False
 
 def create_choropleth_map(data, locations, location_mode, color, title=None, hover_name=None,
                           color_discrete_sequence=None, color_continuous_scale=None, labels=None,
-                          legend_title=None, width=1200, height=600, **kwargs):
+                          legend_title=None, width=1400, height=800, **kwargs):
     fig = px.choropleth(
         data,
         locations=locations,
@@ -88,14 +88,30 @@ def create_bubble_plot(data, x, y, size, color=None, text=None, yaxis_title=None
     st.plotly_chart(fig)
 
 
-def create_histogram(data, x, nbins=10, color=None, labels=None, yaxis_title='Count',
-                     **kwargs):
+def create_scatter_plot(data, x, y, color, hover_data, symbol, color_map):
+    fig = px.scatter(
+        data,
+        x=x,
+        y=y,
+        color=color,
+        hover_data=hover_data,
+        symbol=symbol,
+        trendline="lowess",
+        opacity=0.5,
+        color_discrete_map=color_map,
+    )
+    fig.update_traces(showlegend=True)
+    fig.update_layout(height=600)
+
+    st.plotly_chart(fig)
+
+
+def create_histogram(data, x, nbins=10, color=None, yaxis_title='Count', **kwargs):
     fig = px.histogram(
         data,
         x=x,
         color=color,
         nbins=nbins,
-        labels=labels,
         barmode='overlay' if color else 'group',
         color_discrete_sequence=['#109618'],
         **kwargs
@@ -104,6 +120,69 @@ def create_histogram(data, x, nbins=10, color=None, labels=None, yaxis_title='Co
         yaxis_title=yaxis_title,
         bargap=0.05,
         yaxis=dict(showgrid=False),
+    )
+    st.plotly_chart(fig)
+
+
+def create_histogram_normal_distribution(data, x, country, mean, median, one_std_dev, two_std_dev,
+                                         three_std_dev, nbins=10, yaxis_title='Count', **kwargs):
+    fig = px.histogram(
+        data,
+        x=x,
+        nbins=nbins,
+        title=f"Track Popularity Distribution in Top 50 - {country}",
+        opacity=0.7,
+        color_discrete_sequence=['#109618'],
+        **kwargs
+    )
+    fig.update_layout(
+        yaxis_title=yaxis_title,
+        bargap=0.05,
+        yaxis=dict(showgrid=False),
+    )
+    fig.add_vline(
+        x=mean,
+        line_dash="dash",
+        line_color="red",
+        annotation_text=f"Mean: {mean:.2f}",
+        annotation_position="top right",
+        annotation_font_color="black"
+    )
+    fig.add_vline(
+        x=median,
+        line_dash="dot",
+        line_color="orange",
+        annotation_text=f"Median: {median:.2f}",
+        annotation_position="bottom left",
+        annotation_font_color="black",
+    )
+    fig.update_layout(
+        bargap=0.05,
+        yaxis=dict(showgrid=False),
+    )
+    fig.add_vrect(
+        x0=one_std_dev[0], x1=one_std_dev[1],
+        fillcolor="blue", opacity=0.1,
+        layer="below", line_width=0,
+        annotation_text="1 Std Dev",
+        annotation_position="top left",
+        annotation_font_color="black",
+    )
+    fig.add_vrect(
+        x0=two_std_dev[0], x1=two_std_dev[1],
+        fillcolor="green", opacity=0.1,
+        layer="below", line_width=0,
+        annotation_text="2 Std Dev",
+        annotation_position="top left",
+        annotation_font_color="black",
+    )
+    fig.add_vrect(
+        x0=three_std_dev[0], x1=three_std_dev[1],
+        fillcolor="yellow", opacity=0.1,
+        layer="below", line_width=0,
+        annotation_text="3 Std Dev",
+        annotation_position="top left",
+        annotation_font_color="black",
     )
     st.plotly_chart(fig)
 
