@@ -1,69 +1,24 @@
-20-Dec-24 15:58:37 [DEBUG] Starting new HTTPS connection (1): accounts.spotify.com:443
-20-Dec-24 15:58:37 [DEBUG] https://accounts.spotify.com:443 "POST /api/token HTTP/11" 200 None
-20-Dec-24 15:58:37 [INFO] Access token retrieved successfully
-20-Dec-24 15:58:37 [INFO] Spotify API token: BQApPRUDbgxKl0ZkhQaOTRbLchVWkCdbfRkG2a9NcP4gB1EwOYnlNEsbIkASRJopOQclzT1QWTl7VQITEqw-IyKsqJCJ6TYJPRxq6PMAiq95PH7qhJw
-20-Dec-24 15:58:37 [INFO] Discogs API token: EaALIPVnUVkCSfqeUhhWzcdXZfgXNvERIHfabBFh
-20-Dec-24 15:58:37 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
-20-Dec-24 15:58:37 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbMDoHDwVN2tF HTTP/11" 404 None
-20-Dec-24 15:58:37 [INFO] Playlist information retrieved successfully
-20-Dec-24 15:58:37 [INFO] Playlist 'Top 50 - Global' saved successfully
-20-Dec-24 15:58:37 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
-20-Dec-24 15:58:38 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbLRQDuF5jeBp HTTP/11" 404 None
-20-Dec-24 15:58:38 [INFO] Playlist information retrieved successfully
-20-Dec-24 15:58:38 [INFO] Playlist 'Top 50 - USA' saved successfully
-20-Dec-24 15:58:38 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
-20-Dec-24 15:58:38 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbKj23U1GF4IR HTTP/11" 404 None
-20-Dec-24 15:58:38 [INFO] Playlist information retrieved successfully
-20-Dec-24 15:58:38 [INFO] Playlist 'Top 50 - Canada' saved successfully
-20-Dec-24 15:58:38 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
-20-Dec-24 15:58:39 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbMXbN3EUUhlg HTTP/11" 404 None
-20-Dec-24 15:58:39 [INFO] Playlist information retrieved successfully
-20-Dec-24 15:58:39 [INFO] Playlist 'Top 50 - Brazil' saved successfully
-20-Dec-24 15:58:39 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
-20-Dec-24 15:58:39 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbMMy2roB9myp HTTP/11" 404 None
-20-Dec-24 15:58:39 [INFO] Playlist information retrieved successfully
-20-Dec-24 15:58:39 [INFO] Playlist 'Top 50 - Argentina' saved successfully
-20-Dec-24 15:58:39 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
-20-Dec-24 15:58:40 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbJiZcmkrIHGU HTTP/11" 404 None
-20-Dec-24 15:58:40 [INFO] Playlist information retrieved successfully
-20-Dec-24 15:58:40 [INFO] Playlist 'Top 50 - Germany' saved successfully
-20-Dec-24 15:58:40 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
-20-Dec-24 15:58:40 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbIPWwFssbupI HTTP/11" 404 None
-20-Dec-24 15:58:40 [INFO] Playlist information retrieved successfully
-20-Dec-24 15:58:40 [INFO] Playlist 'Top 50 - France' saved successfully
-20-Dec-24 15:58:40 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
-20-Dec-24 15:58:41 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbNFJfN1Vw8d9 HTTP/11" 404 None
-20-Dec-24 15:58:41 [INFO] Playlist information retrieved successfully
-20-Dec-24 15:58:41 [INFO] Playlist 'Top 50 - Spain' saved successfully
-20-Dec-24 15:58:41 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
-20-Dec-24 15:58:41 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbKkidEfWYRuD HTTP/11" 404 None
-20-Dec-24 15:58:41 [INFO] Playlist information retrieved successfully
-20-Dec-24 15:58:41 [INFO] Playlist 'Top 50 - Ukraine' saved successfully
-20-Dec-24 15:58:41 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
-20-Dec-24 15:58:42 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbMH2jvi6jvjk HTTP/11" 404 None
-20-Dec-24 15:58:42 [INFO] Playlist information retrieved successfully
-20-Dec-24 15:58:42 [INFO] Playlist 'Top 50 - South Africa' saved successfully
-20-Dec-24 15:58:42 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
-20-Dec-24 15:58:42 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbM4UZuIrvHvA HTTP/11" 404 None
-20-Dec-24 15:58:42 [INFO] Playlist information retrieved successfully
-20-Dec-24 15:58:42 [INFO] Playlist 'Top 50 - UAE' saved successfully
-20-Dec-24 15:58:42 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
-20-Dec-24 15:58:42 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbNxXF4SkHj9F HTTP/11" 404 None
-20-Dec-24 15:58:42 [INFO] Playlist information retrieved successfully
-20-Dec-24 15:58:42 [INFO] Playlist 'Top 50 - South Korea' saved successfully
-20-Dec-24 15:58:42 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
-20-Dec-24 15:58:43 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbLZ52XmnySJg HTTP/11" 404 None
-20-Dec-24 15:58:43 [INFO] Playlist information retrieved successfully
-20-Dec-24 15:58:43 [INFO] Playlist 'Top 50 - India' saved successfully
-20-Dec-24 15:58:43 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
-20-Dec-24 15:58:43 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbLnolsZ8PSNw HTTP/11" 404 None
-20-Dec-24 15:58:43 [INFO] Playlist information retrieved successfully
-20-Dec-24 15:58:43 [INFO] Playlist 'Top 50 - United Kingdom' saved successfully
-20-Dec-24 15:58:43 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
-20-Dec-24 15:58:44 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbKY7jLzlJ11V HTTP/11" 404 None
-20-Dec-24 15:58:44 [INFO] Playlist information retrieved successfully
-20-Dec-24 15:58:44 [INFO] Playlist 'Top 50 - Nigeria' saved successfully
-20-Dec-24 15:58:44 [DEBUG] Starting new HTTPS connection (1): api.spotify.com:443
-20-Dec-24 15:58:44 [DEBUG] https://api.spotify.com:443 "GET /v1/playlists/37i9dQZEVXbMDoHDwVN2tF HTTP/11" 404 None
-20-Dec-24 15:58:44 [INFO] Playlist information retrieved successfully
-20-Dec-24 15:58:44 [INFO] Retrieving playlist data for playlist ID: 37i9dQZEVXbMDoHDwVN2tF
+24-Dec-24 15:10:35 [INFO] Access token retrieved successfully
+24-Dec-24 15:10:35 [INFO] Spotify API token: BQCEy67M0cW2MzMvNeIvn0DOi68Rpji7tt8pSlFLAQ9NH-1s59M8WSsjJ-agxmhQhh59Egur4EMMsKoL-_cwl4QBxvwJ-Z42BUccc-7WW_WUQZmWjmo
+24-Dec-24 15:10:35 [INFO] Discogs API token: EaALIPVnUVkCSfqeUhhWzcdXZfgXNvERIHfabBFh
+24-Dec-24 15:10:36 [INFO] Status code for 37i9dQZEVXbMDoHDwVN2tF: 404
+24-Dec-24 15:10:36 [INFO] Status code for 37i9dQZEVXbLRQDuF5jeBp: 404
+24-Dec-24 15:10:36 [INFO] Status code for 37i9dQZEVXbKj23U1GF4IR: 404
+24-Dec-24 15:10:37 [INFO] Status code for 37i9dQZEVXbMXbN3EUUhlg: 404
+24-Dec-24 15:10:37 [INFO] Status code for 37i9dQZEVXbMMy2roB9myp: 404
+24-Dec-24 15:10:38 [INFO] Status code for 37i9dQZEVXbJiZcmkrIHGU: 404
+24-Dec-24 15:10:38 [INFO] Status code for 37i9dQZEVXbIPWwFssbupI: 404
+24-Dec-24 15:10:39 [INFO] Status code for 37i9dQZEVXbNFJfN1Vw8d9: 404
+24-Dec-24 15:10:39 [INFO] Status code for 37i9dQZEVXbKkidEfWYRuD: 404
+24-Dec-24 15:10:40 [INFO] Status code for 37i9dQZEVXbMH2jvi6jvjk: 404
+24-Dec-24 15:10:40 [INFO] Status code for 37i9dQZEVXbM4UZuIrvHvA: 404
+24-Dec-24 15:10:41 [INFO] Status code for 37i9dQZEVXbNxXF4SkHj9F: 404
+24-Dec-24 15:10:41 [INFO] Status code for 37i9dQZEVXbLZ52XmnySJg: 404
+24-Dec-24 15:10:42 [INFO] Status code for 37i9dQZEVXbLnolsZ8PSNw: 404
+24-Dec-24 15:10:42 [INFO] Status code for 37i9dQZEVXbKY7jLzlJ11V: 404
+24-Dec-24 15:10:42 [INFO] Not all status codes are 200. Downloading preprocessed data from S3 instead.
+24-Dec-24 15:10:43 [INFO] File 'data/preprocessed/albums.csv' has been downloaded from bucket 'project-spotify-analysis-data' to local path 'data/preprocessed/albums.csv'.
+24-Dec-24 15:10:43 [INFO] File 'data/preprocessed/artists_genres_full_unknown.csv' has been downloaded from bucket 'project-spotify-analysis-data' to local path 'data/preprocessed/artists_genres_full_unknown.csv'.
+24-Dec-24 15:10:43 [INFO] File 'data/preprocessed/playlists.csv' has been downloaded from bucket 'project-spotify-analysis-data' to local path 'data/preprocessed/playlists.csv'.
+24-Dec-24 15:10:44 [INFO] File 'data/preprocessed/tracks.csv' has been downloaded from bucket 'project-spotify-analysis-data' to local path 'data/preprocessed/tracks.csv'.
+24-Dec-24 15:10:47 [INFO] 'data/genres/genres.yaml' has been uploaded to bucket 'project-spotify-analysis-data' as 'data/genres/genres.yaml'.

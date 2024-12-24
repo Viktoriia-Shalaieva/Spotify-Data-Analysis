@@ -203,8 +203,8 @@ Classical:
 - historically informed performance
 - german literature
 - nordic contemporary classical
-- australian classical
 - mexican classical
+- australian classical
 - british classical piano
 - classical trumpet
 - acousmatic
@@ -734,9 +734,9 @@ Electronic:
 - tech house
 - melodic house
 - sad lo-fi
-- corecore
 - drift phonk
 - lo-fi beats
+- corecore
 - slap house
 - progressive house
 - hip house
@@ -771,10 +771,10 @@ Electronic:
 - dancefloor dnb
 - charva
 - bubble trance
+- rally house
 - russelater
 - japanese vgm
 - vocal house
-- rally house
 - focus beats
 - traprun
 - dubstep
@@ -1393,12 +1393,12 @@ Folk/Acoustic:
 - asheville indie
 - italian folk
 - dong-yo
-- swiss indie folk
 - swiss folk
 - basque folk
 - romanian folk
 - michigan indie
 - flemish folk
+- swiss indie folk
 - armenian folk
 - spanish folk
 - garage psych
@@ -1677,6 +1677,7 @@ Hip Hop:
 - thai hip hop
 - punjabi hip hop
 - old school atlanta hip hop
+- nerdcore brasileiro
 - greek hip hop
 - swedish pop rap
 - latin viral rap
@@ -1687,8 +1688,8 @@ Hip Hop:
 - kazakh hip hop
 - urdu hip hop
 - venezuelan hip hop
-- experimental hip hop
 - south african hip hop
+- experimental hip hop
 - canadian trap
 - golden age hip hop
 - political hip hop
@@ -1812,8 +1813,8 @@ Hip Hop:
 - palestinian alternative
 - balkan hip hop
 - lithuanian trap
-- slovak trap
 - croatian hip hop
+- slovak trap
 - south african underground rap
 - soul flow
 - palestinian hip hop
@@ -2003,41 +2004,41 @@ Hip Hop:
 - nu electro
 - irish underground rap
 - outer hip hop
-- west-vlaamse hip hop
-- futuristic swag
-- maltese hip hop
-- lao hip hop
-- vapor trap
-- mississippi hip hop
-- belarusian hip hop
-- marathi hip hop
-- swazi hip hop
-- turkmen hip hop
-- libyan hip hop
-- old school nederhop
-- kyrgyz hip hop
+- military cadence
 - vaportrap
 - jamaican hip hop
-- austin hip hop
-- khmer
-- assamese hip hop
-- kikuyu gospel
-- chip hop
-- irish trap
-- iowa hip hop
-- proto-rap
-- idaho hip hop
 - hawaiian indie
-- goa hip hop
-- tibetan hip hop
-- dungeon rap
-- hip hop cubano
-- tamaulipas rap
-- spoken word
-- kansas hip hop
-- sesotho hip hop
-- military cadence
 - lapland hip hop
+- hip hop cubano
+- austin hip hop
+- libyan hip hop
+- iowa hip hop
+- irish trap
+- mississippi hip hop
+- kansas hip hop
+- tamaulipas rap
+- turkmen hip hop
+- swazi hip hop
+- khmer
+- goa hip hop
+- kikuyu gospel
+- west-vlaamse hip hop
+- sesotho hip hop
+- futuristic swag
+- old school nederhop
+- proto-rap
+- tibetan hip hop
+- maltese hip hop
+- spoken word
+- belarusian hip hop
+- lao hip hop
+- assamese hip hop
+- chip hop
+- idaho hip hop
+- kyrgyz hip hop
+- vapor trap
+- dungeon rap
+- marathi hip hop
 Jazz:
 - jazz
 - vocal jazz
@@ -2547,8 +2548,8 @@ Latin:
 - nova musica paulista
 - neotango
 - orquesta tipica
-- brazilian percussion
 - mexican pop punk
+- brazilian percussion
 - mestissatge
 - son cubano
 - ska chileno
@@ -2563,12 +2564,12 @@ Latin:
 - folklore nuevo argentino
 - nuevo flamenco
 - piano mpb
-- musica maranhense
 - musica catarinense
 - samba paulista
 - banda peruana
 - guadalajara indie
 - sanfona
+- musica maranhense
 - jazz cubano
 - nueva ola peruana
 - musica popular uruguaya
@@ -2619,8 +2620,8 @@ Latin:
 - indie rock colombiano
 - musica popular mineira
 - punk colombiano
-- indie cantabria
 - post-punk mexicano
+- indie cantabria
 - street punk espanol
 - guitarra argentina
 - reggae tico
@@ -2867,7 +2868,6 @@ Metal:
 - progressive post-hardcore
 - brutal death metal
 - comic metal
-- nerdcore brasileiro
 - sludge metal
 - melodic metal
 - heavy metal
@@ -3131,8 +3131,8 @@ Metal:
 - austrian punk
 - folk metal latinoamericano
 - death doom
-- quebec death metal
 - epic doom
+- quebec death metal
 - symphonic melodic death metal
 - dissonant death metal
 - dutch death metal
@@ -3217,8 +3217,8 @@ Metal:
 - melodic progressive metal
 - italian black metal
 - gothic doom
-- native american metal
 - irish metal
+- native american metal
 - christian deathcore
 - brazilian black metal
 - russian folk metal
@@ -3229,8 +3229,8 @@ Metal:
 - japanese black metal
 - deep hardcore punk
 - funeral doom
-- chinese metal
 - christian symphonic metal
+- chinese metal
 - portuguese metal
 - war metal
 - belarusian metal
@@ -3239,8 +3239,8 @@ Metal:
 - belgian hardcore
 - dark black metal
 - latin american heavy psych
-- grisly death metal
 - minnesota metal
+- grisly death metal
 - progressive technical death metal
 - australian thrash metal
 - indian metal
@@ -3889,8 +3889,8 @@ Pop:
 - classic norwegian pop
 - classic belgian pop
 - belgian dance
-- kazakh viral pop
 - k-pop ballad
+- kazakh viral pop
 - thai viral pop
 - icelandic pop
 - khaliji
@@ -4676,8 +4676,8 @@ Rock:
 - nu gaze
 - punk rock
 - classic indonesian rock
-- dreamo
 - hyper-rock
+- dreamo
 - canadian rock
 - spanish rock
 - canadian indie
@@ -4868,8 +4868,8 @@ Rock:
 - portland indie
 - london indie
 - melbourne indie
-- gainesville indie
 - czech folk rock
+- gainesville indie
 - power blues-rock
 - space rock
 - manchester indie
@@ -4886,6 +4886,7 @@ Rock:
 - modern southern rock
 - puerto rican rock
 - magyar mulatos
+- vocaloid rock
 - dc hardcore
 - grebo
 - power-pop punk
@@ -4894,7 +4895,6 @@ Rock:
 - rock independant francais
 - reading indie
 - toronto indie
-- vocaloid rock
 - uk post-hardcore
 - norwegian folk rock
 - scottish indie
@@ -4941,8 +4941,8 @@ Rock:
 - olympia wa indie
 - deep christian rock
 - dutch prog
-- rock viet
 - ecuadorian alternative rock
+- rock viet
 - detroit rock
 - miami indie
 - jazz rock
@@ -4955,10 +4955,10 @@ Rock:
 - swiss alternative rock
 - comedy rock
 - japanese indie rock
-- irish indie rock
-- swedish garage rock
-- pinoy alternative rock
 - nottingham indie
+- pinoy alternative rock
+- swedish garage rock
+- irish indie rock
 - estonian rock
 - swiss singer-songwriter
 - neo-rockabilly
@@ -4987,8 +4987,8 @@ Rock:
 - sheffield indie
 - american post-rock
 - indie rock italiano
-- rock mineiro
 - perth indie
+- rock mineiro
 - birmingham indie
 - minneapolis punk
 - spanish folk rock
@@ -5068,8 +5068,8 @@ Rock:
 - chinese indie rock
 - australian shoegaze
 - scottish hush
-- traditional ska
 - bern indie
+- traditional ska
 - swedish stoner rock
 - bogor indie
 - modern progressive rock
@@ -5438,11 +5438,11 @@ World/Traditional:
 - naija old school
 - zimdancehall
 - ecuadorian indie
+- dalarna indie
 - ghanaian gospel
 - rap ivoire
 - reggae maghreb
 - svensk progg
-- dalarna indie
 - candomble
 - irish neo-traditional
 - qawwali

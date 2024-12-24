@@ -1,10 +1,18 @@
 import boto3
 import os
 from logs.logger_config import logger
+from source import utils
 
+
+aws_secrets = utils.get_secrets('aws')
 
 # Create S3 resource
-s3 = None
+s3 = boto3.resource(
+   service_name='s3',
+   region_name='eu-central-1',
+   aws_access_key_id=aws_secrets.get('aws_access_key_id'),
+   aws_secret_access_key=aws_secrets.get('aws_secret_access_key'),
+)
 
 
 def upload_to_s3(file_name, bucket_name, s3_key):
