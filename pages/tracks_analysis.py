@@ -7,8 +7,6 @@ import os
 import plotly.express as px
 
 
-
-
 components.set_page_layout()
 st.sidebar.markdown("**Tracks Analysis** 🎵")
 

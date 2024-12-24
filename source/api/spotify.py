@@ -34,6 +34,25 @@ def get_spotify_access_token():
     return None
 
 
+def get_playlist_status_code(token, playlists_id):
+    status_codes = []
+    for playlist_id in playlists_id:
+        url_base = "https://api.spotify.com/v1/playlists/"
+        url = urljoin(url_base, playlist_id)
+        headers = {
+            "Authorization": f"Bearer {token}"
+        }
+        try:
+            response = requests.get(url, headers=headers)
+            status_code = response.status_code
+            status_codes.append(status_code)
+            logger.info(f'Status code for {playlist_id}: {response.status_code}')
+        except Exception as error_message:
+            logger.error(f"Failed to retrieve playlist {playlist_id}: {error_message}")
+    logger.debug(status_codes)
+    return status_codes
+
+
 def get_playlist(access_token, playlist_id):
     playlist_info = None
     url_base = "https://api.spotify.com/v1/playlists/"

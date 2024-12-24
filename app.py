@@ -1,8 +1,10 @@
 from pprint import pprint
 import pandas as pd
+
 from source.api import spotify
 from source.web_scraping import chosic
 from source.preprocessing import data_prep
+from services import s3_operations
 import yaml
 from logs.logger_config import logger
 import os
@@ -16,6 +18,8 @@ logger.info(f"Spotify API token: {spotify_api_token}")
 
 discogs_api_token = 'EaALIPVnUVkCSfqeUhhWzcdXZfgXNvERIHfabBFh'
 logger.info(f"Discogs API token: {discogs_api_token}")
+
+bucket_name = 'project-spotify-analysis-data'
 
 with open('config/config.yaml', 'r') as file:
     config = yaml.safe_load(file)
@@ -41,111 +45,166 @@ tracks_path = str(file_paths['tracks.csv'])
 
 genres_path = os.path.join(genres_dir, 'genres.yaml')
 
-playlist_data = spotify.get_save_playlist(spotify_api_token, playlists_all, raw_dir)
+playlists_id = list(playlists_all.values())
+# spotify.get_playlist_status_code(spotify_api_token, playlists_id)
 
-playlists_ids = list(playlists_all.values())
-playlists = data_prep.create_all_playlists_table(spotify_api_token, playlists_ids)
-logger.debug(playlists)
+status_codes = spotify.get_playlist_status_code(spotify_api_token, playlists_id)
 
-playlists.to_csv(playlists_path, index=False, sep="~")
-logger.info(f"Playlists data saved to {playlists_path}")
+if all(code == 200 for code in status_codes):
+    logger.info("All status codes are 200. Proceeding with fetching and preprocessing data from Spotify API.")
+    playlist_data = spotify.get_save_playlist(spotify_api_token, playlists_all, raw_dir)
 
-playlists_table = pd.read_csv(playlists_path, sep="~")
-logger.debug(type(playlists_table['artist_id']))
+    playlists_ids = list(playlists_all.values())
+    playlists = data_prep.create_all_playlists_table(spotify_api_token, playlists_ids)
+    logger.debug(playlists)
 
-album_ids = set(playlists_table['album_id'])
-artist_ids = set(playlists_table['artist_id'])
-track_ids = set(playlists_table['track_id'])
+    playlists.to_csv(playlists_path, index=False, sep="~")
+    logger.info(f"Playlists data saved to {playlists_path}")
 
-albums = data_prep.create_albums_table(spotify_api_token, album_ids)
-logger.debug(albums)
+    playlists_table = pd.read_csv(playlists_path, sep="~")
+    logger.debug(type(playlists_table['artist_id']))
 
-albums.to_csv(albums_path, index=False, sep="~")
-logger.info(f"Albums data saved to {albums_path}")
+    album_ids = set(playlists_table['album_id'])
+    artist_ids = set(playlists_table['artist_id'])
+    track_ids = set(playlists_table['track_id'])
 
-artists = data_prep.create_artists_table(spotify_api_token, artist_ids)
-logger.debug(artists)
+    albums = data_prep.create_albums_table(spotify_api_token, album_ids)
+    logger.debug(albums)
 
-artists.to_csv(artists_path, index=False, sep="~")
-logger.info(f"Artists data saved to {artists_path}")
+    albums.to_csv(albums_path, index=False, sep="~")
+    logger.info(f"Albums data saved to {albums_path}")
 
-tracks = data_prep.create_tracks_table(spotify_api_token, track_ids)
-logger.debug(tracks)
+    artists = data_prep.create_artists_table(spotify_api_token, artist_ids)
+    logger.debug(artists)
 
-tracks.to_csv(tracks_path, index=False, sep="~")
-logger.info(f"Tracks data saved to {tracks_path}")
+    artists.to_csv(artists_path, index=False, sep="~")
+    logger.info(f"Artists data saved to {artists_path}")
 
-artists = pd.read_csv(artists_path, sep="~")
-logger.debug(artists)
+    tracks = data_prep.create_tracks_table(spotify_api_token, track_ids)
+    logger.debug(tracks)
 
-empty_genre_count_art = (artists['artist_genres'] == '[]').sum()
-logger.info(f"Number of empty artist genres in artists.csv: {empty_genre_count_art}")
+    tracks.to_csv(tracks_path, index=False, sep="~")
+    logger.info(f"Tracks data saved to {tracks_path}")
 
-artists_genres_discogs = data_prep.create_artist_genre_table(artists, discogs_api_token)
-logger.debug(artists_genres_discogs)
+    artists = pd.read_csv(artists_path, sep="~")
+    logger.debug(artists)
 
-artists_genres_discogs.to_csv(artists_genres_discogs_path, index=False, sep="~")
+    empty_genre_count_art = (artists['artist_genres'] == '[]').sum()
+    logger.info(f"Number of empty artist genres in artists.csv: {empty_genre_count_art}")
 
-artists_genres_discogs = pd.read_csv(artists_genres_discogs_path, sep="~")
+    artists_genres_discogs = data_prep.create_artist_genre_table(artists, discogs_api_token)
+    logger.debug(artists_genres_discogs)
 
-empty_artists_genres_count = (artists_genres_discogs['artist_genre'] == '[]').sum()
-logger.info(f"Number of empty genres in artists_genres_discogs.csv: {empty_artists_genres_count}")
+    artists_genres_discogs.to_csv(artists_genres_discogs_path, index=False, sep="~")
 
-artists['artist_genres'] = artists['artist_genres'].replace('[]', pd.NA)
+    artists_genres_discogs = pd.read_csv(artists_genres_discogs_path, sep="~")
 
-artists = artists.merge(artists_genres_discogs, on='artist_name', how='left')
-logger.debug(artists)
-artists['artist_genres'] = artists['artist_genres'].fillna(artists['artist_genre'])
-artists = artists.drop(columns=['artist_genre'])
-artists.to_csv(artists_genres_full_path, index=False, sep="~")
+    empty_artists_genres_count = (artists_genres_discogs['artist_genre'] == '[]').sum()
+    logger.info(f"Number of empty genres in artists_genres_discogs.csv: {empty_artists_genres_count}")
 
-artists['artist_genres'] = artists['artist_genres'].replace('[]', 'unknown genre')
+    artists['artist_genres'] = artists['artist_genres'].replace('[]', pd.NA)
 
-artists.to_csv(artists_genres_full_unknown_path, index=False, sep="~")
-logger.debug(artists)
+    artists = artists.merge(artists_genres_discogs, on='artist_name', how='left')
+    logger.debug(artists)
+    artists['artist_genres'] = artists['artist_genres'].fillna(artists['artist_genre'])
+    artists = artists.drop(columns=['artist_genre'])
+    artists.to_csv(artists_genres_full_path, index=False, sep="~")
 
-artists_genres_full_unknown = pd.read_csv(artists_genres_full_unknown_path, sep="~")
-empty_genre_count_art = (artists_genres_full_unknown['artist_genres'] == 'unknown genre').sum()
-logger.info(f"Number of empty artist genres in artists_genre_full.csv: {empty_genre_count_art}")
+    artists['artist_genres'] = artists['artist_genres'].replace('[]', 'unknown genre')
 
-albums_table = pd.read_csv(albums_path, sep='~')
-artists_genres_full = pd.read_csv(artists_genres_full_path, sep='~')
-tracks_table = pd.read_csv(tracks_path, sep='~')
+    artists.to_csv(artists_genres_full_unknown_path, index=False, sep="~")
+    logger.debug(artists)
 
-logger.debug(albums_table.info())
-logger.debug(artists.info())
-logger.debug(artists_genres_discogs.info())
-logger.debug(artists_genres_full.info())
-logger.debug(artists_genres_full_unknown.info())
-logger.debug(playlists_table.info())
-logger.debug(tracks_table.info())
+    artists_genres_full_unknown = pd.read_csv(artists_genres_full_unknown_path, sep="~")
+    empty_genre_count_art = (artists_genres_full_unknown['artist_genres'] == 'unknown genre').sum()
+    logger.info(f"Number of empty artist genres in artists_genre_full.csv: {empty_genre_count_art}")
 
-# Use the .apply() method to apply the eval function to each element in the 'artist_genres' column
-# The eval function converts the string representation of lists back into actual Python lists
-artists_genres_full['artist_genres'] = artists_genres_full['artist_genres'].apply(eval)
+    albums_table = pd.read_csv(albums_path, sep='~')
+    artists_genres_full = pd.read_csv(artists_genres_full_path, sep='~')
+    tracks_table = pd.read_csv(tracks_path, sep='~')
 
-unique_genres = set()
-for genres in artists_genres_full['artist_genres'].dropna():
-    unique_genres.update(genres)
+    logger.debug(albums_table.info())
+    logger.debug(artists.info())
+    logger.debug(artists_genres_discogs.info())
+    logger.debug(artists_genres_full.info())
+    logger.debug(artists_genres_full_unknown.info())
+    logger.debug(playlists_table.info())
+    logger.debug(tracks_table.info())
 
-unique_genres_list = sorted(unique_genres)
+    # Use the .apply() method to apply the eval function to each element in the 'artist_genres' column
+    # The eval function converts the string representation of lists back into actual Python lists
+    artists_genres_full['artist_genres'] = artists_genres_full['artist_genres'].apply(eval)
 
-logger.debug(unique_genres_list)
-num_unique_genres = len(unique_genres_list)
-logger.debug(num_unique_genres)
+    unique_genres = set()
+    for genres in artists_genres_full['artist_genres'].dropna():
+        unique_genres.update(genres)
 
-logger.debug(random.choice(unique_genres_list))
+    unique_genres_list = sorted(unique_genres)
 
-artists_genres_full['artist_genres'] = artists_genres_full['artist_genres'].apply(
-    lambda x: random.choice(unique_genres_list) if (isinstance(x, list) and len(x) == 0) else x
-)
-logger.debug(artists_genres_full)
-logger.debug(artists_genres_full.info())
+    logger.debug(unique_genres_list)
+    num_unique_genres = len(unique_genres_list)
+    logger.debug(num_unique_genres)
 
-artists_genres_full.to_csv(artists_genres_full_random_path, index=False, sep="~")
+    logger.debug(random.choice(unique_genres_list))
+
+    artists_genres_full['artist_genres'] = artists_genres_full['artist_genres'].apply(
+        lambda x: random.choice(unique_genres_list) if (isinstance(x, list) and len(x) == 0) else x
+    )
+    logger.debug(artists_genres_full)
+    logger.debug(artists_genres_full.info())
+
+    artists_genres_full.to_csv(artists_genres_full_random_path, index=False, sep="~")
+
+    s3_operations.upload_to_s3(
+        file_name="data/preprocessed/albums.csv",
+        bucket_name=bucket_name,
+        s3_key="data/preprocessed/albums.csv")
+
+    s3_operations.upload_to_s3(
+        file_name="data/preprocessed/artists_genres_full_unknown.csv",
+        bucket_name=bucket_name,
+        s3_key="data/preprocessed/artists_genres_full_unknown.csv")
+
+    s3_operations.upload_to_s3(
+        file_name="data/preprocessed/playlists.csv",
+        bucket_name=bucket_name,
+        s3_key="data/preprocessed/playlists.csv")
+
+    s3_operations.upload_to_s3(
+        file_name="data/preprocessed/tracks.csv",
+        bucket_name=bucket_name,
+        s3_key="data/preprocessed/tracks.csv")
+
+else:
+    logger.info("Not all status codes are 200. Downloading preprocessed data from S3 instead.")
+    s3_operations.download_from_s3(
+        file_name="data/preprocessed/albums.csv",
+        bucket_name=bucket_name,
+        s3_key="data/preprocessed/albums.csv")
+
+    s3_operations.download_from_s3(
+        file_name="data/preprocessed/artists_genres_full_unknown.csv",
+        bucket_name=bucket_name,
+        s3_key="data/preprocessed/artists_genres_full_unknown.csv")
+
+    s3_operations.download_from_s3(
+        file_name="data/preprocessed/playlists.csv",
+        bucket_name=bucket_name,
+        s3_key="data/preprocessed/playlists.csv")
+
+    s3_operations.download_from_s3(
+        file_name="data/preprocessed/tracks.csv",
+        bucket_name=bucket_name,
+        s3_key="data/preprocessed/tracks.csv")
+
 
 genres = chosic.get_genres()
 logger.debug(genres)
 
 with open(genres_path, 'w', encoding='utf-8') as file:
     yaml.dump(genres, file, default_flow_style=False, allow_unicode=True)
+
+s3_operations.upload_to_s3(
+        file_name="data/genres/genres.yaml",
+        bucket_name=bucket_name,
+        s3_key="data/genres/genres.yaml")
