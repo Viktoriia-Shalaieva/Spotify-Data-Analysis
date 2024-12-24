@@ -31,15 +31,3 @@ def download_from_s3(file_name, bucket_name, s3_key):
         logger.info(f"File '{s3_key}' has been downloaded from bucket '{bucket_name}' to local path '{file_name}'.")
     except Exception as e:
         logger.error(f"Error downloading file: {e}")
-
-
-# download_from_s3(file_name=file_name, bucket_name=bucket_name, s3_key=s3_key)
-
-
-# # Access the bucket
-# bucket = s3.Bucket(bucket_name)
-#
-# # Print all files and folders
-# logger.info(f"Files and folders in the bucket '{bucket_name}':")
-# for obj in bucket.objects.all():
-#     logger.info(obj.key)

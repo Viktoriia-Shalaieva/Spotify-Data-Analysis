@@ -1,5 +1,5 @@
 import streamlit as st
-from modules import components
+from streamlit_utils import layouts
 
 
 components.set_page_layout()
