@@ -1,14 +1,14 @@
 import streamlit as st
-from modules import components
+from streamlit_utils import layouts
 import pandas as pd
 import yaml
 import os
 
 
-components.set_page_layout()
+layouts.set_page_layout()
 st.sidebar.markdown("# **Data Preview** 🧮 ")
 
-components.set_page_header("Data Preview", "🧮")
+layouts.set_page_header("Data Preview", "🧮")
 
 with open('config/path_config.yaml', 'r') as config_file:
     path_config = yaml.safe_load(config_file)

@@ -1,15 +1,14 @@
 import streamlit as st
 import pandas as pd
-from modules import components
 import yaml
 import os
-from modules import plots
+from streamlit_utils import plots, layouts
 
 
-components.set_page_layout()
+layouts.set_page_layout()
 st.sidebar.markdown("# **Albums Analysis** 📀️ ")
 
-components.set_page_header("Albums Analysis", "📀️")
+layouts.set_page_header("Albums Analysis", "📀️")
 
 with open('config/path_config.yaml', 'r') as config_file:
     path_config = yaml.safe_load(config_file)

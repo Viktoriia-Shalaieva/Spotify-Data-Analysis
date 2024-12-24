@@ -1,16 +1,14 @@
 import streamlit as st
 import pandas as pd
-from modules import components
-from modules import plots
-from modules import data_processing
+from streamlit_utils import plots, layouts
 import yaml
 import os
 
 
-components.set_page_layout()
+layouts.set_page_layout()
 st.sidebar.markdown("# **Artists Analysis** 👩‍🎤 ")
 
-components.set_page_header("Artists Analysis", " 👩‍🎤")
+layouts.set_page_header("Artists Analysis", " 👩‍🎤")
 
 
 with open('config/path_config.yaml', 'r') as config_file:
@@ -76,7 +74,7 @@ top_10_artists_followers = (
 )
 
 top_10_artists_followers['Artist Total Followers (formatted)'] = (
-    data_processing.format_number_text(
+    plots.format_number_text(
         top_10_artists_followers['Artist Total Followers']
     )
 )

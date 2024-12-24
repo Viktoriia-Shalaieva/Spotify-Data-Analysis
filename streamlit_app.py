@@ -2,10 +2,10 @@ import streamlit as st
 from streamlit_utils import layouts
 
 
-components.set_page_layout()
+layouts.set_page_layout()
 st.sidebar.markdown("# Home 🏘️ ")
 
-components.set_page_header("Welcome to the Spotify Data Analysis App", "👋")
+layouts.set_page_header("Welcome to the Spotify Data Analysis App", "👋")
 
 st.write("""
 This application provides interactive visualizations and analyses of Spotify data,

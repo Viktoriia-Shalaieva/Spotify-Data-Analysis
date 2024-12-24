@@ -1,10 +1,10 @@
 import boto3
 import os
 from logs.logger_config import logger
-from source import utils
+from source.api import secrets_functions
 
 
-aws_secrets = utils.get_secrets('aws')
+aws_secrets = secrets_functions.get_secrets('aws')
 
 # Create S3 resource
 s3 = boto3.resource(

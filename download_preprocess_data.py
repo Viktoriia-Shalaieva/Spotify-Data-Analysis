@@ -6,6 +6,7 @@ from source.web_scraping import chosic
 from source.preprocessing import data_prep
 from logs.logger_config import logger
 from source import utils
+from source.api import secrets_functions
 
 
 def main():
@@ -17,8 +18,8 @@ def main():
 
 
     # get secrets
-    spotify_secret = utils.get_secrets(secret_group='spotify')
-    discogs_secret = utils.get_secrets(secret_group='discogs')
+    spotify_secret = secrets_functions.get_secrets(secret_group='spotify')
+    discogs_secret = secrets_functions.get_secrets(secret_group='discogs')
     discogs_api_token = discogs_secret.get('discogs_api_token')
 
     spotify_api_token = spotify.get_spotify_access_token(

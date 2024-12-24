@@ -1,16 +1,14 @@
 import streamlit as st
-from modules import components
-from modules import plots
+from streamlit_utils import plots, layouts
 import pandas as pd
 import yaml
 import os
-import plotly.express as px
 
 
-components.set_page_layout()
+layouts.set_page_layout()
 st.sidebar.markdown("**Tracks Analysis** 🎵")
 
-components.set_page_header("Tracks Analysis", "🎵")
+layouts.set_page_header("Tracks Analysis", "🎵")
 
 
 with open('config/path_config.yaml', 'r') as config_file:

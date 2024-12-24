@@ -6,10 +6,7 @@ from urllib.parse import urljoin
 from logs.logger_config import logger
 
 
-def get_spotify_access_token():
-    client_id = 'ac3eaf00cb0845a8a8a2f60c134c328e'
-    client_secret = 'bc63f9adbb3a4bea8e5c7ba13b951e8e'
-
+def get_spotify_access_token(client_id, client_secret):
     token_url = "https://accounts.spotify.com/api/token"
 
     payload = {

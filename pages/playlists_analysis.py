@@ -1,20 +1,18 @@
 import streamlit as st
-from modules import components
-from modules import plots
+from streamlit_utils import plots, layouts
 import pandas as pd
 import yaml
 import os
 import plotly.express as px
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
-from modules import data_processing
 from scipy.stats import shapiro, skew
 
 
-components.set_page_layout()
+layouts.set_page_layout()
 st.sidebar.markdown("# **Playlists Analysis** 📋️ ")
 
-components.set_page_header("Playlists Analysis", "📋️")
+layouts.set_page_header("Playlists Analysis", "📋️")
 
 with open('config/country_coords.yaml', 'r') as config_file:
     country_coords = yaml.safe_load(config_file)
@@ -136,7 +134,7 @@ followers_data = playlists_table[['Country', 'Playlist Total Followers']].drop_d
 followers_data = followers_data[followers_data['Country'].isin(selected_countries)]
 followers_data = followers_data.sort_values(by='Playlist Total Followers', ascending=False)
 followers_data['Playlist Total Followers (formatted)'] = (
-    data_processing.format_number_text(followers_data['Playlist Total Followers'])
+    plots.format_number_text(followers_data['Playlist Total Followers'])
 )
 
 plots.create_bubble_plot(
