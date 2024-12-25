@@ -36,10 +36,11 @@ def create_playlist_table(playlist):
         rows.append(row)
     df = pd.DataFrame(rows)
     logger.info(f"Playlist '{playlist_name}' processed with {len(rows)} tracks.")
+
     return df
 
 
-def create_all_playlists_table(token, playlists_id):
+def create_all_playlists_table(token, playlists_id, path, save):
     all_playlists = []
     for playlist_id in playlists_id:
         playlist_data = spotify.get_playlist(token, playlist_id)
@@ -49,14 +50,17 @@ def create_all_playlists_table(token, playlists_id):
 
     playlists = pd.concat(all_playlists, ignore_index=True)
     logger.info("All playlists processed successfully.")
+
+    if save:
+        playlists.to_csv(path, index=False, sep="~")
     return playlists
 
 
-def create_tracks_table(access_token, track_ids):
+def create_tracks_table(token, track_ids, path, save):
     tracks_data = []
 
     for track_id in track_ids:
-        track_info = spotify.get_track(access_token, track_id)
+        track_info = spotify.get_track(token, track_id)
         time.sleep(0.4)
 
         if track_info:
@@ -74,14 +78,16 @@ def create_tracks_table(access_token, track_ids):
 
     tracks = pd.DataFrame(tracks_data)
     logger.info("All track data processed successfully.")
+    if save:
+        tracks.to_csv(path, index=False, sep="~")
     return tracks
 
 
-def create_albums_table(access_token, album_ids):
+def create_albums_table(token, album_ids, path, save):
     albums_data = []
 
     for album_id in album_ids:
-        album_info = spotify.get_album(access_token, album_id)
+        album_info = spotify.get_album(token, album_id)
         time.sleep(0.4)
 
         if album_info:
@@ -101,10 +107,12 @@ def create_albums_table(access_token, album_ids):
 
     albums = pd.DataFrame(albums_data)
     logger.info("All album data processed successfully.")
+    if save:
+        albums.to_csv(path, index=False, sep="~")
     return albums
 
 
-def create_artists_table(access_token, artist_ids):
+def create_artists_table(token, artist_ids, path, save):
     rows = []
     unique_artist_ids = set()
 
@@ -113,7 +121,7 @@ def create_artists_table(access_token, artist_ids):
         unique_artist_ids.update(separated_ids)
 
     for artist_id in unique_artist_ids:
-        artist_info = spotify.get_artist(access_token, artist_id)
+        artist_info = spotify.get_artist(token, artist_id)
         time.sleep(0.4)
 
         if artist_info:
@@ -131,16 +139,18 @@ def create_artists_table(access_token, artist_ids):
 
     artists = pd.DataFrame(rows)
     logger.info("All artist data processed successfully.")
+    if save:
+        artists.to_csv(path, index=False, sep="~")
     return artists
 
 
-def create_artist_genre_table(file, discogs_api_token):
+def create_artist_genre_table(token, file, path, save):
     rows = []
 
     for _, row in file.iterrows():  # Using _ indicates that the index value is not important and will not be used.
         artist = row['artist_name']
 
-        genres = discogs.get_genre_artist(discogs_api_token, artist)
+        genres = discogs.get_genre_artist(token, artist)
         time.sleep(0.7)
 
         rows.append({
@@ -150,4 +160,6 @@ def create_artist_genre_table(file, discogs_api_token):
         logger.info(f"Genre data retrieved for artist '{artist}'")
     artist_genre = pd.DataFrame(rows, columns=['artist_name', 'artist_genre'])
     logger.info("All artist genre data processed successfully.")
+    if save:
+        artist_genre.to_csv(path, index=False, sep="~")
     return artist_genre
