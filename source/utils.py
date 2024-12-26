@@ -72,6 +72,7 @@ def download_preprocessed_data_from_s3(bucket_name):
 
     return None
 
+
 def upload_chosic_genres_to_s3(bucket_name):
     s3_functions.upload_to_s3(
         file_name="data/genres/genres.yaml",

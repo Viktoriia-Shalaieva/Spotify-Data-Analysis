@@ -1,5 +1,5 @@
 import streamlit as st
-from streamlit_utils import plots, layouts
+from streamlit_utils import plots, layouts, data_processing
 import pandas as pd
 import yaml
 import os
@@ -14,26 +14,54 @@ st.sidebar.markdown("# **Playlists Analysis** 📋️ ")
 
 layouts.set_page_header("Playlists Analysis", "📋️")
 
-with open('config/country_coords.yaml', 'r') as config_file:
-    country_coords = yaml.safe_load(config_file)
+# with open('config/country_coords.yaml', 'r') as config_file:
+#     country_coords = yaml.safe_load(config_file)
 
 with open('./data/genres/genres.yaml', 'r', encoding='utf-8') as file:
     all_genres_with_subgenres = yaml.safe_load(file)
 
-countries_for_map = []
-latitudes = []
-longitudes = []
+# with open('config/path_config.yaml', 'r') as config_file:
+#     path_config = yaml.safe_load(config_file)
 
-for country, coords in country_coords['countries'].items():
-    countries_for_map.append(country)
-    latitudes.append(coords['latitude'])
-    longitudes.append(coords['longitude'])
+# data_dir = path_config['data_dir'][0]
+# file_paths = {file_name: os.path.join(data_dir, file_name) for file_name in path_config['files_names']}
+#
+# playlists_path = str(file_paths['playlists.csv'])
+# artists_genres_full_unknown_path = str(file_paths['artists_genres_full_unknown.csv'])
+# tracks_path = str(file_paths['tracks.csv'])
+#
+# playlists_table = pd.read_csv(playlists_path, sep="~")
+# artists_genres_full_unknown = pd.read_csv(artists_genres_full_unknown_path, sep='~')
+# tracks_table = pd.read_csv(tracks_path, sep='~')
+#
+# playlists_table = data_processing.rename_playlists(playlists_table)
+#
+# artists_table = data_processing.rename_artists(artists_genres_full_unknown)
+#
+# tracks_table = data_processing.rename_tracks(tracks_table)
 
-country_coords_df = pd.DataFrame({
-    'Country': countries_for_map,
-    'Latitude': latitudes,
-    'Longitude': longitudes
-})
+data = data_processing.load_and_process_data('config/path_config.yaml')
+
+playlists_table = data["playlists"]
+artists_table = data["artists"]
+tracks_table = data["tracks"]
+
+country_coords_df = data_processing.load_country_coords('config/country_coords.yaml')
+
+# countries_for_map = []
+# latitudes = []
+# longitudes = []
+#
+# for country, coords in country_coords['countries'].items():
+#     countries_for_map.append(country)
+#     latitudes.append(coords['latitude'])
+#     longitudes.append(coords['longitude'])
+#
+# country_coords_df = pd.DataFrame({
+#     'Country': countries_for_map,
+#     'Latitude': latitudes,
+#     'Longitude': longitudes
+# })
 
 st.subheader("Map of Countries for Playlist Analysis")
 unique_countries = country_coords_df['Country'].unique()
@@ -49,46 +77,6 @@ plots.create_choropleth_map(
     legend_title='Country',
 )
 
-with open('config/path_config.yaml', 'r') as config_file:
-    path_config = yaml.safe_load(config_file)
-
-data_dir = path_config['data_dir'][0]
-raw_dir = path_config['raw_dir'][0]
-file_paths = {file_name: os.path.join(data_dir, file_name) for file_name in path_config['files_names']}
-
-playlists_path = str(file_paths['playlists.csv'])
-artists_genres_full_unknown_path = str(file_paths['artists_genres_full_unknown.csv'])
-tracks_path = str(file_paths['tracks.csv'])
-
-playlists_table = pd.read_csv(playlists_path, sep="~")
-artists_genres_full_unknown = pd.read_csv(artists_genres_full_unknown_path, sep='~')
-tracks_table = pd.read_csv(tracks_path, sep='~')
-
-playlists_table = playlists_table.rename(columns={
-    'playlist_id': 'Playlist ID',
-    'playlist_name': 'Playlist Name',
-    'country': 'Country',
-    'playlist_followers_total': 'Playlist Total Followers',
-    'track_id': 'Track ID',
-    'album_id': 'Album ID',
-    'artist_id': 'Artist ID'
-})
-
-artists_table = artists_genres_full_unknown.rename(columns={
-    'artist_id': 'Artist ID',
-    'artist_name': 'Artist Name',
-    'artist_followers': 'Artist Total Followers',
-    'artist_genres': 'Artist Genres',
-    'artist_popularity': 'Artist Popularity'
-})
-
-tracks_table = tracks_table.rename(columns={
-    'track_id': 'Track ID',
-    'track_name': 'Track Name',
-    'track_duration_ms': 'Duration (ms)',
-    'track_explicit': 'Explicit Content',
-    'track_popularity': 'Track Popularity'
-})
 
 playlist_names = playlists_table['Playlist Name'].unique()
 countries_for_map = playlists_table['Country'].unique()
@@ -118,10 +106,10 @@ st.subheader('Number of Followers per Playlist')
 select_all = st.checkbox("Select All", value=True)
 
 with st.popover("Select countries for analysis", icon="🌍"):
-    select_all = st.checkbox("Select All", value=True,
-                             help="Check to select all countries. Uncheck to choose specific ones.")
+    select_all_countries = st.checkbox("Select All", value=True,
+                                       help="Check to select all countries. Uncheck to choose specific ones.")
 
-    if select_all:
+    if select_all_countries:
         selected_countries = countries_for_map
     else:
         selected_countries = st.multiselect(

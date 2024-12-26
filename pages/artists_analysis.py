@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from streamlit_utils import plots, layouts
+from streamlit_utils import plots, layouts, data_processing
 import yaml
 import os
 
@@ -11,39 +11,25 @@ st.sidebar.markdown("# **Artists Analysis** 👩‍🎤 ")
 layouts.set_page_header("Artists Analysis", " 👩‍🎤")
 
 
-with open('config/path_config.yaml', 'r') as config_file:
-    path_config = yaml.safe_load(config_file)
-
-data_dir = path_config['data_dir'][0]
-raw_dir = path_config['raw_dir'][0]
-file_paths = {file_name: os.path.join(data_dir, file_name) for file_name in path_config['files_names']}
-
-artists_genres_full_unknown_path = str(file_paths['artists_genres_full_unknown.csv'])
-artists_genres_full_unknown = pd.read_csv(artists_genres_full_unknown_path, sep='~')
-
-playlists_path = str(file_paths['playlists.csv'])
-playlists_table = pd.read_csv(playlists_path, sep="~")
-
-artists_table = artists_genres_full_unknown.rename(columns={
-    'artist_id': 'Artist ID',
-    'artist_name': 'Artist Name',
-    'artist_followers': 'Artist Total Followers',
-    'artist_genres': 'Artist Genres',
-    'artist_popularity': 'Artist Popularity'
-})
-
-playlists_table = playlists_table.rename(columns={
-    'playlist_id': 'Playlist ID',
-    'playlist_name': 'Playlist Name',
-    'country': 'Country',
-    'playlist_followers_total': 'Playlist Total Followers',
-    'track_id': 'Track ID',
-    'album_id': 'Album ID',
-    'artist_id': 'Artist ID'
-})
+# with open('config/path_config.yaml', 'r') as config_file:
+#     path_config = yaml.safe_load(config_file)
 
 with open('./data/genres/genres.yaml', 'r', encoding='utf-8') as file:
     all_genres_with_subgenres = yaml.safe_load(file)
+
+# data_dir = path_config['data_dir'][0]
+# file_paths = {file_name: os.path.join(data_dir, file_name) for file_name in path_config['files_names']}
+#
+# artists_genres_full_unknown_path = str(file_paths['artists_genres_full_unknown.csv'])
+# artists_genres_full_unknown = pd.read_csv(artists_genres_full_unknown_path, sep='~')
+#
+# playlists_path = str(file_paths['playlists.csv'])
+# playlists_table = pd.read_csv(playlists_path, sep="~")
+
+data = data_processing.load_and_process_data('config/path_config.yaml')
+
+playlists_table = data["playlists"]
+artists_table = data["artists"]
 
 st.subheader('Distribution of Artist Popularity',)
 plots.create_histogram(

@@ -1,5 +1,5 @@
 import streamlit as st
-from streamlit_utils import layouts
+from streamlit_utils import layouts, data_processing
 import pandas as pd
 import yaml
 import os
@@ -10,70 +10,43 @@ st.sidebar.markdown("# **Data Preview** 🧮 ")
 
 layouts.set_page_header("Data Preview", "🧮")
 
-with open('config/path_config.yaml', 'r') as config_file:
-    path_config = yaml.safe_load(config_file)
+# with open('config/path_config.yaml', 'r') as config_file:
+#     path_config = yaml.safe_load(config_file)
 
-data_dir = path_config['data_dir'][0]
-raw_dir = path_config['raw_dir'][0]
-file_paths = {file_name: os.path.join(data_dir, file_name) for file_name in path_config['files_names']}
+# data_dir = path_config['data_dir'][0]
+# file_paths = {file_name: os.path.join(data_dir, file_name) for file_name in path_config['files_names']}
+#
+# playlists_path = str(file_paths['playlists.csv'])
+# albums_path = str(file_paths['albums.csv'])
+# artists_genres_full_unknown_path = str(file_paths['artists_genres_full_unknown.csv'])
+# tracks_path = str(file_paths['tracks.csv'])
+#
+# playlists_table = pd.read_csv(playlists_path, sep="~")
+# albums_table = pd.read_csv(albums_path, sep='~')
+# artists_genres_full_unknown = pd.read_csv(artists_genres_full_unknown_path, sep='~')
+# tracks_table = pd.read_csv(tracks_path, sep='~')
+#
+# playlists_table = data_processing.rename_playlists(playlists_table)
+#
+# albums_table = data_processing.rename_albums(albums_table)
+#
+# artists_table = data_processing.rename_artists(artists_genres_full_unknown)
+#
+# tracks_table = data_processing.rename_tracks(tracks_table)
+#
+data = data_processing.load_and_process_data('config/path_config.yaml')
 
-playlists_path = str(file_paths['playlists.csv'])
-albums_path = str(file_paths['albums.csv'])
-artists_genres_full_unknown_path = str(file_paths['artists_genres_full_unknown.csv'])
-tracks_path = str(file_paths['tracks.csv'])
-
-playlists_table = pd.read_csv(playlists_path, sep="~")
-albums_table = pd.read_csv(albums_path, sep='~')
-artists_genres_full_unknown = pd.read_csv(artists_genres_full_unknown_path, sep='~')
-tracks_table = pd.read_csv(tracks_path, sep='~')
-
-playlists_table = playlists_table.rename(columns={
-    'playlist_id': 'Playlist ID',
-    'playlist_name': 'Playlist Name',
-    'country': 'Country',
-    'playlist_followers_total': 'Total Followers',
-    'track_id': 'Track ID',
-    'album_id': 'Album ID',
-    'artist_id': 'Artist ID'
-})
-
-albums_table = albums_table.rename(columns={
-    'album_id': 'Album ID',
-    'album_name': 'Album Name',
-    'album_type': 'Album Type',
-    'album_release_date': 'Release Date',
-    'album_total_tracks': 'Total Tracks',
-    'album_label': 'Label',
-    'album_popularity': 'Popularity'
-})
-
-artists_table = artists_genres_full_unknown.rename(columns={
-    'artist_id': 'Artist ID',
-    'artist_name': 'Artist Name',
-    'artist_followers': 'Total Followers',
-    'artist_genres': 'Genres',
-    'artist_popularity': 'Popularity'
-})
-
-tracks_table = tracks_table.rename(columns={
-    'track_id': 'Track ID',
-    'track_name': 'Track Name',
-    'track_duration_ms': 'Duration (ms)',
-    'track_explicit': 'Explicit Content',
-    'track_popularity': 'Popularity'
-})
-
-playlists_table['Playlist ID'] = playlists_table['Playlist ID'].astype(str)
-albums_table['Album ID'] = albums_table['Album ID'].astype(str)
-artists_table['Artist ID'] = artists_table['Artist ID'].astype(str)
-tracks_table['Track ID'] = tracks_table['Track ID'].astype(str)
+playlists_table = data["playlists"]
+artists_table = data["artists"]
+tracks_table = data["tracks"]
+albums_table = data["albums"]
 
 total_playlists = playlists_table['Playlist ID'].nunique()
-average_followers = playlists_table['Total Followers'].mean()
+average_followers = playlists_table['Playlist Total Followers'].mean()
 total_unique_tracks = playlists_table['Track ID'].nunique()
 
-max_followers_playlist = playlists_table.sort_values(by='Total Followers', ascending=False).iloc[0]
-min_followers_playlist = playlists_table.sort_values(by='Total Followers').iloc[0]
+max_followers_playlist = playlists_table.sort_values(by='Playlist Total Followers', ascending=False).iloc[0]
+min_followers_playlist = playlists_table.sort_values(by='Playlist Total Followers').iloc[0]
 
 st.subheader("Playlists Analysis - Overview Statistics")
 
@@ -101,11 +74,11 @@ with tab2_playlists:
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
-        max_followers = playlists_table['Total Followers'].max()
+        max_followers = playlists_table['Playlist Total Followers'].max()
         most_followed_playlist = playlists_table.loc[
-            playlists_table['Total Followers'].idxmax(), 'Country'
+            playlists_table['Playlist Total Followers'].idxmax(), 'Country'
         ]
-        avg_followers = playlists_table['Total Followers'].mean()
+        avg_followers = playlists_table['Playlist Total Followers'].mean()
 
         st.metric(label="🏆 Most Followers", value=f"{max_followers:,.0f}")
         st.metric(label="🎶 Playlist with Most Followers", value=most_followed_playlist)
@@ -139,8 +112,8 @@ with tab2_albums:
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        avg_popularity = albums_table['Popularity'].mean()
-        max_popularity = albums_table['Popularity'].max()
+        avg_popularity = albums_table['Album Popularity'].mean()
+        max_popularity = albums_table['Album Popularity'].max()
 
         st.metric(label="🔥 Avg. Album Popularity", value=f"{avg_popularity:.1f}")
         st.metric(label="🎉 Max Album Popularity", value=max_popularity)
@@ -167,18 +140,18 @@ with tab2_artists:
     col1, col2 = st.columns(2)
 
     with col1:
-        avg_popularity = artists_table['Popularity'].mean()
-        most_popular_artist = artists_table.loc[artists_table['Popularity'].idxmax(), 'Artist Name']
-        max_popularity = artists_table['Popularity'].max()
+        avg_popularity = artists_table['Artist Popularity'].mean()
+        most_popular_artist = artists_table.loc[artists_table['Artist Popularity'].idxmax(), 'Artist Name']
+        max_popularity = artists_table['Artist Popularity'].max()
 
         st.metric(label="🔥 Avg. Artist Popularity", value=f"{avg_popularity:.1f}")
         st.metric(label="🏆 Most Popular Artist", value=most_popular_artist)
         st.metric(label="🎉 Max Artist Popularity", value=max_popularity)
 
     with col2:
-        avg_followers_artist = artists_table['Total Followers'].mean()
-        max_followers = artists_table['Total Followers'].max()
-        most_followed_artist = artists_table.loc[artists_table['Total Followers'].idxmax(), 'Artist Name']
+        avg_followers_artist = artists_table['Artist Total Followers'].mean()
+        max_followers = artists_table['Artist Total Followers'].max()
+        most_followed_artist = artists_table.loc[artists_table['Artist Total Followers'].idxmax(), 'Artist Name']
 
         st.metric(label="👥 Avg. Followers/Artist", value=f"{avg_followers_artist:,.0f}")
         st.metric(label="🏅 Most Followed Artist", value=most_followed_artist)
@@ -192,11 +165,11 @@ with tab2_tracks:
     col1, col2 = st.columns(2)
 
     with col1:
-        avg_popularity_track = tracks_table['Popularity'].mean()
-        max_popularity_track = tracks_table['Popularity'].max()
+        avg_popularity_track = tracks_table['Track Popularity'].mean()
+        max_popularity_track = tracks_table['Track Popularity'].max()
         most_popular_track = tracks_table.loc[
-            tracks_table['Popularity'].idxmax(), 'Track Name']
-        max_popularity = tracks_table['Popularity'].max()
+            tracks_table['Track Popularity'].idxmax(), 'Track Name']
+        max_popularity = tracks_table['Track Popularity'].max()
 
         st.metric(label="🔥 Avg. Track Popularity", value=f"{avg_popularity_track:.1f}")
         st.metric(label="🏆 Most Popular Track", value=most_popular_track)

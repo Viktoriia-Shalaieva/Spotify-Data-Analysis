@@ -1,5 +1,5 @@
 import streamlit as st
-from streamlit_utils import plots, layouts
+from streamlit_utils import plots, layouts, data_processing
 import pandas as pd
 import yaml
 import os
@@ -11,61 +11,47 @@ st.sidebar.markdown("**Tracks Analysis** 🎵")
 layouts.set_page_header("Tracks Analysis", "🎵")
 
 
-with open('config/path_config.yaml', 'r') as config_file:
-    path_config = yaml.safe_load(config_file)
+# with open('config/path_config.yaml', 'r') as config_file:
+#     path_config = yaml.safe_load(config_file)
+#
+# data_dir = path_config['data_dir'][0]
+# file_paths = {file_name: os.path.join(data_dir, file_name) for file_name in path_config['files_names']}
+#
+#
+# @st.cache_data
+# def load_playlists_data():
+#     playlists_path = str(file_paths['playlists.csv'])
+#     return pd.read_csv(playlists_path, sep="~")
+#
+#
+# @st.cache_data
+# def load_tracks_data():
+#     tracks_path = str(file_paths['tracks.csv'])
+#     return pd.read_csv(tracks_path, sep='~')
+#
+#
+# @st.cache_data
+# def load_artists_data():
+#     artists_genres_full_unknown_path = str(file_paths['artists_genres_full_unknown.csv'])
+#     return pd.read_csv(artists_genres_full_unknown_path, sep='~')
+#
+#
+# playlists_table = load_playlists_data()
+# tracks_table = load_tracks_data()
+# artists_genres_full_unknown = load_artists_data()
+#
+# playlists_table = data_processing.rename_playlists(playlists_table)
+#
+# artists_table = data_processing.rename_artists(artists_genres_full_unknown)
+#
+# tracks_table = data_processing.rename_tracks(tracks_table)
 
-data_dir = path_config['data_dir'][0]
-raw_dir = path_config['raw_dir'][0]
-file_paths = {file_name: os.path.join(data_dir, file_name) for file_name in path_config['files_names']}
 
+data = data_processing.load_and_process_data('config/path_config.yaml')
 
-@st.cache_data
-def load_playlists_data():
-    playlists_path = str(file_paths['playlists.csv'])
-    return pd.read_csv(playlists_path, sep="~")
-
-
-@st.cache_data
-def load_tracks_data():
-    tracks_path = str(file_paths['tracks.csv'])
-    return pd.read_csv(tracks_path, sep='~')
-
-
-@st.cache_data
-def load_artists_data():
-    artists_path = str(file_paths['artists_genres_full_unknown.csv'])
-    return pd.read_csv(artists_path, sep='~')
-
-
-playlists_table = load_playlists_data()
-tracks_table = load_tracks_data()
-artists_table = load_artists_data()
-
-playlists_table = playlists_table.rename(columns={
-    'playlist_id': 'Playlist ID',
-    'playlist_name': 'Playlist Name',
-    'country': 'Country',
-    'playlist_followers_total': 'Playlist Total Followers',
-    'track_id': 'Track ID',
-    'album_id': 'Album ID',
-    'artist_id': 'Artist ID'
-})
-
-artists_table = artists_table.rename(columns={
-    'artist_id': 'Artist ID',
-    'artist_name': 'Artist Name',
-    'artist_followers': 'Artist Total Followers',
-    'artist_genres': 'Artist Genres',
-    'artist_popularity': 'Artist Popularity'
-})
-
-tracks_table = tracks_table.rename(columns={
-    'track_id': 'Track ID',
-    'track_name': 'Track Name',
-    'track_duration_ms': 'Duration (ms)',
-    'track_explicit': 'Explicit Content',
-    'track_popularity': 'Track Popularity'
-})
+playlists_table = data["playlists"]
+artists_table = data["artists"]
+tracks_table = data["tracks"]
 
 st.subheader('Distribution of Track Popularity')
 plots.create_histogram(
