@@ -1,8 +1,8 @@
-import streamlit as st
-import pandas as pd
-from streamlit_utils import plots, layouts, data_processing
-import yaml
 import os
+import yaml
+import pandas as pd
+import streamlit as st
+from streamlit_utils import plots, layouts, data_processing
 
 
 layouts.set_page_layout()
@@ -14,8 +14,12 @@ layouts.set_page_header("Artists Analysis", " 👩‍🎤")
 # with open('config/path_config.yaml', 'r') as config_file:
 #     path_config = yaml.safe_load(config_file)
 
-with open('./data/genres/genres.yaml', 'r', encoding='utf-8') as file:
-    all_genres_with_subgenres = yaml.safe_load(file)
+# with open('./data/genres/genres.yaml', 'r', encoding='utf-8') as file:
+#     all_genres_with_subgenres = yaml.safe_load(file)
+
+# all_genres_with_subgenres = data_processing.load_config('./data/genres/genres.yaml')
+
+
 
 # data_dir = path_config['data_dir'][0]
 # file_paths = {file_name: os.path.join(data_dir, file_name) for file_name in path_config['files_names']}
@@ -31,7 +35,9 @@ data = data_processing.load_and_process_data('config/path_config.yaml')
 playlists_table = data["playlists"]
 artists_table = data["artists"]
 
-st.subheader('Distribution of Artist Popularity',)
+help_popularity = 'The value of popularity will be between 0 and 100, with 100 being the most popular'
+
+st.subheader('Distribution of Artist Popularity', help=help_popularity)
 plots.create_histogram(
             data=artists_table,
             x='Artist Popularity',
@@ -44,7 +50,7 @@ top_10_artists_popularity = (
 min_x = top_10_artists_popularity['Artist Popularity'].min() - 3
 max_x = top_10_artists_popularity['Artist Popularity'].max()
 
-st.subheader('Top 10 Most Popular Artists')
+st.subheader('Top 10 Most Popular Artists', help=help_popularity)
 plots.create_bar_plot(
     data=top_10_artists_popularity,
     x='Artist Popularity',
@@ -86,40 +92,41 @@ bin_counts = artists_table['Follower Group'].value_counts(sort=False)
 st.subheader('Number of Artists by Follower Groups')
 plots.create_bar_plot(
     data=bin_counts,
-    x=bin_counts.index,
+    # Convert bin_counts.index to a list to ensure compatibility with Streamlit's caching system.
+    # pandas.Index is not hashable and cannot be used as a cache key,
+    # so converting it to a list resolves the issue.
+    x=list(bin_counts.index),
     y=bin_counts.values,
     labels={'y': 'Number of Artists'},
     showticklabels=True
 )
 
-artists_table['Artist Genres'] = artists_table['Artist Genres'].str.split(', ')
+# # Update classification logic based on the provided detailed genre structure
+# def classify_genres_detailed_structure(genre):
+#     for parent_genre, subgenres in all_genres_with_subgenres.items():
+#         if genre in subgenres:
+#             return parent_genre
+#     return 'Other'
 
-expanded_artists_genres = artists_table.explode('Artist Genres')
+# artists_table['Artist Genres'] = artists_table['Artist Genres'].str.split(', ')
+#
+# expanded_artists_genres = artists_table.explode('Artist Genres')
+#
+# # r"[\"\'\[\]]": Regular expression to match the characters.
+# # regex=True : Indicates using a regular expression for matching.
+# expanded_artists_genres['Artist Genres'] = (expanded_artists_genres['Artist Genres']
+#                                             .str.replace(r"[\"\'\[\]]", '', regex=True))
+#
+#
+# expanded_artists_genres['Artist Genres'] = expanded_artists_genres['Artist Genres'].str.lower()
+#
+# expanded_artists_genres['Artist Genres'] = (expanded_artists_genres['Artist Genres']
+#                                             .str.replace(r'&\s*country', 'country', regex=True))
+#
+# expanded_artists_genres['Parent Genre'] = (expanded_artists_genres['Artist Genres']
+#                                            .apply(classify_genres_detailed_structure))
 
-# r"[\"\'\[\]]": Regular expression to match the characters.
-# regex=True : Indicates using a regular expression for matching.
-expanded_artists_genres['Artist Genres'] = (expanded_artists_genres['Artist Genres']
-                                            .str.replace(r"[\"\'\[\]]", '', regex=True))
-
-
-expanded_artists_genres['Artist Genres'] = expanded_artists_genres['Artist Genres'].str.lower()
-
-
-# Update classification logic based on the provided detailed genre structure
-def classify_genres_detailed_structure(genre):
-    for parent_genre, subgenres in all_genres_with_subgenres.items():
-        if genre in subgenres:
-            return parent_genre
-    return 'Other'
-
-
-expanded_artists_genres['Artist Genres'] = (expanded_artists_genres['Artist Genres']
-                                            .str.replace(r'&\s*country', 'country', regex=True))
-
-genre_counts = expanded_artists_genres['Artist Genres'].value_counts(sort=False).reset_index()
-
-expanded_artists_genres['Parent Genre'] = (expanded_artists_genres['Artist Genres']
-                                           .apply(classify_genres_detailed_structure))
+expanded_artists_genres = data_processing.expand_and_classify_artists_genres(artists_table)
 
 # Group by main genres and count occurrences
 main_genre_counts = expanded_artists_genres['Parent Genre'].value_counts(sort=False).reset_index()

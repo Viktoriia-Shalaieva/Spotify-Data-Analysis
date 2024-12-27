@@ -1,5 +1,5 @@
-import boto3
 import os
+import boto3
 from logs.logger_config import logger
 from source.api import secrets_functions
 

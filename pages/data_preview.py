@@ -1,8 +1,8 @@
+import os
+import yaml
+import pandas as pd
 import streamlit as st
 from streamlit_utils import layouts, data_processing
-import pandas as pd
-import yaml
-import os
 
 
 layouts.set_page_layout()

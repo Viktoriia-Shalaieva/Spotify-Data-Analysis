@@ -1,12 +1,12 @@
-import streamlit as st
-from streamlit_utils import plots, layouts, data_processing
-import pandas as pd
-import yaml
 import os
+import yaml
+import pandas as pd
 import plotly.express as px
+import streamlit as st
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 from scipy.stats import shapiro, skew
+from streamlit_utils import plots, layouts, data_processing
 
 
 layouts.set_page_layout()
@@ -17,8 +17,8 @@ layouts.set_page_header("Playlists Analysis", "📋️")
 # with open('config/country_coords.yaml', 'r') as config_file:
 #     country_coords = yaml.safe_load(config_file)
 
-with open('./data/genres/genres.yaml', 'r', encoding='utf-8') as file:
-    all_genres_with_subgenres = yaml.safe_load(file)
+# with open('./data/genres/genres.yaml', 'r', encoding='utf-8') as file:
+#     all_genres_with_subgenres = yaml.safe_load(file)
 
 # with open('config/path_config.yaml', 'r') as config_file:
 #     path_config = yaml.safe_load(config_file)
@@ -185,39 +185,16 @@ median_popularity_df = median_popularity_df.sort_values(by='Median Popularity', 
 
 sorted_countries = median_popularity_df['Country'].tolist()
 
-st.subheader('Distribution of Track Popularity by Country and Overall (Sorted by Median, Descending Order)')
-fig = make_subplots(
-    rows=1, cols=2,
-    shared_yaxes=True,
-    horizontal_spacing=0.02,
-    column_widths=[0.94, 0.06],
+st.subheader('Distribution of Track Popularity by Country and Overall (Sorted by Median, Descending Order)',
+             help=help_popularity)
+
+plots.create_boxplot_subplots(
+    x=merged_playlists_tracks['Country'],
+    y=merged_playlists_tracks['Track Popularity'],
+    y2=tracks_table['Track Popularity'],
+    title="Track Popularity",
+    categoryarray=sorted_countries
 )
-fig.add_trace(
-    go.Box(
-        x=merged_playlists_tracks['Country'],
-        y=merged_playlists_tracks['Track Popularity'],
-        marker=dict(color='#109618'),
-    ),
-    row=1, col=1
-)
-fig.add_trace(
-    go.Box(
-        y=tracks_table['Track Popularity'],
-        name="Overall",
-        marker=dict(color='orange'),
-    ),
-    row=1, col=2
-)
-fig.update_layout(
-    height=700,
-    showlegend=False,
-    yaxis=dict(title="Track Popularity"),
-    xaxis=dict(
-        categoryorder='array',
-        categoryarray=sorted_countries
-    )
-)
-st.plotly_chart(fig)
 
 st.subheader("Country-wise Track Popularity Analysis", help=help_popularity)
 
@@ -465,30 +442,33 @@ top_10_artists_full = top_10_artists_full[
 top_10_artists_full.columns = ['Artist Name', 'Number of songs in playlists',
                                'Followers', 'Artist Popularity', 'Artist Genres']
 
-top_10_artists_full['Artist Genres'] = top_10_artists_full['Artist Genres'].str.split(', ')
+# top_10_artists_full['Artist Genres'] = top_10_artists_full['Artist Genres'].str.split(', ')
+#
+# expanded_artists_genres = top_10_artists_full.explode('Artist Genres')
+#
+# # r"[\"\'\[\]]": Regular expression to match the characters.
+# # regex=True : Indicates using a regular expression for matching.
+# expanded_artists_genres['Artist Genres'] = (expanded_artists_genres['Artist Genres']
+#                                             .str.replace(r"[\"\'\[\]]", '', regex=True))
+#
+# expanded_artists_genres['Artist Genres'] = expanded_artists_genres['Artist Genres'].str.lower()
+#
+#
+# # Update classification logic based on the provided detailed genre structure
+# def classify_genres_detailed_structure(genre):
+#     for parent_genre, subgenres in all_genres_with_subgenres.items():
+#         if genre in subgenres:
+#             return parent_genre
+#     return 'Other'
+#
+#
+# expanded_artists_genres['Artist Genres'] = (expanded_artists_genres['Artist Genres']
+#                                             .str.replace(r'&\s*country', 'country', regex=True))
+# expanded_artists_genres['Parent Genre'] = (expanded_artists_genres['Artist Genres']
+#                                            .apply(classify_genres_detailed_structure))
 
-expanded_artists_genres = top_10_artists_full.explode('Artist Genres')
 
-# r"[\"\'\[\]]": Regular expression to match the characters.
-# regex=True : Indicates using a regular expression for matching.
-expanded_artists_genres['Artist Genres'] = (expanded_artists_genres['Artist Genres']
-                                            .str.replace(r"[\"\'\[\]]", '', regex=True))
-
-expanded_artists_genres['Artist Genres'] = expanded_artists_genres['Artist Genres'].str.lower()
-
-
-# Update classification logic based on the provided detailed genre structure
-def classify_genres_detailed_structure(genre):
-    for parent_genre, subgenres in all_genres_with_subgenres.items():
-        if genre in subgenres:
-            return parent_genre
-    return 'Other'
-
-
-expanded_artists_genres['Artist Genres'] = (expanded_artists_genres['Artist Genres']
-                                            .str.replace(r'&\s*country', 'country', regex=True))
-expanded_artists_genres['Parent Genre'] = (expanded_artists_genres['Artist Genres']
-                                           .apply(classify_genres_detailed_structure))
+expanded_artists_genres = data_processing.expand_and_classify_artists_genres(top_10_artists_full)
 
 # Grouping the data by 'Artist Name' and aggregating values
 top_10_artists_grouped = expanded_artists_genres.groupby('Artist Name').agg({

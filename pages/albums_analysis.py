@@ -1,7 +1,7 @@
-import streamlit as st
-import pandas as pd
-import yaml
 import os
+import yaml
+import pandas as pd
+import streamlit as st
 from streamlit_utils import plots, layouts, data_processing
 
 
@@ -32,7 +32,9 @@ artists_table = data["artists"]
 tracks_table = data["tracks"]
 albums_table = data["albums"]
 
-st.subheader('Distribution of Album Popularity',)
+help_popularity = 'The value of popularity will be between 0 and 100, with 100 being the most popular'
+
+st.subheader('Distribution of Album Popularity', help=help_popularity)
 plots.create_histogram(
             data=albums_table,
             x='Album Popularity',
@@ -66,7 +68,7 @@ top_10_albums_artists_grouped = albums_artists_name.groupby('Album ID').agg({
 
 top_10_albums_artists_sorted = top_10_albums_artists_grouped.sort_values(by='Album Popularity', ascending=True)
 
-st.subheader('Top 10 Most Popular Albums')
+st.subheader('Top 10 Most Popular Albums', help=help_popularity)
 plots.create_bar_plot(
     data=top_10_albums_artists_sorted,
     x='Album Popularity',

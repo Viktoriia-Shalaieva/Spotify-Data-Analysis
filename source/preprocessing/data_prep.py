@@ -1,7 +1,7 @@
-import pandas as pd
-from source.api import discogs, spotify
 import time
+import pandas as pd
 from logs.logger_config import logger
+from source.api import discogs, spotify
 
 
 def create_playlist_table(playlist):

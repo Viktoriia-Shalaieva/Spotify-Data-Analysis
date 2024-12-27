@@ -1,6 +1,6 @@
-import pandas as pd
-import yaml
 import os
+import yaml
+import pandas as pd
 import streamlit as st
 
 
@@ -9,6 +9,7 @@ def load_config(config_path, encoding='utf-8'):
         return yaml.safe_load(file)
 
 
+@st.cache_data
 def load_data(path_config):
     data_dir = path_config['data_dir'][0]
     file_paths = {file_name: os.path.join(data_dir, file_name) for file_name in path_config['files_names']}
@@ -110,3 +111,36 @@ def load_country_coords(file_path):
         'Latitude': latitudes,
         'Longitude': longitudes
     })
+
+
+def classify_genres_detailed_structure(genre, all_genres_with_subgenres):
+    for parent_genre, subgenres in all_genres_with_subgenres.items():
+        if genre in subgenres:
+            return parent_genre
+    return 'Other'
+
+
+def expand_and_classify_artists_genres(artists_table):
+    all_genres_with_subgenres = load_config('./data/genres/genres.yaml')
+    artists_table['Artist Genres'] = artists_table['Artist Genres'].str.split(', ')
+
+    expanded_artists_genres = artists_table.explode('Artist Genres')
+
+    # r"[\"\'\[\]]": Regular expression to match the characters.
+    # regex=True : Indicates using a regular expression for matching.
+    expanded_artists_genres['Artist Genres'] = (expanded_artists_genres['Artist Genres']
+                                                .str.replace(r"[\"\'\[\]]", '', regex=True))
+
+    expanded_artists_genres['Artist Genres'] = expanded_artists_genres['Artist Genres'].str.lower()
+
+    expanded_artists_genres['Artist Genres'] = (
+        expanded_artists_genres['Artist Genres']
+        .str.replace(r'&\s*country', 'country', regex=True)
+    )
+
+    expanded_artists_genres['Parent Genre'] = (
+        expanded_artists_genres['Artist Genres']
+        .apply(lambda genre: classify_genres_detailed_structure(genre, all_genres_with_subgenres))
+    )
+    return expanded_artists_genres
+

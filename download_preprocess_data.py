@@ -1,12 +1,11 @@
-import pandas as pd
-import yaml
 import os
-from source.api import spotify
-from source.web_scraping import chosic
-from source.preprocessing import data_prep
+import yaml
+import pandas as pd
 from logs.logger_config import logger
 from source import utils
-from source.api import secrets_functions
+from source.api import secrets_functions, spotify
+from source.preprocessing import data_prep
+from source.web_scraping import chosic
 
 
 def main():

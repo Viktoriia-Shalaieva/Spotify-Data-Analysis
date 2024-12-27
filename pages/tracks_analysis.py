@@ -1,8 +1,8 @@
+import os
+import yaml
+import pandas as pd
 import streamlit as st
 from streamlit_utils import plots, layouts, data_processing
-import pandas as pd
-import yaml
-import os
 
 
 layouts.set_page_layout()
@@ -53,7 +53,9 @@ playlists_table = data["playlists"]
 artists_table = data["artists"]
 tracks_table = data["tracks"]
 
-st.subheader('Distribution of Track Popularity')
+help_popularity = 'The value of popularity will be between 0 and 100, with 100 being the most popular'
+
+st.subheader('Distribution of Track Popularity', help=help_popularity)
 plots.create_histogram(
     data=tracks_table,
     x='Track Popularity',
@@ -89,7 +91,7 @@ top_10_tracks_popularity = (
 min_x = top_10_tracks_popularity['Track Popularity'].min() - 3
 max_x = top_10_tracks_popularity['Track Popularity'].max()
 
-st.subheader('Top 10 Most Popular Tracks')
+st.subheader('Top 10 Most Popular Tracks', help=help_popularity)
 plots.create_bar_plot(
     data=top_10_tracks_popularity,
     x='Track Popularity',
@@ -111,7 +113,7 @@ plots.create_pie_chart(
     names='Explicit Status',
 )
 
-st.subheader('Analysis of Track Popularity for Explicit and Non-Explicit Tracks')
+st.subheader('Analysis of Track Popularity for Explicit and Non-Explicit Tracks', help=help_popularity)
 
 
 tab1_boxplot, tab2_histogram = st.tabs(['Box Plot', 'Histogram'])

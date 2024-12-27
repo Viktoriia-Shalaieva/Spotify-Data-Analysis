@@ -1,8 +1,8 @@
-import os
-import requests
 import json
-from slugify import slugify
+import os
 from urllib.parse import urljoin
+import requests
+from slugify import slugify
 from logs.logger_config import logger
 
 
