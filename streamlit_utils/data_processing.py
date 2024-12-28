@@ -144,3 +144,29 @@ def expand_and_classify_artists_genres(artists_table):
     )
     return expanded_artists_genres
 
+
+def calculate_std_dev_ranges_and_percentages(data):
+    mean_value = data.mean()
+    median_value = data.median()
+    std_value = data.std()
+    total_values = len(data)
+
+    summary_stats = {
+        "mean": mean_value,
+        "median": median_value,
+        "std": std_value
+    }
+
+    std_dev_ranges = {}
+    percentages_within_std_dev = {}
+
+    for i in range(1, 4):
+        lower_bound = mean_value - i * std_value
+        upper_bound = mean_value + i * std_value
+
+        std_dev_ranges[f'{i}_std_dev'] = (lower_bound, upper_bound)
+
+        within_range = len(data[(data >= lower_bound) & (data <= upper_bound)])
+        percentages_within_std_dev[f'within_{i}_std_dev'] = within_range / total_values * 100
+
+    return summary_stats, std_dev_ranges, percentages_within_std_dev

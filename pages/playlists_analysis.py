@@ -201,29 +201,46 @@ st.subheader("Country-wise Track Popularity Analysis", help=help_popularity)
 selected_country = st.selectbox("Select a Country", countries_for_map)
 filtered_data = merged_playlists_tracks[merged_playlists_tracks['Country'] == selected_country]
 
-mean_popularity = filtered_data['Track Popularity'].mean()
-median_popularity = filtered_data['Track Popularity'].median()
-std_popularity = filtered_data['Track Popularity'].std()
-
 # Shapiro-Wilk Test for normality
 shapiro_stat, shapiro_p_value = shapiro(filtered_data['Track Popularity'])
 skewness = skew(filtered_data['Track Popularity'])
 
-one_std_dev = (mean_popularity - std_popularity, mean_popularity + std_popularity)
-two_std_dev = (mean_popularity - 2 * std_popularity, mean_popularity + 2 * std_popularity)
-three_std_dev = (mean_popularity - 3 * std_popularity, mean_popularity + 3 * std_popularity)
+# mean_popularity = filtered_data['Track Popularity'].mean()
+# median_popularity = filtered_data['Track Popularity'].median()
+# std_popularity = filtered_data['Track Popularity'].std()
+#
+# one_std_dev = (mean_popularity - std_popularity, mean_popularity + std_popularity)
+# two_std_dev = (mean_popularity - 2 * std_popularity, mean_popularity + 2 * std_popularity)
+# three_std_dev = (mean_popularity - 3 * std_popularity, mean_popularity + 3 * std_popularity)
+#
+# total_values = len(filtered_data['Track Popularity'])
+#
+# within_one_std_dev = len(filtered_data
+#                          [(filtered_data['Track Popularity'] >= one_std_dev[0]) &
+#                           (filtered_data['Track Popularity'] <= one_std_dev[1])]) / total_values * 100
+# within_two_std_dev = len(filtered_data
+#                          [(filtered_data['Track Popularity'] >= two_std_dev[0]) &
+#                           (filtered_data['Track Popularity'] <= two_std_dev[1])]) / total_values * 100
+# within_three_std_dev = len(filtered_data
+#                            [(filtered_data['Track Popularity'] >= three_std_dev[0]) &
+#                             (filtered_data['Track Popularity'] <= three_std_dev[1])]) / total_values * 100
 
-total_values = len(filtered_data['Track Popularity'])
+summary_stats, std_dev_ranges, percentages_within_std_dev = data_processing.calculate_std_dev_ranges_and_percentages(
+    filtered_data['Track Popularity']
+)
 
-within_one_std_dev = len(filtered_data
-                         [(filtered_data['Track Popularity'] >= one_std_dev[0]) &
-                          (filtered_data['Track Popularity'] <= one_std_dev[1])]) / total_values * 100
-within_two_std_dev = len(filtered_data
-                         [(filtered_data['Track Popularity'] >= two_std_dev[0]) &
-                          (filtered_data['Track Popularity'] <= two_std_dev[1])]) / total_values * 100
-within_three_std_dev = len(filtered_data
-                           [(filtered_data['Track Popularity'] >= three_std_dev[0]) &
-                            (filtered_data['Track Popularity'] <= three_std_dev[1])]) / total_values * 100
+mean_popularity = summary_stats['mean']
+median_popularity = summary_stats['median']
+std_popularity = summary_stats['std']
+
+one_std_dev = std_dev_ranges['1_std_dev']
+two_std_dev = std_dev_ranges['2_std_dev']
+three_std_dev = std_dev_ranges['3_std_dev']
+
+within_one_std_dev = percentages_within_std_dev['within_1_std_dev']
+within_two_std_dev = percentages_within_std_dev['within_2_std_dev']
+within_three_std_dev = percentages_within_std_dev['within_3_std_dev']
+
 
 if shapiro_p_value >= 0.05 and abs(skewness) <= 0.5:
     st.success("The data is approximately normally distributed. Building a histogram with standard deviations.")
