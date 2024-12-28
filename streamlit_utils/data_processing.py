@@ -170,3 +170,73 @@ def calculate_std_dev_ranges_and_percentages(data):
         percentages_within_std_dev[f'within_{i}_std_dev'] = within_range / total_values * 100
 
     return summary_stats, std_dev_ranges, percentages_within_std_dev
+
+
+# for the albums analysis
+def merge_albums_with_artists(albums, playlists, artists):
+    merged_playlists_albums = pd.merge(
+        albums,
+        playlists[['Album ID', 'Artist ID']],
+        on='Album ID',
+        how='left'
+    )
+    merged_playlists_albums.loc[:, 'Artist ID'] = merged_playlists_albums['Artist ID'].str.split(', ')
+    expanded_albums_artists = merged_playlists_albums.explode('Artist ID')
+    return expanded_albums_artists.merge(
+        artists[['Artist ID', 'Artist Name']],
+        on='Artist ID',
+        how='left'
+    )
+
+
+# for the artists page
+def merge_artists_with_playlists(artists, playlists):
+    return artists.merge(
+        playlists[['Artist ID', 'Country']],
+        on='Artist ID',
+        how='left'
+    )
+
+
+# for the playlists page
+def merge_playlists_with_tracks(playlists, tracks):
+    return pd.merge(
+        playlists,
+        tracks,
+        on='Track ID',
+        how='left'
+    )
+
+
+def merge_tracks_with_artists(tracks, playlists, artists):
+    tracks_data = tracks.merge(
+        playlists[['Track ID', 'Artist ID']],
+        on='Track ID',
+        how='left'
+    )
+    tracks_data = tracks_data.drop_duplicates(subset=['Track ID'])
+    tracks_data['Artist ID'] = tracks_data['Artist ID'].str.split(', ')
+    expanded_tracks_artists = tracks_data.explode('Artist ID')
+    return expanded_tracks_artists.merge(
+        artists[['Artist ID', 'Artist Name']],
+        on='Artist ID',
+        how='left'
+    )
+
+
+def merge_artists_with_country_data(artist_data, country_coords_df):
+    return artist_data.merge(
+        country_coords_df,
+        on='Country',
+        how='left'
+    )
+
+
+def group_tracks_by_id(tracks):
+    return tracks.groupby('Track ID').agg({
+        'Track Name': 'first',
+        'Artist Name': lambda x: ', '.join(x.dropna().unique()),
+        'Duration (ms)': 'first',
+        'Explicit Content': 'first',
+        'Track Popularity': 'first'
+    }).reset_index()

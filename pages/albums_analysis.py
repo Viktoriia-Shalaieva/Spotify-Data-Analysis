@@ -54,6 +54,7 @@ merged_playlists_albums = pd.merge(
 )
 merged_playlists_albums.loc[:, 'Artist ID'] = merged_playlists_albums['Artist ID'].str.split(', ')
 expanded_albums_artists = merged_playlists_albums.explode('Artist ID')
+
 albums_artists_name = expanded_albums_artists.merge(
     artists_table[['Artist ID', 'Artist Name']],
     on='Artist ID',

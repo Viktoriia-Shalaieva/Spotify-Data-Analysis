@@ -67,8 +67,10 @@ merged_playlists_tracks = pd.merge(
     on='Track ID',
     how='left'
 )
+
 merged_playlists_tracks.loc[:, 'Artist ID'] = merged_playlists_tracks['Artist ID'].str.split(', ')
 expanded_tracks_artists = merged_playlists_tracks.explode('Artist ID')
+
 tracks_artists_name = expanded_tracks_artists.merge(
     artists_table[['Artist ID', 'Artist Name']],
     on='Artist ID',

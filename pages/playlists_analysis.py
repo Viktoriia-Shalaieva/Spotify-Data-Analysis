@@ -64,8 +64,6 @@ country_coords_df = data_processing.load_country_coords('config/country_coords.y
 # })
 
 st.subheader("Map of Countries for Playlist Analysis")
-unique_countries = country_coords_df['Country'].unique()
-n_countries = len(unique_countries)
 
 plots.create_choropleth_map(
     data=country_coords_df,
@@ -326,9 +324,10 @@ if show_explanation:
 
 track_counts = playlists_table['Track ID'].value_counts().reset_index()
 
-track_counts_sorted = track_counts.sort_values(by='count', ascending=False)
+# track_counts_sorted = track_counts.sort_values(by='count', ascending=False)
+# top_track_counts_sorted = track_counts_sorted.head(10)
 
-top_track_counts_sorted = track_counts_sorted.head(10)
+top_track_counts_sorted = track_counts.nlargest(n=10, columns='count')
 
 tracks_data = top_track_counts_sorted.merge(
     tracks_table[['Track ID', 'Track Name', 'Track Popularity', 'Explicit Content']],
@@ -442,9 +441,10 @@ artist_per_playlist = (
 
 artist_counts = expanded_playlists_artists['Artist ID'].value_counts().reset_index()
 
-artist_counts_sorted = artist_counts.sort_values(by='count', ascending=False)
+# artist_counts_sorted = artist_counts.sort_values(by='count', ascending=False)
+# top_10_artists = artist_counts_sorted.head(10)
 
-top_10_artists = artist_counts_sorted.head(10)
+top_10_artists = artist_counts.nlargest(n=10, columns='count')
 
 top_10_artists_full = top_10_artists.merge(
     artists_table[['Artist ID', 'Artist Name', 'Artist Total Followers', 'Artist Popularity', 'Artist Genres']],
