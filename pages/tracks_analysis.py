@@ -161,28 +161,13 @@ plots.create_scatter_plot(
             },
 )
 
-show_explanation = st.checkbox('Show explanation', value=False)
+show_explanation = st.checkbox('Show more details', value=False)
 
 if show_explanation:
     st.info("""
-        ### Track Popularity vs. Duration: Explanation
-        This scatter plot visualizes the relationship between the **duration of tracks** (in minutes) and their 
-        **popularity**. 
-        - The tracks are categorized as **Explicit** (containing explicit content) or **Non-Explicit**.
-        - Each dot represents a track, and the trendlines (red for Explicit, green for Non-Explicit) indicate the 
-        general pattern of popularity changes with track duration.
-
-        #### How to interpret:
-        1. **Trendlines**: 
-           - These lines show the overall trend for each category using the LOWESS (Locally Weighted Scatterplot 
-           Smoothing) method.
-           - They help identify patterns in the data without assuming a strict linear relationship.
-           - For example, a rising trendline indicates that longer tracks in that category tend to be more popular.
-        2. **Colors**:
-           - Red dots and lines: Represent Explicit tracks.
-           - Green dots and lines: Represent Non-Explicit tracks.
-        3. **Key Observations**:
-           - Look for patterns such as peaks or declines in popularity for specific durations.
-           - Compare the trends between Explicit and Non-Explicit categories to identify differences in listener 
-           preferences.
+        **Trendlines**:
+        - These lines show the overall trend for each category using the LOWESS (Locally Weighted Scatterplot 
+        Smoothing) method.
+        - They help identify patterns in the data without assuming a strict linear relationship.
+        - For example, a rising trendline indicates that longer tracks in that category tend to be more popular.
     """)

@@ -4,7 +4,6 @@ from plotly.subplots import make_subplots
 import streamlit as st
 
 
-@st.cache_data
 def create_bar_plot(data, x, y, orientation="v", text=None, showticklabels=False, **kwargs):
     fig = px.bar(
         data,
@@ -34,7 +33,6 @@ def create_bar_plot(data, x, y, orientation="v", text=None, showticklabels=False
     st.plotly_chart(fig)
 
 
-@st.cache_data
 def create_choropleth_map(data, locations, location_mode, color, title=None, hover_name=None,
                           color_discrete_sequence=None, color_continuous_scale=None, labels=None,
                           legend_title=None, width=1400, height=800, **kwargs):
@@ -62,7 +60,6 @@ def create_choropleth_map(data, locations, location_mode, color, title=None, hov
     st.plotly_chart(fig)
 
 
-@st.cache_data
 def create_bubble_plot(data, x, y, size, color=None, text=None, yaxis_title=None, **kwargs):
     fig = px.scatter(
         data,
@@ -93,7 +90,6 @@ def create_bubble_plot(data, x, y, size, color=None, text=None, yaxis_title=None
     st.plotly_chart(fig)
 
 
-@st.cache_data
 def create_scatter_plot(data, x, y, color, hover_data, symbol, color_map):
     fig = px.scatter(
         data,
@@ -112,7 +108,6 @@ def create_scatter_plot(data, x, y, color, hover_data, symbol, color_map):
     st.plotly_chart(fig)
 
 
-@st.cache_data
 def create_histogram(data, x, nbins=10, color=None, yaxis_title='Count', **kwargs):
     fig = px.histogram(
         data,
@@ -131,7 +126,6 @@ def create_histogram(data, x, nbins=10, color=None, yaxis_title='Count', **kwarg
     st.plotly_chart(fig)
 
 
-@st.cache_data
 def create_histogram_normal_distribution(data, x, country, mean, median, one_std_dev, two_std_dev,
                                          three_std_dev, nbins=10, yaxis_title='Count', **kwargs):
     fig = px.histogram(
@@ -195,7 +189,6 @@ def create_histogram_normal_distribution(data, x, country, mean, median, one_std
     st.plotly_chart(fig)
 
 
-@st.cache_data
 def create_pie_chart(data, names, **kwargs):
     fig = px.pie(
         data,
@@ -212,7 +205,6 @@ def create_pie_chart(data, names, **kwargs):
     st.plotly_chart(fig)
 
 
-@st.cache_data
 def create_boxplot(data, x, y, color_discrete_map=None, color_discrete_sequence=None, **kwargs):
     fig = px.box(
         data,
@@ -226,7 +218,6 @@ def create_boxplot(data, x, y, color_discrete_map=None, color_discrete_sequence=
     st.plotly_chart(fig)
 
 
-@st.cache_data
 def create_polar_chart(data, r, theta, height=550):
     fig = px.line_polar(
         data,
@@ -250,7 +241,6 @@ def create_polar_chart(data, r, theta, height=550):
     st.plotly_chart(fig)
 
 
-@st.cache_data
 def create_heatmap(data, x, y, z, label_z, height=600):
     fig = px.density_heatmap(
         data,
@@ -270,7 +260,6 @@ def create_heatmap(data, x, y, z, label_z, height=600):
     st.plotly_chart(fig)
 
 
-@st.cache_data
 def create_line_chart(data, x, y, text=None, log_y=True, yaxis_title=None, **kwargs):
     fig = px.line(
         data,
@@ -293,7 +282,6 @@ def create_line_chart(data, x, y, text=None, log_y=True, yaxis_title=None, **kwa
     st.plotly_chart(fig)
 
 
-@st.cache_data
 def format_number_text(column):
     return column.apply(
         lambda x: (
@@ -303,21 +291,6 @@ def format_number_text(column):
         )
     )
 
-
-@st.cache_data
-# Format numerical values in a DataFrame column to 'K', 'M', or plain string.
-def format_number_text_2(data, column):
-    data[f"{column} (formatted)"] = data[column].apply(
-        lambda x: (
-            f"{x / 1e6:.1f}M" if x >= 1e6 else
-            f"{x / 1e3:.1f}K" if x >= 1e3 else
-            str(x)
-        )
-    )
-    return data
-
-
-@st.cache_data
 def create_boxplot_subplots(x, y, y2, title, categoryarray):
     fig = make_subplots(
         rows=1, cols=2,

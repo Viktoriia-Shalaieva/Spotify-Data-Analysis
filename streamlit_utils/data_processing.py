@@ -32,6 +32,7 @@ def load_data(path_config):
     }
 
 
+@st.cache_data
 def process_data(data):
     processed_data = {
         "playlists": rename_playlists(data['playlists']),
@@ -49,6 +50,7 @@ def load_and_process_data(config_path):
     return process_data(data)
 
 
+@st.cache_data
 def rename_playlists(dataframe):
     return dataframe.rename(columns={
         'playlist_id': 'Playlist ID',
@@ -61,6 +63,7 @@ def rename_playlists(dataframe):
     })
 
 
+@st.cache_data
 def rename_artists(dataframe):
     return dataframe.rename(columns={
         'artist_id': 'Artist ID',
@@ -71,6 +74,7 @@ def rename_artists(dataframe):
     })
 
 
+@st.cache_data
 def rename_tracks(dataframe):
     return dataframe.rename(columns={
         'track_id': 'Track ID',
@@ -81,6 +85,7 @@ def rename_tracks(dataframe):
     })
 
 
+@st.cache_data
 def rename_albums(dataframe):
     return dataframe.rename(columns={
         'album_id': 'Album ID',
@@ -151,92 +156,77 @@ def calculate_std_dev_ranges_and_percentages(data):
     std_value = data.std()
     total_values = len(data)
 
-    summary_stats = {
+    popularity_stats = {
         "mean": mean_value,
         "median": median_value,
         "std": std_value
     }
 
-    std_dev_ranges = {}
-    percentages_within_std_dev = {}
+    std_ranges = {}
+    perc_within_std = {}
 
     for i in range(1, 4):
         lower_bound = mean_value - i * std_value
         upper_bound = mean_value + i * std_value
 
-        std_dev_ranges[f'{i}_std_dev'] = (lower_bound, upper_bound)
+        std_ranges[f'{i}_std'] = (lower_bound, upper_bound)
 
         within_range = len(data[(data >= lower_bound) & (data <= upper_bound)])
-        percentages_within_std_dev[f'within_{i}_std_dev'] = within_range / total_values * 100
+        perc_within_std[f'within_{i}_std'] = within_range / total_values * 100
 
-    return summary_stats, std_dev_ranges, percentages_within_std_dev
-
-
-# for the albums analysis
-def merge_albums_with_artists(albums, playlists, artists):
-    merged_playlists_albums = pd.merge(
-        albums,
-        playlists[['Album ID', 'Artist ID']],
-        on='Album ID',
-        how='left'
-    )
-    merged_playlists_albums.loc[:, 'Artist ID'] = merged_playlists_albums['Artist ID'].str.split(', ')
-    expanded_albums_artists = merged_playlists_albums.explode('Artist ID')
-    return expanded_albums_artists.merge(
-        artists[['Artist ID', 'Artist Name']],
-        on='Artist ID',
-        how='left'
-    )
+    return popularity_stats, std_ranges, perc_within_std
 
 
-# for the artists page
-def merge_artists_with_playlists(artists, playlists):
-    return artists.merge(
-        playlists[['Artist ID', 'Country']],
-        on='Artist ID',
-        how='left'
-    )
+def prepare_top_tracks_data(playlists_table, tracks_table, artists_table):
+    """
+    Prepare necessary tables for visualizing Top 10 Tracks by Frequency in Playlists.
 
+    Parameters:
+    - playlists_table (pd.DataFrame): DataFrame with playlist information.
+    - tracks_table (pd.DataFrame): DataFrame with track details.
+    - artists_table (pd.DataFrame): DataFrame with artist details.
+    - country_coords_df (pd.DataFrame): DataFrame with country coordinates for map visualization.
 
-# for the playlists page
-def merge_playlists_with_tracks(playlists, tracks):
-    return pd.merge(
-        playlists,
-        tracks,
+    Returns:
+    - Dict[str, pd.DataFrame]: A dictionary containing processed data tables.
+    """
+    # Count tracks and select top 10
+    track_frequencies = playlists_table['Track ID'].value_counts().reset_index()
+    # track_frequencies.columns = ['Track ID', 'Frequency']
+    top_10_tracks = track_frequencies.nlargest(n=10, columns='count')
+
+    # Merge with tracks and artists data
+    top_tracks_with_details = top_10_tracks.merge(
+        tracks_table[['Track ID', 'Track Name', 'Track Popularity', 'Explicit Content']],
         on='Track ID',
         how='left'
     )
-
-
-def merge_tracks_with_artists(tracks, playlists, artists):
-    tracks_data = tracks.merge(
-        playlists[['Track ID', 'Artist ID']],
+    tracks_with_artists = top_tracks_with_details.merge(
+        playlists_table[['Track ID', 'Artist ID']],
         on='Track ID',
         how='left'
     )
-    tracks_data = tracks_data.drop_duplicates(subset=['Track ID'])
-    tracks_data['Artist ID'] = tracks_data['Artist ID'].str.split(', ')
-    expanded_tracks_artists = tracks_data.explode('Artist ID')
-    return expanded_tracks_artists.merge(
-        artists[['Artist ID', 'Artist Name']],
+    unique_tracks_with_artists = tracks_with_artists.drop_duplicates(subset=['Track ID'])
+    unique_tracks_with_artists.loc[:, 'Artist ID'] = unique_tracks_with_artists['Artist ID'].str.split(', ')
+    exploded_tracks_with_artists = unique_tracks_with_artists.explode('Artist ID')
+
+    tracks_with_artist_names = exploded_tracks_with_artists.merge(
+        artists_table[['Artist ID', 'Artist Name']],
         on='Artist ID',
         how='left'
     )
 
-
-def merge_artists_with_country_data(artist_data, country_coords_df):
-    return artist_data.merge(
-        country_coords_df,
-        on='Country',
-        how='left'
-    )
-
-
-def group_tracks_by_id(tracks):
-    return tracks.groupby('Track ID').agg({
-        'Track Name': 'first',
-        'Artist Name': lambda x: ', '.join(x.dropna().unique()),
-        'Duration (ms)': 'first',
-        'Explicit Content': 'first',
-        'Track Popularity': 'first'
+    # Group data by track and aggregate values
+    grouped_tracks_data = tracks_with_artist_names.groupby('Track ID').agg({
+        'Track Name': 'first',  # Keep the first occurrence of the track name
+        'Artist Name': lambda x: ', '.join(x.dropna().unique()),  # Concatenate unique artist names, separated by commas
+        'count': 'first',
+        'Track Popularity': 'first',
+        'Explicit Content': 'first'
     }).reset_index()
+
+    tracks_summary = grouped_tracks_data[
+        ['Track Name', 'Artist Name', 'count', 'Track Popularity', 'Explicit Content']]
+    tracks_summary.columns = ['Track Name', 'Artists', 'Frequency in Playlists', 'Popularity', 'Explicit']
+
+    return tracks_summary

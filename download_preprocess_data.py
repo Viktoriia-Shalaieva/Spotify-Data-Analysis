@@ -53,7 +53,7 @@ def main():
         logger.info("All status codes are 200. Proceeding with fetching and preprocessing data from Spotify API.")
 
         # Download  and save playlist data
-        playlist_data = spotify.get_save_playlist(spotify_api_token, playlists_all, raw_dir)
+        spotify.get_save_playlist(spotify_api_token, playlists_all, raw_dir)
         logger.info('Playlist data has been downloaded successfully.')
         playlists_ids = list(playlists_all.values())
 
@@ -71,7 +71,7 @@ def main():
         track_ids = set(playlists_df['track_id'])
 
         # Preprocess and save albums data to csv
-        albums_df = data_prep.create_albums_table(
+        data_prep.create_albums_table(
             token=spotify_api_token,
             album_ids=album_ids,
             path=albums_path,
@@ -79,7 +79,7 @@ def main():
         logger.info(f'Albums data has been preprocessed and saved successfully to {albums_path}.')
 
         # Preprocess and save tracks data to csv
-        tracks_df = data_prep.create_tracks_table(
+        data_prep.create_tracks_table(
             token=spotify_api_token,
             track_ids=track_ids,
             path=tracks_path,
@@ -131,7 +131,6 @@ def main():
         utils.upload_preprocessed_data_to_s3(bucket_name=BUCKET_NAME)
 
     else:
-        # Download preprocessed data from S3 if API status codes are not all 200
         logger.info("Not all status codes are 200. Downloading preprocessed data from S3 instead.")
         utils.download_preprocessed_data_from_s3(bucket_name=BUCKET_NAME)
 
