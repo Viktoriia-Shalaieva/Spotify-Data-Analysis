@@ -188,7 +188,7 @@ def prepare_top_tracks_data(playlists_table, tracks_table, artists_table):
     - country_coords_df (pd.DataFrame): DataFrame with country coordinates for map visualization.
 
     Returns:
-    - Dict[str, pd.DataFrame]: A dictionary containing processed data tables.
+    - tracks_summary.
     """
     # Count tracks and select top 10
     track_frequencies = playlists_table['Track ID'].value_counts().reset_index()
@@ -230,3 +230,40 @@ def prepare_top_tracks_data(playlists_table, tracks_table, artists_table):
     tracks_summary.columns = ['Track Name', 'Artists', 'Frequency in Playlists', 'Popularity', 'Explicit']
 
     return tracks_summary
+
+
+def prepare_top_artists_data(playlists_table, tracks_table, artists_table):
+    playlists_table['Artist ID'] = playlists_table['Artist ID'].str.split(', ')
+
+    # Expand the playlists table so that each artist in the 'artist_id' list gets its own row
+    expanded_playlists_artists = playlists_table.explode('Artist ID')
+
+    # Group by country and artist_id to count how often each artist appears in playlists for each country
+    artist_per_playlist = (
+        expanded_playlists_artists
+        .groupby('Country')['Artist ID']
+        .value_counts()
+        .reset_index()
+    )
+
+    artist_counts = expanded_playlists_artists['Artist ID'].value_counts().reset_index()
+
+    top_10_artists = artist_counts.nlargest(n=10, columns='count')
+
+    top_10_artists_full = top_10_artists.merge(
+        artists_table[['Artist ID', 'Artist Name', 'Artist Total Followers', 'Artist Popularity', 'Artist Genres']],
+        on='Artist ID',
+        how='left'
+    )
+
+    top_10_artists_full = top_10_artists_full[
+        ['Artist Name', 'count', 'Artist Total Followers', 'Artist Popularity', 'Artist Genres']
+    ]
+
+    top_10_artists_full.columns = ['Artist Name', 'Number of songs in playlists',
+                                   'Followers', 'Artist Popularity', 'Artist Genres']
+
+    return {
+        'artist_per_playlist': artist_per_playlist,
+        'top_10_artists_full': top_10_artists_full,
+    }

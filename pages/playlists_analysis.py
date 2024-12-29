@@ -321,38 +321,39 @@ with tab4_tracks:
 
 st.subheader("Top 10 Artists by Frequency in Playlists")
 
-playlists_table['Artist ID'] = playlists_table['Artist ID'].str.split(', ')
+# playlists_table['Artist ID'] = playlists_table['Artist ID'].str.split(', ')
+#
+# # Expand the playlists table so that each artist in the 'artist_id' list gets its own row
+# expanded_playlists_artists = playlists_table.explode('Artist ID')
+#
+# # Group by country and artist_id to count how often each artist appears in playlists for each country
+# artist_per_playlist = (
+#     expanded_playlists_artists
+#     .groupby('Country')['Artist ID']
+#     .value_counts()
+#     .reset_index()
+# )
+#
+# artist_counts = expanded_playlists_artists['Artist ID'].value_counts().reset_index()
+#
+# top_10_artists = artist_counts.nlargest(n=10, columns='count')
+#
+# top_10_artists_full = top_10_artists.merge(
+#     artists_table[['Artist ID', 'Artist Name', 'Artist Total Followers', 'Artist Popularity', 'Artist Genres']],
+#     on='Artist ID',
+#     how='left'
+# )
+#
+# top_10_artists_full = top_10_artists_full[
+#     ['Artist Name', 'count', 'Artist Total Followers', 'Artist Popularity', 'Artist Genres']
+# ]
+#
+# top_10_artists_full.columns = ['Artist Name', 'Number of songs in playlists',
+#                                'Followers', 'Artist Popularity', 'Artist Genres']
 
-# Expand the playlists table so that each artist in the 'artist_id' list gets its own row
-expanded_playlists_artists = playlists_table.explode('Artist ID')
-
-# Group by country and artist_id to count how often each artist appears in playlists for each country
-artist_per_playlist = (
-    expanded_playlists_artists
-    .groupby('Country')['Artist ID']
-    .value_counts()
-    .reset_index()
-)
-
-artist_counts = expanded_playlists_artists['Artist ID'].value_counts().reset_index()
-
-# artist_counts_sorted = artist_counts.sort_values(by='count', ascending=False)
-# top_10_artists = artist_counts_sorted.head(10)
-
-top_10_artists = artist_counts.nlargest(n=10, columns='count')
-
-top_10_artists_full = top_10_artists.merge(
-    artists_table[['Artist ID', 'Artist Name', 'Artist Total Followers', 'Artist Popularity', 'Artist Genres']],
-    on='Artist ID',
-    how='left'
-)
-
-top_10_artists_full = top_10_artists_full[
-    ['Artist Name', 'count', 'Artist Total Followers', 'Artist Popularity', 'Artist Genres']
-]
-
-top_10_artists_full.columns = ['Artist Name', 'Number of songs in playlists',
-                               'Followers', 'Artist Popularity', 'Artist Genres']
+artists = data_processing.prepare_top_artists_data(playlists_table, tracks_table, artists_table)
+top_10_artists_full = artists['top_10_artists_full']
+artist_per_playlist = artists['artist_per_playlist']
 
 # top_10_artists_full['Artist Genres'] = top_10_artists_full['Artist Genres'].str.split(', ')
 #
@@ -382,6 +383,7 @@ top_10_artists_full.columns = ['Artist Name', 'Number of songs in playlists',
 
 expanded_artists_genres = data_processing.expand_and_classify_artists_genres(top_10_artists_full)
 
+st.dataframe(expanded_artists_genres)
 # Grouping the data by 'Artist Name' and aggregating values
 top_10_artists_grouped = expanded_artists_genres.groupby('Artist Name').agg({
     'Number of songs in playlists': 'first',
