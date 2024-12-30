@@ -89,28 +89,31 @@ plots.create_bubble_plot(
     yaxis_title="Total Followers (log scale)",
 )
 
-merged_playlists_tracks = pd.merge(
-    playlists_table,
-    tracks_table,
-    on='Track ID',
-    how='left'
-)
+# merged_playlists_tracks = pd.merge(
+#     playlists_table,
+#     tracks_table,
+#     on='Track ID',
+#     how='left'
+# )
+#
+# median_popularity = (
+#     merged_playlists_tracks
+#     .groupby('Country')['Track Popularity']
+#     .median()
+# )
+# median_popularity_df = median_popularity.reset_index()
+#
+# median_popularity_df.columns = ['Country', 'Median Popularity']
+#
+# median_popularity_df = median_popularity_df.sort_values(by='Median Popularity', ascending=False)
+#
+# sorted_countries = median_popularity_df['Country'].tolist()
+
+data_playlists_tracks = data_processing.prepare_median_popularity_data(playlists_table, tracks_table)
+merged_playlists_tracks = data_playlists_tracks['merged_playlists_tracks']
+sorted_countries = data_playlists_tracks['sorted_countries']
 
 help_popularity = 'The value of popularity will be between 0 and 100, with 100 being the most popular'
-
-median_popularity = (
-    merged_playlists_tracks
-    .groupby('Country')['Track Popularity']
-    .median()
-)
-median_popularity_df = median_popularity.reset_index()
-
-median_popularity_df.columns = ['Country', 'Median Popularity']
-
-median_popularity_df = median_popularity_df.sort_values(by='Median Popularity', ascending=False)
-
-sorted_countries = median_popularity_df['Country'].tolist()
-
 st.subheader('Distribution of Track Popularity by Country and Overall (Sorted by Median, Descending Order)',
              help=help_popularity)
 

@@ -53,6 +53,10 @@ playlists_table = data["playlists"]
 artists_table = data["artists"]
 tracks_table = data["tracks"]
 
+data_tracks = data_processing.process_tracks_data(playlists_table, tracks_table, artists_table)
+top_10_tracks_by_popularity = data_tracks['top_10_tracks']
+tracks_artists_grouped = data_tracks['grouped_tracks']
+
 help_popularity = 'The value of popularity will be between 0 and 100, with 100 being the most popular'
 
 st.subheader('Distribution of Track Popularity', help=help_popularity)
@@ -61,41 +65,42 @@ plots.create_histogram(
     x='Track Popularity',
 )
 
-merged_playlists_tracks = pd.merge(
-    playlists_table[['Track ID', 'Artist ID']],
-    tracks_table,
-    on='Track ID',
-    how='left'
-)
+# merged_playlists_tracks = pd.merge(
+#     playlists_table[['Track ID', 'Artist ID']],
+#     tracks_table,
+#     on='Track ID',
+#     how='left'
+# )
+#
+# merged_playlists_tracks.loc[:, 'Artist ID'] = merged_playlists_tracks['Artist ID'].str.split(', ')
+# expanded_tracks_artists = merged_playlists_tracks.explode('Artist ID')
+#
+# tracks_artists_name = expanded_tracks_artists.merge(
+#     artists_table[['Artist ID', 'Artist Name']],
+#     on='Artist ID',
+#     how='left'
+# )
+#
+# tracks_artists_grouped = tracks_artists_name.groupby('Track ID').agg({
+#     'Track Name': 'first',   # Keep the first occurrence of the track name
+#     'Artist Name': lambda x: ', '.join(x.dropna().unique()),  # Concatenate unique artist names, separated by commas
+#     'Duration (ms)': 'first',
+#     'Explicit Content': 'first',
+#     'Track Popularity': 'first',
+# }).reset_index()
+#
+#
+# top_10_tracks_by_popularity = (
+#     tracks_artists_grouped.nlargest(n=10, columns='Track Popularity')
+#     .sort_values(by='Track Popularity', ascending=True)
+# )
 
-merged_playlists_tracks.loc[:, 'Artist ID'] = merged_playlists_tracks['Artist ID'].str.split(', ')
-expanded_tracks_artists = merged_playlists_tracks.explode('Artist ID')
-
-tracks_artists_name = expanded_tracks_artists.merge(
-    artists_table[['Artist ID', 'Artist Name']],
-    on='Artist ID',
-    how='left'
-)
-
-tracks_artists_grouped = tracks_artists_name.groupby('Track ID').agg({
-    'Track Name': 'first',   # Keep the first occurrence of the track name
-    'Artist Name': lambda x: ', '.join(x.dropna().unique()),  # Concatenate unique artist names, separated by commas
-    'Duration (ms)': 'first',
-    'Explicit Content': 'first',
-    'Track Popularity': 'first',
-}).reset_index()
-
-top_10_tracks_popularity = (
-    tracks_artists_grouped.nlargest(n=10, columns='Track Popularity')
-    .sort_values(by='Track Popularity', ascending=True)
-)
-
-min_x = top_10_tracks_popularity['Track Popularity'].min() - 3
-max_x = top_10_tracks_popularity['Track Popularity'].max()
+min_x = top_10_tracks_by_popularity['Track Popularity'].min() - 3
+max_x = top_10_tracks_by_popularity['Track Popularity'].max()
 
 st.subheader('Top 10 Most Popular Tracks', help=help_popularity)
 plots.create_bar_plot(
-    data=top_10_tracks_popularity,
+    data=top_10_tracks_by_popularity,
     x='Track Popularity',
     y='Track Name',
     orientation='h',
@@ -104,16 +109,16 @@ plots.create_bar_plot(
     hover_data={'Artist Name': True},
 )
 
-tracks_artists_grouped['Explicit Status'] = (
-    tracks_artists_grouped['Explicit Content']
-    .map({True: 'Explicit', False: 'Non-Explicit'})
-)
-
-st.subheader('Distribution of Explicit and Non-Explicit Tracks')
-plots.create_pie_chart(
-    data=tracks_artists_grouped,
-    names='Explicit Status',
-)
+# tracks_artists_grouped['Explicit Status'] = (
+#     tracks_artists_grouped['Explicit Content']
+#     .map({True: 'Explicit', False: 'Non-Explicit'})
+# )
+#
+# st.subheader('Distribution of Explicit and Non-Explicit Tracks')
+# plots.create_pie_chart(
+#     data=tracks_artists_grouped,
+#     names='Explicit Status',
+# )
 
 st.subheader('Analysis of Track Popularity for Explicit and Non-Explicit Tracks', help=help_popularity)
 
@@ -142,7 +147,7 @@ with tab2_histogram:
         },
     )
 
-tracks_artists_grouped['Track Duration (minutes)'] = tracks_artists_grouped['Duration (ms)'] / 60000
+# tracks_artists_grouped['Track Duration (minutes)'] = tracks_artists_grouped['Duration (ms)'] / 60000
 
 help_trendline = ("""Trendlines show the overall relationship between track duration and popularity 
                   for Explicit and Non-Explicit tracks.""")

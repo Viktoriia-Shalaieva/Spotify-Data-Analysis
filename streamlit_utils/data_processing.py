@@ -2,6 +2,7 @@ import os
 import yaml
 import pandas as pd
 import streamlit as st
+from streamlit_utils import plots
 
 
 def load_config(config_path, encoding='utf-8'):
@@ -150,6 +151,43 @@ def expand_and_classify_artists_genres(artists_table):
     return expanded_artists_genres
 
 
+def prepare_median_popularity_data(playlists_table, tracks_table):
+    """
+    Prepare data for calculating median popularity of tracks by country.
+
+    Parameters:
+        - playlists_table (pd.DataFrame): DataFrame with playlist information.
+        - tracks_table (pd.DataFrame): DataFrame with track details.
+
+    Returns:
+        - Dict[str, pd.DataFrame]: A dictionary containing merged playlist-track data and sorted countries by median
+        popularity.
+    """
+    merged_playlists_tracks = pd.merge(
+        playlists_table,
+        tracks_table,
+        on='Track ID',
+        how='left'
+    )
+
+    median_popularity = (
+        merged_playlists_tracks
+        .groupby('Country')['Track Popularity']
+        .median()
+    )
+    median_popularity_df = median_popularity.reset_index()
+
+    median_popularity_df.columns = ['Country', 'Median Popularity']
+
+    median_popularity_df = median_popularity_df.sort_values(by='Median Popularity', ascending=False)
+
+    sorted_countries = median_popularity_df['Country'].tolist()
+    return {
+        'merged_playlists_tracks': merged_playlists_tracks,
+        'sorted_countries': sorted_countries
+    }
+
+
 def calculate_std_dev_ranges_and_percentages(data):
     mean_value = data.mean()
     median_value = data.median()
@@ -182,13 +220,12 @@ def prepare_top_tracks_data(playlists_table, tracks_table, artists_table):
     Prepare necessary tables for visualizing Top 10 Tracks by Frequency in Playlists.
 
     Parameters:
-    - playlists_table (pd.DataFrame): DataFrame with playlist information.
-    - tracks_table (pd.DataFrame): DataFrame with track details.
-    - artists_table (pd.DataFrame): DataFrame with artist details.
-    - country_coords_df (pd.DataFrame): DataFrame with country coordinates for map visualization.
+        - playlists_table (pd.DataFrame): DataFrame with playlist information.
+        - tracks_table (pd.DataFrame): DataFrame with track details.
+        - artists_table (pd.DataFrame): DataFrame with artist details.
 
     Returns:
-    - tracks_summary.
+        - tracks_summary.
     """
     # Count tracks and select top 10
     track_frequencies = playlists_table['Track ID'].value_counts().reset_index()
@@ -266,4 +303,182 @@ def prepare_top_artists_data(playlists_table, tracks_table, artists_table):
     return {
         'artist_per_playlist': artist_per_playlist,
         'top_10_artists_full': top_10_artists_full,
+    }
+
+
+def process_tracks_data(playlists_table, tracks_table, artists_table):
+    """
+    Process track data by merging playlist, track, and artist information.
+
+    Parameters:
+    - playlists_table (pd.DataFrame): DataFrame with playlist information.
+    - tracks_table (pd.DataFrame): DataFrame with track details.
+    - artists_table (pd.DataFrame): DataFrame with artist details.
+
+    Returns:
+    dict: A dictionary containing:
+        - 'top_10_tracks': Top 10 tracks sorted by popularity.
+        - 'grouped_tracks': Grouped track data with artist names, track duration in minutes and additional columns.
+    """
+    merged_playlists_tracks = pd.merge(
+        playlists_table[['Track ID', 'Artist ID']],
+        tracks_table,
+        on='Track ID',
+        how='left'
+    )
+
+    merged_playlists_tracks.loc[:, 'Artist ID'] = merged_playlists_tracks['Artist ID'].str.split(', ')
+    expanded_tracks_artists = merged_playlists_tracks.explode('Artist ID')
+
+    tracks_artists_name = expanded_tracks_artists.merge(
+        artists_table[['Artist ID', 'Artist Name']],
+        on='Artist ID',
+        how='left'
+    )
+
+    tracks_artists_grouped = tracks_artists_name.groupby('Track ID').agg({
+        'Track Name': 'first',  # Keep the first occurrence of the track name
+        'Artist Name': lambda x: ', '.join(x.dropna().unique()),  # Concatenate unique artist names, separated by commas
+        'Duration (ms)': 'first',
+        'Explicit Content': 'first',
+        'Track Popularity': 'first',
+    }).reset_index()
+
+    top_10_tracks_by_popularity = (
+        tracks_artists_grouped.nlargest(n=10, columns='Track Popularity')
+        .sort_values(by='Track Popularity', ascending=True)
+    )
+
+    tracks_artists_grouped['Explicit Status'] = (
+        tracks_artists_grouped['Explicit Content']
+        .map({True: 'Explicit', False: 'Non-Explicit'})
+    )
+
+    tracks_artists_grouped['Track Duration (minutes)'] = tracks_artists_grouped['Duration (ms)'] / 60000
+
+    return {
+        'top_10_tracks': top_10_tracks_by_popularity,
+        'grouped_tracks': tracks_artists_grouped,
+    }
+
+
+def process_artists_data(artists_table):
+    """
+    Analyzes an artists table to identify top artists and follower group distribution.
+
+    Parameters:
+        artists_table (pd.DataFrame): A DataFrame containing artist data.
+
+    Returns:
+        Dict[str, Union[pd.DataFrame, pd.Series]]: A dictionary with:
+            - 'top_10_artists_by_popularity': Top 10 artists by popularity.
+            - 'top_10_artists_by_followers': Top 10 artists by total followers, including a formatted followers column.
+            - 'bin_counts_followers': Distribution of artists by follower count groups.
+    """
+    top_10_artists_by_popularity = (
+        artists_table.nlargest(n=10, columns='Artist Popularity')
+        .sort_values(by='Artist Popularity', ascending=True)
+    )
+
+    top_10_artists_by_followers = (
+        artists_table.nlargest(n=10, columns='Artist Total Followers')
+        .sort_values(by='Artist Total Followers', ascending=True)
+    )
+
+    top_10_artists_by_followers['Artist Total Followers (formatted)'] = (
+        plots.format_number_text(
+            top_10_artists_by_followers['Artist Total Followers']
+        )
+    )
+
+    artists_table['Follower Group'] = pd.cut(
+        artists_table['Artist Total Followers'],
+        bins=[0, 1e6, 5e6, 10e6, 50e6, 100e6, 150e6],
+        labels=['<1M', '1-5M', '5-10M', '10-50M', '50-100M', '>100M'],
+        ordered=True
+    )
+
+    bin_counts_followers = artists_table['Follower Group'].value_counts(sort=False)
+
+    return {
+        'top_10_artists_by_popularity': top_10_artists_by_popularity,
+        'top_10_artists_by_followers': top_10_artists_by_followers,
+        'bin_counts_followers': bin_counts_followers
+    }
+
+
+def process_albums_data(albums_table, playlists_table, artists_table):
+    """
+    Prepare data for creating Top 10 Most Popular Albums, Seasonality of
+    Album Releases, Album Releases Timeline, Distribution of Album Types.
+
+    Parameters:
+    - albums_table: DataFrame with album details.
+    - playlists_table: DataFrame with playlist information.
+    - artists_table: DataFrame with artist details.
+
+    Returns:
+    - Dict[str, pd.DataFrame]: A dictionary containing processed data tables.
+    """
+    # For Top 10 Most Popular Albums
+    top_10_albums_by_popularity = (
+        albums_table.nlargest(n=10, columns='Album Popularity')
+    )
+
+    merged_playlists_albums = pd.merge(
+        top_10_albums_by_popularity,
+        playlists_table[['Album ID', 'Artist ID']],
+        on='Album ID',
+        how='left'
+    )
+    merged_playlists_albums.loc[:, 'Artist ID'] = merged_playlists_albums['Artist ID'].str.split(', ')
+    expanded_albums_artists = merged_playlists_albums.explode('Artist ID')
+
+    albums_artists_name = expanded_albums_artists.merge(
+        artists_table[['Artist ID', 'Artist Name']],
+        on='Artist ID',
+        how='left'
+    )
+
+    top_10_albums_artists_grouped = albums_artists_name.groupby('Album ID').agg({
+        'Album Name': 'first',  # Keep the first occurrence of the track name
+        'Artist Name': lambda x: ', '.join(x.dropna().unique()),  # Concatenate unique artist names, separated by commas
+        'Album Popularity': 'first',
+    }).reset_index()
+
+    # For Top 10 Most Popular Albums
+    top_10_albums_artists_sorted = top_10_albums_artists_grouped.sort_values(by='Album Popularity', ascending=True)
+
+    # The 'errors="coerce"' argument replaces invalid date entries with NaT (Not a Time),
+    # ensuring the column can be processed without raising errors for incorrect formats.
+    albums_table['Release Date'] = pd.to_datetime(albums_table['Release Date'], errors='coerce')
+
+    albums_table['release_month'] = albums_table['Release Date'].dt.month
+
+    # For Seasonality of Album Releases
+    monthly_releases = albums_table['release_month'].value_counts().reset_index()
+    monthly_releases.columns = ['Month', 'Release Count']
+
+    month_names = {
+        1: 'January', 2: 'February', 3: 'March', 4: 'April',
+        5: 'May', 6: 'June', 7: 'July', 8: 'August',
+        9: 'September', 10: 'October', 11: 'November', 12: 'December'
+    }
+    monthly_releases['Month Name'] = monthly_releases['Month'].map(month_names)
+
+    monthly_releases = monthly_releases.sort_values(by='Month')
+
+    # For Distribution of Album Types
+    albums_table['release_year'] = albums_table['Release Date'].dt.year
+
+    # For Album Releases Timeline
+    yearly_releases = albums_table['release_year'].value_counts().sort_index().reset_index()
+    yearly_releases.columns = ['Release Year', 'Release Count']
+
+    return {
+        'top_10_albums_by_popularity': top_10_albums_by_popularity,
+        'top_10_albums_artists_sorted': top_10_albums_artists_sorted,
+        'monthly_releases': monthly_releases,
+        'yearly_releases': yearly_releases,
+        'albums_table': albums_table
     }

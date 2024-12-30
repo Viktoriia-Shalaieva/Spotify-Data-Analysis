@@ -35,6 +35,11 @@ data = data_processing.load_and_process_data('config/path_config.yaml')
 playlists_table = data["playlists"]
 artists_table = data["artists"]
 
+data_artists = data_processing.process_artists_data(artists_table)
+top_10_artists_by_popularity = data_artists['top_10_artists_by_popularity']
+top_10_artists_by_followers = data_artists['top_10_artists_by_followers']
+bin_counts_followers = data_artists['bin_counts_followers']
+
 help_popularity = 'The value of popularity will be between 0 and 100, with 100 being the most popular'
 
 st.subheader('Distribution of Artist Popularity', help=help_popularity)
@@ -43,16 +48,16 @@ plots.create_histogram(
             x='Artist Popularity',
         )
 
-top_10_artists_popularity = (
-    artists_table.nlargest(n=10, columns='Artist Popularity')
-    .sort_values(by='Artist Popularity', ascending=True)
-)
-min_x = top_10_artists_popularity['Artist Popularity'].min() - 3
-max_x = top_10_artists_popularity['Artist Popularity'].max()
+# top_10_artists_by_popularity = (
+#     artists_table.nlargest(n=10, columns='Artist Popularity')
+#     .sort_values(by='Artist Popularity', ascending=True)
+# )
+min_x = top_10_artists_by_popularity['Artist Popularity'].min() - 3
+max_x = top_10_artists_by_popularity['Artist Popularity'].max()
 
 st.subheader('Top 10 Most Popular Artists', help=help_popularity)
 plots.create_bar_plot(
-    data=top_10_artists_popularity,
+    data=top_10_artists_by_popularity,
     x='Artist Popularity',
     y='Artist Name',
     orientation='h',
@@ -60,43 +65,43 @@ plots.create_bar_plot(
     range_x=[min_x, max_x],
 )
 
-top_10_artists_followers = (
-    artists_table.nlargest(n=10, columns='Artist Total Followers')
-    .sort_values(by='Artist Total Followers', ascending=True)
-)
-
-top_10_artists_followers['Artist Total Followers (formatted)'] = (
-    plots.format_number_text(
-        top_10_artists_followers['Artist Total Followers']
-    )
-)
+# top_10_artists_by_followers = (
+#     artists_table.nlargest(n=10, columns='Artist Total Followers')
+#     .sort_values(by='Artist Total Followers', ascending=True)
+# )
+#
+# top_10_artists_by_followers['Artist Total Followers (formatted)'] = (
+#     plots.format_number_text(
+#         top_10_artists_by_followers['Artist Total Followers']
+#     )
+# )
 
 st.subheader('Top 10 Artists by Followers')
 plots.create_bar_plot(
-    data=top_10_artists_followers,
+    data=top_10_artists_by_followers,
     x='Artist Total Followers',
     y='Artist Name',
     orientation='h',
     text='Artist Total Followers (formatted)',
 )
 
-artists_table['Follower Group'] = pd.cut(
-    artists_table['Artist Total Followers'],
-    bins=[0, 1e6, 5e6, 10e6, 50e6, 100e6, 150e6],
-    labels=['<1M', '1-5M', '5-10M', '10-50M', '50-100M', '>100M'],
-    ordered=True
-)
-
-bin_counts = artists_table['Follower Group'].value_counts(sort=False)
+# artists_table['Follower Group'] = pd.cut(
+#     artists_table['Artist Total Followers'],
+#     bins=[0, 1e6, 5e6, 10e6, 50e6, 100e6, 150e6],
+#     labels=['<1M', '1-5M', '5-10M', '10-50M', '50-100M', '>100M'],
+#     ordered=True
+# )
+#
+# bin_counts = artists_table['Follower Group'].value_counts(sort=False)
 
 st.subheader('Number of Artists by Follower Groups')
 plots.create_bar_plot(
-    data=bin_counts,
-    # Convert bin_counts.index to a list to ensure compatibility with Streamlit's caching system.
+    data=bin_counts_followers,
+    # Convert bin_counts_followers.index to a list to ensure compatibility with Streamlit's caching system.
     # pandas.Index is not hashable and cannot be used as a cache key,
     # so converting it to a list resolves the issue.
-    x=list(bin_counts.index),
-    y=bin_counts.values,
+    x=list(bin_counts_followers.index),
+    y=bin_counts_followers.values,
     labels={'y': 'Number of Artists'},
     showticklabels=True
 )
