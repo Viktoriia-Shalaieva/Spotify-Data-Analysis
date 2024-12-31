@@ -3,11 +3,12 @@ import yaml
 import pandas as pd
 import streamlit as st
 from streamlit_utils import plots
+from source import utils
 
 
-def load_config(config_path, encoding='utf-8'):
-    with open(config_path, 'r', encoding=encoding) as file:
-        return yaml.safe_load(file)
+# def load_config(config_path, encoding='utf-8'):
+#     with open(config_path, 'r', encoding=encoding) as file:
+#         return yaml.safe_load(file)
 
 
 @st.cache_data
@@ -46,7 +47,7 @@ def process_data(data):
 
 @st.cache_data
 def load_and_process_data(config_path):
-    path_config = load_config(config_path)
+    path_config = utils.load_config(config_path)
     data = load_data(path_config)
     return process_data(data)
 
@@ -101,7 +102,7 @@ def rename_albums(dataframe):
 
 @st.cache_data
 def load_country_coords(file_path):
-    country_coords = load_config(file_path)
+    country_coords = utils.load_config(file_path)
 
     countries_for_map = []
     latitudes = []
@@ -127,7 +128,7 @@ def classify_genres_detailed_structure(genre, all_genres_with_subgenres):
 
 
 def expand_and_classify_artists_genres(artists_table):
-    all_genres_with_subgenres = load_config('./data/genres/genres.yaml')
+    all_genres_with_subgenres = utils.load_config('./data/genres/genres.yaml')
     artists_table['Artist Genres'] = artists_table['Artist Genres'].str.split(', ')
 
     expanded_artists_genres = artists_table.explode('Artist Genres')

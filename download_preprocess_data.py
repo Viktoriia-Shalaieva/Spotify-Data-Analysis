@@ -12,8 +12,8 @@ def main():
     BUCKET_NAME = 'project-spotify-analysis-data'
 
     # Get configs
-    config = utils.get_config()
-    path_config = utils.get_path_config()
+    config = utils.load_config('config/config.yaml')
+    path_config = utils.load_config('config/path_config.yaml')
 
     # Get secrets and API tokens
     spotify_secret = secrets_functions.get_secrets(secret_group='spotify')

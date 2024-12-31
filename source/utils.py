@@ -2,27 +2,33 @@ import yaml
 from source.api import s3_functions
 
 
+def load_config(config_path, encoding='utf-8'):
+    with open(config_path, 'r', encoding=encoding) as file:
+        return yaml.safe_load(file)
+
+
 def get_secrets(secret_group):
-    with open('.credentials.yaml', 'r') as file:
-        credentials = yaml.safe_load(file)
+    # with open('.credentials.yaml', 'r') as file:
+    #     credentials = yaml.safe_load(file)
+    credentials = load_config('.credentials.yaml')
 
     secrets = credentials.get(secret_group)
 
     return secrets
 
 
-def get_config():
-    with open('config/config.yaml', 'r') as file:
-        config = yaml.safe_load(file)
-
-    return config
-
-
-def get_path_config():
-    with open('config/path_config.yaml', 'r') as config_file:
-        path_config = yaml.safe_load(config_file)
-
-    return path_config
+# def get_config():
+#     with open('config/config.yaml', 'r') as file:
+#         config = yaml.safe_load(file)
+#
+#     return config
+#
+#
+# def get_path_config():
+#     with open('config/path_config.yaml', 'r') as config_file:
+#         path_config = yaml.safe_load(config_file)
+#
+#     return path_config
 
 
 def upload_preprocessed_data_to_s3(bucket_name):
