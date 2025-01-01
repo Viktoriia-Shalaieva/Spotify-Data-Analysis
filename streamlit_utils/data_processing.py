@@ -1,7 +1,10 @@
 import os
+import random
 import yaml
+
 import pandas as pd
 import streamlit as st
+
 from streamlit_utils import plots
 from source import utils
 
@@ -120,15 +123,81 @@ def load_country_coords(file_path):
     })
 
 
+def calculate_genre_weights(artists_table):
+    """
+    Calculates the unique genres and their relative frequencies (weights)
+    from the 'Artist Genres' column of the artists_table.
+
+    Parameters:
+        artists_table (pd.DataFrame): The DataFrame containing the 'Artist Genres' column.
+
+    Returns:
+        tuple: A tuple containing:
+            - genres_list (list): The unique genres.
+            - weights (list): The corresponding relative weights.
+    """
+    genre_counts = artists_table['Artist Genres'].str.split(', ').explode().value_counts()
+
+    genres_list = genre_counts.index.tolist()
+    weights = genre_counts.tolist()
+
+    return genres_list, weights
+
+
+def populate_artist_genres_randomly(artists_table):
+    """
+    Randomly populates the 'Artist Genres' column in the artists_table DataFrame
+    while preserving the statistical distribution using calculated weights.
+    """
+    # Calculate genres and weights from non-unknown values
+    known_genres_table = artists_table[artists_table['Artist Genres'] != 'unknown genre']
+    genres_list, weights = calculate_genre_weights(known_genres_table)
+
+    # Find indices where 'Artist Genres' is 'unknown'
+    unknown_indices = artists_table[artists_table['Artist Genres'] == 'unknown genre'].index
+
+    # Generate random genres using the weights
+    random_genres = random.choices(
+        population=genres_list,
+        weights=weights,
+        k=len(unknown_indices)
+    )
+
+    # Update the 'Artist Genres' column only for 'unknown' rows
+    artists_table.loc[unknown_indices, 'Artist Genres'] = random_genres
+
+    return artists_table
+
+
 def classify_genres_detailed_structure(genre, all_genres_with_subgenres):
+    """
+    Classifies a genre into a parent genre based on a given mapping.
+
+    Parameters:
+        genre (str): The genre to classify.
+        all_genres_with_subgenres (dict): A dictionary mapping parent genres to their subgenres.
+
+    Returns:
+        str: The parent genre if found, otherwise 'Other'.
+    """
     for parent_genre, subgenres in all_genres_with_subgenres.items():
         if genre in subgenres:
             return parent_genre
     return 'Other'
 
 
+def classify_other_genres(genre, additional_genres):
+    """Classifies a genre into a parent genre based on additional genres mapping."""
+    for parent_genre, subgenres in additional_genres.items():
+        if subgenres is not None and genre in subgenres:
+            return parent_genre
+    return 'Other'
+
+
 def expand_and_classify_artists_genres(artists_table):
+
     all_genres_with_subgenres = utils.load_config('./data/genres/genres.yaml')
+    additional_genres_with_subgenres = utils.load_config('./data/genres/additional_genres.yaml')
     artists_table['Artist Genres'] = artists_table['Artist Genres'].str.split(', ')
 
     expanded_artists_genres = artists_table.explode('Artist Genres')
@@ -145,9 +214,17 @@ def expand_and_classify_artists_genres(artists_table):
         .str.replace(r'&\s*country', 'country', regex=True)
     )
 
+    # expanded_artists_genres = populate_artist_genres_randomly(expanded_artists_genres)
+
     expanded_artists_genres['Parent Genre'] = (
         expanded_artists_genres['Artist Genres']
         .apply(lambda genre: classify_genres_detailed_structure(genre, all_genres_with_subgenres))
+    )
+
+    expanded_artists_genres['Parent Genre'] = expanded_artists_genres.apply(
+        lambda row: classify_other_genres(row['Artist Genres'], additional_genres_with_subgenres)
+        if row['Parent Genre'] == 'Other' else row['Parent Genre'],
+        axis=1
     )
     return expanded_artists_genres
 

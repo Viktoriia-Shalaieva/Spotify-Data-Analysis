@@ -132,7 +132,8 @@ plots.create_bar_plot(
 #                                            .apply(classify_genres_detailed_structure))
 
 expanded_artists_genres = data_processing.expand_and_classify_artists_genres(artists_table)
-
+expanded_artists_genres_unknown = expanded_artists_genres[expanded_artists_genres['Parent Genre'] == 'Other']
+st.dataframe(expanded_artists_genres_unknown)
 # Group by main genres and count occurrences
 main_genre_counts = expanded_artists_genres['Parent Genre'].value_counts(sort=False).reset_index()
 main_genre_counts.columns = ['Parent Genre', 'Number of Artists']
