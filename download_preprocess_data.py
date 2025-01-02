@@ -38,7 +38,7 @@ def main():
     albums_path = str(file_paths['albums.csv'])
     artists_path = str(file_paths['artists.csv'])
     artists_genres_discogs_path = str(file_paths['artists_genres_discogs.csv'])
-    artists_genres_full_unknown_path = str(file_paths['artists_genres_full_unknown.csv'])
+    artists_full_path = str(file_paths['artists_full.csv'])
     tracks_path = str(file_paths['tracks.csv'])
 
     genres_path = os.path.join(genres_dir, 'genres.yaml')
@@ -92,7 +92,7 @@ def main():
             artist_ids=artist_ids,
             path=artists_path,
             save=True)
-        logger.info(f'Artists data has been preprocessed and saved successfully to {tracks_path}.')
+        logger.info(f'Artists data has been preprocessed and saved successfully to {artists_path}.')
 
         # Check for missing artist genres
         empty_genre_count_art = (artists_df['artist_genres'] == '[]').sum()
@@ -113,20 +113,20 @@ def main():
         empty_artists_genres_count = (artists_genres_discogs['artist_genre'] == '[]').sum()
         logger.info(f"Number of empty genres in artists_genres_discogs.csv: {empty_artists_genres_count}")
 
-        # Combine and preprocess artist genres
-        artists_df['artist_genres'] = artists_df['artist_genres'].replace('[]', pd.NA)
+        # Combine artist genres
         artists = artists_df.merge(artists_genres_discogs, on='artist_name', how='left')
 
         # Fill missing values in the 'artist_genres' column with corresponding values from the 'artist_genre' column.
         artists['artist_genres'] = artists['artist_genres'].fillna(artists['artist_genre'])
         artists = artists.drop(columns=['artist_genre'])
-        artists['artist_genres'] = artists['artist_genres'].replace('[]', 'unknown genre')
-        artists.to_csv(artists_genres_full_unknown_path, index=False, sep="~")
+        empty_artists_genre_count = (artists['artist_genres'] == '[]').sum()
+        logger.info(f"Number of empty genres in artists: {empty_artists_genre_count}")
 
-        # Check for missing genres
-        empty_genre_count_art = (artists['artist_genres'] == 'unknown genre').sum()
-        logger.info(f"Number of empty artist genres in artists_genres_full_unknown.csv: {empty_genre_count_art}")
-
+        data_prep.process_artist_genres(
+            artists_df=artists,
+            path=artists_full_path,
+            save=True
+        )
         # Upload processed data to S3 bucket
         utils.upload_preprocessed_data_to_s3(bucket_name=BUCKET_NAME)
 

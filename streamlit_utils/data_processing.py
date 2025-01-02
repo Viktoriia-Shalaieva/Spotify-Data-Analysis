@@ -23,17 +23,20 @@ def load_data(path_config):
     albums_path = str(file_paths['albums.csv'])
     artists_genres_full_unknown_path = str(file_paths['artists_genres_full_unknown.csv'])
     tracks_path = str(file_paths['tracks.csv'])
+    artists_full_path = str(file_paths['artists_full.csv'])
 
     playlists = pd.read_csv(playlists_path, sep="~")
     albums = pd.read_csv(albums_path, sep='~')
     artists = pd.read_csv(artists_genres_full_unknown_path, sep='~')
+    artists_full = pd.read_csv(artists_full_path, sep='~')
     tracks = pd.read_csv(tracks_path, sep='~') if 'albums.csv' in file_paths else None
 
     return {
         "playlists": playlists,
-        "artists": artists,
+        # "artists": artists,
+        "artists": artists_full,
         "tracks": tracks,
-        "albums": albums
+        "albums": albums,
     }
 
 

@@ -1,0 +1,22 @@
+02-Jan-25 16:49:40 [INFO] Access token retrieved successfully
+02-Jan-25 16:49:40 [INFO] Status code for 37i9dQZEVXbMDoHDwVN2tF: 404
+02-Jan-25 16:49:41 [INFO] Status code for 37i9dQZEVXbLRQDuF5jeBp: 404
+02-Jan-25 16:49:41 [INFO] Status code for 37i9dQZEVXbKj23U1GF4IR: 404
+02-Jan-25 16:49:41 [INFO] Status code for 37i9dQZEVXbMXbN3EUUhlg: 404
+02-Jan-25 16:49:42 [INFO] Status code for 37i9dQZEVXbMMy2roB9myp: 404
+02-Jan-25 16:49:42 [INFO] Status code for 37i9dQZEVXbJiZcmkrIHGU: 404
+02-Jan-25 16:49:43 [INFO] Status code for 37i9dQZEVXbIPWwFssbupI: 404
+02-Jan-25 16:49:43 [INFO] Status code for 37i9dQZEVXbNFJfN1Vw8d9: 404
+02-Jan-25 16:49:43 [INFO] Status code for 37i9dQZEVXbKkidEfWYRuD: 404
+02-Jan-25 16:49:44 [INFO] Status code for 37i9dQZEVXbMH2jvi6jvjk: 404
+02-Jan-25 16:49:44 [INFO] Status code for 37i9dQZEVXbM4UZuIrvHvA: 404
+02-Jan-25 16:49:45 [INFO] Status code for 37i9dQZEVXbNxXF4SkHj9F: 404
+02-Jan-25 16:49:45 [INFO] Status code for 37i9dQZEVXbLZ52XmnySJg: 404
+02-Jan-25 16:49:45 [INFO] Status code for 37i9dQZEVXbLnolsZ8PSNw: 404
+02-Jan-25 16:49:46 [INFO] Status code for 37i9dQZEVXbKY7jLzlJ11V: 404
+02-Jan-25 16:49:46 [INFO] Not all status codes are 200. Downloading preprocessed data from S3 instead.
+02-Jan-25 16:49:46 [INFO] File 'data/preprocessed/albums.csv' has been downloaded from bucket 'project-spotify-analysis-data' to local path 'data/preprocessed/albums.csv'.
+02-Jan-25 16:49:46 [ERROR] Error downloading file: An error occurred (404) when calling the HeadObject operation: Not Found
+02-Jan-25 16:49:47 [INFO] File 'data/preprocessed/playlists.csv' has been downloaded from bucket 'project-spotify-analysis-data' to local path 'data/preprocessed/playlists.csv'.
+02-Jan-25 16:49:47 [INFO] File 'data/preprocessed/tracks.csv' has been downloaded from bucket 'project-spotify-analysis-data' to local path 'data/preprocessed/tracks.csv'.
+02-Jan-25 16:49:50 [INFO] 'data/genres/genres.yaml' has been uploaded to bucket 'project-spotify-analysis-data' as 'data/genres/genres.yaml'.

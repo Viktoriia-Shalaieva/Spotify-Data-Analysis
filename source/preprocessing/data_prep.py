@@ -1,4 +1,5 @@
 import time
+import random
 import pandas as pd
 from logs.logger_config import logger
 from source.api import discogs, spotify
@@ -163,3 +164,42 @@ def create_artist_genre_table(token, file, path, save):
     if save:
         artist_genre.to_csv(path, index=False, sep="~")
     return artist_genre
+
+
+def process_artist_genres(artists_df, path, save):
+    """
+    Processes the 'artist_genres' column in a DataFrame, replacing missing genres
+    with randomly generated genres based on the distribution of existing genres.
+    """
+    # Replace empty lists ('[]') with NaN
+    artists_df['artist_genres'] = artists_df['artist_genres'].replace('[]', pd.NA)
+
+    # Remove square brackets and extra quotes
+    artists_df['artist_genres'] = (
+        artists_df['artist_genres']
+        .str.strip("[]")
+        .str.replace("'", "")
+    )
+    # Count the frequency of each genre
+    genre_counts = artists_df['artist_genres'].str.split(', ').explode().value_counts()
+    genres_list = genre_counts.index.tolist()
+    weights = genre_counts.tolist()
+
+    # Identify indices where 'artist_genres' is NaN
+    unknown_genre_indices = artists_df[artists_df['artist_genres'].isna()].index
+
+    # Generate random genres for missing values based on frequency distribution
+    random_genres = random.choices(
+        population=genres_list,
+        weights=weights,
+        k=len(unknown_genre_indices)
+    )
+
+    # Assign the generated random genres to missing values
+    artists_df.loc[unknown_genre_indices, 'artist_genres'] = random_genres
+
+    # Save the updated DataFrame to a CSV file
+    if save:
+        artists_df.to_csv(path, index=False, sep="~")
+
+    return artists_df

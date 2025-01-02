@@ -17,3 +17,4 @@ files_names:
   - 'playlists.csv'
   - 'tracks.csv'
   - 'genres.yaml'
+  - 'artists_full.csv'

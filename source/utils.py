@@ -38,9 +38,9 @@ def upload_preprocessed_data_to_s3(bucket_name):
         s3_key="data/preprocessed/albums.csv")
 
     s3_functions.upload_to_s3(
-        file_name="data/preprocessed/artists_genres_full_unknown.csv",
+        file_name="data/preprocessed/artists_full.csv",
         bucket_name=bucket_name,
-        s3_key="data/preprocessed/artists_genres_full_unknown.csv")
+        s3_key="data/preprocessed/artists_full.csv")
 
     s3_functions.upload_to_s3(
         file_name="data/preprocessed/playlists.csv",
@@ -62,9 +62,9 @@ def download_preprocessed_data_from_s3(bucket_name):
         s3_key="data/preprocessed/albums.csv")
 
     s3_functions.download_from_s3(
-        file_name="data/preprocessed/artists_genres_full_unknown.csv",
+        file_name="data/preprocessed/artists_full.csv",
         bucket_name=bucket_name,
-        s3_key="data/preprocessed/artists_genres_full_unknown.csv")
+        s3_key="data/preprocessed/artists_full.csv")
 
     s3_functions.download_from_s3(
         file_name="data/preprocessed/playlists.csv",
