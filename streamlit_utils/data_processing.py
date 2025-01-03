@@ -9,11 +9,6 @@ from streamlit_utils import plots
 from source import utils
 
 
-# def load_config(config_path, encoding='utf-8'):
-#     with open(config_path, 'r', encoding=encoding) as file:
-#         return yaml.safe_load(file)
-
-
 @st.cache_data
 def load_data(path_config):
     data_dir = path_config['data_dir'][0]
@@ -21,19 +16,16 @@ def load_data(path_config):
 
     playlists_path = str(file_paths['playlists.csv'])
     albums_path = str(file_paths['albums.csv'])
-    artists_genres_full_unknown_path = str(file_paths['artists_genres_full_unknown.csv'])
     tracks_path = str(file_paths['tracks.csv'])
     artists_full_path = str(file_paths['artists_full.csv'])
 
     playlists = pd.read_csv(playlists_path, sep="~")
     albums = pd.read_csv(albums_path, sep='~')
-    artists = pd.read_csv(artists_genres_full_unknown_path, sep='~')
     artists_full = pd.read_csv(artists_full_path, sep='~')
-    tracks = pd.read_csv(tracks_path, sep='~') if 'albums.csv' in file_paths else None
+    tracks = pd.read_csv(tracks_path, sep='~')
 
     return {
         "playlists": playlists,
-        # "artists": artists,
         "artists": artists_full,
         "tracks": tracks,
         "albums": albums,
@@ -126,52 +118,6 @@ def load_country_coords(file_path):
     })
 
 
-def calculate_genre_weights(artists_table):
-    """
-    Calculates the unique genres and their relative frequencies (weights)
-    from the 'Artist Genres' column of the artists_table.
-
-    Parameters:
-        artists_table (pd.DataFrame): The DataFrame containing the 'Artist Genres' column.
-
-    Returns:
-        tuple: A tuple containing:
-            - genres_list (list): The unique genres.
-            - weights (list): The corresponding relative weights.
-    """
-    genre_counts = artists_table['Artist Genres'].str.split(', ').explode().value_counts()
-
-    genres_list = genre_counts.index.tolist()
-    weights = genre_counts.tolist()
-
-    return genres_list, weights
-
-
-def populate_artist_genres_randomly(artists_table):
-    """
-    Randomly populates the 'Artist Genres' column in the artists_table DataFrame
-    while preserving the statistical distribution using calculated weights.
-    """
-    # Calculate genres and weights from non-unknown values
-    known_genres_table = artists_table[artists_table['Artist Genres'] != 'unknown genre']
-    genres_list, weights = calculate_genre_weights(known_genres_table)
-
-    # Find indices where 'Artist Genres' is 'unknown'
-    unknown_indices = artists_table[artists_table['Artist Genres'] == 'unknown genre'].index
-
-    # Generate random genres using the weights
-    random_genres = random.choices(
-        population=genres_list,
-        weights=weights,
-        k=len(unknown_indices)
-    )
-
-    # Update the 'Artist Genres' column only for 'unknown' rows
-    artists_table.loc[unknown_indices, 'Artist Genres'] = random_genres
-
-    return artists_table
-
-
 def classify_genres_detailed_structure(genre, all_genres_with_subgenres):
     """
     Classifies a genre into a parent genre based on a given mapping.
@@ -216,14 +162,10 @@ def expand_and_classify_artists_genres(artists_table):
         expanded_artists_genres['Artist Genres']
         .str.replace(r'&\s*country', 'country', regex=True)
     )
-
-    # expanded_artists_genres = populate_artist_genres_randomly(expanded_artists_genres)
-
     expanded_artists_genres['Parent Genre'] = (
         expanded_artists_genres['Artist Genres']
         .apply(lambda genre: classify_genres_detailed_structure(genre, all_genres_with_subgenres))
     )
-
     expanded_artists_genres['Parent Genre'] = expanded_artists_genres.apply(
         lambda row: classify_other_genres(row['Artist Genres'], additional_genres_with_subgenres)
         if row['Parent Genre'] == 'Other' else row['Parent Genre'],
@@ -234,15 +176,8 @@ def expand_and_classify_artists_genres(artists_table):
 
 def prepare_median_popularity_data(playlists_table, tracks_table):
     """
-    Prepare data for calculating median popularity of tracks by country.
-
-    Parameters:
-        - playlists_table (pd.DataFrame): DataFrame with playlist information.
-        - tracks_table (pd.DataFrame): DataFrame with track details.
-
-    Returns:
-        - Dict[str, pd.DataFrame]: A dictionary containing merged playlist-track data and sorted countries by median
-        popularity.
+    Merges playlist and track data, calculates the median track popularity by country,
+    and returns the merged table along with a list of countries sorted by median popularity.
     """
     merged_playlists_tracks = pd.merge(
         playlists_table,
@@ -250,7 +185,6 @@ def prepare_median_popularity_data(playlists_table, tracks_table):
         on='Track ID',
         how='left'
     )
-
     median_popularity = (
         merged_playlists_tracks
         .groupby('Country')['Track Popularity']

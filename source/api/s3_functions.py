@@ -23,6 +23,15 @@ def upload_to_s3(file_name, bucket_name, s3_key):
         logger.error(f"Error uploading file: {e}")
 
 
+def upload_files_to_s3(bucket_name, files):
+    for file in files:
+        upload_to_s3(
+            file_name=file['file_name'],
+            bucket_name=bucket_name,
+            s3_key=file['s3_key']
+        )
+
+
 def download_from_s3(file_name, bucket_name, s3_key):
     directory = os.path.dirname(file_name)
     os.makedirs(directory, exist_ok=True)

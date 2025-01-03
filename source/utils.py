@@ -1,5 +1,6 @@
 import yaml
 from source.api import s3_functions
+from slugify import slugify
 
 
 def load_config(config_path, encoding='utf-8'):
@@ -7,14 +8,14 @@ def load_config(config_path, encoding='utf-8'):
         return yaml.safe_load(file)
 
 
-def get_secrets(secret_group):
-    # with open('.credentials.yaml', 'r') as file:
-    #     credentials = yaml.safe_load(file)
-    credentials = load_config('.credentials.yaml')
-
-    secrets = credentials.get(secret_group)
-
-    return secrets
+# def get_secrets(secret_group):
+#     # with open('.credentials.yaml', 'r') as file:
+#     #     credentials = yaml.safe_load(file)
+#     credentials = load_config('.credentials.yaml')
+#
+#     secrets = credentials.get(secret_group)
+#
+#     return secrets
 
 
 # def get_config():
@@ -87,3 +88,16 @@ def upload_chosic_genres_to_s3(bucket_name):
 
     return None
 
+
+def upload_raw_playlists_to_s3(bucket_name, config_path='config/config.yaml'):
+    config = load_config(config_path)
+
+    playlist_files = [
+        {
+            "file_name": f"data/raw/playlists/{slugify(playlist_name, separator='_')}.json",
+            "s3_key": f"data/raw2/playlists/{slugify(playlist_name, separator='_')}.json"
+        }
+        for playlist_name in config['playlists'].keys()
+    ]
+
+    s3_functions.upload_files_to_s3(bucket_name, playlist_files)

@@ -182,10 +182,10 @@ def process_artist_genres(artists_df, path, save):
     )
     # Count the frequency of each genre
     genre_counts = artists_df['artist_genres'].str.split(', ').explode().value_counts()
+
     genres_list = genre_counts.index.tolist()
     weights = genre_counts.tolist()
 
-    # Identify indices where 'artist_genres' is NaN
     unknown_genre_indices = artists_df[artists_df['artist_genres'].isna()].index
 
     # Generate random genres for missing values based on frequency distribution
@@ -198,7 +198,6 @@ def process_artist_genres(artists_df, path, save):
     # Assign the generated random genres to missing values
     artists_df.loc[unknown_genre_indices, 'artist_genres'] = random_genres
 
-    # Save the updated DataFrame to a CSV file
     if save:
         artists_df.to_csv(path, index=False, sep="~")
 

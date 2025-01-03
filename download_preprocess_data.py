@@ -8,6 +8,7 @@ from source.preprocessing import data_prep
 from source.web_scraping import chosic
 
 
+BUCKET_NAME = 'project-spotify-analysis-data'
 def main():
     BUCKET_NAME = 'project-spotify-analysis-data'
 
@@ -127,8 +128,9 @@ def main():
             path=artists_full_path,
             save=True
         )
-        # Upload processed data to S3 bucket
+        # Upload processed and raw data to S3 bucket
         utils.upload_preprocessed_data_to_s3(bucket_name=BUCKET_NAME)
+        utils.upload_raw_playlists_to_s3(bucket_name=BUCKET_NAME)
 
     else:
         logger.info("Not all status codes are 200. Downloading preprocessed data from S3 instead.")
@@ -143,3 +145,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+

@@ -69,7 +69,7 @@ st.subheader("Playlists:")
 tab1_playlists, tab2_playlists = st.tabs(["Data", "Descriptive Statistics"])
 
 with tab1_playlists:
-    st.dataframe(playlists_table, height=210,  hide_index=True)
+    st.dataframe(playlists_table, width=1200, height=210, hide_index=True)
 with tab2_playlists:
     col1, col2, col3, col4 = st.columns(4)
 
