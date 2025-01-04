@@ -3,6 +3,7 @@ from logs.logger_config import logger
 
 
 def get_genre_artist(discogs_api_token, artist_name):
+    """Retrieve a list of unique music genres associated with a given artist from the Discogs API."""
     genres = None
     url = 'https://api.discogs.com/database/search'
     params = {
@@ -11,12 +12,12 @@ def get_genre_artist(discogs_api_token, artist_name):
     }
     try:
         response = requests.get(url, params=params)
-        track = response.json()
+        info = response.json()
         genres = set()
-        for result in track['results']:
+        for result in info['results']:
             if 'genre' in result:
                 genres.update(result['genre'])
-                logger.info("Genre information for artist retrieved successfully")
+                logger.info(f"Genre information for artist '{artist_name}' retrieved successfully")
     except Exception as error_message:
         logger.error(f"Failed to retrieve genre for artist '{artist_name}': {error_message}")
 

@@ -7,6 +7,7 @@ from logs.logger_config import logger
 
 
 def get_spotify_access_token(client_id, client_secret):
+    """Retrieve a Spotify access token using client credentials."""
     token_url = "https://accounts.spotify.com/api/token"
 
     payload = {
@@ -32,6 +33,7 @@ def get_spotify_access_token(client_id, client_secret):
 
 
 def get_playlist_status_code(token, playlists_id):
+    """Retrieve HTTP status codes for a list of Spotify playlist IDs."""
     status_codes = []
     for playlist_id in playlists_id:
         url_base = "https://api.spotify.com/v1/playlists/"
@@ -51,6 +53,7 @@ def get_playlist_status_code(token, playlists_id):
 
 
 def get_playlist(access_token, playlist_id):
+    """Fetch content of a Spotify playlist by its ID using the Spotify API."""
     playlist_info = None
     url_base = "https://api.spotify.com/v1/playlists/"
     url = urljoin(url_base, playlist_id)
@@ -69,6 +72,7 @@ def get_playlist(access_token, playlist_id):
 
 
 def get_save_playlist(token, playlists, file_path):
+    """Retrieve Spotify playlists and save them as JSON files in the specified directory."""
     # Create the specified directory path if it doesn't already exist.
     # 'exist_ok=True' ensures no error is raised if the directory already exists.
     os.makedirs(file_path, exist_ok=True)
@@ -94,6 +98,7 @@ def get_save_playlist(token, playlists, file_path):
 
 
 def get_track(access_token, track_id):
+    """Fetch data for a Spotify track by its unique ID using the Spotify API."""
     track_info = None
     url_base = "https://api.spotify.com/v1/tracks/"
     url = urljoin(url_base, track_id)
@@ -112,6 +117,7 @@ def get_track(access_token, track_id):
 
 
 def get_album(access_token, album_id):
+    """Fetch data for a Spotify album by its unique ID using the Spotify API."""
     album_info = None
     url_base = "https://api.spotify.com/v1/albums/"
     url = urljoin(url_base, album_id)
@@ -129,6 +135,7 @@ def get_album(access_token, album_id):
 
 
 def get_artist(access_token, artist_id):
+    """Fetch data for a Spotify artist by their unique ID using the Spotify API."""
     artist_info = None
     url_base = "https://api.spotify.com/v1/artists/"
     url = urljoin(url_base, artist_id)
