@@ -35,8 +35,8 @@ Blues:
 - piedmont blues
 - gospel singers
 - german blues
-- garage punk blues
 - second line
+- garage punk blues
 - dutch blues
 - boogie-woogie
 - canadian blues
@@ -93,46 +93,46 @@ Classical:
 - impressionism
 - renaissance
 - cello
+- choral
 - italian romanticism
 - orthodox chant
-- choral
 - contemporary classical
-- neoclassicism
 - classical guitar
+- neoclassicism
 - icelandic classical
-- christian a cappella
 - classical piano
-- hindustani classical
 - russian romanticism
 - french opera
+- christian a cappella
 - classical tenor
 - french romanticism
+- hindustani classical
 - neoclassical darkwave
 - early romantic era
 - italian baroque
-- opera
-- british choir
 - ballet class
 - italian tenor
 - 21st century classical
-- nordic soundtrack
-- dutch baroque
 - uwielbienie
+- dutch baroque
+- nordic soundtrack
 - marching band
 - spanish classical
-- orchestra
-- violin
+- british choir
 - german romanticism
+- violin
+- orchestra
+- opera
 - japanese guitar
-- icelandic indie
 - galante era
 - military band
-- classical cello
+- icelandic indie
 - english baroque
 - italian opera
 - minimalism
 - latin classical
 - victorian britain
+- classical cello
 - german baroque
 - british modern classical
 - downtempo fusion
@@ -141,42 +141,42 @@ Classical:
 - japanese classical
 - american choir
 - french baroque
-- classical performance
 - concert band
 - russian modern classical
+- classical performance
 - laboratorio
 - swedish choir
 - polish classical
-- orchestral performance
 - german opera
 - gospel italiano
 - musica etnica
 - french renaissance
 - anglican liturgy
 - university choir
+- british contemporary classical
 - english renaissance
 - violao classico
 - african-american classical
 - hungarian classical performance
 - hengelliset laulut
 - cologne indie
+- orchestral performance
 - operetta
 - finnish choir
 - finnish classical
 - italian renaissance
-- british contemporary classical
 - norwegian classical
 - american contemporary classical
 - avant-garde
 - wind symphony
 - japanese classical performance
 - chamber choir
+- american modern classical
 - madrigal
 - franco-flemish school
 - brazilian classical
-- american modern classical
-- tape music
 - cathedral choir
+- tape music
 - post-minimalism
 - spanish renaissance
 - japanese choir
@@ -190,20 +190,20 @@ Classical:
 - classical clarinet
 - musica sarda
 - danish classical
-- serialism
 - german renaissance
 - canti alpini
 - classical organ
 - french classical piano
-- classical flute
+- serialism
 - british brass band
+- classical flute
 - harpsichord
 - baltic classical
 - demoscene
 - russian classical piano
-- historically informed performance
 - german literature
 - nordic contemporary classical
+- historically informed performance
 - mexican classical
 - australian classical
 - british classical piano
@@ -444,8 +444,8 @@ Country:
 - pop nacional antigas
 - forro de favela
 - progressive bluegrass
-- musica gaucha tradicionalista
 - pop rap brasileiro
+- musica gaucha tradicionalista
 - arrochadeira
 - texas country
 - brega romantico
@@ -453,29 +453,29 @@ Country:
 - brega
 - bandinhas
 - black americana
-- funk das antigas
 - piseiro
 - gospel antigas
-- roots americana
+- funk das antigas
 - dansktop
-- bluegrass
 - canadian country
+- roots americana
 - canadian contemporary country
+- bluegrass
 - australian country
-- irish country
 - louvor
 - classic oklahoma country
 - funk 150 bpm
+- irish country
 - arkansas country
 - tecnobrega
-- comedy
 - batidao romantico
-- southern gospel
+- comedy
 - musica gaucha
-- deep new americana
 - vaqueiro
+- southern gospel
 - danseband
 - banjo
+- deep new americana
 - norwegian country
 - australian indigenous music
 - deep talent show
@@ -483,11 +483,11 @@ Country:
 - nashville singer-songwriter
 - skansk musik
 - east coast reggae
-- jamgrass
 - cowboy western
+- jamgrass
 - rap df
-- bluegrass gospel
 - traditional country
+- bluegrass gospel
 - family gospel
 - canadian americana
 - swedish country
@@ -496,14 +496,14 @@ Country:
 - deep funk ostentacao
 - cosmic american
 - alberta country
-- north carolina roots
 - western swing
+- north carolina roots
 - kentucky indie
 - neo-traditional bluegrass
 - instrumental bluegrass
-- southern americana
 - country gospel
 - forro gospel
+- southern americana
 - country quebecois
 - musique acadienne
 - clean comedy
@@ -513,9 +513,9 @@ Country:
 - deathgrass
 - midwest americana
 - new orleans americana
-- austin americana
 - kentucky roots
 - ukulele
+- austin americana
 - mandolin
 - western americana
 - german country
@@ -528,17 +528,17 @@ Country:
 - deep contemporary country
 - oshare kei
 - tulsa indie
-- new england americana
 - austin singer-songwriter
+- new england americana
+- south african country
 - baptist gospel
 - fotbollslatar
-- south african country
 - dallas indie
 - ok indie
 - australian americana
-- zydeco
 - viola caipira
 - knoxville indie
+- zydeco
 - traditional reggae
 - jesus movement
 - milwaukee indie
@@ -558,10 +558,10 @@ Country:
 - traditional bluegrass
 - australian alt-country
 - finlandssvenska musik
-- alaska indie
 - steel guitar
-- classic australian country
+- alaska indie
 - hamilton on indie
+- classic australian country
 - musica sul-mato-grossense
 - bluegrass fiddle
 - australian hardcore
@@ -571,31 +571,31 @@ Country:
 - tucson indie
 - dragspel
 - vintage western
-- neo-traditional country
-- australian comedy
 - alandsk musik
-- kalmar indie
-- bush ballad
-- montana roots
 - musica mato-grossense
+- iowa indie
+- musica timor-leste
+- manitoba country
+- musica goiana
+- neo honky tonk
 - vintage radio show
 - swiss country
-- musica goiana
-- el paso indie
+- kalmar indie
 - classic nz country
 - piada
-- musica timor-leste
+- bush ballad
 - forro manauara
-- vintage gospel
-- modern uplift
-- iowa indie
-- deep orgcore
-- neo honky tonk
-- manitoba country
-- country boogie
 - wyoming indie
-- wyoming roots
+- vintage gospel
+- country boogie
+- el paso indie
+- deep orgcore
+- neo-traditional country
+- modern uplift
 - san marcos tx indie
+- montana roots
+- wyoming roots
+- australian comedy
 - ny roots
 - musica tocantinense
 Easy listening:
@@ -609,16 +609,16 @@ Easy listening:
 - children's music
 - broadway
 - preschool children's music
-- cartoon
 - romantico
+- cartoon
 - japanese soundtrack
 - nursery
 - swing
 - lounge
 - french movie tunes
 - electro swing
-- musica per bambini
 - british soundtrack
+- musica per bambini
 - volksmusik
 - scorecore
 - classic girl group
@@ -627,18 +627,18 @@ Easy listening:
 - classic soundtrack
 - australian children's music
 - harlem renaissance
-- french soundtrack
 - children's story
 - stride
-- deep adult standards
+- french soundtrack
 - kundiman
+- deep adult standards
+- dixieland
 - vocal harmony group
 - theme
 - ballroom
 - andean flute
-- dixieland
-- canadian soundtrack
 - italian soundtrack
+- canadian soundtrack
 - blaskapelle
 - vintage hollywood
 - waiata mo tamariki
@@ -646,57 +646,57 @@ Easy listening:
 - old west
 - west end
 - marimba orquesta
-- swing revival
 - man's orchestra
+- swing revival
 - german soundtrack
 - oceania soundtrack
 - library music
-- vintage italian soundtrack
 - marimba de guatemala
+- vintage italian soundtrack
 - swing italiano
 - moog
 - vintage chanson
 - jazz clarinet
-- halloween
 - british dance band
 - indonesian emo
 - exotica
 - marimba mexicana
+- halloween
 - canadian children's music
 - musique pour enfant quebecois
 - deep soundtrack
 - bajki
 - christmas product
 - modern swing
+- children's choir
+- spytrack
 - light music
 - deep eurodance
 - tin pan alley
-- children's choir
-- spytrack
-- latin soundtrack
 - calypso
+- latin soundtrack
 - college a cappella
 - vintage schlager
 - accordeon
 - instrumental surf
-- panpipe
 - musica colombiana instrumental
+- panpipe
 - arpa paraguaya
 - italian library music
 - vintage swing
 - vintage broadway
 - jazz trombone
 - lesen
-- horror synth
 - brass ensemble
 - modern big band
 - comedienne
+- horror synth
 - alpine yodeling
 - jazz orchestra
+- polka
 - canadian comedy
 - zither
 - covertrance
-- polka
 - stubenmusik
 - italian mandolin
 - deep surf music
@@ -704,13 +704,13 @@ Easy listening:
 - drama
 - euphonium
 - animal singing
-- volkstumliche musik
 - trad jazz catala
+- volkstumliche musik
 - oratory
+- salon music
 - tanzorchester
 - pops orchestra
 - ringtone
-- salon music
 - band organ
 - hula
 - vintage hawaiian
@@ -729,9 +729,9 @@ Electronic:
 - tropical house
 - metropopolis
 - dutch house
-- new french touch
 - chill house
 - tech house
+- new french touch
 - melodic house
 - sad lo-fi
 - lo-fi beats
@@ -780,11 +780,11 @@ Electronic:
 - focus beats
 - pop house
 - drum and bass
-- uplifting trance
 - classic hardstyle
 - organic electronic
 - sky room
 - progressive trance
+- uplifting trance
 - australian dance
 - organic house
 - japanese chillhop
@@ -817,8 +817,8 @@ Electronic:
 - deep euro house
 - gaming dubstep
 - dark clubbing
-- glitch hop
 - microhouse
+- glitch hop
 - psychedelic trance
 - bouncy house
 - float house
@@ -826,13 +826,13 @@ Electronic:
 - trap funk
 - beach house
 - filthstep
-- livetronica
 - bassline
 - future house
 - minimal tech house
-- funky house
+- livetronica
 - uk funky
 - melodic techno
+- funky house
 - melbourne bounce international
 - wave
 - g-house
@@ -844,21 +844,21 @@ Electronic:
 - gabber
 - swedish tropical house
 - german house
-- lithuanian edm
 - danish electronic
 - dark techno
-- melbourne bounce
 - drone
+- melbourne bounce
 - jazz house
 - romanian house
 - deep chill
-- j-ambient
 - jungle
+- lithuanian edm
 - turkish edm
-- future bounce
+- j-ambient
 - progressive psytrance
 - chicago house
 - kawaii future bass
+- future bounce
 - uk house
 - russian rave
 - turkish deep house
@@ -866,47 +866,47 @@ Electronic:
 - swiss indie
 - latintronica
 - sound team
-- deep rai
 - neurofunk
+- deep rai
 - hardstyle
 - jump up
 - idm
 - circuit
-- progressive uplifting trance
 - trance brasileiro
-- nantes indie
-- cedm
 - deep big room
-- balearic
-- norwegian indie
 - lo-fi brasileiro
-- finnish edm
+- norwegian indie
+- cedm
+- progressive uplifting trance
 - german trance
 - uk tech house
 - sung poetry
-- speed garage
+- nantes indie
+- balearic
 - kawaii edm
 - experimental bass
 - south african deep house
 - breakbeat
+- speed garage
 - hip-hop experimental
+- finnish edm
 - old school bassline
 - ragga jungle
 - darksynth
-- mexican edm
 - hungarian edm
 - riddim dubstep
 - funky tech house
+- mexican edm
 - vgm remix
 - polish reggae
 - arab electronic
-- soulful house
 - neoperreo
 - substep
 - uk reggae
 - bolobedu house
 - dutch trance
 - deep minimal techno
+- soulful house
 - latin house
 - neapolitan funk
 - nordic house
@@ -917,205 +917,205 @@ Electronic:
 - experimental ambient
 - brazilian bass
 - chill baile
-- downtempo bass
 - dream trance
 - russian indie
 - acid house
 - classic dubstep
-- tribal house
-- greek downtempo
+- progressive trance house
 - deep uplifting trance
 - australian house
-- progressive trance house
+- greek downtempo
 - cape town indie
 - russian electronic
+- downtempo bass
 - workout product
+- tribal house
 - flamenco electronica
 - brazilian house
 - dutch moombahton
-- deep pop edm
 - russian witch house
 - doujin
-- birmingham grime
+- deep pop edm
 - french tech house
 - japanese jazztronica
 - nz electronic
 - hamburg electronic
-- jamtronica
 - modern ska punk
 - dutch tech house
 - irish electronic
 - ritmo kombina
+- birmingham grime
 - darkstep
+- jamtronica
 - minimal dub
-- deep progressive trance
 - scottish electronic
+- deep progressive trance
 - swedish electronic
+- french punk
 - italian techno
 - deep techno
 - latin tech house
 - swancore
-- french punk
 - jumpstyle
-- indian edm
 - classic progressive house
-- french dub
 - balkan brass
-- minimal melodic techno
 - garage house
+- indian edm
+- minimal melodic techno
 - dub reggae
 - vintage french electronic
 - dutch dnb
-- dubsteppe
+- french dub
 - chiptune
 - ukg revival
 - vinahouse
 - tekno
 - german tech house
 - raw techno
+- singaporean electronic
+- dubsteppe
 - techno rave
 - deep soul house
 - 2-step
-- singaporean electronic
 - indonesian edm
 - gothenburg indie
 - italian trance
 - elektropunk
 - deep dubstep
-- polish electronica
 - balkan beats
 - space ambient
+- polish electronica
 - tech trance
-- frankfurt electronic
-- atmospheric dnb
-- uk bass
 - deep dnb
+- frankfurt electronic
 - fidget house
 - ambient house
 - japanese edm
 - spanish techno
-- persian electronic
-- broken beat
-- italo house
+- atmospheric dnb
 - japanese beats
-- bristol electronic
 - bajan soca
+- italo house
+- uk bass
+- broken beat
 - speed house
 - deathstep
 - electronica peruana
 - acid trance
 - purple sound
+- persian electronic
 - jackin' house
-- russian trance
 - swedish house
+- russian trance
 - romanian indie
 - vocal trance
 - nz dnb
+- bristol electronic
 - ukrainian edm
 - mashcore
 - detroit house
 - indie napoletano
 - bass music
 - outsider house
-- drill and bass
 - uk experimental electronic
 - halftime dnb
 - old school hard trance
 - israeli techno
-- gamecore
+- drill and bass
+- focus trance
 - pakistani electronic
 - hard trance
 - instrumental grime
 - piano house
-- focus trance
 - hard techno
 - belgian dnb
 - canadian house
 - dusseldorf electronic
 - electronica venezuela
+- gamecore
 - deep deep house
 - indie electronica
 - acid techno
 - south african soulful deep house
-- psybass
 - witch house
 - irish drill
 - boston electronic
-- deep liquid
 - leipzig electronic
 - turkish electronic
 - psydub
+- psybass
 - nyc club
+- deep liquid
 - south african electronic
 - experimental house
 - icelandic electronic
 - raggatek
-- dark disco
-- german electronica
-- pune indie
 - footwork
 - gypsy fusion
-- german dnb
+- pune indie
+- german electronica
 - swiss house
-- ukrainian electronic
-- brazilian techno
-- neurostep
 - deep progressive house
-- brazilian tech house
+- german dnb
+- brazilian techno
+- dark disco
+- ukrainian electronic
 - italian electronica
 - trance mexicano
-- indie veneto
+- brazilian tech house
 - african electronic
-- munich electronic
-- destroy techno
-- miami electronic
-- schranz
+- indie veneto
+- modern jungle
 - hard house
+- munich electronic
+- schranz
+- destroy techno
 - ambient dub
 - dark progressive house
 - stateside dnb
 - swedish synth
-- deep funk house
+- neurostep
 - northeast indian indie
-- modern jungle
+- miami electronic
+- deep funk house
 - electro trash
 - nordic ambient
 - romanian electronic
-- pinoy edm
 - finnish electro
 - bergen indie
 - norwegian house
 - drone ambient
 - portuguese electronic
-- digital hardcore
 - experimental electronic
 - russian dnb
-- serbian electronic
 - austrian dnb
+- digital hardcore
 - minimal dubstep
-- nu skool breaks
-- bulgarian electronic
 - pop ambient
 - belgian electronic
+- nu skool breaks
+- serbian electronic
 - dark psytrance
 - jazzy dnb
 - greek house
 - tijuana electronic
 - hardcore breaks
 - lithuanian electronic
-- mexican tech house
-- slovak electronic
 - minimal dnb
 - norwegian space disco
+- mexican tech house
+- pinoy edm
+- bulgarian electronic
 - psybreaks
+- slovak electronic
 - dutch experimental electronic
-- sinhala edm
-- hungarian techno
 - future ambient
+- hungarian techno
+- sinhala edm
 - belgian techno
-- cologne electronic
 - myanmar indie
 - experimental techno
+- cologne electronic
 - tearout
 - house argentino
 - indian electronic
@@ -1123,18 +1123,18 @@ Electronic:
 - japanese electronic
 - breaks
 - lounge house
-- sovietwave
-- deep ambient
-- mongolian alternative
 - japanese house
+- mongolian alternative
+- sovietwave
 - irish techno
-- scottish techno
+- deep ambient
 - danish techno
-- deep liquid bass
 - french dnb
 - russian ska
 - australian ambient
+- scottish techno
 - ambient trance
+- deep liquid bass
 - deep darkpsy
 - czech electronic
 - russian techno
@@ -1143,19 +1143,19 @@ Electronic:
 - swiss techno
 - weightless
 - field recording ambient
-- polish ambient
-- drumfunk
 - spanish electronic
 - polish techno
 - hard minimal techno
+- drumfunk
+- polish ambient
 - psytech
 - glitch ambient
 - industrial techno
 - portuguese techno
-- taiwan electronic
 - nitzhonot
 - swedish techno
 - chinese electronic
+- taiwan electronic
 - japanese progressive house
 - techno argentina
 - berlin minimal techno
@@ -1167,14 +1167,14 @@ Electronic:
 - dreampunk
 - dark ambient
 - slovenian indie
-- modular techno
-- dark minimal techno
 - russian experimental electronic
-- acid idm
 - indian techno
+- acid idm
+- dark minimal techno
 - power noise
-- deep psytrance
 - re:techno
+- modular techno
+- deep psytrance
 - speedcore
 - eletronica underground brasileira
 - epic collage
@@ -1188,59 +1188,59 @@ Electronic:
 - doomcore
 - chinese experimental
 - baithak gana
-- 8-bit
+- deep breakcore
 - finnish techno
-- cosmic uplifting trance
+- sunset lounge
 - irish experimental electronic
-- georgian electronic
+- latvian electronic
 - glitter trance
 - deep flow
 - deep power-pop punk
-- cuban electronic
 - deep filthstep
-- skweee
+- cuban electronic
 - deep deep tech house
 - ritual ambient
+- skweee
 - macedonian electronic
 - deep tech house
-- latvian electronic
+- georgian electronic
 - deep vocal house
 - argentine ambient
-- polish experimental electronic
+- slovenian electronic
 - viet edm
 - terrorcore
 - japanese juke
-- slovenian electronic
+- polish experimental electronic
 - indonesian electronic
 - bosnian electronic
-- deep breakcore
+- finnish electronic
 - dub product
 - flashcore
-- norwegian techno
-- mashup
 - dubstep product
+- mashup
+- norwegian techno
 - luxembourgian electronic
 - nice indie
 - ukrainian ambient
 - neo-proto
 - ghoststep
-- sunset lounge
+- cinematic dubstep
 - vapor house
+- 8-bit
 - solipsynthm
 - canberra indie
-- belarusian electronic
 - vietnamese electronic
 - estonian electronic
 - algorave
 - experimental dubstep
 - hard dance
 - mexican electronic
-- cinematic dubstep
+- cosmic uplifting trance
 - basel indie
 - indian ambient
-- finnish electronic
-- zurich indie
 - cybergrind
+- zurich indie
+- belarusian electronic
 Folk/Acoustic:
 - folk
 - singer-songwriter
@@ -1266,39 +1266,39 @@ Folk/Acoustic:
 - roots worship
 - dutch indie
 - anti-folk
-- indian folk
 - ska punk
+- indian folk
 - folk punk
 - christian indie folk
 - irish folk
 - ambient folk
-- anthem worship
 - alternative americana
 - rune folk
 - christian indie
+- anthem worship
 - fantasy
 - czech folk
 - australian indie folk
 - vbs
-- stomp and flutter
 - viking folk
-- west coast reggae
 - indian singer-songwriter
 - british folk
+- stomp and flutter
+- west coast reggae
 - australian reggae fusion
 - polish punk
 - indie viet
 - slowcore
-- canadian folk
 - indonesian folk
+- canadian folk
 - telugu folk
 - thai folk
 - folktronica
 - children's folk
 - bardcore
-- folk brasileiro
 - german indie folk
 - adventista
+- folk brasileiro
 - pastoral
 - american folk revival
 - chamber psych
@@ -1315,26 +1315,26 @@ Folk/Acoustic:
 - uk americana
 - dutch americana
 - japanese folk
-- new weird america
 - beatlesque
-- nashville indie
+- new weird america
 - ukrainian indie
+- nashville indie
 - french indie folk
 - icelandic folk
-- french psychedelic
 - ontario indie
-- women's music
+- french psychedelic
 - arab folk
 - acoustic punk
-- hindi worship
 - puerto rican folk
 - saskatchewan indie
+- hindi worship
+- women's music
 - gypsy punk
-- hurdy-gurdy
 - nz singer-songwriter
 - nz folk
 - eau claire indie
 - bhojpuri folk
+- hurdy-gurdy
 - muzica crestina
 - boston folk
 - swedish americana
@@ -1348,47 +1348,47 @@ Folk/Acoustic:
 - south carolina indie
 - middle earth
 - canadian indie folk
-- israeli folk
 - russian folk
 - swedish indie folk
-- modern old-time
 - spanish indie folk
 - ann arbor indie
 - hungarian folk
 - korean indie folk
+- modern old-time
+- israeli folk
 - nl folk
 - japanese indie folk
+- psych gaze
 - neo-pagan
 - modern psychedelic folk
-- psych gaze
 - dunedin indie
 - okinawan folk
-- spirituals
 - manitoba indie
 - taiwan campus folk
-- psychedelic folk
-- american primitive
 - corsican folk
+- psychedelic folk
+- spirituals
+- american primitive
+- edmonton indie
 - chattanooga indie
 - mongolian folk
 - czech singer-songwriter
-- chinese folk
-- edmonton indie
-- indy indie
 - canadian indigenous music
+- chinese folk
+- indy indie
 - pei indie
 - danish singer-songwriter
 - experimental indie
-- traditional folk
-- irish indie
 - alabama indie
 - north carolina indie
+- traditional folk
 - charlotte nc indie
 - rusyn folk
-- geek folk
-- polish folk
 - columbus ohio indie
+- polish folk
+- irish indie
 - freak folk
+- geek folk
 - traditional british folk
 - asheville indie
 - italian folk
@@ -1396,39 +1396,39 @@ Folk/Acoustic:
 - swiss folk
 - basque folk
 - romanian folk
-- michigan indie
 - flemish folk
 - swiss indie folk
+- michigan indie
 - armenian folk
 - spanish folk
 - garage psych
 - contemporary folk
 - popgaze
-- chamber folk
-- belarusian indie
 - german shoegaze
 - old-time
+- chamber folk
 - portuguese folk
 - polish post-punk
 - maine indie
 - crack rock steady
 - neo-kraut
-- neofolk
 - balfolk
+- belarusian indie
 - wisconsin indie
 - musica occitana
 - springfield mo indie
 - breton folk
 - traditional english folk
-- string band
 - tavern
 - georgian folk
 - vermont indie
 - nordic folk
-- baltic folk
+- neofolk
 - early american folk
-- ottawa indie
+- baltic folk
 - traditional scottish folk
+- ottawa indie
+- string band
 - appalachian folk
 - scottish indie folk
 - ohio indie
@@ -1436,13 +1436,13 @@ Folk/Acoustic:
 - slovenian folk
 - sefardi
 - newfoundland indie
-- japanese psychedelic
 - malagasy folk
 - algerian folk
 - cymraeg
 - russian shoegaze
 - greek folk
 - paraguayan indie
+- japanese psychedelic
 - slovak folk
 - wellington indie
 - galician folk
@@ -1460,14 +1460,14 @@ Folk/Acoustic:
 - pontian folk
 - deep german punk
 - faroese indie
-- scottish gaelic folk
 - estonian folk
 - traditional southern folk
+- scottish gaelic folk
 - irish gaelic folk
 - bulgarian folk
 - old-time fiddle
-- finnish folk
 - norwegian punk
+- finnish folk
 - french folk
 - boeremusiek
 - faroese folk
@@ -1569,9 +1569,9 @@ Hip Hop:
 - dutch hip hop
 - cali rap
 - dark trap
-- alternative hip hop
 - cloud rap
 - underground hip hop
+- alternative hip hop
 - viral rap
 - hardcore hip hop
 - tagalog rap
@@ -1633,11 +1633,11 @@ Hip Hop:
 - jawaiian
 - viet chill rap
 - rap cristiano
+- nigerian hip hop
 - florida rap
 - freestyle
 - christian trap
 - jazz rap
-- nigerian hip hop
 - deep underground hip hop
 - comic
 - lo-fi rap
@@ -1651,43 +1651,43 @@ Hip Hop:
 - norwegian pop rap
 - instrumental hip hop
 - chill abstract hip hop
-- german viral rap
 - queens hip hop
 - florida drill
+- german viral rap
 - egyptian trap
 - deep german hip hop
-- viral trap
 - smutny rap
 - old school hip hop
 - jazz boom bap
+- frauenrap
+- viral trap
 - vietnamese melodic rap
 - soca
 - houston rap
 - romanian trap
-- frauenrap
+- hindi hip hop
 - lo-fi vgm
 - anime rap
-- hip hop quebecois
-- hindi hip hop
 - atl drill
 - bass trap
 - new jersey rap
+- hip hop quebecois
 - punjabi hip hop
-- greek hip hop
 - thai hip hop
+- greek hip hop
 - polish underground rap
 - old school atlanta hip hop
 - phonk
 - nerdcore brasileiro
-- swedish pop rap
 - latin viral rap
-- belgian hip hop
+- swedish pop rap
 - taiwan hip hop
+- belgian hip hop
 - australian hip hop
 - urdu hip hop
 - boom bap
-- venezuelan hip hop
 - south african hip hop
+- venezuelan hip hop
 - kazakh hip hop
 - canadian trap
 - political hip hop
@@ -1696,27 +1696,27 @@ Hip Hop:
 - hamburg hip hop
 - chinese hip hop
 - narco rap
-- japanese trap
 - pinoy trap
 - techno
 - london rap
 - australian trap
 - thai pop rap
+- japanese trap
 - russian emo rap
 - arabic hip hop
 - egyptian hip hop
-- chinese melodic rap
 - abstract hip hop
+- chinese melodic rap
 - greek underground rap
 - old school rap francais
 - scam rap
 - scream rap
-- thai trap
+- australian underground hip hop
 - drill
 - czsk emo rap
-- australian underground hip hop
 - japanese pop rap
 - psychedelic hip hop
+- thai trap
 - hungarian hip hop
 - uk melodic rap
 - peruvian hip hop
@@ -1730,44 +1730,44 @@ Hip Hop:
 - turntablism
 - hyphy
 - magyar trap
-- german worship
 - philly rap
 - desi trap
 - swiss hip hop
 - dmv rap
 - birmingham hip hop
-- romanian rap
 - tennessee hip hop
+- romanian rap
 - maga rap
-- norwegian hip hop
 - alabama rap
 - hard motivation
 - chicago drill
+- german worship
 - persian hip hop
 - dark plugg
 - dfw rap
 - bulgarian trap
+- norwegian hip hop
 - rap inde
-- polish old school hip hop
 - oakland hip hop
 - malay rap
 - slovak hip hop
+- polish old school hip hop
 - malaysian hip hop
 - detroit trap
 - uk desi rap
 - lgbtq+ hip hop
-- german reggae
 - suomirap
-- underground rap
 - balkan trap
-- italian underground hip hop
 - sichuanese hip hop
 - brooklyn drill
+- ukrainian hip hop
 - comedy rap
 - toronto rap
-- ukrainian hip hop
+- underground rap
+- german reggae
 - russian viral rap
 - chopped and screwed
+- italian underground hip hop
 - kasi rap
 - polynesian hip hop
 - japanese old school hip hop
@@ -1777,44 +1777,43 @@ Hip Hop:
 - persian melodic rap
 - new orleans rap
 - israeli trap
-- arab trap
-- chicago bop
 - german jazz rap
-- atlanta bass
+- chicago bop
+- arab trap
 - malayalam hip hop
 - miami bass
 - norwegian trap
 - persian sad rap
 - pinoy alternative rap
 - beatboxing
+- atlanta bass
 - north carolina hip hop
-- asian american hip hop
 - oldschool deutschrap
-- japanese chill rap
+- asian american hip hop
 - nz hip hop
 - horrorcore
 - kids dance party
-- ambeat
+- japanese chill rap
 - sacramento hip hop
 - st louis rap
 - canadian old school hip hop
+- ambeat
 - russian underground rap
 - musica eletronica gospel
-- rhode island rap
 - baton rouge rap
-- azeri rap
+- rhode island rap
 - finnish trap
 - swedish reggae
-- electro
-- south african trap
 - tamil hip hop
+- azeri rap
 - bc underground hip hop
 - drumless hip hop
 - bayerischer rap
 - palestinian alternative
 - balkan hip hop
+- electro
+- south african trap
 - slovak trap
-- soul flow
 - palestinian hip hop
 - croatian hip hop
 - turkce kadin rap
@@ -1823,141 +1822,142 @@ Hip Hop:
 - hong kong hip hop
 - boston hip hop
 - kentucky hip hop
+- soul flow
 - nz gangsta rap
-- milwaukee hip hop
-- gothenburg hip hop
 - bounce
+- gothenburg hip hop
 - igbo trap
-- manchester hip hop
+- milwaukee hip hop
 - west coast trap
-- battle rap
 - detroit techno
+- manchester hip hop
 - antilliaanse rap
-- apostolic worship
 - swiss trap
 - irish hip hop
 - seattle hip hop
+- apostolic worship
 - schweizer rap
-- deep southern trap
 - lithuanian hip hop
 - minnesota hip hop
 - philly drill
+- battle rap
+- deep southern trap
 - sinhala rap
 - pittsburgh rap
-- flint hip hop
 - necrotrap
 - greek fem rap
-- central asian hip hop
 - samurai trap
 - bisaya rap
+- central asian hip hop
+- flint hip hop
 - khmer hip hop
-- uk christian rap
 - japanese underground rap
+- uk christian rap
 - ohio hip hop
 - australian indigenous hip hop
+- beats
 - nottingham hip hop
 - latvian hip hop
 - nz christian
-- korean underground rap
 - igbo rap
 - trival
 - ottawa rap
 - gospel drill
-- beats
-- portland hip hop
 - upstate ny rap
 - scouse rap
-- indian underground rap
 - sudanese hip hop
-- indonesian underground hip hop
+- portland hip hop
+- korean underground rap
+- indian underground rap
 - middle east hip hop
+- indonesian underground hip hop
 - icelandic hip hop
 - mongolian hip hop
-- rva drill
 - serbian hip hop
 - baltimore hip hop
 - estonian hip hop
+- rva drill
 - bulgarian hip hop
 - texas latin rap
-- military rap
 - cologne hip hop
 - bay area hip hop
+- military rap
 - korean old school hip hop
 - persian trap
 - korean worship
 - san diego rap
 - xhosa hip hop
 - gulf hip hop
-- armenian hip hop
 - korean trap
 - arkansas hip hop
 - brisbane hip hop
-- buffalo hip hop
+- alberta hip hop
 - trap cristiano
 - industrial hip hop
-- persian underground hip hop
+- armenian hip hop
 - kenyan hip hop
 - kurdish hip hop
 - new jersey underground rap
 - kids hip hop
 - hungarian underground rap
+- persian underground hip hop
+- buffalo hip hop
 - kannada hip hop
-- south carolina hip hop
 - indonesian hardcore
 - cincinnati rap
+- south carolina hip hop
 - josei rap
 - deep east coast hip hop
-- oc rap
 - northeast indian hip hop
-- alberta hip hop
-- ethiopian hip hop
 - singaporean hip hop
+- ethiopian hip hop
 - nerdcore
 - electronica cristiana
-- scratch
+- christian punk
 - byzantine
+- scratch
 - christlicher rap
-- ghettotech
+- oc rap
 - venda rap
 - virginia hip hop
-- christian punk
+- ghettotech
 - wu fam
 - afrikaans hip hop
 - indonesian trap
-- canadian underground hip hop
 - braindance
 - georgian hip hop
 - san antonio rap
+- canadian underground hip hop
 - telugu hip hop
 - bleep techno
 - zim hip hop
 - gospel rap
 - surinamese hip hop
 - jewish hip hop
-- deep idm
 - kansas city hip hop
+- deep idm
 - flick hop
 - indonesian emo rap
-- west australian hip hop
 - malaysian tamil rap
-- north moroccan rap
-- tanzanian hip hop
+- west australian hip hop
 - austrian hip hop
 - kashmiri hip hop
 - norrlandsk hip hop
+- north moroccan rap
 - zambian hip hop
+- tanzanian hip hop
 - cypriot hip hop
 - vlaamse rap
 - czech alternative rap
 - malawian hip hop
 - swedish underground rap
 - hip hop galsen
+- ua trap
 - bangladeshi hip hop
-- dirty texas rap
 - cameroonian hip hop
+- dirty texas rap
 - perth hip hop
 - denver rap
-- ua trap
 - israelite hip hop
 - myanmar hip hop
 - dutch underground hip hop
@@ -1965,32 +1965,32 @@ Hip Hop:
 - gambian hip hop
 - nordnorsk rap
 - welsh hip hop
-- breakcore
-- brockton hip hop
 - melbourne hip hop
 - afghan rap
-- singeli
 - christian dance
+- breakcore
 - indiana hip hop
-- hawaiian hip hop
+- brockton hip hop
 - nashville hip hop
 - old school uk hip hop
+- hawaiian hip hop
+- singeli
 - uzbek hip hop
 - australian techno
 - tamil indie hip hop
-- czech indie
 - luxembourgian hip hop
+- czech indie
 - maine hip hop
 - syrian hip hop
-- atlantic canada hip hop
 - russian old school hip hop
+- atlantic canada hip hop
 - deep g funk
+- alaska hip hop
 - slovenian hip hop
 - cascadia psych
 - rwandan hip hop
 - canadian indigenous hip hop
 - britcore
-- alaska hip hop
 - spiritual hip hop
 - ugandan hip hop
 - winnipeg hip hop
@@ -2005,40 +2005,40 @@ Hip Hop:
 - assamese hip hop
 - irish underground rap
 - outer hip hop
-- khmer
-- military cadence
-- jamaican hip hop
-- turkmen hip hop
-- hawaiian indie
-- lapland hip hop
-- hip hop cubano
-- irish trap
-- swazi hip hop
-- iowa hip hop
-- austin hip hop
-- mississippi hip hop
+- dungeon rap
 - tamaulipas rap
-- kansas hip hop
-- libyan hip hop
-- goa hip hop
-- kikuyu gospel
-- west-vlaamse hip hop
-- sesotho hip hop
-- futuristic swag
+- lao hip hop
+- khmer
+- swazi hip hop
+- spoken word
 - old school nederhop
+- turkmen hip hop
+- irish trap
+- futuristic swag
+- austin hip hop
+- jamaican hip hop
+- goa hip hop
+- hawaiian indie
+- kansas hip hop
+- military cadence
 - proto-rap
 - tibetan hip hop
-- marathi hip hop
-- spoken word
-- belarusian hip hop
-- lao hip hop
-- idaho hip hop
-- chip hop
+- iowa hip hop
+- sesotho hip hop
+- libyan hip hop
 - vapor trap
-- kyrgyz hip hop
+- belarusian hip hop
 - vaportrap
-- dungeon rap
+- hip hop cubano
+- mississippi hip hop
+- lapland hip hop
+- west-vlaamse hip hop
+- marathi hip hop
 - maltese hip hop
+- kyrgyz hip hop
+- idaho hip hop
+- kikuyu gospel
+- chip hop
 Jazz:
 - jazz
 - vocal jazz
@@ -2081,25 +2081,25 @@ Jazz:
 - german oi
 - south african jazz
 - gypsy jazz
-- modern jazz piano
 - jazz quartet
+- modern jazz piano
 - abstract beats
 - norwegian jazz
-- carnatic
-- electric bass
 - audiophile vocal
-- vintage jazz
+- carnatic
 - rare groove
+- electric bass
+- vintage jazz
 - samba-jazz
 - german jazz
 - japanese jazz fusion
-- new delhi indie
 - japanese jazz
 - new orleans jazz
-- modern jazz trio
 - acid jazz
-- a cappella
+- modern jazz trio
 - arabic jazz
+- a cappella
+- new delhi indie
 - detske pisnicky
 - danish jazz
 - israeli jazz
@@ -2109,28 +2109,28 @@ Jazz:
 - french jazz
 - rock drums
 - israeli indie
-- ska jazz
 - straight-ahead jazz
 - british jazz
+- ska jazz
 - italian jazz
 - hammond organ
 - ethio-jazz
 - classic japanese jazz
 - sitar
-- bass trip
 - polish jazz
+- bass trip
 - dark jazz
 - jazz organ
 - west african jazz
-- experimental jazz
 - turkish modern jazz
 - jazz drums
+- experimental jazz
 - italian contemporary jazz
 - neo soul-jazz
-- jazz vibraphone
 - jazz worship
 - bal-musette
 - jazz double bass
+- jazz vibraphone
 - judaica
 - cabaret
 - experimental guitar
@@ -2139,35 +2139,35 @@ Jazz:
 - carnatic instrumental
 - aarhus indie
 - steelpan
-- psychedelic jazz fusion
 - vaudeville
+- psychedelic jazz fusion
 - belgian jazz
-- argentine jazz
 - jazz harp
+- argentine jazz
 - avant-garde jazz
-- indian jazz
 - lithuanian indie
 - finnish jazz
 - jazz accordion
-- spanish jazz
+- indian jazz
 - canadian modern jazz
 - spiritual jazz
-- chinese jazz
+- spanish jazz
 - ragtime
+- chinese jazz
 - brazilian modern jazz
 - music hall
-- jazz violin
 - rap catarinense
+- jazz violin
 - jazz catala
 - experimental vocal
 - hot jazz
 - south african modern jazz
 - serbian indie
+- dutch jazz
 - swiss jazz
 - australian jazz
 - jazz puertorriqueno
 - belgian modern jazz
-- dutch jazz
 - mallet
 - portuguese jazz
 - icelandic jazz
@@ -2188,53 +2188,53 @@ Jazz:
 - greek jazz
 - austrian jazz
 - free improvisation
-- modern free jazz
 - deep jazz fusion
+- modern free jazz
 - italian jazz fusion
 - electroacoustic improvisation
 - japanese vocal jazz
 - jazz composition
-- deep free jazz
-- czech jazz
-- experimental big band
-- harmonica jazz
-- irish modern jazz
-- experimental poetry
+- jazz guitar trio
+- beat poetry
+- dub poetry
+- honky-tonk piano
+- frafra
 - musica feirense
 - musique alsacienne
 - faroese jazz
-- polish free jazz
-- plunderphonics
-- estonian jazz
-- washboard
-- indian violin
-- lithuanian jazz
-- dub poetry
-- korean jazz
 - nz jazz
-- ethnomusicology
-- jazz guitar trio
+- polish free jazz
+- deep latin jazz
+- washboard
+- lithuanian jazz
+- dortmund indie
+- bossa nova jazz
+- harmonica jazz
+- korean jazz
+- plunderphonics
 - russian jazz
+- czech jazz
 - russian modern jazz
-- jazz venezolano
+- deep free jazz
+- ethnomusicology
 - japanese worship
 - saxophone trio
-- deep latin jazz
+- experimental big band
 - school ensemble
 - swedish jazz orkester
 - scottish jazz
-- frafra
+- estonian jazz
+- jazz venezolano
+- irish modern jazz
 - jazz tuba
-- dortmund indie
+- indian violin
 - classical jazz fusion
-- honky-tonk piano
-- contrabass
 - ukrainian jazz
 - skiffle
 - vintage finnish jazz
-- beat poetry
+- contrabass
 - accordion
-- bossa nova jazz
+- experimental poetry
 - chill groove
 - galician jazz
 Latin:
@@ -2265,11 +2265,11 @@ Latin:
 - r&b francais
 - latin christian
 - trap brasileiro
-- nova mpb
 - cantautor
+- nova mpb
 - cumbia villera
-- pop flamenco
 - latin worship
+- pop flamenco
 - urbano mexicano
 - trap argentino
 - coverchill
@@ -2277,8 +2277,8 @@ Latin:
 - samba
 - flamenco urbano
 - urbano chileno
-- mexican rock-and-roll
 - musica para ninos
+- mexican rock-and-roll
 - musica popular colombiana
 - pop romantico
 - cuarteto
@@ -2286,69 +2286,69 @@ Latin:
 - musica infantil
 - cumbia paraguaya
 - cumbia peruana
-- rumba
 - velha guarda
-- trap italiana
 - argentine indie
+- rumba
 - gruperas inmortales
+- trap italiana
 - bossa nova cover
 - bachata
 - rap conciencia
 - tejano
 - spanish new wave
-- dembow dominicano
 - mexican indie
 - cancion melodica
+- dembow dominicano
 - rap espanol
 - mariachi
 - lo-fi cover
 - vallenato
+- cumbia
 - folklore argentino
 - kizomba
-- cumbia
 - funk consciente
 - cumbia chilena
 - cumbia ranchera
 - cubaton
 - norteno-sax
-- french reggae
 - perreo
-- spanish punk
+- french reggae
 - gogeo
-- dembow
+- spanish punk
 - vallenato moderno
+- dembow
 - pop argentino
 - trova
 - merengue
 - rap dominicano
 - reparto
-- bolero mexicano
 - pop venezolano
 - cancion infantil mexicana
+- bolero mexicano
 - trap boricua
 - modern salsa
-- salsa colombiana
 - jazz cover
 - cumbia santafesina
+- salsa colombiana
 - salsa puertorriquena
-- rap chileno
 - deep latin christian
-- rock urbano mexicano
 - salsa peruana
+- rap chileno
+- rock urbano mexicano
 - pop reggaeton
 - reggaeton mexicano
 - tropical alternativo
 - indie triste
 - flamenco
-- rap latina
 - zouk riddim
+- rap latina
 - trap triste
-- anime latino
 - huayno popular
 - musica tradicional cubana
-- banda carnavalera
 - musica triste brasileira
 - ska argentino
+- banda carnavalera
+- anime latino
 - electro latino
 - chilean indie
 - pagode baiano
@@ -2357,56 +2357,56 @@ Latin:
 - grupero romantico
 - reggaeton chileno
 - pop peruano
-- guaracha
 - trap venezolano
 - samba moderno
 - rkt
 - trap dominicano
 - rap underground mexicano
 - salsa international
+- guaracha
 - bachata dominicana
 - cumbia colombiana regia
 - salsa choke
-- german drill
 - nueva cancion
+- german drill
 - manguebeat
 - drill espanol
-- zouk
 - rock cristiano
 - rock catala
+- zouk
 - rap canario
-- russian punk
-- rap politico
 - tex-mex
+- russian punk
 - rap tunisien
 - tecnobanda
-- trap mexicano
+- rap politico
+- chanson paillarde
 - cumbia ecuatoriana
 - rap underground argentino
-- mambo chileno
-- chanson paillarde
+- trap mexicano
 - mariachi cristiano
+- mambo chileno
 - trap chileno
 - pop chileno
 - rap romantico
 - musica costena
+- duranguense
 - salsa venezolana
 - rap nacional antigo
 - banda jalisciense
-- latin afrobeat
 - cumbia sonorense
 - gaita zuliana
-- duranguense
 - trap peruano
 - rap maromba
 - cumbia del sureste
+- latin afrobeat
 - huayno peruano
-- nueva ola chilena
 - samba-enredo
 - kompa
-- musica sonorense
 - jovem guarda
+- nueva ola chilena
 - champeta
+- musica sonorense
 - rap underground espanol
 - timba
 - fado
@@ -2426,8 +2426,8 @@ Latin:
 - argentine reggae
 - salsa cubana
 - musica andina
-- musica cristiana guatemalteca
 - adoracion
+- musica cristiana guatemalteca
 - kompa gouyad
 - hinos ccb
 - tango
@@ -2444,8 +2444,8 @@ Latin:
 - folclor colombiano
 - musica neoleonesa
 - sevillanas
-- musica chihuahuense
 - merengue tipico
+- musica chihuahuense
 - salsa urbana
 - corridos cristianos
 - cumbia salvadorena
@@ -2453,38 +2453,38 @@ Latin:
 - cueca chilena
 - rock gaucho
 - flamenco fusion
-- reggae en espanol
 - chilena
-- indie catala
+- reggae en espanol
 - cumbia lagunera
 - tunantada
 - regional mexicano femenil
+- indie catala
 - musica para criancas
 - folklore peruano
 - psicodelia brasileira
-- nuevo folklore mexicano
-- cantautora mexicana
-- cumbia uruguaya
-- villancicos
 - samba reggae
-- brazilian boogie
+- nuevo folklore mexicano
+- cumbia uruguaya
+- cantautora mexicana
+- villancicos
 - musica catalana
 - forro tradicional
 - chamame
+- brazilian boogie
 - musique guadeloupe
 - ska mexicano
 - nova musica carioca
-- nuevo folklore argentino
-- violao
 - huayno
+- pop electronico
 - folklore boliviano
 - dancehall colombiano
-- pop electronico
+- violao
 - latin ska
-- mambo
+- nuevo folklore argentino
 - spanish invasion
 - post-punk argentina
 - musica tabasquena
+- mambo
 - musica evangelica instrumental
 - kizomba cabo-verdiana
 - rap antillais
@@ -2495,38 +2495,38 @@ Latin:
 - musica ayacuchana
 - folclore jujeno
 - indie rock mexicano
-- tamborazo
 - punk euskera
 - flamenco guitar
 - bases de freestyle
+- tamborazo
 - rap underground colombiano
 - argentine punk
 - hard rock brasileiro
-- cuban alternative
-- kizomba antigas
 - musica potosina
+- kizomba antigas
 - porro
-- trap catala
 - pop paraguayo
+- trap catala
 - electronica argentina
+- cuban alternative
 - makina
-- twoubadou
 - concepcion indie
+- twoubadou
 - folclore santiagueno
-- canto popular uruguayo
-- cornetas y tambores
-- bolero cubano
 - colombian indie
-- cantautor catala
+- canto popular uruguayo
+- bolero cubano
 - vintage tango
+- cantautor catala
+- cornetas y tambores
 - trap colombiano
 - rap lyonnais
 - musica coahuilense
 - rap regio
+- huapango
 - danzon
 - ska espanol
 - rap catala
-- huapango
 - peruvian indie
 - salsa cristiana
 - raspe
@@ -2542,21 +2542,21 @@ Latin:
 - guitarra andina
 - euskal musica
 - charanga
-- trio huasteco
 - copla
-- haitian gospel
+- trio huasteco
 - nova musica paulista
 - neotango
 - orquesta tipica
-- mexican pop punk
+- haitian gospel
 - brazilian percussion
 - mestissatge
-- son cubano
 - ska chileno
+- mexican pop punk
 - choro
 - latin funk
 - rock alternativo espanol
 - musica jibara
+- son cubano
 - musica jalisciense
 - tipico
 - reggae peruano
@@ -2577,8 +2577,8 @@ Latin:
 - carimbo
 - italian ska
 - carnaval cadiz
-- spanish reggae
 - portuguese indie
+- spanish reggae
 - indie extremena
 - comedia
 - folklore veracruzano
@@ -2586,7 +2586,6 @@ Latin:
 - rap feminino chileno
 - mpb gospel
 - bandoneon
-- sambass
 - musica aguascalentense
 - ska catala
 - punk catala
@@ -2594,29 +2593,30 @@ Latin:
 - indie cordoba
 - folklore uruguayo
 - capoeira
+- sambass
 - indie salvadoreno
 - musica oaxaquena
 - reggae mexicano
-- musica andina colombiana
 - granada indie
 - rock chapin
 - chihuahua indie
 - cdmx indie
 - folklore ecuatoriano
-- musica nicaraguense
 - musica andina chilena
 - musica canaria
-- canadian latin
 - polka nortena
+- musica nicaraguense
 - manso indie
+- canadian latin
 - folklore venezolano
 - musica mallorquina
 - rumba catalana
 - tango cancion
-- monterrey indie
 - musica baiana
+- musica andina colombiana
 - pop catracho
 - rap boricua
+- monterrey indie
 - indie rock colombiano
 - musica popular mineira
 - post-punk mexicano
@@ -2641,8 +2641,8 @@ Latin:
 - afro-cuban percussion
 - nova canco
 - rockabilly en espanol
-- rasin
 - emo mexicano
+- rasin
 - musica istmena
 - musica costarricense
 - musica aragonesa
@@ -2669,18 +2669,18 @@ Latin:
 - euroska
 - mexican son
 - psicodelia chilena
-- haitian dance
 - cumbia funk
+- haitian dance
 - new tejano
 - euskal reggae
 - caracas indie
 - punk mexicano
-- murga
 - brazilian ska
 - neo-psicodelia brasileira
 - merida indie
 - indie platense
 - kompa chretien
+- murga
 - musica mapuche
 - rio grande do sul indie
 - rosario indie
@@ -2724,115 +2724,115 @@ Latin:
 - colombian hardcore
 - punk tico
 - post-rock latinoamericano
-- synthwave brasileiro
-- oaxaca indie
-- musica piauiense
-- spanish prog
-- musica menorquina
-- indie campechano
-- garage rock mexicano
-- brass band brasileiro
-- jazz tico
-- reggae uruguayo
-- rock dominicano
-- cuban funk
-- joropo
-- bullerengue
-- leon gto indie
-- indie hidrocalido
-- cuento infantile
-- indie caribe colombiano
-- cumbia andina mexicana
-- folk cantabria
-- rap salvadoreno
-- musica puntana
 - jazz dominicano
-- junior eurovision
-- gaita colombiana
-- musica campechana
-- jazz colombiano
-- tamaulipas indie
-- rap paraguayo
-- indie nordeste argentino
+- synthwave brasileiro
+- spanish prog
+- gwoka
+- punk ska
 - cumbia surena
-- musica hondurena
-- frevo
-- indie hidalguense
-- jazz chileno
-- folclore castilla y leon
-- jazz caraibes
-- musica yucateca
-- rap galego
+- brass band brasileiro
+- musica piauiense
+- música pitiusa
+- musica tlaxcalteca
+- combos nacionales
+- musica tamaulipeca
+- musica puntana
+- folclore navarra
+- bullerengue
+- indie trujillano
 - folclore extremeno
+- musica rapa nui
+- cuatro venezolano
 - rap euskera
-- tropicalia
-- cha-cha-cha
-- jota aragonesa
-- dark electro-industrial
-- musica nublensina
-- forro instrumental
-- hardcore punk espanol
-- rap baixada fluminense
-- hard chime
-- samba de roda
-- panamanian indie
-- rap alagoano
-- orquesta tropical
+- musica yucateca
 - disney espanol
+- folclore tucumano
+- hard chime
+- musica nublensina
+- junior eurovision
+- folk cantabria
+- tamaulipas indie
+- musica menorquina
+- jazz chileno
+- cuban funk
+- rap paraguayo
+- musica londrinense
+- post-punk colombiano
+- reggae uruguayo
+- folclore castilla y leon
+- musica hondurena
+- indie poblano
+- musica de intervencao
+- rock en asturiano
+- musica campechana
+- baja indie
+- cha-cha-cha
+- dark electro-industrial
+- musica amapaense
+- indie arequipeno
+- musica alagoana
+- hardcore punk espanol
+- musica quintanarroense
+- musica sinfonica
+- samba de roda
+- disney portugues brasil
+- morelos indie
+- jota aragonesa
+- rap alagoano
+- joropo
+- nueva musica mexicana
+- jazz tico
+- oaxaca indie
+- jazz colombiano
+- forro instrumental
+- jazz caraibes
+- frevo
+- tijuana indie
 - orquesta cubana
 - indie tucumano
-- indie poblano
-- combos nacionales
-- nueva musica mexicana
-- punk ska
-- musica de intervencao
-- morelos indie
-- tijuana indie
-- puglia indie
-- indie michoacano
 - sevilla indie
-- cuatro venezolano
-- indie trujillano
-- grunge brasileiro
-- grunge argentina
-- musica londrinense
-- canzone genovese
-- bomba
-- sinaloa indie
-- blues mexicano
-- guitarra portuguesa
-- bloco
-- folclore navarra
-- trio cubano
-- indie arequipeno
-- trombone brasileiro
-- baja indie
-- bandolim
 - rock catracho
-- musica tlaxcalteca
-- musica rapa nui
-- musica tamaulipeca
-- rock en asturiano
-- musica sinfonica
-- post-punk colombiano
-- banda de bronces
+- gaita colombiana
 - indie tabasqueno
-- baiao
+- indie nordeste argentino
 - indie sudcaliforniano
-- gwoka
-- disney portugues brasil
-- musica quintanarroense
-- musica alagoana
-- vanuatu music
-- musica amapaense
-- música pitiusa
-- sonora indie
-- haur kantak
-- esperanto
-- hard rock mexicano
-- rock alagoano
+- indie michoacano
+- bomba
+- tropicalia
+- blues mexicano
+- indie hidalguense
+- bloco
+- rap galego
+- trio cubano
+- rock dominicano
+- trombone brasileiro
+- canzone genovese
+- bandolim
+- sinaloa indie
+- indie hidrocalido
+- leon gto indie
+- puglia indie
 - latino comedy
-- folclore tucumano
+- indie caribe colombiano
+- orquesta tropical
+- banda de bronces
+- garage rock mexicano
+- baiao
+- cuento infantile
+- indie campechano
+- grunge argentina
+- cumbia andina mexicana
+- panamanian indie
+- vanuatu music
+- sonora indie
+- guitarra portuguesa
+- grunge brasileiro
+- haur kantak
+- rap salvadoreno
+- hard rock mexicano
+- esperanto
+- rap baixada fluminense
+- rock alagoano
 Metal:
 - metal
 - alternative metal
@@ -2865,9 +2865,9 @@ Metal:
 - german metal
 - slayer
 - metallic hardcore
-- brutal death metal
 - progressive post-hardcore
 - comic metal
+- brutal death metal
 - sludge metal
 - melodic metal
 - heavy metal
@@ -2875,42 +2875,42 @@ Metal:
 - technical death metal
 - deathgrind
 - melodic hardcore
-- trancecore
 - liedermacher
 - post-metal
 - spanish metal
+- trancecore
 - american metalcore
-- kabarett
 - metal cover
 - folk metal
-- symphonic power metal
+- kabarett
 - finnish metal
 - drone metal
-- magyar alternative
 - nu-metalcore
+- symphonic power metal
 - hardcore
+- magyar alternative
 - hard alternative
 - progressive deathcore
 - german power metal
-- doom metal
 - canadian metal
-- viking metal
-- psychedelic doom
+- doom metal
 - atmospheric black metal
+- viking metal
 - wrestling
 - swedish metal
+- psychedelic doom
 - cyberpunk
 - neo classical metal
 - aggrotech
-- crossover thrash
 - christian metal
+- crossover thrash
 - neue deutsche harte
 - finnish power metal
-- latin metal
 - j-metal
+- latin metal
 - nightrun
-- argentine heavy metal
 - depressive black metal
+- argentine heavy metal
 - grindcore
 - german post-hardcore
 - oi
@@ -2920,17 +2920,17 @@ Metal:
 - straight edge
 - gaian doom
 - xtra raw
-- california hardcore
 - shred
+- california hardcore
 - electro dub
 - progressive metalcore
 - proto-metal
 - frenchcore
 - nyhc
 - post-doom metal
+- southern metal
 - polish metal
 - symphonic black metal
-- southern metal
 - turkce trap metal
 - sacramento indie
 - australian metalcore
@@ -2938,28 +2938,28 @@ Metal:
 - skramz
 - norwegian black metal
 - finnish punk
-- us power metal
-- symphonic deathcore
 - british power metal
+- symphonic deathcore
 - fantasy metal
+- us power metal
 - crust punk
 - black thrash
-- pirate
-- nwothm
 - german metalcore
-- electro-industrial
+- pirate
 - j-core
 - christian metalcore
-- trap metal italiana
+- nwothm
+- electro-industrial
 - finnish melodeath
 - tribute
 - beatdown
+- trap metal italiana
 - brazilian hardcore
 - goregrind
-- swedish death metal
+- brazilian punk
 - boston punk
 - instrumental djent
-- brazilian punk
+- swedish death metal
 - metal gotico
 - dungeon synth
 - psychokore
@@ -2970,48 +2970,47 @@ Metal:
 - canadian metalcore
 - anarcho-punk
 - kawaii metal
-- swedish progressive metal
 - swedish power metal
 - rap sardegna
 - neo metal
-- dutch metal
+- swedish progressive metal
+- danish metal
 - glam punk
 - nwobhm
 - swedish metalcore
-- danish metal
-- new wave of thrash metal
 - slamming deathcore
 - brazilian metal
-- japanese heavy metal
+- new wave of thrash metal
+- dutch metal
+- fallen angel
 - progressive death metal
 - pagan black metal
+- japanese heavy metal
 - celtic metal
 - swedish melodeath
 - powerviolence
-- new jersey hardcore
 - thall
 - pornogrind
-- progressive alternative
+- new jersey hardcore
 - blackened deathcore
+- progressive alternative
 - christian hardcore
 - italian metal
-- greek metal
-- tennessee metal
 - deep metalcore
-- fallen angel
-- melodic thrash
-- japanese metalcore
 - vocaloid metal
-- uk82
-- rap metal espanol
-- swedish heavy metal
-- italian metalcore
+- greek metal
 - finnish death metal
+- japanese metalcore
+- rap metal espanol
+- italian metalcore
+- tennessee metal
+- swedish heavy metal
 - mexican metal
+- uk82
 - prog metal
 - virginia punk
 - french metal
-- florida death metal
+- melodic thrash
 - metal guitar
 - avant-garde metal
 - pennsylvania hardcore
@@ -3019,92 +3018,93 @@ Metal:
 - new wave of speed metal
 - technical melodic death metal
 - french shoegaze
+- florida death metal
 - polish folk metal
-- finnish heavy metal
 - american grindcore
 - italian power metal
 - autonomous black metal
 - technical thrash
+- finnish heavy metal
 - scottish metal
 - denver metal
-- oriental metal
-- instrumental progressive metal
-- black 'n' roll
-- new jersey punk
 - lldm
 - swedish black metal
+- black 'n' roll
+- new jersey punk
 - punk tuga
 - blackgaze
 - nordic folk metal
 - canadian hardcore
+- oriental metal
 - long island punk
 - thrash core
 - finnish pop punk
-- new wave of glam metal
-- atmospheric post-metal
+- instrumental progressive metal
 - opera metal
+- new wave of glam metal
 - cyber metal
+- atmospheric post-metal
 - boston hardcore
-- australian psych
 - post-black metal
+- australian psych
 - viking black metal
 - indonesian metal
-- deathrash
-- usbm
 - italian folk metal
-- north carolina metal
 - keller synth
 - gothenburg metal
 - japanese power metal
-- connecticut hardcore
 - thai metal
+- connecticut hardcore
+- north carolina metal
 - australian metal
 - jazz metal
 - progressive power metal
 - russian metalcore
 - texas metal
-- russian metal
 - vampiric black metal
 - virginia metal
 - cosmic death metal
-- austrian metal
-- german black metal
+- deathrash
 - technical brutal death metal
+- russian metal
+- german black metal
 - portland metal
 - texas hardcore
-- symphonic death metal
+- usbm
+- austrian metal
 - ukhc
 - swiss metal
-- uk doom metal
 - russian trap metal
 - voidgrind
+- uk doom metal
 - technical black metal
 - new york death metal
-- atlanta metal
-- cavernous death metal
-- melodic deathcore
-- neo-crust
 - melodic black metal
-- rap metalcore
+- melodic deathcore
+- symphonic death metal
 - christian power metal
-- brazilian power metal
 - alternative metalcore
+- cavernous death metal
+- atlanta metal
+- neo-crust
 - swiss black metal
 - medieval black metal
+- rap metalcore
 - cosmic black metal
 - vegan straight edge
 - czech metal
-- swedish doom metal
-- american melodeath
 - emotional black metal
-- slavic folk metal
-- russian nu metal
 - brazilian post-hardcore
-- ambient black metal
+- russian nu metal
+- american melodeath
 - blackened screamo
+- brazilian power metal
+- brutal deathcore
+- ambient black metal
+- swedish doom metal
 - heavy psych
 - shoegaze brasileiro
-- brutal deathcore
+- slavic folk metal
 - tolkien metal
 - deep melodic metalcore
 - argentine metal
@@ -3112,40 +3112,40 @@ Metal:
 - danish death metal
 - new wave of osdm
 - folk black metal
-- british death metal
 - nyc metal
 - italian post-hardcore
-- d-beat
 - german heavy metal
 - black sludge
 - progressive sludge
+- d-beat
 - sci-fi metal
-- boston metal
+- british death metal
 - german thrash metal
 - technical deathcore
 - skinhead oi
 - polish black metal
-- belgian metal
 - power thrash
 - french hardcore
 - austrian punk
 - folk metal latinoamericano
-- death doom
-- quebec death metal
-- epic doom
+- belgian metal
+- boston metal
 - symphonic melodic death metal
 - dissonant death metal
 - dutch death metal
-- swedish hardcore
 - lowlands hardcore
+- death doom
 - quebec metal
-- british black metal
+- quebec death metal
 - finnish black metal
+- swedish hardcore
+- epic doom
 - icelandic metal
-- french death metal
 - austin metal
+- french death metal
 - black death
 - ohio hardcore
+- british black metal
 - euskal metal
 - seattle metal
 - black speed metal
@@ -3158,54 +3158,54 @@ Metal:
 - hungarian metal
 - taiwan metal
 - indonesian death metal
-- italian death metal
-- gothic black metal
 - street punk
 - french black metal
-- bleakgaze
+- gothic black metal
+- new england metal
 - australian black metal
 - australian death metal
-- new england metal
+- bleakgaze
 - icelandic punk
+- italian death metal
 - slavic metal
 - german melodeath
 - icelandic black metal
 - brazilian thrash metal
 - finnish doom metal
 - avant-garde black metal
-- peruvian metal
 - korean metal
+- peruvian metal
 - hard glam
-- arab metal
 - atmospheric sludge
+- blackened hardcore
 - metal mineiro
 - occult black metal
-- blackened hardcore
-- israeli metal
 - norwegian doom metal
 - raw black metal
-- metal colombiano
+- arab metal
 - finnish progressive metal
-- texas death metal
+- metal colombiano
 - progressive doom
-- chilean metal
+- texas death metal
 - rock goiano
 - cascadian black metal
 - sludgecore
 - grim death metal
 - japanese death metal
-- melodic doom
-- norwegian death metal
+- chilean metal
 - german pagan metal
+- melodic doom
 - goa trance
 - ukrainian black metal
+- israeli metal
 - industrial black metal
-- belgian death metal
+- norwegian death metal
 - dub metal
 - brazilian death metal
+- belgian death metal
 - ukrainian metal
-- epic black metal
 - finnish hardcore
+- epic black metal
 - german death metal
 - canadian death metal
 - forest black metal
@@ -3217,20 +3217,20 @@ Metal:
 - deep folk metal
 - italian black metal
 - gothic doom
-- irish metal
 - native american metal
-- brazilian black metal
-- russian folk metal
 - lovecraftian metal
+- brazilian black metal
 - christian deathcore
+- irish metal
 - experimental black metal
+- russian folk metal
 - blackened crust
 - greek black metal
 - japanese black metal
+- chinese metal
 - deep hardcore punk
 - funeral doom
 - christian symphonic metal
-- chinese metal
 - portuguese metal
 - war metal
 - belarusian metal
@@ -3433,8 +3433,8 @@ New age:
 - sleep
 - healing hz
 - background music
-- ocean
 - binaural
+- ocean
 - environmental
 - high vibe
 - kindermusik
@@ -3453,10 +3453,10 @@ New age:
 - atmosphere
 - pianissimo
 - music box
-- musique pour enfants
 - intelligent dance music
 - asmr
 - new age piano
+- musique pour enfants
 - chalga
 - ambient worship
 - musica de fondo
@@ -3494,8 +3494,8 @@ New age:
 - psychill
 - 528hz
 - pet calming
-- steampunk
 - fingerstyle
+- steampunk
 - dark wave
 - world chill
 - lds instrumental
@@ -3504,11 +3504,11 @@ New age:
 - guided meditation
 - belgian singer-songwriter
 - kundalini
-- spacewave
 - birdsong
 - world meditation
 - abstract
 - 8d
+- spacewave
 - synthesizer
 - neue deutsche todeskunst
 - sound effects
@@ -3522,9 +3522,9 @@ New age:
 - coral gospel
 - 432hz
 - motivation
-- warm drone
 - deep freestyle
 - goralski
+- warm drone
 - modern goth
 - rennes indie
 - modular synth
@@ -3532,27 +3532,27 @@ New age:
 - gamelan
 - glitch
 - nu age
-- zen
 - modern cello
-- thai instrumental
+- zen
 - tassie indie
 - georgian alternative
 - hauntology
-- ambient techno
 - dronescape
+- thai instrumental
 - therapy
+- ambient techno
 - tibetan mantra
-- experimental synth
+- new isolationism
 - hindustani instrumental
 - ambient synth
-- new isolationism
+- experimental synth
 - chakra
 - ukrainian experimental
-- sound art
-- corrosion
-- slc indie
 - batida
+- corrosion
 - koto
+- sound art
+- slc indie
 - british experimental
 - leipzig indie
 - australian experimental
@@ -3572,8 +3572,8 @@ New age:
 - deep sunset lounge
 - martial industrial
 - japanese idm
-- experimental dub
 - yoga
+- experimental dub
 - mexican experimental
 - massage
 - post-punk brasileiro
@@ -3589,8 +3589,8 @@ New age:
 - canadian experimental
 - swiss experimental
 - welsh choir
-- italian experimental
 - swedish experimental
+- italian experimental
 - lowercase
 - ambient industrial
 - modern electroacoustic
@@ -3598,46 +3598,46 @@ New age:
 - minimal synth
 - ethereal gothic
 - field recording
-- polish experimental
-- kingston on indie
-- italian occult psychedelia
-- irish experimental
-- korean experimental
-- pilates
-- mindfulness
-- new england experimental
-- hypnosis
-- peruvian experimental
-- bulgarian experimental
-- commons
-- circus
-- chill-out trance
-- kinderchor
 - glass
+- italian occult psychedelia
+- kingston on indie
+- irish experimental
+- italian industrial
+- finnish experimental
+- dutch experimental
+- glitch beats
+- portuguese experimental
+- hypnosis
+- new england experimental
+- commons
+- mindfulness
+- chill-out trance
+- kinderliedjies
+- indonesian experimental
 - whale song
 - sound collage
-- finnish experimental
+- circus
 - belgian experimental
 - taiwan experimental
-- musica madeirense
 - dhrupad
-- indonesian experimental
-- italian industrial
+- erotica
+- kinderchor
+- korean experimental
 - spanish experimental
 - turkish experimental
 - bansuri
-- native american
+- peruvian experimental
 - string duo
-- kinderliedjies
-- glitch beats
-- kapa haka
-- erotica
-- african experimental
-- portuguese experimental
-- ninja
+- native american
 - iranian experimental
-- dutch experimental
+- ninja
+- pilates
+- african experimental
+- musica madeirense
+- bulgarian experimental
 - sarod
+- polish experimental
+- kapa haka
 Pop:
 - pop
 - dance pop
@@ -3679,9 +3679,9 @@ Pop:
 - uk pop
 - mandopop
 - adoracao
+- v-pop
 - anime
 - swedish pop
-- v-pop
 - neon pop punk
 - christian music
 - bedroom pop
@@ -3697,10 +3697,10 @@ Pop:
 - otacore
 - girl group
 - russian pop
-- afropop
 - arab pop
 - meme
 - k-pop boy group
+- afropop
 - gen z singer-songwriter
 - folk-pop
 - cumbia pop
@@ -3712,9 +3712,9 @@ Pop:
 - latin viral pop
 - boy band
 - colombian pop
-- swedish trap pop
 - 5th gen k-pop
 - reggae fusion
+- swedish trap pop
 - dutch rap pop
 - malaysian pop
 - korean pop
@@ -3722,19 +3722,19 @@ Pop:
 - acoustic pop
 - country pop
 - cantopop
-- neo-synthpop
-- bubblegum pop
-- arabesk
 - thai pop
+- bubblegum pop
+- neo-synthpop
+- arabesk
 - vocaloid
 - canadian pop
 - dream pop
 - finnish pop
 - viral pop
 - funk rj
+- ukrainian pop
 - modern indie pop
 - hyperpop
-- ukrainian pop
 - mollywood
 - classic swedish pop
 - tamil pop
@@ -3760,20 +3760,20 @@ Pop:
 - taiwan pop
 - weirdcore
 - turkish trap pop
-- mainland chinese pop
 - czech pop
+- mainland chinese pop
 - israeli pop
-- south african pop
 - social media pop
 - classic j-pop
 - australian pop
 - mahraganat
+- south african pop
 - classic mandopop
 - funk bh
-- moroccan pop
 - uk drill
 - russian alt pop
 - sophisti-pop
+- moroccan pop
 - spanish indie pop
 - pakistani pop
 - iskelma
@@ -3785,72 +3785,70 @@ Pop:
 - j-pixie
 - bossbeat
 - indonesian folk pop
-- hungarian pop
 - viral afropop
 - pop lgbtq+ brasileira
 - classic uk pop
 - classic french pop
+- hungarian pop
 - italian indie pop
 - deep ccm
 - classic russian pop
 - italo disco
-- nederpop
 - persian pop
 - rap maroc
 - korean ost
-- classic indo pop
-- glitchcore
 - experimental pop
+- nederpop
+- glitchcore
+- classic indo pop
 - christian pop
 - chill breakcore
+- k-indie
 - turkish singer-songwriter
 - classic city pop
-- bhojpuri pop
-- k-indie
-- kurdish pop
 - kayokyoku
+- bhojpuri pop
+- kurdish pop
 - nyc pop
 - westcoast flow
-- portuguese pop
-- okinawan pop
 - scenecore
 - chill dream pop
-- acoustic chill
+- okinawan pop
 - italo dance
 - dark pop
 - modern alternative pop
 - pinoy indie
-- rai
 - deep turkish pop
 - barnmusik
 - japanese viral pop
+- portuguese pop
 - pacific islands pop
+- rai
 - bulgarian pop
 - taiwan singer-songwriter
 - c-pop
-- j-acoustic
+- acoustic chill
 - bubblegum dance
 - brega funk
 - p-pop
 - classic turkish pop
-- dansband
+- j-acoustic
 - synthwave
+- nepali pop
 - acoustic cover
-- classic danish pop
+- jazz pop
 - classic thai pop
 - classic israeli pop
-- nepali pop
-- swedish idol pop
-- jazz pop
-- hopebeat
+- dansband
 - classic pakistani pop
 - austropop
+- classic danish pop
 - variete francaise
-- classic iskelma
+- swedish idol pop
+- hopebeat
 - indonesian viral pop
 - electra
-- gujarati pop
-- marathi pop
+- taiwan indie
 - candy pop
 - sinhala pop
 - hk-pop
@@ -3860,84 +3858,85 @@ Pop:
 - rave funk
 - nz pop
 - operatic pop
+- marathi pop
+- classic iskelma
 - classic colombian pop
 - rap napoletano
 - belgian pop
 - brill building pop
+- hands up
 - shaabi
 - classic cantopop
-- taiwan indie
 - nederlandse hardstyle
 - hardcore techno
 - channel pop
 - scandipop
-- hands up
+- gujarati pop
 - baroque pop
 - oyun havasi
 - rif
 - thai folk pop
 - power pop
 - rap marseille
+- ukrainian viral pop
 - lithuanian pop
 - lustrum
-- antiviral pop
-- classic polish pop
-- ukrainian viral pop
 - turkish alternative
+- k-pop ballad
 - croatian pop
+- antiviral pop
 - indie electropop
 - classic norwegian pop
 - classic belgian pop
 - zhongguo feng
-- k-pop ballad
+- classic polish pop
 - kazakh viral pop
 - belgian dance
-- spectra
 - thai viral pop
 - thai indie pop
 - volkspop
-- west bengali pop
 - pop teen brasileiro
 - happy hardcore
 - icelandic pop
+- west bengali pop
+- turkce remix
 - khaliji
+- spectra
+- kazakh pop
 - teen pop
 - argentine telepop
 - egyptian viral pop
-- turkce remix
-- kazakh pop
-- mizrahi
 - pink noise
 - thai teen pop
+- mizrahi
 - bow pop
 - karadeniz turkuleri
 - nasyid
 - bosnian pop
-- slovak pop
 - malayalam pop
 - modern dream pop
-- tontipop
-- classic finnish pop
+- slovak pop
 - swedish eurodance
 - visual kei
+- tontipop
 - lebanese pop
 - assamese pop
 - classic czech pop
 - ecuadorian pop
 - uk alternative pop
-- dabke
 - quran
 - swedish electropop
 - bangla pop
 - classic persian pop
-- indonesian city pop
 - ghanaian pop
+- indonesian city pop
 - kosovan pop
 - burmese pop
 - classic venezuelan pop
+- dabke
+- classic finnish pop
 - socal pop punk
 - classic malaysian pop
-- pop rock brasileiro
 - comedie musicale
 - pinoy reggae
 - j-division
@@ -3945,6 +3944,7 @@ Pop:
 - jewish pop
 - russian hyperpop
 - funk pop
+- pop rock brasileiro
 - classic portuguese pop
 - classic peruvian pop
 - irish pop
@@ -3954,15 +3954,15 @@ Pop:
 - classic greek pop
 - neomelodici
 - turkce slow sarkilar
-- chinese singer-songwriter
-- disco polo
 - j-pop girl group
-- chinese indie
+- disco polo
+- chinese singer-songwriter
 - odia pop
 - german hyperpop
-- canadian electropop
+- chinese indie
 - french synthpop
 - swedish indie pop
+- canadian electropop
 - czsk viral pop
 - chinese drama ost
 - kodomo no ongaku
@@ -3973,174 +3973,174 @@ Pop:
 - tanzanian pop
 - korean singer-songwriter
 - khaleeji iraqi
-- j-idol
-- singaporean pop
 - russian dance pop
 - glitchbreak
+- j-idol
 - ulkucu sarkilar
-- russian viral pop
+- singaporean pop
 - jersey club
-- dutch drill
 - azeri pop
+- dutch drill
 - j-pop boy group
 - strut
 - vlaamse kinderliedje
 - j-reggae
 - sunshine pop
 - syrian pop
-- dakke dak
+- classic bangla pop
 - classic k-pop
 - reunion pop
 - japanese alternative pop
-- austrian pop
-- classic bangla pop
-- turkish soundtrack
-- lds youth
+- dakke dak
+- russian viral pop
 - denpa-kei
+- austrian pop
 - estonian pop
 - grave wave
+- turkish soundtrack
 - classic nepali pop
 - dutch cabaret
+- lds youth
 - proto-hyperpop
 - city pop
 - german singer-songwriter
-- turkish psych
-- pinoy singer-songwriter
-- malaysian mandopop
 - cocuk sarkilari
 - japanese electropop
+- pinoy singer-songwriter
+- malaysian mandopop
 - ethiopian pop
 - australian electropop
-- acoustic opm
 - idol kayo
 - indonesian lo-fi pop
+- turkish psych
 - japanese dance pop
-- danish electropop
 - australian alternative pop
 - french folk pop
-- classic punjabi pop
 - classic icelandic pop
 - christelijk
 - vintage dutch pop
 - uzbek pop
 - musical advocacy
+- classic punjabi pop
 - islamic recitation
 - swiss pop
-- ugandan pop
+- acoustic opm
+- danish electropop
 - eurobeat
 - classic nz pop
 - latvian pop
-- tunisian pop
+- ugandan pop
 - k-pop reality show
 - streektaal
 - classic dutch pop
-- canadian pop punk
-- belly dance
+- tunisian pop
+- classic sinhala pop
 - viral pop brasileiro
+- belly dance
 - cambodian pop
 - futurepop
 - drain
-- classic sinhala pop
 - bozlak
 - kenyan pop
 - vapor pop
 - soviet synthpop
 - emo rap italiano
 - singaporean mandopop
-- chinese electropop
-- shibuya-kei
 - garhwali pop
-- australian talent show
+- canadian pop punk
 - classic hungarian pop
-- pinoy city pop
+- shibuya-kei
 - malaysian indie
 - german show tunes
+- pinoy city pop
 - carnaval limburg
 - jordanian pop
 - german ccm
 - arab groove
 - techno kayo
+- chinese electropop
 - turk sanat muzigi
+- australian talent show
 - igbo pop
 - barbadian pop
-- egyptian alternative
 - vietnamese pop
 - deconstructed club
 - idol
 - ambient pop
 - nagpuri pop
+- egyptian alternative
 - gauze pop
 - chinese manyao
 - indonesian idol pop
 - montenegrin pop
-- mande pop
-- garage pop
 - pinoy idol pop
 - moldovan pop
 - popwave
 - himachali pop
-- jangle pop
 - manipuri pop
+- jangle pop
+- garage pop
 - armenian pop
 - japanese new wave
-- vietnamese idol pop
 - kannada pop
-- electropowerpop
+- vietnamese idol pop
 - baglama
 - transpop
-- game mood
+- electropowerpop
 - deep acoustic pop
-- rajasthani pop
 - polish synthpop
-- taiwan idol pop
+- rajasthani pop
 - vintage swedish pop
+- taiwan idol pop
 - kleinkunst
 - dark synthpop
+- mande pop
 - sepedi pop
 - hong kong indie
 - german indie pop
 - korean city pop
-- space age pop
 - milan indie
 - sambalpuri pop
-- japanese indie pop
+- game mood
 - spanish noise pop
 - malaysian tamil pop
 - classic romanian pop
 - shiver pop
 - psychedelic pop
+- space age pop
 - draga
+- japanese indie pop
 - singaporean singer-songwriter
-- modern power pop
 - uk worship
 - xitsonga pop
 - fake
+- modern power pop
 - classic korean pop
-- hokkien pop
-- marwadi pop
-- palestinian pop
-- cantaditas
 - canadian ccm
+- palestinian pop
+- hokkien pop
+- cantaditas
+- marwadi pop
 - malawian pop
 - heavy alternative
-- industrial pop
-- khandeshi pop
 - mizo pop
 - rap feminino nacional
-- chinese idol pop
 - etherpop
+- industrial pop
+- khandeshi pop
 - kumaoni pop
 - j-indie
 - jacksonville indie
-- slovenian pop
+- chinese idol pop
 - bitpop
-- kabyle
 - banjara pop
 - piratenmuziek
 - guinean pop
 - amharic pop
 - zillertal
 - keroncong
+- kabyle
+- slovenian pop
 - classic azeri pop
 - furry
 - dariacore
@@ -4152,64 +4152,64 @@ Pop:
 - georgian pop
 - melodipop
 - voetbal
-- trondersk musikk
 - bubblegum bass
 - chinese new year
+- trondersk musikk
 - turkish reggae
 - korean electropop
-- somali pop
-- shimmer psych
 - swedish synthpop
 - icelandic singer-songwriter
-- danish indie pop
-- classic moroccan pop
+- somali pop
 - stomp pop
+- danish indie pop
 - cameroonian pop
-- japanese post-hardcore
+- shimmer psych
 - eritrean pop
 - indonesian indie pop
+- classic moroccan pop
 - deep dance pop
+- japanese post-hardcore
 - rap criolo
 - classic italian folk pop
+- vogue
 - modern enka
 - vispop
-- twee pop
 - chhattisgarhi pop
 - brass band pop
 - chinese indie pop
-- vogue
 - ruta destroy
 - russian grime
 - assyrian pop
-- kashmiri pop
 - samoan pop
 - texasgaze
 - pahadi pop
-- nohay
 - classic bulgarian pop
-- san diego indie
+- kashmiri pop
 - chaabi marocain
 - khortha pop
 - barnalog
 - classic ukrainian pop
 - taiwanese indie
-- japanese dream pop
+- twee pop
 - chinese minyao
+- japanese dream pop
 - japanese pop punk
+- nohay
 - bhutanese pop
 - latin tek
 - new beat
 - socal indie
+- san diego indie
 - alternative pop
 - chinese worship
-- malagasy pop
+- virgin islands reggae
 - chinese audiophile
-- swamp pop
+- malagasy pop
 - tigrigna pop
 - 48g
 - hyperpop brasileiro
 - surinamese pop
-- virgin islands reggae
+- swamp pop
 - santali pop
 - fo jing
 - rwandan pop
@@ -4217,54 +4217,54 @@ Pop:
 - q-pop
 - fluxwork
 - tibetan pop
-- musique mariage algerien
 - mewati pop
-- pinoy pop punk
 - khasi pop
+- musique mariage algerien
 - japanese shoegaze
 - mongolian pop
 - chasidic pop
 - ryukyu ongaku
-- taiwan instrumental
 - orebro indie
 - deep brazilian pop
 - pashto pop
-- junior songfestival
+- taiwan instrumental
 - venda pop
 - hardvapour
+- pinoy pop punk
+- solomon islands pop
 - russian ccm
-- underground power pop
-- russian synthpop
 - pop boliviano
-- turkish punk
+- junior songfestival
 - collage pop
 - melanesian pop
+- russian synthpop
 - guatemalan pop
 - vienna indie
 - maluku pop
 - hokkaido indie
 - arabic instrumental
 - bodo pop
+- turkish punk
+- underground power pop
 - zambian pop
 - indonesian hyperpop
-- solomon islands pop
 - remix product
 - er ge
-- chinese instrumental
 - early synthpop
 - italian pop punk
 - swedish folk pop
 - alt-idol
 - cascadia shoegaze
 - kokborok pop
+- chinese instrumental
 - bmore
 - cook islands pop
 - yemeni pop
 - libyan pop
 - adivasi pop
 - czsk electropop
-- saraiki pop
 - fan chant
+- saraiki pop
 - lezginka
 - chinese soundtrack
 - j-punk
@@ -4274,52 +4274,52 @@ Pop:
 - purulia pop
 - kyrgyz pop
 - newcastle nsw indie
-- korean dream pop
+- barnasogur
 - multidisciplinary
 - guzheng
-- barnasogur
 - spanish synthpop
 - korean talent show
 - czsk hyperpop
-- glitch pop
 - dutch musical
 - cypriot pop
+- faroese pop
 - bahamian pop
 - macedonian pop
-- faroese pop
 - bisaya indie
+- glitch pop
+- korean dream pop
 - grunge pop
 - greenlandic pop
-- japanese hyperpop
 - fijian pop
+- japanese hyperpop
 - grimewave
 - togolese pop
 - darbuka
 - classic sudanese pop
 - taraneem
-- tongan pop
 - beninese pop
 - turin indie
 - vintage italian pop
 - karaoke
 - deep italo disco
-- karbi pop
 - vintage cantonese pop
+- experimental club
 - maltese pop
 - rap capixaba
 - math pop
 - boy pop
 - chamorro pop
-- experimental club
 - oromo pop
 - vintage chinese pop
 - taiwanese pop
+- karbi pop
 - japanese bedroom pop
 - karen pop
 - finnish worship
 - stockholm indie
 - trot
 - classic tunisian pop
+- tongan pop
 - gambian pop
 - garo pop
 - chinese hyperpop
@@ -4327,20 +4327,20 @@ Pop:
 - rap paranaense
 - classic latvian pop
 - erhu
+- deep discofox
 - seychelles pop
 - gabonese pop
-- deep discofox
 - xinyao
 - sinogaze
 - estonian indie
 - cleveland indie
 - japanese post-punk
-- japanese ska
 - oslo indie
+- japanese ska
 - chechen pop
+- nordic shoegaze
 - turkmen pop
 - orlando indie
-- nordic shoegaze
 - bruneian pop
 - northwest china indie
 - inuit pop
@@ -4351,16 +4351,16 @@ Pop:
 - japanese melodic punk
 - botswana pop
 - japanese emo
+- sierra leonean pop
 - mising pop
 - singaporean indie
 - png pop
 - namibian pop
 - modern jangle pop
 - indie fuzzpop
-- korean hyperpop
 - tatar pop
-- sierra leonean pop
 - nova musica maranhense
+- korean hyperpop
 - vintage norwegian pop
 - south sudanese pop
 - classic konkani pop
@@ -4382,26 +4382,26 @@ Pop:
 - svensk indie
 - indie nica
 - belarusian pop
-- bohol indie
+- korean punk
 - ladakhi pop
 - tibetan folk pop
 - rap sergipano
 - neo-singer-songwriter
-- chakma pop
-- dweilorkest
-- deep indie pop
-- dutch idol pop
-- disney svenska
-- tempe indie
-- dutch disney
-- draaiorgel
-- australian ska
-- tampa indie
-- dogri pop
-- tajik pop
-- dombra
-- eurovision
 - shamisen
+- dogri pop
+- tampa indie
+- tempe indie
+- dweilorkest
+- dutch idol pop
+- disney italiano
+- dutch disney
+- australian ska
+- deep indie pop
+- dombra
+- tajik pop
+- draaiorgel
+- eurovision
+- cerkes muzikleri
 - taiko
 - kikuyu pop
 - finnish idol pop
@@ -4410,21 +4410,21 @@ Pop:
 - korean superband
 - gaddiyali pop
 - vlaamse cabaret
-- swazi pop
-- balochi pop
-- coventry indie
-- arab experimental
-- coptic hymn
-- yakut pop
 - glee club
+- balochi pop
+- swazi pop
+- arab experimental
+- coventry indie
+- yakut pop
+- coptic hymn
 - picopop
 - sesotho pop
 - shantykoren
 - joseon pop
-- cerkes muzikleri
+- chakma pop
 - kansas indie
 - japanese disney
-- disney italiano
+- disney svenska
 - santa fe indie
 - greek shoegaze
 - kamba pop
@@ -4437,18 +4437,18 @@ Pop:
 - hazaragi pop
 - rap pernambucano
 - twee indie pop
-- korean punk
+- bohol indie
 - soda pop
 - rap cearense
 - ilocano pop
 - birthday
-- classic eurovision
-- lao pop
 - indie dream pop
+- lao pop
+- classic eurovision
 - limerick indie
-- chinese opera
-- luxembourgian pop
 - sirmauri pop
+- luxembourgian pop
+- chinese opera
 - macau pop
 - indie psych-pop
 - maghreb
@@ -4500,35 +4500,35 @@ R&B:
 - japanese r&b
 - nu disco
 - trap soul
-- bedroom soul
 - chicago soul
+- bedroom soul
 - souldies
 - classic praise
-- dub
 - bboy
+- dub
 - old school dancehall
 - pinoy r&b
 - electro-pop francais
 - instrumental funk
 - r&b en espanol
 - r&b brasileiro
-- afro r&b
 - neo r&b
+- afro r&b
 - experimental r&b
 - chinese r&b
 - retro soul
 - dutch r&b
 - psychedelic soul
-- northern soul
 - sholawat
 - praise
 - p funk
+- northern soul
 - aussie drill
 - gospel r&b
 - swedish soul
 - minneapolis sound
-- brit funk
 - indonesian r&b
+- brit funk
 - funktronica
 - japanese soul
 - brazilian soul
@@ -4545,26 +4545,26 @@ R&B:
 - new orleans funk
 - early reggae
 - contemporary gospel
-- instrumental soul
 - post-disco soul
-- polish indie
 - r&b argentino
+- polish indie
+- instrumental soul
 - deep disco
-- new orleans soul
 - traditional soul
 - modern funk
-- popping
+- new orleans soul
 - austrian indie
 - smooth soul
+- popping
 - brass band
 - funky breaks
 - south african r&b
 - black comedy
 - street band
 - boogie
-- vintage reggae
 - norsk lovsang
 - oc indie
+- vintage reggae
 - slam poetry
 - beach music
 - deep funk
@@ -4577,13 +4577,13 @@ R&B:
 - traditional funk
 - gospel soul
 - screamocore
+- deep southern soul
+- mento
 - finnish soul
 - deep motown
 - deep r&b
-- deep smooth r&b
-- mento
 - language
-- deep southern soul
+- deep smooth r&b
 Rock:
 - rock
 - classic rock
@@ -4629,8 +4629,8 @@ Rock:
 - indonesian indie
 - rockabilly
 - psychedelic rock
-- j-poprock
 - heartland rock
+- j-poprock
 - southern rock
 - dutch rock
 - indie garage rock
@@ -4639,10 +4639,10 @@ Rock:
 - levenslied
 - rock kapak
 - chilean rock
-- suomi rock
 - garage rock
-- pixie
 - lo-fi indie
+- pixie
+- suomi rock
 - shoegaze
 - new rave
 - progressive rock
@@ -4654,63 +4654,63 @@ Rock:
 - classic canadian rock
 - bubblegrunge
 - pinoy rock
-- anadolu rock
-- modern j-rock
 - ska
+- anadolu rock
 - english indie rock
+- modern j-rock
 - funk rock
 - indian indie
-- indonesian rock
 - grunge
 - thai rock
-- russian rock
 - post-hardcore
+- russian rock
+- indonesian rock
 - dance-punk
 - chillwave
 - crank wave
 - gymcore
-- czech rock
 - lovers rock
-- polish rock
-- israeli rock
+- czech rock
 - nu gaze
+- israeli rock
+- polish rock
 - punk rock
 - dreamo
-- classic indonesian rock
 - hyper-rock
+- classic indonesian rock
 - canadian rock
 - spanish rock
 - thai folk rock
 - canadian indie
 - protopunk
-- rap rock
 - brooklyn indie
-- indie punk
+- rap rock
 - indie surf
-- ye ye
+- indie punk
 - symphonic rock
-- ukrainian rock
+- ye ye
 - stoner rock
-- anthem emo
 - modern folk rock
 - australian alternative rock
+- ukrainian rock
+- anthem emo
 - modern hard rock
 - uk post-punk
 - danish pop rock
 - australian surf rock
 - christian rock
 - british invasion
-- belgian rock
-- classic garage rock
 - rock nacional
+- belgian rock
 - midwest emo
+- classic garage rock
 - post-punk
 - small room
 - lo-fi
-- german pop rock
 - madchester
 - spanish pop rock
 - swedish alternative rock
+- german pop rock
 - merseybeat
 - riot grrrl
 - portuguese rock
@@ -4724,8 +4724,8 @@ Rock:
 - classic russian rock
 - hungarian rock
 - gothic rock
-- turkish alternative rock
 - colombian rock
+- turkish alternative rock
 - post-screamo
 - industrial rock
 - medieval rock
@@ -4738,18 +4738,17 @@ Rock:
 - instrumental rock
 - experimental rock
 - slacker rock
-- belgian indie
 - electrofox
+- belgian indie
 - electronic rock
 - philly indie
 - czech pop rock
-- hindi indie
 - novelty
 - instrumental post-rock
-- supergroup
 - norwegian rock
+- supergroup
+- hindi indie
 - easycore
-- experimental
 - noise rock
 - nyc indie rock
 - spanish modern rock
@@ -4757,29 +4756,29 @@ Rock:
 - sleaze rock
 - indonesian reggae
 - italian pop rock
+- experimental
 - rock gospel brasileiro
 - british indie rock
 - classic greek rock
 - slovak rock
 - danish rock
 - indie rockism
-- classic j-rock
-- neue deutsche welle
-- samba-rock
 - lo-fi emo
-- british alternative rock
+- classic j-rock
 - kindie rock
-- orgcore
+- british alternative rock
+- samba-rock
+- neue deutsche welle
 - acid rock
 - scottish rock
 - electroclash
+- orgcore
 - german alternative rock
 - tagalog worship
-- bay area indie
 - croatian rock
 - pub rock
 - rock quebecois
-- venezuelan rock
+- bay area indie
 - telugu indie
 - icelandic rock
 - chicago indie
@@ -4788,25 +4787,26 @@ Rock:
 - future rock
 - grungegaze
 - russian post-punk
-- japanese punk rock
-- math rock
+- venezuelan rock
 - zolo
+- japanese punk rock
 - deep soft rock
+- math rock
 - brighton indie
 - ambient guitar
-- telugu worship
 - beat italiano
 - swamp rock
 - boston rock
-- new jersey indie
 - boston indie
-- psychobilly
+- ostrock
+- new jersey indie
+- britpop revival
 - seattle indie
 - african rock
+- psychobilly
 - classic finnish rock
-- britpop revival
+- telugu worship
 - romanian rock
-- ostrock
 - indonesian alternative rock
 - melodic hard rock
 - nwocr
@@ -4814,175 +4814,175 @@ Rock:
 - alternative roots rock
 - no wave
 - classic hungarian rock
-- argentine alternative rock
-- ska revival
 - pinoy praise
 - australian indie rock
 - indonesian punk
 - german punk rock
 - rock alternativo brasileiro
+- argentine alternative rock
+- ska revival
+- black punk
 - mexican classic rock
 - double drumming
-- black punk
 - minimal wave
 - oxford indie
-- chaotic hardcore
-- uk post-punk revival
 - konsrock
 - nintendocore
+- uk post-punk revival
 - canadian indie rock
 - acoustic rock
+- chaotic hardcore
 - scottish new wave
 - swedish indie rock
 - ukrainian folk rock
-- vancouver indie
+- wrock
 - modern hardcore
 - german hard rock
 - spacegrunge
-- christian hard rock
-- wrock
 - industrial
+- vancouver indie
 - art punk
+- christian hard rock
 - punk 'n' roll
 - bangladeshi rock
 - k-rock
-- folk rock italiano
 - american shoegaze
+- folk rock italiano
 - russian punk rock
 - rock alternatif francais
-- utah indie
-- quebec indie
 - palm desert scene
 - chicago punk
-- canadian punk
 - atlanta indie
+- utah indie
+- canadian punk
 - parody
 - dark rock
 - danish alternative rock
 - kurdish rock
-- uk dub
-- russian alternative rock
-- indonesian ska
-- portland indie
-- cowpunk
-- london indie
-- instrumental math rock
-- melbourne indie
-- czech folk rock
-- gainesville indie
-- power blues-rock
-- space rock
 - manchester indie
-- korean indie rock
-- south african rock
+- uk dub
+- quebec indie
+- indonesian ska
+- russian alternative rock
+- cowpunk
+- instrumental math rock
+- power blues-rock
+- czech folk rock
+- portland indie
 - modern southern rock
-- bristol indie
-- swedish rockabilly
+- south african rock
+- london indie
+- melbourne indie
 - tape club
 - japanese post-rock
-- outsider
-- indian rock
-- alternative pop rock
-- danish indie
-- puerto rican rock
-- magyar mulatos
-- vocaloid rock
-- dc hardcore
-- grebo
-- power-pop punk
 - texas pop punk
-- queercore
-- rock independant francais
-- reading indie
-- uk post-hardcore
-- norwegian folk rock
+- alternative pop rock
+- indian rock
+- space rock
+- puerto rican rock
+- danish indie
+- magyar mulatos
+- bristol indie
+- vocaloid rock
+- swedish rockabilly
+- outsider
+- dc hardcore
 - scottish indie
+- gainesville indie
+- korean indie rock
+- grebo
+- queercore
+- norwegian folk rock
+- uk post-hardcore
 - munich indie
+- rock independant francais
+- power-pop punk
+- reading indie
 - welsh rock
 - toronto indie
 - bulgarian rock
 - hamburg indie
-- finnish hard rock
+- minneapolis indie
 - brisbane indie
-- finnish alternative rock
+- american post-punk
 - swiss rock
 - surf punk
-- american post-punk
 - auckland indie
 - baltimore indie
 - psychedelic folk rock
+- finnish hard rock
+- finnish alternative rock
 - new england emo
-- minneapolis indie
 - deathrock
 - mathcore
 - albanian rock
 - oakland indie
 - paraguayan rock
 - emo punk
-- post-post-hardcore
 - irish post-punk
 - indonesian indie rock
 - swedish melodic rock
 - c86
 - aussie emo
 - pakistani rock
-- swedish hard rock
+- post-post-hardcore
 - new york shoegaze
 - varmland rock
-- japanese garage rock
+- swedish hard rock
 - connecticut indie
+- russian indie rock
 - indie shoegaze
 - ambient post-rock
 - athens indie
 - indie rock peruano
-- russian indie rock
-- olympia wa indie
 - deep christian rock
 - dutch prog
 - rock viet
 - ecuadorian alternative rock
-- miami indie
+- japanese indie rock
 - scottish indie rock
 - jazz rock
-- dutch indie rock
+- nz indie
+- japanese garage rock
 - detroit rock
+- dutch indie rock
 - synth punk
 - french garage rock
 - deep new wave
+- miami indie
 - german indie rock
-- swiss alternative rock
-- japanese indie rock
-- irish indie rock
-- pinoy alternative rock
-- swedish garage rock
-- estonian rock
 - victoria bc indie
+- estonian rock
+- swedish garage rock
+- neo-progressive
 - nottingham indie
 - swiss singer-songwriter
-- neo-rockabilly
-- nz indie
-- neo-progressive
+- irish indie rock
+- gbvfi
 - indorock
-- galician rock
 - indonesian post-hardcore
 - one-person band
-- british comedy
 - belgian new wave
 - comedy rock
-- liverpool indie
-- instrumental stoner rock
+- galician rock
+- neo-rockabilly
 - indonesian psychedelia
 - russian folk rock
 - rwandan gospel
+- olympia wa indie
+- liverpool indie
+- instrumental stoner rock
+- pinoy alternative rock
 - rock curitibano
-- washington indie
+- british comedy
 - persian rock
 - proto-techno
-- gbvfi
+- washington indie
 - chicano punk
 - canterbury scene
-- japanese math rock
 - american post-rock
+- japanese math rock
+- swiss alternative rock
 - indie rock italiano
 - perth indie
 - rock mineiro
@@ -4991,127 +4991,127 @@ Rock:
 - birmingham indie
 - minneapolis punk
 - uk pop punk
-- spanish folk rock
+- welsh indie
 - lithuanian rock
+- spanish folk rock
 - kent indie
 - slovenian rock
 - detroit indie
-- grand rapids indie
+- vancouver punk
 - dreamgaze
-- deep gothic post-punk
-- welsh indie
 - traditional rockabilly
 - flute rock
 - rock keyboard
-- vancouver punk
 - okc indie
 - canadian garage rock
 - luxembourgian indie
-- cincinnati indie
-- austin rock
-- bangalore indie
 - stuttgart indie
+- bangalore indie
+- deep gothic post-punk
+- cincinnati indie
 - canadian post-punk
 - hong kong rock
+- austin rock
 - sydney indie
 - louisville indie
 - swedish prog
 - ghent indie
+- grand rapids indie
 - essex indie
 - southampton indie
-- emocore
 - scottish shoegaze
-- phoenix indie
 - halifax indie
 - brazilian emo
+- phoenix indie
 - freakbeat
+- emocore
 - irish shoegaze
 - rhode island indie
 - psychedelic blues-rock
-- belarusian rock
 - belgian indie rock
 - christchurch indie
 - uk beatdown
 - leeds indie
+- belarusian rock
 - omaha indie
-- krautrock
 - taiwan rock
 - italian new wave
+- krautrock
 - new orleans indie
 - trop rock
 - buffalo ny indie
 - devon indie
 - rochester ny indie
+- canadian psychedelic
 - northern irish indie
-- north east england indie
-- electronicore
 - chicago pop punk
-- french post-punk
 - asbury park indie
+- french post-punk
 - geek rock
 - doomgaze
-- pittsburgh indie
+- electronicore
 - mod revival
 - deep progressive rock
-- polish indie rock
 - newcastle indie
+- polish indie rock
 - dublin indie
-- canadian psychedelic
-- dc indie
+- north east england indie
 - bolivian rock
 - brazilian indie rock
+- dc indie
 - adelaide indie
 - swedish psychedelic rock
-- italian progressive rock
 - norwegian alternative rock
-- fast melodic punk
+- pittsburgh indie
 - chinese indie rock
-- australian shoegaze
+- italian progressive rock
 - scottish hush
 - bern indie
 - traditional ska
+- australian shoegaze
 - swedish stoner rock
 - bogor indie
+- portuguese indie rock
 - modern progressive rock
 - uk rockabilly
+- fast melodic punk
 - mumbai indie
 - kc indie
-- elephant 6
 - western mass indie
+- elephant 6
 - denver indie
-- portuguese indie rock
-- british post-rock
 - norwegian punk rock
 - greek rock
 - brazilian lo-fi rock
 - argentine indie rock
-- german stoner rock
+- british post-rock
 - cornwall indie
 - german post-punk
 - glasgow indie
 - action rock
-- rva indie
+- german stoner rock
 - cambridgeshire indie
+- rva indie
 - deep melodic hard rock
 - canadian post-rock
-- nordic post-rock
 - texas punk
+- nordic post-rock
 - polish hardcore
 - dunedin sound
+- canadian shoegaze
 - danish post-punk
-- brazilian punk rock
 - irish punk
 - panamanian rock
 - florida hardcore
 - greek psychedelic rock
 - calgary indie
-- canadian shoegaze
-- cinematic post-rock
-- polish prog
 - indie emo
+- cinematic post-rock
+- indonesian shoegaze
+- polish prog
+- brazilian punk rock
 - serbian alternative rock
 - dayton indie
-- indonesian shoegaze
 - british math rock
 - psychedelic space rock
 - georgian rock
@@ -5120,49 +5120,50 @@ Rock:
 - deep punk rock
 - latvian rock
 - sasscore
-- nz alternative rock
 - german prog
 - spanish rockabilly
+- nz alternative rock
 - east anglia indie
+- norwegian prog
 - classic psychedelic rock
 - pinoy indie rock
-- norwegian prog
 - spanish indie rock
 - japanese psychedelic rock
-- trash rock
 - deep psychobilly
 - greek punk
+- trash rock
 - idaho indie
 - rock gotico
-- british industrial
 - pittsburgh indie rock
-- uk diy punk
+- british industrial
 - cardiff indie
+- coldwave
 - danish punk
 - heavy gothic rock
+- uk diy punk
 - new brunswick indie
-- coldwave
 - french stoner rock
 - southeast asian post-rock
-- italian stoner rock
 - uk noise rock
 - ukrainian alternative rock
+- italian stoner rock
 - russian post-rock
 - uk stoner rock
-- underground grunge
 - spanish progressive rock
 - modern noise rock
-- gothic post-punk
+- underground grunge
 - neo-trad prog
 - taiwan post-rock
 - synth prog
 - latin surf rock
-- paisley underground
+- gothic post-punk
 - german rockabilly
+- paisley underground
 - indie psychedelic rock
 - swedish post-punk
 - rock nica
 - crossover prog
+- german post-rock
 - mathgrind
 - french post-rock
 - c64
@@ -5171,7 +5172,6 @@ Rock:
 - rock progressif francais
 - experimental indie rock
 - lawrence ks indie
-- german post-rock
 - slovak indie
 - greek indie rock
 - noise punk
@@ -5190,14 +5190,14 @@ Rock:
 - noise
 - deep space rock
 - brazilian stoner rock
-- french experimental rock
 - power electronics
+- french experimental rock
 - drone rock
 - rock in opposition
 - zeuhl
 - brazilian post-rock
 - vegas indie
-- lincoln ne indie
+- portsmouth indie
 - polish noise rock
 - chinese punk
 - lancaster pa indie
@@ -5220,7 +5220,7 @@ Rock:
 - rock of gibraltar
 - brutal prog
 - rock noise
-- mexican post-rock
+- pittsburgh rock
 - rock nacional feminino
 - bosstown sound
 - grunge revival
@@ -5288,7 +5288,7 @@ Rock:
 - rhythm rock
 - canadian post-hardcore
 - spanish psychedelic rock
-- portsmouth indie
+- lincoln ne indie
 - delaware indie
 - triangle indie
 - rhythm and boogie
@@ -5300,7 +5300,7 @@ Rock:
 - deep swedish rock
 - malaysian post-rock
 - indiana indie
-- pittsburgh rock
+- mexican post-rock
 - indie catracho
 - modern downshift
 - rap toscana
@@ -5365,44 +5365,44 @@ World/Traditional:
 - entehno
 - mantra
 - maskandi
-- manila sound
 - nasheed
-- south african pop dance
 - narodna muzika
+- manila sound
+- south african pop dance
 - celtic
-- bhangra
 - south african gospel
-- uk dancehall
+- bhangra
 - afrobeat
-- african gospel
+- uk dancehall
 - chutney
-- native american traditional
+- african gospel
 - enka
+- native american traditional
 - canzone d'autore
 - christian afrobeat
 - folklore paraguayo
 - indian instrumental
-- greek indie
 - native american flute
 - world fusion
 - arab alternative
+- greek indie
 - russian chanson
 - alte
 - sevdah
 - french worship
-- shanty
-- turkish instrumental
 - celtic punk
+- turkish instrumental
 - greek swing
 - ghazal
+- shanty
 - azonto
 - soukous
 - norske viser
 - asakaa
-- israeli singer-songwriter
 - football
-- bongo flava
+- israeli singer-songwriter
 - ilahiler
+- bongo flava
 - coupe-decale
 - ghanaian alternative
 - gqom
@@ -5411,34 +5411,34 @@ World/Traditional:
 - finnish indie
 - swahili gospel
 - chinese traditional
+- mbalax
 - cruise
 - norwegian singer-songwriter
 - polca paraguaya
-- mbalax
+- bard
 - rosary
 - canadian celtic
-- swedish dancehall
-- bard
 - musiikkia lapsille
 - bouzouki
-- hiplife
 - rebetiko
 - naat
+- hiplife
 - punta
 - marathi traditional
-- gengetone
 - barnsagor
 - afro psych
+- gengetone
 - indie curitibano
+- swedish dancehall
+- congolese gospel
 - poezja spiewana
 - rumba congolaise
 - zouglou
-- congolese gospel
 - mexican traditional
 - naija old school
+- rap ivoire
 - ecuadorian indie
 - dalarna indie
-- rap ivoire
 - ghanaian gospel
 - reggae maghreb
 - svensk progg
@@ -5452,17 +5452,17 @@ World/Traditional:
 - ndombolo
 - neo kyma
 - anthem
-- griot
 - sega
 - swedish punk
+- griot
 - musique militaire
 - musikkorps
-- persian alternative
 - reggae tuga
 - bangladeshi indie
+- persian alternative
 - tuareg guitar
-- visor
 - harp
+- visor
 - scottish singer-songwriter
 - south african alternative
 - svensk lovsang
@@ -5476,21 +5476,21 @@ World/Traditional:
 - classic afrobeat
 - zilizopendwa
 - celtic harp
-- gnawa
 - czsk reggae
-- semba
+- gnawa
 - paidika tragoudia
 - musica afroperuana
 - belo horizonte indie
 - musica paranaense
 - comptine africaine
-- morna
+- semba
+- makossa
 - oud
 - sungura
 - kora
 - ilahije
-- makossa
 - zim urban groove
+- morna
 - trinidadian reggae
 - musica pernambucana
 - native american contemporary
@@ -5506,28 +5506,27 @@ World/Traditional:
 - zim gospel
 - sami
 - rap baiano
-- lebanese indie
 - azeri traditional
 - fuji
 - igbo traditional
 - bagpipe
-- highlife
-- african reggae
+- lebanese indie
 - igbo worship
 - musica mocambicana
+- highlife
+- african reggae
 - benga
 - norwegian americana
 - dub brasileiro
 - old school highlife
 - sundanese traditional
 - klezmer
-- irish dance
 - brasilia indie
+- irish dance
 - persian traditional
 - chennai indie
 - musica indigena mexicana
 - russian romance
-- hammered dulcimer
 - gumbe
 - bagpipe marching band
 - uilleann pipes
@@ -5536,6 +5535,7 @@ World/Traditional:
 - bahai
 - deep downtempo fusion
 - powwow
+- hammered dulcimer
 - musica eletronica brasileira
 - komedi
 - balinese traditional
@@ -5549,9 +5549,9 @@ World/Traditional:
 - nubian traditional
 - scottish americana
 - musique nigerienne
+- bikutsi
 - african percussion
 - marrabenta
-- bikutsi
 - persian neo-traditional
 - musiikkia lapista
 - native american spiritual
@@ -5568,8 +5568,8 @@ World/Traditional:
 - musica folk asturiana
 - djembe
 - musica brasiliense
-- duduk
 - tamburica
+- duduk
 - sindhi
 - afghan traditional
 - swedish fiddle

@@ -9,6 +9,8 @@ from source.web_scraping import chosic
 
 
 BUCKET_NAME = 'project-spotify-analysis-data'
+
+
 def main():
     BUCKET_NAME = 'project-spotify-analysis-data'
 
@@ -133,17 +135,19 @@ def main():
         utils.upload_raw_playlists_to_s3(bucket_name=BUCKET_NAME)
 
     else:
-        logger.info("Not all status codes are 200. Downloading preprocessed data from S3 instead.")
-        utils.download_preprocessed_data_from_s3(bucket_name=BUCKET_NAME)
+        logger.info("Not all status codes are 200. Downloading data from S3 instead.")
+        utils.download_preprocessed_data_from_s3(bucket_name=BUCKET_NAME, file_type='preprocessed_files')
+        utils.download_raw_playlists_from_s3(bucket_name=BUCKET_NAME)
 
     # Get and save genres from Chosic
     genres = chosic.get_genres()
     with open(genres_path, 'w', encoding='utf-8') as file:
         yaml.dump(genres, file, default_flow_style=False, allow_unicode=True)
-    utils.upload_chosic_genres_to_s3(bucket_name=BUCKET_NAME)
+    utils.upload_preprocessed_data_to_s3(bucket_name=BUCKET_NAME, file_type='genre_files')
+
+    utils.upload_preprocessed_data_to_s3(bucket_name=BUCKET_NAME, file_type='preprocessed_files')
+    utils.upload_raw_playlists_to_s3(bucket_name=BUCKET_NAME)
 
 
 if __name__ == '__main__':
     main()
-
-

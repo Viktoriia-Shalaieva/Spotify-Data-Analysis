@@ -1,11 +1,8 @@
-files:
-  - file_name: "data/preprocessed/albums.csv"
-    s3_key: "data/preprocessed/albums.csv"
-  - file_name: "data/preprocessed/artists_full.csv"
-    s3_key: "data/preprocessed/artists_full.csv"
-  - file_name: "data/preprocessed/playlists.csv"
-    s3_key: "data/preprocessed/playlists.csv"
-  - file_name: "data/preprocessed/tracks.csv"
-    s3_key: "data/preprocessed/tracks.csv"
-  - file_name: "data/genres/genres.yaml"
-    s3_key: "data/genres/genres.yaml"
+preprocessed_files:
+  - "data/preprocessed/albums.csv"
+  - "data/preprocessed/artists_full.csv"
+  - "data/preprocessed/playlists.csv"
+  - "data/preprocessed/tracks.csv"
+
+genre_files:
+  - "data/genres/genres.yaml"
