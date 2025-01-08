@@ -283,6 +283,12 @@ def create_line_chart(data, x, y, text=None, log_y=True, yaxis_title=None, **kwa
 
 
 def format_number_text(column):
+    """
+    Format numeric values in a column into human-readable text.
+
+    Converts numbers into abbreviated text format with 'K' for thousands and 'M' for millions.
+    Numbers below 1,000 remain unchanged.
+    """
     return column.apply(
         lambda x: (
             f"{x / 1e6:.1f}M" if x >= 1e6 else
@@ -290,6 +296,7 @@ def format_number_text(column):
             str(x)
         )
     )
+
 
 def create_boxplot_subplots(x, y, y2, title, categoryarray):
     fig = make_subplots(

@@ -354,7 +354,7 @@ st.subheader("Top 10 Artists by Frequency in Playlists")
 # top_10_artists_full.columns = ['Artist Name', 'Number of songs in playlists',
 #                                'Followers', 'Artist Popularity', 'Artist Genres']
 
-artists = data_processing.prepare_top_artists_data(playlists_table, tracks_table, artists_table)
+artists = data_processing.prepare_top_artists_data(playlists_table, artists_table)
 top_10_artists_full = artists['top_10_artists_full']
 artist_per_playlist = artists['artist_per_playlist']
 
@@ -386,7 +386,6 @@ artist_per_playlist = artists['artist_per_playlist']
 
 expanded_artists_genres = data_processing.expand_and_classify_artists_genres(top_10_artists_full)
 
-st.dataframe(expanded_artists_genres)
 # Grouping the data by 'Artist Name' and aggregating values
 top_10_artists_grouped = expanded_artists_genres.groupby('Artist Name').agg({
     'Number of songs in playlists': 'first',

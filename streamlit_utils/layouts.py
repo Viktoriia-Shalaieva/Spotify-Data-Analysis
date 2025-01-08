@@ -2,6 +2,10 @@ import streamlit as st
 
 
 def set_page_layout(page_title="Spotify Data Analysis", page_icon="🎵"):
+    """
+    Configure the Streamlit app layout, including the page title, icon, and sidebar setup.
+    It also adds a custom image and navigation bar to the sidebar.
+    """
     st.set_page_config(
         page_title=page_title,
         page_icon=page_icon,
@@ -14,11 +18,18 @@ def set_page_layout(page_title="Spotify Data Analysis", page_icon="🎵"):
 
 
 def set_page_header(header_title: str, header_icon: str = "🏠"):
+    """Set up the page header for the Streamlit application."""
     st.title(f"{header_title} {header_icon}")
     st.divider()
 
 
 def navbar():
+    """
+    Set up the navigation bar in the Streamlit sidebar.
+
+    This function creates links to various pages of the Streamlit application,
+    displayed in the sidebar with labels and icons for easy navigation.
+    """
     with st.sidebar:
         st.page_link('streamlit_app.py', label='Home', icon='🏠')
         st.page_link('pages/data_preview.py', label='Data Preview', icon='🧮')

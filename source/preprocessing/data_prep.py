@@ -6,6 +6,10 @@ from source.api import discogs, spotify
 
 
 def create_playlist_table(playlist):
+    """
+    Extracts data from a Spotify playlist, including playlist details (ID, name, followers, country) and track-specific
+    information (track ID, album ID, artist IDs). The results are returned as a pandas DataFrame.
+    """
     playlist_id = playlist['id']
     playlist_name = playlist['name']
     playlist_followers_total = playlist['followers']['total']
@@ -42,6 +46,16 @@ def create_playlist_table(playlist):
 
 
 def create_all_playlists_table(token, playlists_id, path, save):
+    """
+    Retrieve data for multiple Spotify playlists, processes each playlist
+    using `create_playlist_table`, and concatenates the results into a single DataFrame.
+
+    Args:
+        token (str): Spotify API token for authentication.
+        playlists_id (list of str): A list of playlist IDs to retrieve and process.
+        path (str): File path to save the resulting DataFrame as a CSV file if `save` is True.
+        save (bool): Whether to save the combined DataFrame to a CSV file. Defaults to False.
+    """
     all_playlists = []
     for playlist_id in playlists_id:
         playlist_data = spotify.get_playlist(token, playlist_id)
@@ -58,6 +72,16 @@ def create_all_playlists_table(token, playlists_id, path, save):
 
 
 def create_tracks_table(token, track_ids, path, save):
+    """
+    Retrieve data for multiple Spotify tracks, process each track,
+    and concatenate the results into a single DataFrame.
+
+    Args:
+        token (str): Spotify API token for authentication.
+        track_ids (list of str): A list of track IDs to retrieve and process.
+        path (str): File path to save the resulting DataFrame as a CSV file if `save` is True.
+        save (bool): Whether to save the combined DataFrame to a CSV file. Defaults to False.
+    """
     tracks_data = []
 
     for track_id in track_ids:
@@ -85,6 +109,16 @@ def create_tracks_table(token, track_ids, path, save):
 
 
 def create_albums_table(token, album_ids, path, save):
+    """
+    Retrieve data for multiple Spotify albums, process each album,
+    and concatenate the results into a single DataFrame.
+
+    Args:
+        token (str): Spotify API token for authentication.
+        album_ids (list of str): A list of album IDs to retrieve and process.
+        path (str): File path to save the resulting DataFrame as a CSV file if `save` is True.
+        save (bool): Whether to save the combined DataFrame to a CSV file. Defaults to False.
+    """
     albums_data = []
 
     for album_id in album_ids:
@@ -114,6 +148,16 @@ def create_albums_table(token, album_ids, path, save):
 
 
 def create_artists_table(token, artist_ids, path, save):
+    """
+    Retrieve data for multiple Spotify artists, process each artist,
+    and concatenate the results into a single DataFrame.
+
+    Args:
+        token (str): Spotify API token for authentication.
+        artist_ids (list of str): A list of artist IDs or comma-separated strings of artist IDs to retrieve and process.
+        path (str): File path to save the resulting DataFrame as a CSV file if `save` is True.
+        save (bool): Whether to save the combined DataFrame to a CSV file. Defaults to False.
+    """
     rows = []
     unique_artist_ids = set()
 
@@ -146,6 +190,18 @@ def create_artists_table(token, artist_ids, path, save):
 
 
 def create_artist_genre_table(token, file, path, save):
+    """
+    Retrieve genre data for multiple artists and create a DataFrame.
+
+    This function processes a file containing artist names, retrieves genre data for each artist,
+    and creates a DataFrame with the results. Optionally, the DataFrame can be saved as a CSV file.
+
+    Args:
+        token (str): Discogs API token for authentication.
+        file (pd.DataFrame): A DataFrame containing artist information. It must include a column named 'artist_name'.
+        path (str): File path to save the resulting DataFrame as a CSV file if `save` is True.
+        save (bool): Whether to save the resulting DataFrame to a CSV file. Defaults to False.
+    """
     rows = []
 
     for _, row in file.iterrows():  # Using _ indicates that the index value is not important and will not be used.
@@ -170,6 +226,13 @@ def process_artist_genres(artists_df, path, save):
     """
     Processes the 'artist_genres' column in a DataFrame, replacing missing genres
     with randomly generated genres based on the distribution of existing genres.
+
+    Args:
+        artists_df (pd.DataFrame): A DataFrame containing artist information.
+            It must include a column named 'artist_genres'.
+        path (str): File path to save the processed DataFrame as a CSV file if `save` is True.
+        save (bool): Whether to save the processed DataFrame to a CSV file. Defaults to False.
+
     """
     # Replace empty lists ('[]') with NaN
     artists_df['artist_genres'] = artists_df['artist_genres'].replace('[]', pd.NA)

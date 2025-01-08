@@ -11,6 +11,18 @@ from source import utils
 
 @st.cache_data
 def load_data(path_config):
+    """
+    Load data files specified in the configuration.
+
+    This function reads CSV files for playlists, albums, tracks, and artists from
+    the paths defined in the provided configuration dictionary.
+
+    Args:
+        path_config (dict): A configuration dictionary containing:
+            - 'data_dir' (list): A list with the directory path for data files.
+            - 'files_names' (dict): A dictionary of file names with keys matching
+              'playlists.csv', 'albums.csv', 'tracks.csv', and 'artists_full.csv'.
+    """
     data_dir = path_config['data_dir'][0]
     file_paths = {file_name: os.path.join(data_dir, file_name) for file_name in path_config['files_names']}
 
@@ -34,6 +46,7 @@ def load_data(path_config):
 
 @st.cache_data
 def process_data(data):
+    """Process and standardize data by renaming columns in each dataset."""
     processed_data = {
         "playlists": rename_playlists(data['playlists']),
         "artists": rename_artists(data['artists']),
@@ -45,6 +58,12 @@ def process_data(data):
 
 @st.cache_data
 def load_and_process_data(config_path):
+    """
+    Load, process, and standardize data from the provided configuration.
+
+    This function loads configuration details, retrieves data from specified file paths,
+    and processes the data by renaming columns for consistency across datasets.
+    """
     path_config = utils.load_config(config_path)
     data = load_data(path_config)
     return process_data(data)
@@ -52,6 +71,7 @@ def load_and_process_data(config_path):
 
 @st.cache_data
 def rename_playlists(dataframe):
+    """Rename columns in the playlists DataFrame for consistency and readability."""
     return dataframe.rename(columns={
         'playlist_id': 'Playlist ID',
         'playlist_name': 'Playlist Name',
@@ -65,6 +85,7 @@ def rename_playlists(dataframe):
 
 @st.cache_data
 def rename_artists(dataframe):
+    """Rename columns in the artists DataFrame for consistency and readability."""
     return dataframe.rename(columns={
         'artist_id': 'Artist ID',
         'artist_name': 'Artist Name',
@@ -76,6 +97,7 @@ def rename_artists(dataframe):
 
 @st.cache_data
 def rename_tracks(dataframe):
+    """Rename columns in the tracks DataFrame for consistency and readability."""
     return dataframe.rename(columns={
         'track_id': 'Track ID',
         'track_name': 'Track Name',
@@ -87,6 +109,7 @@ def rename_tracks(dataframe):
 
 @st.cache_data
 def rename_albums(dataframe):
+    """Rename columns in the albums DataFrame for consistency and readability."""
     return dataframe.rename(columns={
         'album_id': 'Album ID',
         'album_name': 'Album Name',
@@ -100,6 +123,12 @@ def rename_albums(dataframe):
 
 @st.cache_data
 def load_country_coords(file_path):
+    """
+    Load country coordinates and return a DataFrame for mapping.
+
+    This function reads a configuration file containing country names and their
+    coordinates (latitude and longitude) and transforms the data into a pandas DataFrame.
+    """
     country_coords = utils.load_config(file_path)
 
     countries_for_map = []
@@ -122,7 +151,7 @@ def classify_genres_detailed_structure(genre, all_genres_with_subgenres):
     """
     Classifies a genre into a parent genre based on a given mapping.
 
-    Parameters:
+    Args:
         genre (str): The genre to classify.
         all_genres_with_subgenres (dict): A dictionary mapping parent genres to their subgenres.
 
@@ -144,7 +173,14 @@ def classify_other_genres(genre, additional_genres):
 
 
 def expand_and_classify_artists_genres(artists_table):
+    """
+    Expand and classify artist genres into parent genres.
 
+    This function processes an artist genres table by:
+    - Splitting the 'Artist Genres' column into individual genres.
+    - Cleaning genre strings by removing special characters and converting them to lowercase.
+    - Classifying each genre into a parent genre based on predefined genre structures.
+    """
     all_genres_with_subgenres = utils.load_config('./data/genres/genres.yaml')
     additional_genres_with_subgenres = utils.load_config('./data/genres/additional_genres.yaml')
     artists_table['Artist Genres'] = artists_table['Artist Genres'].str.split(', ')
@@ -204,6 +240,31 @@ def prepare_median_popularity_data(playlists_table, tracks_table):
 
 
 def calculate_std_dev_ranges_and_percentages(data):
+    """
+    Calculate standard deviation ranges and percentages for a dataset.
+
+    This function computes the mean, median, and standard deviation of the input data.
+    It then calculates ranges within 1, 2, and 3 standard deviations from the mean,
+    and determines the percentage of data points that fall within each range.
+
+    Args:
+        data (pd.Series): A pandas Series containing numerical data.
+
+    Returns:
+        tuple: A tuple containing three dictionaries:
+            - `popularity_stats`: Contains basic statistics:
+                - 'mean': Mean of the data.
+                - 'median': Median of the data.
+                - 'std': Standard deviation of the data.
+            - `std_ranges`: Contains the lower and upper bounds for 1, 2, and 3 standard deviations:
+                - '1_std': (lower_bound, upper_bound)
+                - '2_std': (lower_bound, upper_bound)
+                - '3_std': (lower_bound, upper_bound)
+            - `perc_within_std`: Contains the percentage of data points within each range:
+                - 'within_1_std': Percentage within 1 standard deviation.
+                - 'within_2_std': Percentage within 2 standard deviations.
+                - 'within_3_std': Percentage within 3 standard deviations.
+    """
     mean_value = data.mean()
     median_value = data.median()
     std_value = data.std()
@@ -232,15 +293,8 @@ def calculate_std_dev_ranges_and_percentages(data):
 
 def prepare_top_tracks_data(playlists_table, tracks_table, artists_table):
     """
-    Prepare necessary tables for visualizing Top 10 Tracks by Frequency in Playlists.
-
-    Parameters:
-        - playlists_table (pd.DataFrame): DataFrame with playlist information.
-        - tracks_table (pd.DataFrame): DataFrame with track details.
-        - artists_table (pd.DataFrame): DataFrame with artist details.
-
-    Returns:
-        - tracks_summary.
+    Identify the top 10 most frequent tracks from the playlists table, enriches them with details from
+    the tracks and artists tables, and aggregates artist names for each track.
     """
     # Count tracks and select top 10
     track_frequencies = playlists_table['Track ID'].value_counts().reset_index()
@@ -284,7 +338,16 @@ def prepare_top_tracks_data(playlists_table, tracks_table, artists_table):
     return tracks_summary
 
 
-def prepare_top_artists_data(playlists_table, tracks_table, artists_table):
+def prepare_top_artists_data(playlists_table, artists_table):
+    """
+    Identify the top 10 most frequent artists from the playlists table and their presence in playlists.
+
+    Returns:
+        dict: Contains:
+            - 'artist_per_playlist' (pd.DataFrame): A DataFrame showing how often each
+              artist appears in playlists for each country.
+            - 'top_10_artists_full' (pd.DataFrame): A DataFrame containing information on the top 10 artists.
+    """
     playlists_table['Artist ID'] = playlists_table['Artist ID'].str.split(', ')
 
     # Expand the playlists table so that each artist in the 'artist_id' list gets its own row
@@ -297,7 +360,6 @@ def prepare_top_artists_data(playlists_table, tracks_table, artists_table):
         .value_counts()
         .reset_index()
     )
-
     artist_counts = expanded_playlists_artists['Artist ID'].value_counts().reset_index()
 
     top_10_artists = artist_counts.nlargest(n=10, columns='count')
@@ -307,11 +369,9 @@ def prepare_top_artists_data(playlists_table, tracks_table, artists_table):
         on='Artist ID',
         how='left'
     )
-
     top_10_artists_full = top_10_artists_full[
         ['Artist Name', 'count', 'Artist Total Followers', 'Artist Popularity', 'Artist Genres']
     ]
-
     top_10_artists_full.columns = ['Artist Name', 'Number of songs in playlists',
                                    'Followers', 'Artist Popularity', 'Artist Genres']
 
@@ -323,17 +383,12 @@ def prepare_top_artists_data(playlists_table, tracks_table, artists_table):
 
 def process_tracks_data(playlists_table, tracks_table, artists_table):
     """
-    Process track data by merging playlist, track, and artist information.
-
-    Parameters:
-    - playlists_table (pd.DataFrame): DataFrame with playlist information.
-    - tracks_table (pd.DataFrame): DataFrame with track details.
-    - artists_table (pd.DataFrame): DataFrame with artist details.
+    Process track data to create detailed information about tracks and their artists.
 
     Returns:
-    dict: A dictionary containing:
-        - 'top_10_tracks': Top 10 tracks sorted by popularity.
-        - 'grouped_tracks': Grouped track data with artist names, track duration in minutes and additional columns.
+        dict: Contains:
+            - 'top_10_tracks': Top 10 tracks sorted by popularity.
+            - 'grouped_tracks': Grouped track data with artist names, track duration in minutes and additional columns.
     """
     merged_playlists_tracks = pd.merge(
         playlists_table[['Track ID', 'Artist ID']],
@@ -379,13 +434,12 @@ def process_tracks_data(playlists_table, tracks_table, artists_table):
 
 def process_artists_data(artists_table):
     """
-    Analyzes an artists table to identify top artists and follower group distribution.
-
-    Parameters:
-        artists_table (pd.DataFrame): A DataFrame containing artist data.
+    Process artist data to determine the top 10 artists by popularity
+    and total followers. It also categorizes artists into follower groups and
+    calculates the distribution of these groups.
 
     Returns:
-        Dict[str, Union[pd.DataFrame, pd.Series]]: A dictionary with:
+        dict: Contains:
             - 'top_10_artists_by_popularity': Top 10 artists by popularity.
             - 'top_10_artists_by_followers': Top 10 artists by total followers, including a formatted followers column.
             - 'bin_counts_followers': Distribution of artists by follower count groups.
@@ -424,17 +478,20 @@ def process_artists_data(artists_table):
 
 def process_albums_data(albums_table, playlists_table, artists_table):
     """
-    Prepare data for creating Top 10 Most Popular Albums, Seasonality of
-    Album Releases, Album Releases Timeline, Distribution of Album Types.
+        Process album data to analyze popularity, release patterns, and artist associations.
 
-    Parameters:
-    - albums_table: DataFrame with album details.
-    - playlists_table: DataFrame with playlist information.
-    - artists_table: DataFrame with artist details.
+        This function processes album data to identify the top 10 most popular albums,
+        analyze seasonality and timeline trends in album releases, and associate albums
+        with their respective artists.
 
-    Returns:
-    - Dict[str, pd.DataFrame]: A dictionary containing processed data tables.
-    """
+        Returns:
+            dict: Contains:
+            - 'top_10_albums_by_popularity' (pd.DataFrame): Top 10 albums by popularity.
+            - 'top_10_albums_artists_sorted' (pd.DataFrame): Top 10 albums with artist names.
+            - 'monthly_releases' (pd.DataFrame): Monthly album release counts.
+            - 'yearly_releases' (pd.DataFrame): Yearly album release counts.
+            - 'albums_table' (pd.DataFrame): Updated with release month and year columns.
+        """
     # For Top 10 Most Popular Albums
     top_10_albums_by_popularity = (
         albums_table.nlargest(n=10, columns='Album Popularity')
