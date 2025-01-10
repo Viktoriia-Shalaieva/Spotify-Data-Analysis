@@ -16,20 +16,12 @@ s3 = boto3.resource(
 
 
 def upload_to_s3(file_name, bucket_name, s3_key):
+    """Upload a file to an Amazon S3 bucket."""
     try:
         s3.Bucket(bucket_name).upload_file(Filename=file_name, Key=s3_key)
         logger.info(f"'{file_name}' has been uploaded to bucket '{bucket_name}' as '{s3_key}'.")
     except Exception as e:
         logger.error(f"Error uploading file: {e}")
-
-
-def upload_files_to_s3(bucket_name, files):
-    for file in files:
-        upload_to_s3(
-            file_name=file['file_name'],
-            bucket_name=bucket_name,
-            s3_key=file['s3_key']
-        )
 
 
 def download_from_s3(file_name, bucket_name, s3_key):

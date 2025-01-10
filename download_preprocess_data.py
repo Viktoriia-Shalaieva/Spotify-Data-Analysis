@@ -130,23 +130,25 @@ def main():
             path=artists_full_path,
             save=True
         )
-        # Upload processed and raw data to S3 bucket
-        utils.upload_preprocessed_data_to_s3(bucket_name=BUCKET_NAME)
-        utils.upload_raw_playlists_to_s3(bucket_name=BUCKET_NAME)
+
+        logger.info("Upload processed and raw data to S3 bucket.")
+        utils.sync_preprocessed_data_with_s3(bucket_name=BUCKET_NAME, operation='upload',
+                                             file_type='preprocessed_files')
+        utils.sync_raw_playlists_with_s3(bucket_name=BUCKET_NAME, operation='upload')
 
     else:
         logger.info("Not all status codes are 200. Downloading data from S3 instead.")
-        utils.download_preprocessed_data_from_s3(bucket_name=BUCKET_NAME, file_type='preprocessed_files')
-        utils.download_raw_playlists_from_s3(bucket_name=BUCKET_NAME)
+        utils.sync_preprocessed_data_with_s3(bucket_name=BUCKET_NAME, operation='download',
+                                             file_type='preprocessed_files')
+        utils.sync_raw_playlists_with_s3(bucket_name=BUCKET_NAME, operation='download')
 
     # Get and save genres from Chosic
     genres = chosic.get_genres()
     with open(genres_path, 'w', encoding='utf-8') as file:
         yaml.dump(genres, file, default_flow_style=False, allow_unicode=True)
-    utils.upload_preprocessed_data_to_s3(bucket_name=BUCKET_NAME, file_type='genre_files')
 
-    utils.upload_preprocessed_data_to_s3(bucket_name=BUCKET_NAME, file_type='preprocessed_files')
-    utils.upload_raw_playlists_to_s3(bucket_name=BUCKET_NAME)
+    # Upload genres data to S3 bucket
+    utils.sync_preprocessed_data_with_s3(bucket_name=BUCKET_NAME, operation='upload', file_type='genre_files')
 
 
 if __name__ == '__main__':
