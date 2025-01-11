@@ -1,8 +1,6 @@
-import os
-import yaml
-import pandas as pd
 import streamlit as st
-from streamlit_utils import layouts, data_processing
+
+from streamlit_utils import data_processing, layouts
 
 
 layouts.set_page_layout()
@@ -10,30 +8,6 @@ st.sidebar.markdown("# **Data Preview** 🧮 ")
 
 layouts.set_page_header("Data Preview", "🧮")
 
-# with open('config/path_config.yaml', 'r') as config_file:
-#     path_config = yaml.safe_load(config_file)
-
-# data_dir = path_config['data_dir'][0]
-# file_paths = {file_name: os.path.join(data_dir, file_name) for file_name in path_config['files_names']}
-#
-# playlists_path = str(file_paths['playlists.csv'])
-# albums_path = str(file_paths['albums.csv'])
-# artists_genres_full_unknown_path = str(file_paths['artists_genres_full_unknown.csv'])
-# tracks_path = str(file_paths['tracks.csv'])
-#
-# playlists_table = pd.read_csv(playlists_path, sep="~")
-# albums_table = pd.read_csv(albums_path, sep='~')
-# artists_genres_full_unknown = pd.read_csv(artists_genres_full_unknown_path, sep='~')
-# tracks_table = pd.read_csv(tracks_path, sep='~')
-#
-# playlists_table = data_processing.rename_playlists(playlists_table)
-#
-# albums_table = data_processing.rename_albums(albums_table)
-#
-# artists_table = data_processing.rename_artists(artists_genres_full_unknown)
-#
-# tracks_table = data_processing.rename_tracks(tracks_table)
-#
 data = data_processing.load_and_process_data('config/path_config.yaml')
 
 playlists_table = data["playlists"]

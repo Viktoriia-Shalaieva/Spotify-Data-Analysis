@@ -1,6 +1,4 @@
 import os
-import random
-import yaml
 
 import pandas as pd
 import streamlit as st

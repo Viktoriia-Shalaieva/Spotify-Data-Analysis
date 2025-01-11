@@ -1,34 +1,12 @@
-import os
-import yaml
-import pandas as pd
 import streamlit as st
-from streamlit_utils import plots, layouts, data_processing
+
+from streamlit_utils import data_processing, layouts, plots
 
 
 layouts.set_page_layout()
 st.sidebar.markdown("# **Artists Analysis** 👩‍🎤 ")
 
 layouts.set_page_header("Artists Analysis", " 👩‍🎤")
-
-
-# with open('config/path_config.yaml', 'r') as config_file:
-#     path_config = yaml.safe_load(config_file)
-
-# with open('./data/genres/genres.yaml', 'r', encoding='utf-8') as file:
-#     all_genres_with_subgenres = yaml.safe_load(file)
-
-# all_genres_with_subgenres = data_processing.load_config('./data/genres/genres.yaml')
-
-
-
-# data_dir = path_config['data_dir'][0]
-# file_paths = {file_name: os.path.join(data_dir, file_name) for file_name in path_config['files_names']}
-#
-# artists_genres_full_unknown_path = str(file_paths['artists_genres_full_unknown.csv'])
-# artists_genres_full_unknown = pd.read_csv(artists_genres_full_unknown_path, sep='~')
-#
-# playlists_path = str(file_paths['playlists.csv'])
-# playlists_table = pd.read_csv(playlists_path, sep="~")
 
 data = data_processing.load_and_process_data('config/path_config.yaml')
 
@@ -48,10 +26,6 @@ plots.create_histogram(
             x='Artist Popularity',
         )
 
-# top_10_artists_by_popularity = (
-#     artists_table.nlargest(n=10, columns='Artist Popularity')
-#     .sort_values(by='Artist Popularity', ascending=True)
-# )
 min_x = top_10_artists_by_popularity['Artist Popularity'].min() - 3
 max_x = top_10_artists_by_popularity['Artist Popularity'].max()
 
@@ -65,17 +39,6 @@ plots.create_bar_plot(
     range_x=[min_x, max_x],
 )
 
-# top_10_artists_by_followers = (
-#     artists_table.nlargest(n=10, columns='Artist Total Followers')
-#     .sort_values(by='Artist Total Followers', ascending=True)
-# )
-#
-# top_10_artists_by_followers['Artist Total Followers (formatted)'] = (
-#     plots.format_number_text(
-#         top_10_artists_by_followers['Artist Total Followers']
-#     )
-# )
-
 st.subheader('Top 10 Artists by Followers')
 plots.create_bar_plot(
     data=top_10_artists_by_followers,
@@ -84,15 +47,6 @@ plots.create_bar_plot(
     orientation='h',
     text='Artist Total Followers (formatted)',
 )
-
-# artists_table['Follower Group'] = pd.cut(
-#     artists_table['Artist Total Followers'],
-#     bins=[0, 1e6, 5e6, 10e6, 50e6, 100e6, 150e6],
-#     labels=['<1M', '1-5M', '5-10M', '10-50M', '50-100M', '>100M'],
-#     ordered=True
-# )
-#
-# bin_counts = artists_table['Follower Group'].value_counts(sort=False)
 
 st.subheader('Number of Artists by Follower Groups')
 plots.create_bar_plot(
@@ -106,34 +60,9 @@ plots.create_bar_plot(
     showticklabels=True
 )
 
-# # Update classification logic based on the provided detailed genre structure
-# def classify_genres_detailed_structure(genre):
-#     for parent_genre, subgenres in all_genres_with_subgenres.items():
-#         if genre in subgenres:
-#             return parent_genre
-#     return 'Other'
-
-# artists_table['Artist Genres'] = artists_table['Artist Genres'].str.split(', ')
-#
-# expanded_artists_genres = artists_table.explode('Artist Genres')
-#
-# # r"[\"\'\[\]]": Regular expression to match the characters.
-# # regex=True : Indicates using a regular expression for matching.
-# expanded_artists_genres['Artist Genres'] = (expanded_artists_genres['Artist Genres']
-#                                             .str.replace(r"[\"\'\[\]]", '', regex=True))
-#
-#
-# expanded_artists_genres['Artist Genres'] = expanded_artists_genres['Artist Genres'].str.lower()
-#
-# expanded_artists_genres['Artist Genres'] = (expanded_artists_genres['Artist Genres']
-#                                             .str.replace(r'&\s*country', 'country', regex=True))
-#
-# expanded_artists_genres['Parent Genre'] = (expanded_artists_genres['Artist Genres']
-#                                            .apply(classify_genres_detailed_structure))
-
 expanded_artists_genres = data_processing.expand_and_classify_artists_genres(artists_table)
 expanded_artists_genres_unknown = expanded_artists_genres[expanded_artists_genres['Parent Genre'] == 'Other']
-st.dataframe(expanded_artists_genres_unknown)
+
 # Group by main genres and count occurrences
 main_genre_counts = expanded_artists_genres['Parent Genre'].value_counts(sort=False).reset_index()
 main_genre_counts.columns = ['Parent Genre', 'Number of Artists']

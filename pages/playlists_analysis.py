@@ -1,12 +1,8 @@
-import os
-import yaml
-import pandas as pd
 import plotly.express as px
 import streamlit as st
-from plotly.subplots import make_subplots
-import plotly.graph_objects as go
 from scipy.stats import shapiro, skew
-from streamlit_utils import plots, layouts, data_processing
+
+from streamlit_utils import data_processing, layouts, plots
 
 
 layouts.set_page_layout()
@@ -88,26 +84,6 @@ plots.create_bubble_plot(
     hover_data={'Playlist Total Followers (formatted)': False},
     yaxis_title="Total Followers (log scale)",
 )
-
-# merged_playlists_tracks = pd.merge(
-#     playlists_table,
-#     tracks_table,
-#     on='Track ID',
-#     how='left'
-# )
-#
-# median_popularity = (
-#     merged_playlists_tracks
-#     .groupby('Country')['Track Popularity']
-#     .median()
-# )
-# median_popularity_df = median_popularity.reset_index()
-#
-# median_popularity_df.columns = ['Country', 'Median Popularity']
-#
-# median_popularity_df = median_popularity_df.sort_values(by='Median Popularity', ascending=False)
-#
-# sorted_countries = median_popularity_df['Country'].tolist()
 
 data_playlists_tracks = data_processing.prepare_median_popularity_data(playlists_table, tracks_table)
 merged_playlists_tracks = data_playlists_tracks['merged_playlists_tracks']
@@ -220,48 +196,6 @@ if show_explanation:
               - Median: **{popularity_stats['median']:.2f}**  
               - Standard Deviation: **{popularity_stats['std']:.2f}**  
         """)
-#
-# track_counts = playlists_table['Track ID'].value_counts().reset_index()
-#
-# # track_counts_sorted = track_counts.sort_values(by='count', ascending=False)
-# # top_track_counts_sorted = track_counts_sorted.head(10)
-#
-# top_track_counts_sorted = track_counts.nlargest(n=10, columns='count')
-#
-# tracks_data = top_track_counts_sorted.merge(
-#     tracks_table[['Track ID', 'Track Name', 'Track Popularity', 'Explicit Content']],
-#     on='Track ID',
-#     how='left'
-# )
-# tracks_artists = tracks_data.merge(
-#     playlists_table[['Track ID', 'Artist ID']],
-#     on='Track ID',
-#     how='left'
-# )
-# tracks_artists_cleaned = tracks_artists.drop_duplicates(subset=['Track ID'])
-#
-# tracks_artists_cleaned.loc[:, 'Artist ID'] = tracks_artists_cleaned['Artist ID'].str.split(', ')
-#
-# expanded_tracks_artists = tracks_artists_cleaned.explode('Artist ID')
-#
-# tracks_artists_name = expanded_tracks_artists.merge(
-#     artists_table[['Artist ID', 'Artist Name']],
-#     on='Artist ID',
-#     how='left'
-# )
-#
-# # Grouping the data by 'track_id' and aggregating values
-# tracks_artists_grouped = tracks_artists_name.groupby('Track ID').agg({
-#     'Track Name': 'first',   # Keep the first occurrence of the track name
-#     'Artist Name': lambda x: ', '.join(x.dropna().unique()),  # Concatenate unique artist names, separated by commas
-#     'count': 'first',
-#     'Track Popularity': 'first',
-#     'Explicit Content': 'first'
-# }).reset_index()
-#
-# tracks_full = tracks_artists_grouped[['Track Name', 'Artist Name', 'count', 'Track Popularity', 'Explicit Content']]
-#
-# tracks_full.columns = ['Track Name', 'Artists', 'Frequency in Playlists', 'Popularity', 'Explicit']
 
 top_10_tracks = data_processing.prepare_top_tracks_data(playlists_table, tracks_table, artists_table)
 
@@ -324,65 +258,9 @@ with tab4_tracks:
 
 st.subheader("Top 10 Artists by Frequency in Playlists")
 
-# playlists_table['Artist ID'] = playlists_table['Artist ID'].str.split(', ')
-#
-# # Expand the playlists table so that each artist in the 'artist_id' list gets its own row
-# expanded_playlists_artists = playlists_table.explode('Artist ID')
-#
-# # Group by country and artist_id to count how often each artist appears in playlists for each country
-# artist_per_playlist = (
-#     expanded_playlists_artists
-#     .groupby('Country')['Artist ID']
-#     .value_counts()
-#     .reset_index()
-# )
-#
-# artist_counts = expanded_playlists_artists['Artist ID'].value_counts().reset_index()
-#
-# top_10_artists = artist_counts.nlargest(n=10, columns='count')
-#
-# top_10_artists_full = top_10_artists.merge(
-#     artists_table[['Artist ID', 'Artist Name', 'Artist Total Followers', 'Artist Popularity', 'Artist Genres']],
-#     on='Artist ID',
-#     how='left'
-# )
-#
-# top_10_artists_full = top_10_artists_full[
-#     ['Artist Name', 'count', 'Artist Total Followers', 'Artist Popularity', 'Artist Genres']
-# ]
-#
-# top_10_artists_full.columns = ['Artist Name', 'Number of songs in playlists',
-#                                'Followers', 'Artist Popularity', 'Artist Genres']
-
 artists = data_processing.prepare_top_artists_data(playlists_table, artists_table)
 top_10_artists_full = artists['top_10_artists_full']
 artist_per_playlist = artists['artist_per_playlist']
-
-# top_10_artists_full['Artist Genres'] = top_10_artists_full['Artist Genres'].str.split(', ')
-#
-# expanded_artists_genres = top_10_artists_full.explode('Artist Genres')
-#
-# # r"[\"\'\[\]]": Regular expression to match the characters.
-# # regex=True : Indicates using a regular expression for matching.
-# expanded_artists_genres['Artist Genres'] = (expanded_artists_genres['Artist Genres']
-#                                             .str.replace(r"[\"\'\[\]]", '', regex=True))
-#
-# expanded_artists_genres['Artist Genres'] = expanded_artists_genres['Artist Genres'].str.lower()
-#
-#
-# # Update classification logic based on the provided detailed genre structure
-# def classify_genres_detailed_structure(genre):
-#     for parent_genre, subgenres in all_genres_with_subgenres.items():
-#         if genre in subgenres:
-#             return parent_genre
-#     return 'Other'
-#
-#
-# expanded_artists_genres['Artist Genres'] = (expanded_artists_genres['Artist Genres']
-#                                             .str.replace(r'&\s*country', 'country', regex=True))
-# expanded_artists_genres['Parent Genre'] = (expanded_artists_genres['Artist Genres']
-#                                            .apply(classify_genres_detailed_structure))
-
 
 expanded_artists_genres = data_processing.expand_and_classify_artists_genres(top_10_artists_full)
 

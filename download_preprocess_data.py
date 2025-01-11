@@ -1,14 +1,12 @@
 import os
+
 import yaml
-import pandas as pd
+
 from logs.logger_config import logger
 from source import utils
 from source.api import secrets_functions, spotify
 from source.preprocessing import data_prep
 from source.web_scraping import chosic
-
-
-BUCKET_NAME = 'project-spotify-analysis-data'
 
 
 def main():
@@ -69,9 +67,9 @@ def main():
         logger.info(f'Playlist data has been preprocessed and saved successfully to {playlists_path}.')
 
         # Get other IDs
-        album_ids = set(playlists_df['album_id'])
-        artist_ids = set(playlists_df['artist_id'])
-        track_ids = set(playlists_df['track_id'])
+        album_ids = list(set(playlists_df['album_id']))
+        artist_ids = list(set(playlists_df['artist_id']))
+        track_ids = list(set(playlists_df['track_id']))
 
         # Preprocess and save albums data to csv
         data_prep.create_albums_table(
