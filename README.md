@@ -3,7 +3,7 @@
 
 <!-- TABLE OF CONTENTS -->
 <details>
-  <summary>Table of Contents</summary>
+  <summary>Explore the Project</summary>
   <ol>
     <li><a href="#project-overview">Project Overview</a></li>
     <li><a href="#key-features">Key Features</a></li>
@@ -130,10 +130,50 @@ Spotify-Data-Analysis
 
 _This is an example of how you may give instructions on setting up your project locally. Follow these steps to run the project:_
 
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Viktoriia-Shalaieva/Spotify-Data-Analysis.git
+   ```
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Optional**: Create a `.credentials.yaml` file in the main directory with the following structure:
+   ```yaml
+   aws:
+     aws_access_key_id: YOUR_AWS_ACCESS_KEY_ID
+     aws_secret_access_key: YOUR_AWS_SECRET_ACCESS_KEY
+
+   spotify:
+     client_id: YOUR_SPOTIFY_CLIENT_ID
+     client_secret: YOUR_SPOTIFY_CLIENT_SECRET
+
+   discogs:
+     discogs_api_token: YOUR_DISCOGS_API_TOKEN
+   ```
+
+   - Replace `YOUR_AWS_ACCESS_KEY_ID` and `YOUR_AWS_SECRET_ACCESS_KEY` with your AWS credentials.
+   - Replace `YOUR_SPOTIFY_CLIENT_ID` and `YOUR_SPOTIFY_CLIENT_SECRET` with your Spotify API credentials. You can obtain these by creating an app on the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/applications).
+   - Replace `YOUR_DISCOGS_API_TOKEN` with your Discogs API token, available from your [Discogs developer account](https://www.discogs.com/settings/developers).
+
+   > **Note**: This step is required only if you intend to run the `download_preprocess_data.py` script to update the data.
+
+4. **Optional for updating data**: Run the data preprocessing script:
+   ```bash
+   python download_preprocess_data.py
+   ```
+   > **Note**: As of [November 27, 2024](https://developer.spotify.com/blog/2024-11-27-changes-to-the-web-api), Spotify has deprecated access to playlist API endpoints. If you don't have access to the Spotify API, you can skip this step and use the local data provided in the `data/` folder.
+
+5. Launch the Streamlit dashboard:
+   ```bash
+   streamlit run streamlit_app.py
+   ```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
 ## Future Enhancements
-
+- Advanced trend analysis using machine learning models.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
