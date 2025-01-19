@@ -4,7 +4,7 @@ import yaml
 
 from logs.logger_config import logger
 from source import utils
-from source.api import secrets_functions, spotify
+from source.api import secrets_functions, spotify, s3_functions
 from source.preprocessing import data_prep
 from source.web_scraping import chosic
 
@@ -130,15 +130,15 @@ def main():
         )
 
         logger.info("Upload processed and raw data to S3 bucket.")
-        utils.sync_preprocessed_data_with_s3(bucket_name=BUCKET_NAME, operation='upload',
-                                             file_type='preprocessed_files')
-        utils.sync_raw_playlists_with_s3(bucket_name=BUCKET_NAME, operation='upload')
+        s3_functions.sync_preprocessed_data_with_s3(bucket_name=BUCKET_NAME, operation='upload',
+                                                    file_type='preprocessed_files')
+        s3_functions.sync_raw_playlists_with_s3(bucket_name=BUCKET_NAME, operation='upload')
 
     else:
         logger.info("Not all status codes are 200. Downloading data from S3 instead.")
-        utils.sync_preprocessed_data_with_s3(bucket_name=BUCKET_NAME, operation='download',
-                                             file_type='preprocessed_files')
-        utils.sync_raw_playlists_with_s3(bucket_name=BUCKET_NAME, operation='download')
+        s3_functions.sync_preprocessed_data_with_s3(bucket_name=BUCKET_NAME, operation='download',
+                                                    file_type='preprocessed_files')
+        s3_functions.sync_raw_playlists_with_s3(bucket_name=BUCKET_NAME, operation='download')
 
     # Get and save genres from Chosic
     genres = chosic.get_genres()
@@ -146,7 +146,7 @@ def main():
         yaml.dump(genres, file, default_flow_style=False, allow_unicode=True)
 
     # Upload genres data to S3 bucket
-    utils.sync_preprocessed_data_with_s3(bucket_name=BUCKET_NAME, operation='upload', file_type='genre_files')
+    s3_functions.sync_preprocessed_data_with_s3(bucket_name=BUCKET_NAME, operation='upload', file_type='genre_files')
 
 
 if __name__ == '__main__':
