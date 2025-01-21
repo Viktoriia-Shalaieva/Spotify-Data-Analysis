@@ -1,15 +1,15 @@
-import os
-import requests
 import json
-from slugify import slugify
+import os
 from urllib.parse import urljoin
+
+import requests
+from slugify import slugify
+
 from logs.logger_config import logger
 
 
-def get_spotify_access_token():
-    client_id = 'ac3eaf00cb0845a8a8a2f60c134c328e'
-    client_secret = 'bc63f9adbb3a4bea8e5c7ba13b951e8e'
-
+def get_spotify_access_token(client_id, client_secret):
+    """Retrieve a Spotify access token using client credentials."""
     token_url = "https://accounts.spotify.com/api/token"
 
     payload = {
@@ -34,11 +34,30 @@ def get_spotify_access_token():
     return None
 
 
+def get_playlist_status_code(token, playlists_id):
+    """Retrieve HTTP status codes for a list of Spotify playlist IDs."""
+    status_codes = []
+    for playlist_id in playlists_id:
+        url_base = "https://api.spotify.com/v1/playlists/"
+        url = urljoin(url_base, playlist_id)
+        headers = {
+            "Authorization": f"Bearer {token}"
+        }
+        try:
+            response = requests.get(url, headers=headers)
+            status_code = response.status_code
+            status_codes.append(status_code)
+            logger.info(f'Status code for {playlist_id}: {response.status_code}')
+        except Exception as error_message:
+            logger.error(f"Failed to retrieve playlist {playlist_id}: {error_message}")
+    logger.debug(status_codes)
+    return status_codes
+
+
 def get_playlist(access_token, playlist_id):
+    """Fetch content of a Spotify playlist by its ID using the Spotify API."""
     playlist_info = None
-    # url = f"https://api.spotify.com/v1/playlists/{playlist_id}"
     url_base = "https://api.spotify.com/v1/playlists/"
-    # url = os.path.join(url_base, playlist_id)
     url = urljoin(url_base, playlist_id)
     headers = {
         "Authorization": f"Bearer {access_token}"
@@ -55,6 +74,7 @@ def get_playlist(access_token, playlist_id):
 
 
 def get_save_playlist(token, playlists, file_path):
+    """Retrieve Spotify playlists and save them as JSON files in the specified directory."""
     # Create the specified directory path if it doesn't already exist.
     # 'exist_ok=True' ensures no error is raised if the directory already exists.
     os.makedirs(file_path, exist_ok=True)
@@ -80,6 +100,7 @@ def get_save_playlist(token, playlists, file_path):
 
 
 def get_track(access_token, track_id):
+    """Fetch data for a Spotify track by its unique ID using the Spotify API."""
     track_info = None
     url_base = "https://api.spotify.com/v1/tracks/"
     url = urljoin(url_base, track_id)
@@ -98,8 +119,8 @@ def get_track(access_token, track_id):
 
 
 def get_album(access_token, album_id):
+    """Fetch data for a Spotify album by its unique ID using the Spotify API."""
     album_info = None
-    # url = f"https://api.spotify.com/v1/albums/{album_id}"
     url_base = "https://api.spotify.com/v1/albums/"
     url = urljoin(url_base, album_id)
     headers = {
@@ -115,24 +136,8 @@ def get_album(access_token, album_id):
     return album_info
 
 
-def get_track_audio_features(access_token, track_id):
-    track_audio_info = None
-    url_base = "https://api.spotify.com/v1/audio-features/"
-    url = urljoin(url_base, track_id)
-    headers = {
-        "Authorization": f"Bearer {access_token}"
-    }
-    try:
-        response = requests.get(url, headers=headers)
-        track_audio_info = response.json()
-        logger.info("Track audio features retrieved successfully")
-    except Exception as error_message:
-        logger.error(f"Failed to retrieve audio features for track {track_id}: {error_message}")
-
-    return track_audio_info
-
-
 def get_artist(access_token, artist_id):
+    """Fetch data for a Spotify artist by their unique ID using the Spotify API."""
     artist_info = None
     url_base = "https://api.spotify.com/v1/artists/"
     url = urljoin(url_base, artist_id)

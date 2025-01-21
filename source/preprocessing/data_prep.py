@@ -1,10 +1,17 @@
-import pandas as pd
-from source.api import discogs, spotify
+import random
 import time
+
+import pandas as pd
+
 from logs.logger_config import logger
+from source.api import discogs, spotify
 
 
 def create_playlist_table(playlist):
+    """
+    Extracts data from a Spotify playlist, including playlist details (ID, name, followers, country) and track-specific
+    information (track ID, album ID, artist IDs). The results are returned as a pandas DataFrame.
+    """
     playlist_id = playlist['id']
     playlist_name = playlist['name']
     playlist_followers_total = playlist['followers']['total']
@@ -21,7 +28,6 @@ def create_playlist_table(playlist):
             'country': country,
             'playlist_followers_total': playlist_followers_total,
             'track_id': track.get('id'),
-            # 'track_popularity': track.get('popularity'),
         }
         album = track.get('album', {})
 
@@ -37,10 +43,21 @@ def create_playlist_table(playlist):
         rows.append(row)
     df = pd.DataFrame(rows)
     logger.info(f"Playlist '{playlist_name}' processed with {len(rows)} tracks.")
+
     return df
 
 
-def create_all_playlists_table(token, playlists_id):
+def create_all_playlists_table(token, playlists_id, path, save):
+    """
+    Retrieve data for multiple Spotify playlists, processes each playlist
+    using `create_playlist_table`, and concatenates the results into a single DataFrame.
+
+    Args:
+        token (str): Spotify API token for authentication.
+        playlists_id (list of str): A list of playlist IDs to retrieve and process.
+        path (str): File path to save the resulting DataFrame as a CSV file if `save` is True.
+        save (bool): Whether to save the combined DataFrame to a CSV file. Defaults to False.
+    """
     all_playlists = []
     for playlist_id in playlists_id:
         playlist_data = spotify.get_playlist(token, playlist_id)
@@ -50,14 +67,27 @@ def create_all_playlists_table(token, playlists_id):
 
     playlists = pd.concat(all_playlists, ignore_index=True)
     logger.info("All playlists processed successfully.")
+
+    if save:
+        playlists.to_csv(path, index=False, sep="~")
     return playlists
 
 
-def create_tracks_table(access_token, track_ids):
+def create_tracks_table(token, track_ids, path, save):
+    """
+    Retrieve data for multiple Spotify tracks, process each track,
+    and concatenate the results into a single DataFrame.
+
+    Args:
+        token (str): Spotify API token for authentication.
+        track_ids (list of str): A list of track IDs to retrieve and process.
+        path (str): File path to save the resulting DataFrame as a CSV file if `save` is True.
+        save (bool): Whether to save the combined DataFrame to a CSV file. Defaults to False.
+    """
     tracks_data = []
 
     for track_id in track_ids:
-        track_info = spotify.get_track(access_token, track_id)
+        track_info = spotify.get_track(token, track_id)
         time.sleep(0.4)
 
         if track_info:
@@ -75,14 +105,26 @@ def create_tracks_table(access_token, track_ids):
 
     tracks = pd.DataFrame(tracks_data)
     logger.info("All track data processed successfully.")
+    if save:
+        tracks.to_csv(path, index=False, sep="~")
     return tracks
 
 
-def create_albums_table(access_token, album_ids):
+def create_albums_table(token, album_ids, path, save):
+    """
+    Retrieve data for multiple Spotify albums, process each album,
+    and concatenate the results into a single DataFrame.
+
+    Args:
+        token (str): Spotify API token for authentication.
+        album_ids (list of str): A list of album IDs to retrieve and process.
+        path (str): File path to save the resulting DataFrame as a CSV file if `save` is True.
+        save (bool): Whether to save the combined DataFrame to a CSV file. Defaults to False.
+    """
     albums_data = []
 
     for album_id in album_ids:
-        album_info = spotify.get_album(access_token, album_id)
+        album_info = spotify.get_album(token, album_id)
         time.sleep(0.4)
 
         if album_info:
@@ -102,43 +144,22 @@ def create_albums_table(access_token, album_ids):
 
     albums = pd.DataFrame(albums_data)
     logger.info("All album data processed successfully.")
+    if save:
+        albums.to_csv(path, index=False, sep="~")
     return albums
 
 
-def create_tracks_af_table(access_token, track_ids):
-    rows = []
+def create_artists_table(token, artist_ids, path, save):
+    """
+    Retrieve data for multiple Spotify artists, process each artist,
+    and concatenate the results into a single DataFrame.
 
-    for track_id in track_ids:
-        track_info = spotify.get_track_audio_features(access_token, track_id)
-        time.sleep(0.4)
-
-        if track_info:
-            row = {
-                'track_id': track_info.get('id'),
-                'track_acousticness': track_info.get('acousticness'),
-                'track_danceability': track_info.get('danceability'),
-                'track_duration_ms': track_info.get('duration_ms'),
-                'track_energy': track_info.get('energy'),
-                'track_instrumentalness': track_info.get('instrumentalness'),
-                'track_key': track_info.get('key'),
-                'track_liveness': track_info.get('liveness'),
-                'track_loudness': track_info.get('loudness'),
-                'track_mode': track_info.get('mode'),
-                'track_speechiness': track_info.get('speechiness'),
-                'track_tempo': track_info.get('tempo'),
-                'track_time_signature': track_info.get('time_signature'),
-                'track_valence': track_info.get('valence'),
-            }
-            rows.append(row)
-            logger.info(f"Audio features retrieved for track ID: {track_id}")
-        else:
-            logger.error(f"Audio features not found for track ID: {track_id}")
-
-    tracks_af = pd.DataFrame(rows)
-    return tracks_af
-
-
-def create_artists_table(access_token, artist_ids):
+    Args:
+        token (str): Spotify API token for authentication.
+        artist_ids (list of str): A list of artist IDs or comma-separated strings of artist IDs to retrieve and process.
+        path (str): File path to save the resulting DataFrame as a CSV file if `save` is True.
+        save (bool): Whether to save the combined DataFrame to a CSV file. Defaults to False.
+    """
     rows = []
     unique_artist_ids = set()
 
@@ -147,7 +168,7 @@ def create_artists_table(access_token, artist_ids):
         unique_artist_ids.update(separated_ids)
 
     for artist_id in unique_artist_ids:
-        artist_info = spotify.get_artist(access_token, artist_id)
+        artist_info = spotify.get_artist(token, artist_id)
         time.sleep(0.4)
 
         if artist_info:
@@ -165,38 +186,30 @@ def create_artists_table(access_token, artist_ids):
 
     artists = pd.DataFrame(rows)
     logger.info("All artist data processed successfully.")
+    if save:
+        artists.to_csv(path, index=False, sep="~")
     return artists
 
 
-def create_track_genre_table(file, discogs_api_token):
-    rows = []
+def create_artist_genre_table(token, file, path, save):
+    """
+    Retrieve genre data for multiple artists and create a DataFrame.
 
-    for _, row in file.iterrows():  # Using _ indicates that the index value is not important and will not be used.
-        track_name = row['track_name']
-        artists = row['artist_name']
+    This function processes a file containing artist names, retrieves genre data for each artist,
+    and creates a DataFrame with the results. Optionally, the DataFrame can be saved as a CSV file.
 
-        genres = discogs.get_genre(discogs_api_token, track_name, artists)
-        time.sleep(0.7)
-
-        rows.append({
-                'track_name': track_name,
-                'artist_name': artists,
-                'track_genre': genres,
-        })
-        logger.info(f"Genre data retrieved for track '{track_name}' by artist '{artists}'")
-
-    track_genre = pd.DataFrame(rows, columns=['track_name', 'artist_name', 'track_genre'])
-    logger.info("All track genre data processed successfully.")
-    return track_genre
-
-
-def create_artist_genre_table(file, discogs_api_token):
+    Args:
+        token (str): Discogs API token for authentication.
+        file (pd.DataFrame): A DataFrame containing artist information. It must include a column named 'artist_name'.
+        path (str): File path to save the resulting DataFrame as a CSV file if `save` is True.
+        save (bool): Whether to save the resulting DataFrame to a CSV file. Defaults to False.
+    """
     rows = []
 
     for _, row in file.iterrows():  # Using _ indicates that the index value is not important and will not be used.
         artist = row['artist_name']
 
-        genres = discogs.get_genre_artist(discogs_api_token, artist)
+        genres = discogs.get_genre_artist(token, artist)
         time.sleep(0.7)
 
         rows.append({
@@ -206,27 +219,51 @@ def create_artist_genre_table(file, discogs_api_token):
         logger.info(f"Genre data retrieved for artist '{artist}'")
     artist_genre = pd.DataFrame(rows, columns=['artist_name', 'artist_genre'])
     logger.info("All artist genre data processed successfully.")
+    if save:
+        artist_genre.to_csv(path, index=False, sep="~")
     return artist_genre
 
-#
-# def create_track_genre_theaudiodb(file):
-#     rows = []
-#
-#     for _, row in file.iterrows():  # Using _ indicates that the index value is not important and will not be used.
-#         track_name = row['track_name']
-#         artists = row['artist_name']
-#
-#         genres = theaudiodb.get_track_genre_theaudiodb(track_name, artists)
-#
-#         time.sleep(0.7)
-#
-#         rows.append({
-#                 'track_name': track_name,
-#                 'artist_name': artists,
-#                 'track_genre': genres,
-#         })
-#         logger.info(f"Genre data retrieved for track '{track_name}' by artist '{artists}'")
-#
-#     track_genre = pd.DataFrame(rows, columns=['track_name', 'artist_name', 'track_genre'])
-#     logger.info("All track genre data processed successfully.")
-#     return track_genre
+
+def process_artist_genres(artists_df, path, save):
+    """
+    Processes the 'artist_genres' column in a DataFrame, replacing missing genres
+    with randomly generated genres based on the distribution of existing genres.
+
+    Args:
+        artists_df (pd.DataFrame): A DataFrame containing artist information.
+            It must include a column named 'artist_genres'.
+        path (str): File path to save the processed DataFrame as a CSV file if `save` is True.
+        save (bool): Whether to save the processed DataFrame to a CSV file. Defaults to False.
+
+    """
+    # Replace empty lists ('[]') with NaN
+    artists_df['artist_genres'] = artists_df['artist_genres'].replace('[]', pd.NA)
+
+    # Remove square brackets and extra quotes
+    artists_df['artist_genres'] = (
+        artists_df['artist_genres']
+        .str.strip("[]")
+        .str.replace("'", "")
+    )
+    # Count the frequency of each genre
+    genre_counts = artists_df['artist_genres'].str.split(', ').explode().value_counts(normalize=True)
+
+    genres_list = genre_counts.index.tolist()
+    weights = genre_counts.tolist()
+
+    unknown_genre_indices = artists_df[artists_df['artist_genres'].isna()].index
+
+    # Generate random genres for missing values based on frequency distribution
+    random_genres = random.choices(
+        population=genres_list,
+        weights=weights,
+        k=len(unknown_genre_indices)
+    )
+
+    # Assign the generated random genres to missing values
+    artists_df.loc[unknown_genre_indices, 'artist_genres'] = random_genres
+
+    if save:
+        artists_df.to_csv(path, index=False, sep="~")
+
+    return artists_df

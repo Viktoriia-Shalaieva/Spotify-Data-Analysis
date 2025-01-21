@@ -1,0 +1,8 @@
+preprocessed_files:
+  - "data/preprocessed/albums.csv"
+  - "data/preprocessed/artists_full.csv"
+  - "data/preprocessed/playlists.csv"
+  - "data/preprocessed/tracks.csv"
+
+genre_files:
+  - "data/genres/genres.yaml"
