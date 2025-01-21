@@ -246,7 +246,7 @@ def process_artist_genres(artists_df, path, save):
         .str.replace("'", "")
     )
     # Count the frequency of each genre
-    genre_counts = artists_df['artist_genres'].str.split(', ').explode().value_counts()
+    genre_counts = artists_df['artist_genres'].str.split(', ').explode().value_counts(normalize=True)
 
     genres_list = genre_counts.index.tolist()
     weights = genre_counts.tolist()

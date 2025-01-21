@@ -1,7 +1,7 @@
 artist_id~artist_name~artist_followers~artist_genres~artist_popularity
 1DxLCyH42yaHKGK3cl5bvG~Maria Becerra~7234698~pop argentino, urbano latino~82
-34PYzJSu4DHKEyhdBfsn0E~TORRRES~9923~rock independant francais~62
-58UBmhZzNl22EI94dh9Gx0~OSTY~15373~reggaeton colombiano~52
+34PYzJSu4DHKEyhdBfsn0E~TORRRES~9923~amapiano~62
+58UBmhZzNl22EI94dh9Gx0~OSTY~15373~Non-Music, Pop, Electronic~52
 7iK8PXO48WeuP03g8YR51W~Myke Towers~17347444~reggaeton, trap latino, urbano latino~90
 1QvyquqkuuwUzdszyoKIy4~Haricharan~3427291~filmi~73
 1GxkXlMwML1oSg5eLPiAz3~Michael Bublé~6474353~adult standards, canadian pop, jazz pop, lounge~83
@@ -9,9 +9,9 @@ artist_id~artist_name~artist_followers~artist_genres~artist_popularity
 6l5IEx62Nsc2k1QyfaWvEz~Wellboy~266442~ukrainian pop~53
 6aoGgTKGqtsjj48ymcNs4Z~MC Tuto~1045454~funk consciente~83
 6sW5k31iA8sTy0i2goUKF9~Oldilla~336447~funk consciente~71
-72y6W9pGy97xTM44dwy3F6~BILLA JOE~68575~pagode baiano~63
+72y6W9pGy97xTM44dwy3F6~BILLA JOE~68575~amapiano~63
 4sj6D0zlMOl25nprDJBiU9~Andy Williams~551964~adult standards, easy listening~73
-5IREutgMnyQqRcc8r15gWk~CountryBeat~59943~nigerian pop~68
+5IREutgMnyQqRcc8r15gWk~CountryBeat~59943~agronejo~68
 3MdXrJWsbVzdn6fe5JYkSQ~Latto~1828857~trap queen~80
 2YZyLoL8N0Wb9xBt1NhZWg~Kendrick Lamar~34539703~conscious hip hop, hip hop, rap, west coast rap~94
 59jlthNnbmim5l9tmNA7se~Maiara & Maraisa~13955452~sertanejo, sertanejo pop, sertanejo universitario~80
@@ -19,13 +19,13 @@ artist_id~artist_name~artist_followers~artist_genres~artist_popularity
 790FomKkXshlbRYZFtlgla~KAROL G~52293179~reggaeton, reggaeton colombiano, urbano latino~91
 22dFwJoRBV51ue5TGnC7Dt~Beny Jr~1514689~drill espanol, urbano espanol~77
 1q2nUylEqrRJkiDkXa39Mw~YoungThreat~10942~westcoast flow~64
-2nZdsl4XZtlLoZm4B4F7eh~Renzo ED~8466~g-house~53
+2nZdsl4XZtlLoZm4B4F7eh~Renzo ED~8466~bases de freestyle~53
 67FB4n52MgexGQIG8s0yUH~Lola Young~326615~uk pop~76
 3ozYqVCLohfpXIhalkhM8D~Aditya Rikhari~516023~desi pop~69
 6ltzsmQQbmdoHHbLZ4ZN25~Lord Huron~1783343~indie folk, stomp and holler~78
 6wbEgVlGqWb4I9tbMluu5Q~MONATIK~738424~russian pop, ukrainian pop~51
 6NTzEgUmN1PIBIYEHhf1kS~Okean Elzy~1004011~classic russian rock, ukrainian indie, ukrainian pop, ukrainian rock~58
-7rBed6Ya7Hwa2fXbh5btJE~LACAZETTE~185513~south african hip hop~73
+7rBed6Ya7Hwa2fXbh5btJE~LACAZETTE~185513~cumbia pop~73
 3zaDigUwjHvjOkSn0NDf9x~Bnxn~1951667~afrobeats, nigerian pop~73
 6k6TIai4KyKG1DeIMftSmJ~Siddharth - Garima~26269~modern bollywood~66
 1fUSLFr4WUBx7joEcGwpvG~Sorriso Maroto~3213579~pagode, pagode novo, sertanejo universitario~78
@@ -36,21 +36,21 @@ artist_id~artist_name~artist_followers~artist_genres~artist_popularity
 5TP8Ubo4jLKEi4Mw2O8fAk~BM~1000270~previa~70
 0PcU18DNfkn3pmbjy5yMFz~Genezio~125727~r&b francais~67
 7me0S5Z40qVWj3gzyK8aC3~Mc Livinho~7401052~funk carioca, funk paulista, funk rj~74
-1apU1xLioEcDVmYQmmbXD8~Blacko SA~13843~afrobeats~49
+1apU1xLioEcDVmYQmmbXD8~Blacko SA~13843~argentine hip hop~49
 5JyEgson2YVsJT0fNGroWn~Thabza Tee~34767~sgija~50
-3UfwtvPZZea2HHwI23VtKP~MC Vine7~47242~haryanvi hip hop~71
-5GTZUVrKf86Aco9LJQquxc~mapt0v~30521~rockabilly~61
+3UfwtvPZZea2HHwI23VtKP~MC Vine7~47242~new jack swing~71
+5GTZUVrKf86Aco9LJQquxc~mapt0v~30521~pop lgbtq+ brasileira~61
 523y9KSneKh6APd1hKxLuF~Master KG~607980~bolobedu house, south african house~62
-1eQsrFTW5NHQs1X7B0mImu~Simran Choudhary~59265~afrobeats~66
+1eQsrFTW5NHQs1X7B0mImu~Simran Choudhary~59265~urban contemporary~66
 6k8odn7NzzTT4K3NBNtsfV~Felo Le Tee~930053~amapiano~54
 4gdMJYnopf2nEUcanAwstx~Anuv Jain~4530851~desi pop, hindi indie, indian indie, indian singer-songwriter~77
 3eVa5w3URK5duf6eyVDbu9~ROSÉ~8154674~k-pop~85
 0TnOYISbd1XYRBk9myaseg~Pitbull~10998010~dance pop, miami hip hop, pop~86
-5QFYXpPnIZPu2OSD9n8BVN~LEBIGA~2527~rap~41
+5QFYXpPnIZPu2OSD9n8BVN~LEBIGA~2527~urbano espanol~41
 5xIOUIBQhGFX7HIj8lhdyU~Omar Varela~87506~gaming dubstep~71
 4ojkMVHjuDZgDXSJy5qs2h~Madhubanti Bagchi~62060~modern bollywood~68
-5EVpgXduYKQyggrs93bPby~Msongi~26198~afro drill~47
-1YA6d3F7LilOsKSGYSB4Nm~The Exclusive SA~435~afrobeats~43
+5EVpgXduYKQyggrs93bPby~Msongi~26198~pop lgbtq+ brasileira~47
+1YA6d3F7LilOsKSGYSB4Nm~The Exclusive SA~435~rockabilly~43
 5MJ5f1XKD9yu7aWfG8OGjz~Mellow & Sleazy~1525843~amapiano, barcadi~63
 7FNnA9vBm6EKceENgCGRMb~Anitta~12792363~funk pop, funk rj, pagode baiano, pop, pop nacional~84
 77ziqFxp5gaInVrF2lj4ht~Sech~12096588~panamanian pop, reggaeton, trap latino, urbano latino~80
@@ -62,32 +62,32 @@ artist_id~artist_name~artist_followers~artist_genres~artist_popularity
 7Ln80lUS6He07XvHI8qqHH~Arctic Monkeys~27495276~garage rock, modern rock, permanent wave, rock, sheffield indie~88
 6Te49r3A6f5BiIgBRxH7FH~Ninho~10539479~french hip hop, pop urbaine~81
 3PhoLpVuITZKcymswpck5b~Elton John~14065941~glam rock, mellow gold, piano rock, rock~84
-2hg21aqtw66FhKSo3Uzbne~Famous Pluto~4021~pop~50
+2hg21aqtw66FhKSo3Uzbne~Famous Pluto~4021~bedroom pop~50
 1YO25RWxpZ2Pvg82Bs4ING~Djy Biza~94901~amapiano~56
 05dG9pMLRWenxzvSmefE6U~MixSingh~220517~punjabi lo-fi, punjabi pop~68
 1hNaHKp2Za5YdOAG0WnRbc~Tiwa Savage~2077839~afrobeats, afropop, azonto, nigerian pop~64
-1x0kR06ROuVi1aLwPuaZ7J~SJE Konka~44~r&b francais~51
-756OYK25pOSHYUiTr5RWEw~Caeser~24~rap francais~37
+1x0kR06ROuVi1aLwPuaZ7J~SJE Konka~44~modern country pop~51
+756OYK25pOSHYUiTr5RWEw~Caeser~24~Folk, World, & Country, Reggae, Electronic, Rock, Classical, Non-Music~37
 2krUNMgFZYm5s4Nn0g91W9~HAON~158255~k-rap~54
-3o7GGc9KjbLzTCwOq9WL55~Karthik Netha~3828~sertanejo pop~63
-0Il5vC8lqunSFNav4mMLxU~Natanzinho Lima~266050~la indie~78
+3o7GGc9KjbLzTCwOq9WL55~Karthik Netha~3828~argentine telepop~63
+0Il5vC8lqunSFNav4mMLxU~Natanzinho Lima~266050~french pop~78
 2rN8LHqK4TBI7y3d9POvJb~Dhanda Nyoliwala~512251~haryanvi hip hop, haryanvi pop~72
-55ru5B05MMBunM1tvH7Di6~Valentino Merlo~258232~hip hop~74
+55ru5B05MMBunM1tvH7Di6~Valentino Merlo~258232~canadian pop~74
 0Y3agQaa6g2r0YmHPOO9rh~Davido~6031571~afrobeats, afropop, azontobeats, ghanaian hip hop, nigerian pop~75
 5diMmmNkRVfgUnXJrzXzjZ~Javed Bashir~188959~classic pakistani pop, pakistani pop, qawwali, sufi~63
 7rXMvXRnWHaSwnVvPeUUfw~Gloria Groove~3474469~funk carioca, pop lgbtq+ brasileira~73
 5kwZB1xNLgB3lln1JGS2B9~MaWhoo~687089~bolobedu house~59
 74OaRjmyh0XyRZsQQQ5l7c~Jasleen Royal~2502508~desi pop, filmi, indian singer-songwriter, modern bollywood~72
-7wLAecYIgstxcjqe6JwT3w~DJ JB Mix~2538~german hip hop~66
+7wLAecYIgstxcjqe6JwT3w~DJ JB Mix~2538~punk~66
 75VKfyoBlkmrJFDqo1o2VY~Fireboy DML~3368787~afrobeats, nigerian pop~73
-69UfPJgUmFFAVT740qGVZi~Ken Darby Singers~672~amapiano~59
-7BZeoHymLQ7WC1Vl7gkS5g~BelloM~631~filmi~44
-66YKNnSIqZwFDjrH0i9EAY~Denden~4240~g-house~49
+69UfPJgUmFFAVT740qGVZi~Ken Darby Singers~672~Stage & Screen, Folk, World, & Country, Jazz, Pop, Classical~59
+7BZeoHymLQ7WC1Vl7gkS5g~BelloM~631~Classical, Stage & Screen~44
+66YKNnSIqZwFDjrH0i9EAY~Denden~4240~funk paulista~49
 0tmwSHipWxN12fsoLcFU3B~Manuel Turizo~14280212~colombian pop, latin pop, reggaeton, reggaeton colombiano, trap latino, urbano latino~84
-6xcF2N2Z4NFVEkLCZluCLC~Bontle Smith~25904~rap catala~47
+6xcF2N2Z4NFVEkLCZluCLC~Bontle Smith~25904~amapiano~47
 1zjv7k3fmK1MJIA2CdaCAh~BoyPee~50510~viral afropop~59
 1vyhD5VmyZ7KMfW5gqLgo5~J Balvin~37431041~reggaeton, reggaeton colombiano, trap latino, urbano latino~88
-7jAs1uPnpfNmT6e5qtEPxq~ATL Jacob~66031~adult standards~74
+7jAs1uPnpfNmT6e5qtEPxq~ATL Jacob~66031~Hip Hop~74
 1mV9h1AwhRXSjBFcYpajgY~Mc Lele JP~1007833~funk paulista~70
 5y8tKLUfMvliMe8IKamR32~d4vd~3157153~bedroom pop, bedroom r&b~81
 250b0Wlc5Vk0CoUsaCY84M~JENNIE~7870271~k-pop~82
@@ -95,7 +95,7 @@ artist_id~artist_name~artist_followers~artist_genres~artist_popularity
 5KEG7G8LDYlHgFDqZyEEs2~Chris Rea~1070007~soft rock, sophisti-pop~66
 04XdCDDrPnnqidaVBTOQjt~Hernan y La Champion's Liga~133427~cuarteto, cumbia pop, cumbia villera~60
 4V8LLVI7PbaPR0K2TGSxFF~Tyler, The Creator~17897638~hip hop, rap~95
-0O8DjpANOBrYwtNXlxbyff~Khushi TDT~17071~urbano latino~55
+0O8DjpANOBrYwtNXlxbyff~Khushi TDT~17071~filmi~55
 2toONwOXJt03vVKmJZs30X~Kvng Vinci~19896~cruise~54
 7CyeXFnOrfC1N6z4naIpgo~The Ronettes~343491~brill building pop, classic girl group, motown, rock-and-roll~72
 1SIocsqdEefUTE6XKGUiVS~BABYMONSTER~2985691~5th gen k-pop~79
@@ -104,7 +104,7 @@ artist_id~artist_name~artist_followers~artist_genres~artist_popularity
 44TGR1CzjKBxSHsSEy7bi9~Woodkid~817157~chamber pop~70
 4AupETQEHkWQL9H3O6f9h8~СТРУКТУРА ЩАСТЯ~93835~ukrainian viral pop~49
 5NR8eODM4CQ2X6rBuGpZ2B~Геля Зозуля~17106~ukrainian pop~49
-37lTKHi901VnwngQ7C8noT~Malachiii~9283~pop~75
+37lTKHi901VnwngQ7C8noT~Malachiii~9283~Electronic~75
 1QsdzIKkTT5gDFj8GB1cIX~Yseult~277326~french pop, r&b francais~74
 6Wqpl1YTjgy5TiTluzFzjx~Tman Xpress~348808~amapiano~57
 3vUMXQ9kPnZAQkMkZZ7Hfh~Tiakola~2478554~french hip hop, pop urbaine~78
@@ -118,7 +118,7 @@ artist_id~artist_name~artist_followers~artist_genres~artist_popularity
 4CQdcx66F116k2db2Y0rjE~Hades66~889040~trap latino, urbano latino~74
 3bvfu2KAve4lPHrhEFDZna~Lola Indigo~1380185~spanish pop~71
 20s0P9QLxGqKuCsGwFsp7w~Mario~3586030~dance pop, r&b, southern hip hop, urban contemporary~70
-1gegc3MqXY9tE3SL0PyLKr~Dhrruv Yogi~255~trap latino~63
+1gegc3MqXY9tE3SL0PyLKr~Dhrruv Yogi~255~german hip hop~63
 7v4imS0moSyGdXyLgVTIV7~Nat King Cole~2342742~adult standards, easy listening, lounge, soul, swing, vocal jazz~77
 0FRUZvZNPzM3YJMABJxf2K~WENDY~950810~k-pop, korean pop~66
 0bg3fNpRQgZTCAg3Bseyly~Mc Th~1140410~deboxe, funk carioca, funk mtg, funk ostentacao, funk rj~71
@@ -127,12 +127,12 @@ artist_id~artist_name~artist_followers~artist_genres~artist_popularity
 1Cs0zKBU1kc0i8ypK3B9ai~David Guetta~26464163~big room, dance pop, edm, pop, pop dance~90
 5ZfBThYiIIhL7jHMG8gDB2~Ferrugem~5572664~funk carioca, pagode, pagode novo, sertanejo universitario~78
 7j6DKwmjbxvpQO8h914uEz~Ryan Castro~3252616~reggaeton, trap colombiano, trap latino, urbano latino~81
-0APf0XKCd2289zoD4wzroe~DJ Seneath~13~argentine hip hop~44
+0APf0XKCd2289zoD4wzroe~DJ Seneath~13~urbano latino~44
 1X6ORK7IekgmyjV6IFPszP~Gustavo Mioto~6263966~arrocha, sertanejo, sertanejo universitario~76
 66CXWjxzNUsdJxJ2JdwvnR~Ariana Grande~101269752~pop~93
 4VHa48wXlsDA2vWfgIi7cX~Dody6~8902~westcoast flow~67
 2BTS8Np1YzPQuXjgdlqsBB~Emanero~507100~argentine hip hop, rap conciencia, rap underground argentino~71
-2CsKNR9HBBs3bAswmPz825~2woshort~37744~swing~45
+2CsKNR9HBBs3bAswmPz825~2woshort~37744~Jazz~45
 1qQLhymHXFPtP5U8KNKsm6~Apache 207~3094649~german hip hop~73
 4TEK9tIkcoxib4GxT3O4ky~KISS OF LIFE~1540537~5th gen k-pop, k-pop girl group~76
 7J5UWTbsUFjoSQZQCQCqbQ~Siete7x~2363~westcoast flow~66
@@ -140,26 +140,26 @@ artist_id~artist_name~artist_followers~artist_genres~artist_popularity
 60ZOYUFnCYEeKYsxgvPxOS~Cano~498495~flamenco urbano, rap espanol~70
 0PWfuxCvPtyeCLLWjf4EzJ~CHEEV~60349~ukrainian pop~52
 3ghRXw2nUEH2THaL82hw8R~La K'onga~2814086~cuarteto~71
-2t0frJEIdex2PTwuLlGxDD~Carbonne~171324~french pop~65
+2t0frJEIdex2PTwuLlGxDD~Carbonne~171324~Jazz, Hip Hop, Funk / Soul, Electronic~65
 5Dz2FizMLqV0Cr3c8uhEcF~MC Cebezinho~1153791~funk paulista~75
-3zG4hHVlA4xIX5jwvOa2KD~DJ Guh Mix~22337~south african pop~62
-3YOKEbNmcMxvIDpZxw4jvn~Kabelo Sings~1853~modern bollywood~47
+3zG4hHVlA4xIX5jwvOa2KD~DJ Guh Mix~22337~k-pop~62
+3YOKEbNmcMxvIDpZxw4jvn~Kabelo Sings~1853~pop urbaine~47
 0y59o4v8uw5crbN9M3JiL1~Badshah~27447787~desi hip hop, desi trap, filmi, modern bollywood~78
 5jF4VfE2TZtAXWYQLe3F8A~Smur Lee~31325~viral afropop~57
-1dllQgzSDUNbXbtk5INbhj~Zeh McGeba~966~sgija~48
+1dllQgzSDUNbXbtk5INbhj~Zeh McGeba~966~filmi~48
 3BmGtnKgCSGYIUhmivXKWX~Kelly Clarkson~10645507~dance pop, pop, talent show~78
 5gqmbbfjcikQBzPB5Hv13I~Gazo~3287657~drill francais, french hip hop, pop urbaine, r&b francais, rap francais~76
 2z20q6EEfm6w6PiIKsgtb3~FACE~1821322~kavkaz, russian emo rap, russian grime, russian hip hop, russian trap~64
-6c4AisSoKVYdeivUhofn6P~Ba Bethe Gashoazen~2546~desi pop~49
+6c4AisSoKVYdeivUhofn6P~Ba Bethe Gashoazen~2546~french hip hop~49
 3z0IVhtuFvt9VYUZGT98PU~Jay R~249385~opm~67
-3zO4VnpgPzQAE6ibTievv1~BLESS THE GENTLEMAN~1742~filmi~51
-0DnvMgwUAfLV06uffraoeJ~Dot Mega~403~trap argentino~45
-70jpkgy5oGT4YjaGFpCpk7~MC LUUKY~266079~modern bollywood~79
+3zO4VnpgPzQAE6ibTievv1~BLESS THE GENTLEMAN~1742~trap argentino~51
+0DnvMgwUAfLV06uffraoeJ~Dot Mega~403~ukrainian pop~45
+70jpkgy5oGT4YjaGFpCpk7~MC LUUKY~266079~canadian contemporary r&b~79
 54seKvtsZauR1iauN0ptpo~De La Rose~299486~trap latino, urbano latino~79
-3ZdMTEKhhs4Rl7qQXv4vUT~Epic DJ~1407~pop~45
+3ZdMTEKhhs4Rl7qQXv4vUT~Epic DJ~1407~Hip Hop, Latin, Electronic~45
 0FK1hXdXst70HD11n5J26z~FOLA~47145~viral afropop~57
 4F4pp8NUW08JuXwnoxglpN~Bad Gyal~1854580~neoperreo, rap catala, rap latina, trap catala, urbano espanol, urbano latino~75
-4mexy8G8bBE7SBuAzTBLYr~Eltee~12619~trap argentino~50
+4mexy8G8bBE7SBuAzTBLYr~Eltee~12619~dfw rap~50
 4f7KfxeHq9BiylGmyXepGt~Tanishk Bagchi~4584660~desi pop, filmi, modern bollywood~79
 5xtbUYHaOycg6HIi10EZdV~FRIENDLY THUG 52 NGG~215414~russian hip hop~64
 7dlkBH23ERFXxuNoMHq94Y~Q' Lokura~1293990~cuarteto~75
@@ -169,13 +169,13 @@ artist_id~artist_name~artist_followers~artist_genres~artist_popularity
 3DbwFQlvLxRSi2uX8mf81A~Sexyy Red~1555313~trap queen~81
 1JJq541frMPfUIQiUoVrnp~Mc Laranjinha~264385~funk bh, funk consciente, funk mtg~67
 22UtphG4LcwxlhhV0aP4js~Rauhan Malik~47045~kashmiri pop~66
-5H2zqAv4kVidX9S98sanYa~GringoBeats808~946~modern bhajan~58
+5H2zqAv4kVidX9S98sanYa~GringoBeats808~946~pop~58
 7gHzR22tDNSWGS4HkvvPgw~THE BOX~410050~trap brasileiro~66
 1wRPtKGflJrBx9BmLsSwlU~Pritam~41683469~filmi, indian instrumental, modern bollywood~90
 6WOdPJmexxFINcKMkP2jMG~Sachet Tandon~5230832~desi pop, filmi, modern bhajan, modern bollywood~75
-2tmrdVbpFzIVIOcqxvErj2~Los Sufridos~8027~viral afropop~62
+2tmrdVbpFzIVIOcqxvErj2~Los Sufridos~8027~"""mans orchestra"""~62
 5aC2LaswbZgcf1G2uxqBxF~Brenno & Matheus~206318~agronejo, sertanejo pop~63
-0C1YfsZSxVHgL0Z8bngOTM~Dr. Yaro~24042~k-pop~61
+0C1YfsZSxVHgL0Z8bngOTM~Dr. Yaro~24042~classic pakistani pop~61
 5lpH0xAS4fVfLkACg9DAuM~Wham!~2851074~new romantic, new wave, new wave pop, soft rock~77
 2oSONSC9zQ4UonDKnLqksx~Atif Aslam~29296257~classic pakistani pop, filmi, modern bollywood, sufi~81
 4kcQWQDK0u9AftVSpdrAgk~Luck Ra~1882594~trap argentino, trap triste~77
@@ -183,10 +183,10 @@ artist_id~artist_name~artist_followers~artist_genres~artist_popularity
 6UlNIFEuWlBqb4TvlVCekq~Kirsty MacColl~115987~new wave pop~61
 4m6ubhNsdwF4psNf3R8kwR~KHEA~5818260~argentine hip hop, trap argentino, trap latino, trap triste, urbano latino~78
 2mF7ygWz9oyJ3L6ZPWlZVH~Vigro Deep~545621~amapiano, sgija, underground amapiano~55
-2f8xoxornfSw6ePzgyM9NO~MC Jvila~60021~funk paulista~71
+2f8xoxornfSw6ePzgyM9NO~MC Jvila~60021~pop~71
 387gWxnXhGdDQFO7Ld3mLZ~анастимоза~11666~ukrainian viral pop~39
-1OQxmfKN9UG5C7nr4MkasO~DAESUNG~161582~r&b~55
-1HGyQR41EokAZE5Dl4PtYc~Blaq Major~39386~k-rap~54
+1OQxmfKN9UG5C7nr4MkasO~DAESUNG~161582~post-teen pop~55
+1HGyQR41EokAZE5Dl4PtYc~Blaq Major~39386~south african pop~54
 70kkdajctXSbqSMJbQO424~Kacey Musgraves~1505234~classic texas country, contemporary country, country dawn~77
 3hq7WoPJsrRP0KMSLhUgRz~Murilo Huff~1747147~arrocha, sertanejo, sertanejo universitario~80
 5jvlsVxfcbRVuHJ2Uv8WOh~Mduduzi Ncube~411839~afro soul, south african pop~49
@@ -201,7 +201,7 @@ artist_id~artist_name~artist_followers~artist_genres~artist_popularity
 1r4hJ1h58CWwUQe3MxPuau~Maluma~35101755~latin pop, reggaeton, reggaeton colombiano, trap latino, urbano latino~87
 2tqMDvoyXVbN7uF4ObOeJX~Mthandeni SK~287457~maskandi~55
 3QVolfxko2UyCOtexhVTli~Angèle~2744639~belgian pop, french pop, variete francaise~70
-1AFQg3CpeciNbd120XZDmi~AMK~77737~funk mtg~64
+1AFQg3CpeciNbd120XZDmi~AMK~77737~Rock, Non-Music, Hip Hop, Electronic~64
 2RQXRUsr4IW1f3mKyKsy4B~Noah Kahan~3580249~pov: indie, singer-songwriter pop~86
 0ZCO8oVkMj897cKgFH7fRW~Los Ángeles Azules~7870076~gruperas inmortales, musica mexicana, nu-cumbia, ranchera, tropical~79
 2YRyPiW98bpkARAS4B3OQP~Dei V~1450726~trap latino, urbano latino~81
@@ -211,21 +211,21 @@ artist_id~artist_name~artist_followers~artist_genres~artist_popularity
 1fImPZoBVjmYrBFzCHh0N3~Souly~114620~german hip hop~68
 4q3ewBCX7sLwd24euuV69X~Bad Bunny~87239086~reggaeton, trap latino, urbano latino~95
 1QPdp5duV6lV4XINCzjwQ2~Dinos~677463~french hip hop, pop urbaine, rap francais~65
-2KYeDbDn8hr0auXnbpKfvs~Lwah Ndlunkulu~3768~pagode novo~43
+2KYeDbDn8hr0auXnbpKfvs~Lwah Ndlunkulu~3768~Stage & Screen~43
 1iCnM8foFssWlPRLfAbIwo~Gigi Perez~545689~bedroom pop~81
-0qyv7OappGDi0OyJxcqpVt~KRISTIEE~7790~funk paulista~54
+0qyv7OappGDi0OyJxcqpVt~KRISTIEE~7790~nigerian pop~54
 6sNKQgLUy4LVNEX3r1kG1A~Big Zulu~1486272~afro soul, kasi rap, south african hip hop, south african pop~57
 757aE44tKEUQEqRuT6GnEB~Roddy Ricch~10996383~melodic rap, rap, trap~79
 6HvZYsbFfjnjFrWF950C9d~NewJeans~9589473~k-pop, k-pop girl group~82
 0xJqq4oOJVpnnUv8h7dOwG~Dj 4kerty~60205~nigerian pop~53
 1SZXYhJz4sqEss888VmWLP~Mc Brinquedo~1065522~funk carioca, funk mtg, funk paulista~66
 0Q8NcsJwoCbZOHHW63su5S~Mora~6341761~trap latino, urbano latino~83
-64DTkZLH6KkkMwZEEZ5VWC~Love Funk~905334~dance pop~75
+64DTkZLH6KkkMwZEEZ5VWC~Love Funk~905334~Folk, World, & Country, Funk / Soul, Electronic, Rock, Pop~75
 52iwsT98xCoGgiGntTiR7K~Quevedo~5333370~rap canario, trap latino, urbano latino~84
-1eXXCUkwhu0MRLTamWEgXE~Oskoow~29235~punjabi lo-fi~62
+1eXXCUkwhu0MRLTamWEgXE~Oskoow~29235~dance pop~62
 26zgIfFyTCImkHAp5gwKW8~Joé Dwèt Filé~718949~r&b francais~67
 1FxPMQ9A0882eNDx3ZkD6B~La T y La M~817494~cumbia pop~71
-1b8S7EPzdckRyIh0uSbOMI~DJ Oreia~262951~trap~75
+1b8S7EPzdckRyIh0uSbOMI~DJ Oreia~262951~cruise~75
 3NHwwyb1coYa5cLyI72xSk~Dulquer Salmaan~533968~mollywood~63
 6e3pZKXUxrPfnUPJ960Hd9~Pomme~673197~french pop, nouvelle chanson francaise~66
 6XFc29m1ptfUNmaa1UTuBT~MC Joãozinho VT~1274905~funk paulista~78
@@ -233,43 +233,43 @@ artist_id~artist_name~artist_followers~artist_genres~artist_popularity
 5Vf6gyVzfo8TnzrPRBg3qo~SANTA~134320~french pop~62
 37S0GFsBW73uqxGXNFeADJ~Ghost Killer Track~40345~cloud rap francais~61
 2oA819q93vu53ZDkCJYdbN~TNK MusiQ~50251~amapiano~46
-2VTYSgPG0HoSZ4YMx7EeFj~Mc Duzinho SP~862~chamber pop~64
-0RHglXjgE13MSSVXhbADxt~Yanda Woods~31~viral afropop~42
+2VTYSgPG0HoSZ4YMx7EeFj~Mc Duzinho SP~862~dance pop~64
+0RHglXjgE13MSSVXhbADxt~Yanda Woods~31~afro house~42
 0JRPF8WIKUtSO2IUYfrcuh~Kaique e Felipe~25716~sertanejo pop~68
 47mIJdHORyRerp4os813jD~League of Legends~1954955~speedrun, video game music~83
-3UTF2no3muGdiFXVujl94i~Kapo~316580~sertanejo~81
+3UTF2no3muGdiFXVujl94i~Kapo~316580~Folk, World, & Country, Latin, Electronic, Rock, Jazz, Hip Hop, Pop~81
 20JMfmzDb5cjHxEoMXXMyY~Favé~722387~drill francais, pop urbaine, rap francais~67
 6fqjJNsLs7g6F3PXy01Xnw~AzChike~115373~cali rap~67
-6jUYsFkr46ErYnMV82HgQ8~MK Productions~1248~urban contemporary~53
-5xfBWklmIwTOoijr3nMgHB~Ramos.~21592~pop urbaine~59
+6jUYsFkr46ErYnMV82HgQ8~MK Productions~1248~uk pop~53
+5xfBWklmIwTOoijr3nMgHB~Ramos.~21592~Folk, World, & Country, Latin, Funk / Soul, Electronic, Rock, Pop, Jazz, Classical~59
 4JM1zsVj1pt38Q8mhv5teI~Young Jonn~1364512~afrobeats, nigerian pop~69
 2ojY7fXJxZQhg8Rx5e8h9G~SadSvit~296933~ukrainian post-punk~57
 3a1tBryiczPAZpgoZN9Rzg~Asake~4615137~afrobeats, nigerian pop~77
-1DuBkL1pAgaZQHXKPiVr08~Léo Foguete~76422~trap triste~73
+1DuBkL1pAgaZQHXKPiVr08~Léo Foguete~76422~singer-songwriter pop~73
 07h4CCFmlXkwx0g4PL5Uuh~Guy2Bezbar~522594~french hip hop, pop urbaine, rap francais~66
-7Ez6lTtSMjMf2YSYpukP1I~Dasha~259548~modern bollywood~75
+7Ez6lTtSMjMf2YSYpukP1I~Dasha~259548~Folk, World, & Country, Stage & Screen, Funk / Soul, Electronic, Rock, Hip Hop, Pop, Jazz, Blues~75
 1rdQOMFFtoskDXXUVjiGo9~Shweta Mohan~1948202~filmi~73
-6Z6xrqezBTUUDnCinhPwCO~2Point1~108257~new rave~48
-33qOK5uJ8AR2xuQQAhHump~Teddy Swims~3446695~reggaeton colombiano~87
+6Z6xrqezBTUUDnCinhPwCO~2Point1~108257~folklore argentino~48
+33qOK5uJ8AR2xuQQAhHump~Teddy Swims~3446695~Folk, World, & Country, Funk / Soul, Electronic, Rock, Hip Hop, Pop, Blues~87
 3igykO7sW43wfhSjvnETTo~Prototype~59941~rap francais~60
 0EmeFodog0BfCgMzAIvKQp~Shakira~35526709~colombian pop, dance pop, latin pop, pop~88
-6XX6KGpomRDPmGGm7bofCK~DJ Glenner~268564~french hip hop~78
+6XX6KGpomRDPmGGm7bofCK~DJ Glenner~268564~agronejo~78
 1LIuN7ov1IBQDdLsU83ojl~Hugo & Guilherme~2327485~agronejo, arrocha, sertanejo, sertanejo pop, sertanejo universitario~79
 5s27i7oqhNWIcE4HeoVdq0~MC GP~1451679~funk consciente, funk paulista~77
 47uyFQHOD02S0lj9ptRpoB~Felipe Araújo~5498173~arrocha, sertanejo, sertanejo pop, sertanejo universitario~65
-5RopQXy9tobYADC0GZyLVb~elaggume~103873~pop~62
-2Fotv9MULwrtOPORxgtRui~Kamoh Xaba~1040~candy pop~45
+5RopQXy9tobYADC0GZyLVb~elaggume~103873~"""Childrens"""~62
+2Fotv9MULwrtOPORxgtRui~Kamoh Xaba~1040~viral afropop~45
 7eLcDZDYHXZCebtQmVFL25~Aitana~3120835~latin talent show, latin viral pop, spanish pop~74
-4anb8rmk0xipuQP6QZ5IlH~FORTUNA 812~55697~rave funk~60
+4anb8rmk0xipuQP6QZ5IlH~FORTUNA 812~55697~sertanejo universitario~60
 2FDaBZt51fOXh2rbHL8Afr~Mc Magal~649637~funk mtg, funk paulista~70
 49e4v89VmlDcFCMyDv9wQ9~Dean Martin~1773439~adult standards, easy listening, lounge, vocal jazz~76
 2OhUNb01gLwygOizYvTm0e~Big One~675267~trap argentino~75
 41QLxRXlc2NwfJZkHGHKid~Israel & Rodolffo~2760238~agronejo, arrocha, sertanejo, sertanejo pop, sertanejo universitario~72
-78iJ2FMbYAFY3djO4PbWZi~La Mano 1.9~137175~colombian pop~69
+78iJ2FMbYAFY3djO4PbWZi~La Mano 1.9~137175~experimental pop~69
 1tKrZaph4cLsnEdqC5BNEQ~Clayton & Romário~430651~agronejo, arrocha, sertanejo, sertanejo pop, sertanejo universitario~72
-6YbUZ7rG3diOQFbAq8cySD~DJ KAP~2219~pagode~51
+6YbUZ7rG3diOQFbAq8cySD~DJ KAP~2219~Pop, Hip Hop, Latin~51
 2UZIAOlrnyZmyzt1nuXr9y~Nicki Nicole~7839895~argentine hip hop, r&b argentino, trap argentino, trap latino, urbano latino~80
-34GVjsEo3lNh6lBfcg6cV8~Outsyd Eddie~2053~arrocha~50
+34GVjsEo3lNh6lBfcg6cV8~Outsyd Eddie~2053~reggaeton~50
 1ul8iLt2WnFe2UIyovjg7q~reezy~595372~german hip hop, german r&b~71
 0mMqD2uqwvCjFvlzo6ayGi~DJ Maphorisa~2701125~amapiano~68
 2e4nwiX8ZCU09LGLOpeqTH~Laura Pausini~2642694~europop, italian adult pop, latin arena pop, mexican pop~75
@@ -280,41 +280,41 @@ artist_id~artist_name~artist_followers~artist_genres~artist_popularity
 7bp2lSdh12wcA8LyB1srfJ~Sofia Carson~3680209~pop~71
 3nqS8jzqmsPKFJTp0BOIel~Ikky~401590~punjabi pop~73
 1dVygo6tRFXC8CSWURQJq2~Sonu Nigam~18973180~filmi, modern bollywood~79
-467V6Wi666JBwBY3YMHSuJ~LastBornDiroba~7422~cloud rap francais~44
+467V6Wi666JBwBY3YMHSuJ~LastBornDiroba~7422~talent show~44
 1Yj5Xey7kTwvZla8sqdsdE~Cris Mj~4363023~mambo chileno, trap latino, urbano chileno, urbano latino~87
 3dN9MQpjIyNxyeRfz4EDZe~Rochak Kohli~1155908~desi pop, modern bollywood~73
 6eUKZXaKkcviH0Ku9w2n3V~Ed Sheeran~117392153~pop, singer-songwriter pop, uk pop~89
 1ELUrmWBlXkqVabjVincQ6~Bassie~407161~amapiano~52
-2P1id80CMwR5R5cwcyIIAi~GISELLE~227004~pop~51
+2P1id80CMwR5R5cwcyIIAi~GISELLE~227004~"Stage & Screen, Folk, World, & Country, Latin, Funk / Soul, Electronic, ""Childrens"", Rock, Pop, Classical, Jazz, Hip Hop"~51
 2CKOmarVWvWqkNWUatHCex~Ana Castela~7702087~agronejo, sertanejo, sertanejo pop, sertanejo universitario~81
-5EXPLxIaBJwaXPW5FovTOx~Lash curry~38522~trap triste~58
+5EXPLxIaBJwaXPW5FovTOx~Lash curry~38522~Hip Hop~58
 6TsAG8Ve1icEC8ydeHm3C8~Snow Strippers~150515~cloud rap~68
 5vFGtc23dtvt3f7FSK7vtg~LeeMcKrazy~625301~amapiano~64
 4TKhxSkqClXrdtUWgKqHVU~Shallipopi~1647572~afrobeats, nigerian pop~68
 0hCNtLu0JehylgoiP8L4Gh~Nicki Minaj~32804991~hip pop, pop, queens hip hop, rap~87
 4jIvmo6hfAQ04NSOWPVVA3~кис-кис~414937~russian alt pop, russian punk~53
-57nPqD7z62gDdq37US9XJR~Arcane~326453~french hip hop~80
+57nPqD7z62gDdq37US9XJR~Arcane~326453~Stage & Screen, Electronic, Rock, Hip Hop, Classical, Pop~80
 5M9mFjVaPT2T1HFYFFSoCt~Dladla Mshunqisi~305474~afro soul, gqom, south african pop~48
 0xByDfltDVpk6LDsUMHyI2~Poshlaya Molly~1649867~russian alt pop, russian electronic~66
 7lpGctutZNeN7UKIyEFbPg~Sminofu~82677~maskandi~56
 77SW9BnxLY8rJ0RciFqkHh~The Neighbourhood~18605197~modern alternative rock, modern rock, pop~86
-2ejPIS2ocEAjCNhqkEtblo~Ney The Bae~244~trap latino~38
+2ejPIS2ocEAjCNhqkEtblo~Ney The Bae~244~kindermusik~38
 75i9GaW2MJUgt4BkdUnuUY~MC Ryan SP~6329154~funk paulista~84
-0sc02G8bEK5K2jNeevd8II~Outsyd DJ~4023~rap underground argentino~50
+0sc02G8bEK5K2jNeevd8II~Outsyd DJ~4023~funk paulista~50
 20wkVLutqVOYrc0kxFs7rA~Daniel Caesar~7292990~canadian contemporary r&b~87
-6MPuzz9hPrs4TwxeHh4cEj~Amir Ameer~17066~german hip hop~66
+6MPuzz9hPrs4TwxeHh4cEj~Amir Ameer~17066~Electronic~66
 2GJMSZ7M3D0KyyKRhYgWju~Focalistic~1118649~amapiano, barcadi~58
 1pBLC0qVRTB5zVMuteQ9jJ~Lily-Rose Depp~231811~pop~77
 6m6e7D2TnV0aYMllFFwMxu~Guilherme & Benuto~1342467~agronejo, arrocha, sertanejo, sertanejo pop, sertanejo universitario~75
 4tuJ0bMpJh08umKkEXKUI5~Gracie Abrams~3206313~alt z~90
-2yyaNPcdxZcn4iutCcLMaC~Orso~1289~punk~75
+2yyaNPcdxZcn4iutCcLMaC~Orso~1289~Folk, World, & Country, Electronic, Jazz, Rock, Pop, Non-Music~75
 2qoQgPAilErOKCwE2Y8wOG~GloRilla~1382093~southern hip hop~83
 3yWkz47Z8kE6z1xW6rjkAl~Goldmax~57597~gqom~51
 1SyKki7JI1AZNKwgNMkn25~Sachet-Parampara~1767273~desi pop, filmi, modern bollywood~72
 76fuWYgIf3TVIopTs3vaJ6~Amaal Mallik~3830862~desi pop, filmi, modern bollywood~72
 3E12tRURRvPfHz0hAMCFYc~Omar Courtz~431536~trap boricua, trap latino, urbano latino~81
 4zmZ8lVLzGc84S4v2B1rLx~Seyi Vibez~2125099~afrobeats, nigerian pop~72
-0n4Fao9kbjgM76RmVlfSwr~YG Marley~655888~belgian hip hop~67
+0n4Fao9kbjgM76RmVlfSwr~YG Marley~655888~pop urbaine~67
 4x4ggvlhCaj5oNqKRRwOAL~Tml Vibez~260972~viral afropop~65
 260kWe4y9lg7YFDsZBgsLv~zhanulka~189079~russian alt pop~55
 0LKAV3zJ8a8AIGnyc5OvfB~SDM~1404513~french hip hop, pop urbaine, r&b francais~79
@@ -322,18 +322,18 @@ artist_id~artist_name~artist_followers~artist_genres~artist_popularity
 3GBSge8pq7mpezUQl0GAOA~Kausar Munir~164375~modern bollywood~73
 1raznef8uIDK0SAlPabb86~Funky Qla~25670~gqom~49
 0NErdIJtuKBjtxKmlqaWdj~Divya Kumar~586100~filmi, indian folk, modern bollywood~74
-6XjgqvaVLUib6lCerbZrYD~Stryv~12703~sertanejo~75
+6XjgqvaVLUib6lCerbZrYD~Stryv~12703~Electronic~75
 5gs4Sm2WQUkcGeikMcVHbh~Hamza~1404898~belgian hip hop, cloud rap francais, french hip hop, pop urbaine, rap belge~74
-1NtRGHzfJ8H7dENIXu1tdk~Cristian Di Marco~87~rap espanol~63
+1NtRGHzfJ8H7dENIXu1tdk~Cristian Di Marco~87~Jazz~63
 5MraexJKZDrQYzS98kNwie~Sevdaliza~744790~alternative r&b, persian electronic~76
 7x3eTVPlBiPjXHn3qotY86~KeBlack~1495509~french hip hop, pop urbaine, r&b francais~70
-3vg62RNNbcEtTGVRHzIBdi~Sly~274~ukrainian viral pop~46
-0aNCy4QYgTmEt8dos9toPF~Seemah~30107~trap~44
+3vg62RNNbcEtTGVRHzIBdi~Sly~274~Electronic, Rock, Hip Hop, Classical, Pop~46
+0aNCy4QYgTmEt8dos9toPF~Seemah~30107~Electronic~44
 5j4HeCoUlzhfWtjAfM1acR~Stromae~3473950~belgian pop, g-house~74
 0Y5tJX1MQlPlqiwlOH1tJY~Travis Scott~34703382~rap, slap house~94
 1HY2Jd0NmPuamShAr6KMms~Lady Gaga~32936218~art pop, dance pop, pop~92
 1E8mXBWN7AXZCOPYbOky4J~Jazeek~402570~german hip hop~74
-5rnKcmn5XTpbD9OPEsrV1s~Novatron~2489~afrobeats~48
+5rnKcmn5XTpbD9OPEsrV1s~Novatron~2489~Rock, Electronic~48
 6YVMFz59CuY7ngCxTxjpxE~aespa~7132555~k-pop girl group~83
 74KM79TiuVKeVCqs8QtB0B~Sabrina Carpenter~15324033~pop~94
 0UF7XLthtbSF2Eur7559oV~Kavinsky~981430~filter house~67
@@ -350,33 +350,33 @@ artist_id~artist_name~artist_followers~artist_genres~artist_popularity
 0qS0rxCY4YfrUx9GCTlDIW~Malaysia Vasudevan~1557290~classic kollywood, filmi~68
 6vTqEFbTtTRJsuIpzZgjxi~Grupo Menos É Mais~4031860~pagode, pagode novo~80
 3RtNN1VnooWEn3KQk03DUL~Noriel~8041358~reggaeton, trap latino, urbano latino~79
-0w5arbommuYnUMeXetmv17~Smash SA~12977~sertanejo~50
+0w5arbommuYnUMeXetmv17~Smash SA~12977~Hip Hop~50
 3IW7ScrzXmPvZhB27hmfgy~Jul~10620209~french hip hop, pop urbaine, rap marseille~82
-6SWmwFBXIsxhIx5XPkYo0a~Josh Brar~14562~urbano latino~62
+6SWmwFBXIsxhIx5XPkYo0a~Josh Brar~14562~k-pop girl group~62
 16Sxr5Kd5KJIUXTUVtmVOV~Mshinwemali~16320~maskandi~49
 5lwmRuXgjX8xIwlnauTZIP~Romeo Santos~23200808~bachata, latin hip hop, latin pop, trap latino, urbano latino~85
 5ln4EWpJqQZEWXAlSNTtVz~Kharishma~126173~sepedi pop~56
 0JBdTCGs111JKKYfLqOEBa~Shirin David~966152~frauenrap, german hip hop, german pop~68
 25uiPmTg16RbhZWAqwLBy5~Charli xcx~4464342~art pop, candy pop, metropopolis, pop, uk pop~87
-3hWQDRr1PqwvnHeiZlucBq~Bouss~114824~easy listening~72
+3hWQDRr1PqwvnHeiZlucBq~Bouss~114824~nigerian pop~72
 2x7PC78TmgqpEIjaGAZ0Oz~Trueno~8051824~argentine hip hop, bases de freestyle, trap argentino, trap latino, urbano latino~79
 6XyY86QOPPrYVGvF9ch6wz~Linkin Park~27727652~alternative metal, nu metal, post-grunge, rap metal, rock~93
-38EmEgXkgK51MT2tPY0EoC~Bobby Helms~52997~underground amapiano~71
+38EmEgXkgK51MT2tPY0EoC~Bobby Helms~52997~Folk, World, & Country, Stage & Screen, Funk / Soul, Rock, Pop~71
 4QSTyDpxsKmv3UfavVUImR~Darkoo~157658~afrobeats, afroswing, london rap, uk hip hop~64
 76dRoxKtDwYkgCQePok9cU~Miksu / Macloud~163690~german hip hop~70
 1QZuAtDYNrk2QMogJulsyq~Karina~647706~argentine telepop, cumbia pop~66
 22wbnEMDvgVIAGdFeek6ET~Benson Boone~3970001~singer-songwriter pop~86
 0GOx72r5AAEKRGQFn3xqXK~GIMS~5148107~french hip hop, pop urbaine, r&b francais, rap conscient~80
 6qqNVTkY8uBg9cP3Jd7DAH~Billie Eilish~102709727~art pop, pop~96
-50DchbKTiJU56SYmIRSJCI~Hitta J3~6117~bedroom pop~64
+50DchbKTiJU56SYmIRSJCI~Hitta J3~6117~Hip Hop~64
 2iN5MhOgkenO5FtkPtEVAF~Wanitwa Mos~741619~amapiano~56
-1bpnl8qbR9GxmiNlkEufW6~DJ Japa NK~18484~agronejo~68
+1bpnl8qbR9GxmiNlkEufW6~DJ Japa NK~18484~Stage & Screen~68
 0a1SidMjD8D6EHvJph4n2H~Ruger~3289589~afrobeats, nigerian pop~70
 2qn4hIXsvRUyFoboMi31XB~Rolf Zuckowski~153186~kindermusik~65
-3PpJbrAbphauEun8Xf9tD2~Theodora~17147~sertanejo~58
+3PpJbrAbphauEun8Xf9tD2~Theodora~17147~"Folk, World, & Country, Electronic, ""Childrens"", Rock, Classical, Pop, Jazz, Non-Music"~58
 0IEzMvarfVycBJAXjjEZOL~La Pantera~54435~rap canario~64
-3UVLcqHc3pOMsWiZv2MeIZ~Yugendran Vasudevan~5495~dance pop~64
-1jiZvw42D4oquLl24x2VWV~Lefty Gunplay~31430~argentine hip hop~69
+3UVLcqHc3pOMsWiZv2MeIZ~Yugendran Vasudevan~5495~rap~64
+1jiZvw42D4oquLl24x2VWV~Lefty Gunplay~31430~pop urbaine~69
 0CVOcYvRcSvOXyuR4YGKaC~Dani Fernández~261122~spanish pop~69
 1bNjWBFWsAAzZSR59lRdpR~Kabza De Small~4958929~amapiano~67
 2kS9NyuATpYwjeB93h24H5~Nina Chuba~792705~german pop, hamburg hip hop~72
@@ -384,13 +384,13 @@ artist_id~artist_name~artist_followers~artist_genres~artist_popularity
 13TUuvzi6FAkiA5F9MiYF8~Casswell P~18785~amapiano~51
 0dUyjgCyjfj5eMx6bX2TWf~FMK~1616013~trap argentino, trap triste~69
 2GoeZ0qOTt6kjsWW4eA6LS~Darshan Raval~23508585~desi pop, filmi, gujarati pop, modern bollywood~77
-4LHTgACY32k94VDjenF0nP~Mc Negão Original~77351~funk consciente~70
+4LHTgACY32k94VDjenF0nP~Mc Negão Original~77351~amapiano~70
 1xU878Z1QtBldR7ru9owdU~Phoenix~1948998~alternative dance, indie rock, modern rock, new rave, rock independant francais, shimmer pop~68
 2tIP7SsRs7vjIcLrU85W8J~The Kid LAROI~5863084~australian hip hop~85
 0du5cEVh5yTK9QJze8zA0C~Bruno Mars~62697388~dance pop, pop~96
 3Px6IenueysHsgCQf9xFVr~Kwesta~889339~afro soul, kasi rap, south african hip hop, south african pop~54
 5r3wPya2PpeTTsXsGhQU8O~Shubh~5302111~punjabi hip hop~77
-4Y8Fqly07jv3GLevDRv4qU~Anaïs Cardot~15893~trap latino~52
+4Y8Fqly07jv3GLevDRv4qU~Anaïs Cardot~15893~Hip Hop~52
 6tzRZ39aZlNqlUzQlkuhDV~Pabllo Vittar~4298181~dance pop, funk carioca, funk pop, pop lgbtq+ brasileira, pop nacional~75
 3tHD07u1ON4uHxmnT9rwqZ~Neeraj Shridhar~2355404~filmi, modern bollywood~72
 1Xyo4u8uXC1ZmMpatF05PJ~The Weeknd~94962172~canadian contemporary r&b, canadian pop, pop~96
@@ -409,18 +409,18 @@ artist_id~artist_name~artist_followers~artist_genres~artist_popularity
 2A9kNdL3S9DKEIjhZJZZfM~Brown Joel~74080~viral afropop~59
 5CiGnKThu5ctn9pBxv7DGa~benny blanco~1244249~pop~78
 4iHNK0tOyZPYnBU7nGAgpQ~Mariah Carey~10658809~dance pop, pop, urban contemporary~83
-7CAuIrM6rFLrIgisYOV0Fs~Usimamane~150426~urbano latino~58
+7CAuIrM6rFLrIgisYOV0Fs~Usimamane~150426~korean ost~58
 1uNFoZAHBGtllmzznpCI3s~Justin Bieber~78920541~canadian pop, pop~92
 40ZNYROS4zLfyyBSs2PGe2~Zach Bryan~5562207~classic oklahoma country~90
-4iKk928O7ApC51cf4q2mpO~Mnqobi yazo~2079~filmi~43
+4iKk928O7ApC51cf4q2mpO~Mnqobi yazo~2079~modern bollywood~43
 2qWK8K2Jfh67UqtwY8tCW6~YSY A~3381057~argentine hip hop, trap argentino~77
 4QkKUb73NVonTlAZaShsuY~Sir Trill~823562~amapiano~53
 3aznFYhXZNLiZYfF2nIt6K~Umafikizolo~57090~maskandi~50
-0RSqcZGU4Kf01zKcn4JhiE~Mawelele~14696~funk paulista~47
-2YRHC9O0GHvyHY38yFP434~Dadi~120498~bases de freestyle~62
-2xopv1IOZfIPbbVuHDylEL~X-Morizo~23~nigerian pop~45
+0RSqcZGU4Kf01zKcn4JhiE~Mawelele~14696~rap latina~47
+2YRHC9O0GHvyHY38yFP434~Dadi~120498~"Folk, World, & Country, Stage & Screen, Latin, Funk / Soul, Electronic, ""Childrens"", Jazz, Pop, Rock, Hip Hop, Blues"~62
+2xopv1IOZfIPbbVuHDylEL~X-Morizo~23~r&b~45
 78F6Xkd46aMHkr4AP60TXY~Clarent~141691~trap latino~71
-6Tv4ZrZbgUMcXAMv0d1VQM~fleurnothappy~10852~boy band~55
+6Tv4ZrZbgUMcXAMv0d1VQM~fleurnothappy~10852~rap~55
 3bO19AOone0ubCsfDXDtYt~Myles Smith~822438~singer-songwriter pop~80
 3i9UjIGeZT2cRyltQrr8nj~Cici~223383~afro soul, south african pop~50
 0VZrPa7mWAYXH4CwmYk8Km~Kidd Keo~2936923~drill espanol, trap latino, trap triste, urbano espanol, urbano latino~72
@@ -428,46 +428,46 @@ artist_id~artist_name~artist_followers~artist_genres~artist_popularity
 3sHq8pB8IoGvnatMuoixwd~Zerrydl~382644~afrobeats~63
 3nLLr3ShsQC2Hdrwjl14ie~Gurpreet Saini~12098~desi pop, modern bollywood~63
 1U1el3k54VvEUzo3ybLPlM~Kali Uchis~8125195~colombian pop~86
-2NJ4G5sIHIfma9PF2MO0yi~Khathapillar~7991~funk rj~45
+2NJ4G5sIHIfma9PF2MO0yi~Khathapillar~7991~funk consciente~45
 4gzpq5DPGxSnKTe4SA8HAU~Coldplay~54871112~permanent wave, pop~91
 06Q5VlSAku57lFzyME3HrM~Ke Personajes~4039743~cumbia pop~78
 00sCATpEvwH48ays7PlQFU~Jonita Gandhi~1360794~filmi, modern bollywood~72
-3U6tzzUuiMZD64IPkutbjM~Tebogo G Mashego~10108~motown~51
+3U6tzzUuiMZD64IPkutbjM~Tebogo G Mashego~10108~Funk / Soul~51
 46pWGuE3dSwY3bMMXGBvVS~Rema~5795028~afrobeats, nigerian pop~78
 5o36rLQd78Zh8CaT8rn59d~Shreyas Puranik~64931~modern bollywood~64
 6udveWUgX4vu75FF0DTrXV~TAEYANG~1495274~k-pop, korean r&b~65
 183DgO92lAqgpVVNKI7ZKF~Raj Ranjodh~286607~punjabi pop~65
-6V0AnQuqPD8zkTZKbO1pbk~Ranger~6766~argentine hip hop~49
-0eVixEZVW2PB1UogwTWXc1~Berq~184540~pop rap~70
+6V0AnQuqPD8zkTZKbO1pbk~Ranger~6766~Rock, Pop, Funk / Soul, Electronic~49
+0eVixEZVW2PB1UogwTWXc1~Berq~184540~Pop~70
 3JsHnjpbhX4SnySpvpa9DK~V~19112209~j-division, korean ost~83
 246dkjvS1zLTtiykXe5h60~Post Malone~45862726~dfw rap, melodic rap, pop, rap~91
 5Y3MV9DZ0d87NnVm56qSY1~Tiago PZK~5454795~trap argentino, trap latino, urbano latino~81
-3Cz37xnWAOtQEa5jfrTUbL~VEN1~134203~k-pop~65
+3Cz37xnWAOtQEa5jfrTUbL~VEN1~134203~adult standards~65
 1bAftSH8umNcGZ0uyV7LMg~Duki~11546073~argentine hip hop, trap argentino, trap latino, trap triste, urbano latino~87
-7xcbCUOXrxDyWxbYxPq60B~Indraneel~477~latin pop~62
+7xcbCUOXrxDyWxbYxPq60B~Indraneel~477~Folk, World, & Country, Stage & Screen~62
 2uFxJXYNWECbpiNTpdBDXb~Nasboi~82850~afrobeats, viral afropop~54
 5HmfRnwYc5vNyWxRfP9U74~Fido~30509~viral afropop~59
 2IMZYfNi21MGqxopj9fWx8~Rels B~8415929~r&b en espanol, spanish hip hop, trap latino, urbano espanol, urbano latino~83
 19JYV5zLhGkyqClNjdSfdb~Adam~21996~ukrainian pop, ukrainian rock~49
 6YzSM19LzpLH0nVKKU6Jsy~Mc Daniel~2115060~funk viral~75
-5ByAEWetNZ95GufzBSOkc3~fallen777angel~41465~filmi~61
-6VOn8xBJH73S7DN8VBAoaN~Deejhay RB~12342~dance pop~65
+5ByAEWetNZ95GufzBSOkc3~fallen777angel~41465~urbano latino~61
+6VOn8xBJH73S7DN8VBAoaN~Deejhay RB~12342~bedroom pop~65
 3YBJLs7RqR0aPGBgU27nDh~Werenoi~1572247~french hip hop, pop urbaine~78
 36cgvBn0aadzOijnjjwqMN~ILLIT~1773132~5th gen k-pop~76
 2DFCHTDIA0t638a4mm37dK~Raj Shekhar~105782~modern bollywood~67
 55Aa2cqylxrFIXC767Z865~Lil Wayne~15664686~hip hop, new orleans rap, pop rap, rap, trap~88
-2Mt2vBBEckrvXtg0JldwZ0~Un Poco de Ruido~171914~rock-and-roll~78
+2Mt2vBBEckrvXtg0JldwZ0~Un Poco de Ruido~171914~modern bollywood~78
 2GlEiSHYEKlq9cUYDa9oZb~Lynda~780263~r&b francais~64
 0oOet2f43PA68X5RxKobEy~Shreya Ghoshal~27246431~filmi, modern bollywood~85
-5n0o0t9wgg6uzHqfVd2Yr1~CowBoii~44886~cruise~58
+5n0o0t9wgg6uzHqfVd2Yr1~CowBoii~44886~trap latino~58
 5VfqJBmXcf6ZqXoGij5qTE~Tevin Campbell~1134474~contemporary r&b, new jack swing, r&b, urban contemporary~60
 7K2PBAFUE98RKu30clhIms~Violetta Sokolova~37396~ukrainian viral pop~48
 3wcj11K77LjEY1PkEazffa~Burna Boy~10719626~afrobeats, dancehall, nigerian hip hop, nigerian pop~80
 4STHEaNw4mPZ2tzheohgXB~Paul McCartney~4966815~classic rock, mellow gold, rock, soft rock~75
-0b4EVanoJb8wkWF7QUA3uY~Sin Nombre~15481~pop lgbtq+ brasileira~55
+0b4EVanoJb8wkWF7QUA3uY~Sin Nombre~15481~Folk, World, & Country, Latin, Rock, Pop, Blues~55
 05etL4pzWd6TSv1x5WrlG3~Faheem Abdullah~114024~kashmiri pop~66
 3ZuBEj9ppJe8GSdKaMTfMN~Nimo~1517205~german hip hop, swedish hip hop~72
-6ndLrsgT3MV5CNxIrW71fw~DFZM~101809~classic uk pop~72
+6ndLrsgT3MV5CNxIrW71fw~DFZM~101809~Latin~72
 3tVQdUvClmAT7URs9V3rsp~Wizkid~6462412~afrobeats, afropop, azonto, nigerian hip hop, nigerian pop~83
 1chOgh5tgwfiyJ2zhUHwBj~Dionela~875306~opm~74
 37mqXU98U5GmH5ZDtlHM1c~Matheus Fernandes~879852~arrocha, forro~71
@@ -475,58 +475,58 @@ artist_id~artist_name~artist_followers~artist_genres~artist_popularity
 0sN5oRkFliiyjSNqPIEjML~DoouShii~12065~south african trap~47
 0wi4yTYlGtEnbGo4ltZTib~Shakin' Stevens~160717~classic uk pop, rockabilly~64
 5WUlDfRSoLAfcVSX1WnrxN~Sia~28965871~pop~86
-4moOyBAkXsIAbF3pplCtv8~oddworld~5812~rap conscient~54
+4moOyBAkXsIAbF3pplCtv8~oddworld~5812~Rock, Stage & Screen, Electronic~54
 5vV3bFXnN6D6N3Nj4xRvaV~Jin~8590890~k-pop~85
 6ZjFtWeHP9XN7FeKSUe80S~Bing Crosby~541915~adult standards, easy listening, lounge, swing~75
 6HCBnyTBSLdb3TFn2ayulY~Leto~1193684~french hip hop, pop urbaine, rap francais~69
 3m5qlPf2OkihLz3dRYnkPA~Ovy On The Drums~542367~colombian pop, reggaeton, reggaeton colombiano, trap latino, urbano latino~81
 1mcqfNCReSFxun2vIWvC28~KZ Tandingan~1247830~opm~66
-4GISoVSxo2LkF5EyorXs9W~Ramajogayya Sastry~73389~pop lgbtq+ brasileira~70
+4GISoVSxo2LkF5EyorXs9W~Ramajogayya Sastry~73389~pop urbaine~70
 5TNSXFCNwlq2CfiMcNOCDP~Lijo George-Dj Chetas~53269~desi pop, modern bollywood~66
 09cKncAQn28NqTUORLMwSR~Ariis~192918~gym phonk~75
 3flcjKgRCeBVZTR8n8iShE~Ami Faku~777965~afro soul, south african pop~57
 3WMlRpW5JWuDI95TcEWt3r~Salastkbron~596732~pop argentino~68
-7vCsTTACb2iT4fvBMnwp5w~Prashant Pandey~30796~pop soul~66
+7vCsTTACb2iT4fvBMnwp5w~Prashant Pandey~30796~filmi~66
 1rTUwYS38LkQTlT2fhikch~Yung Beef~568261~drill espanol, emo trap en espanol, neoperreo, spanish hip hop, urbano espanol~67
 5H1nN1SzW0qNeUEZvuXjAj~Danny Ocean~5662245~pop venezolano, reggaeton, trap latino, urbano latino~79
-4L0dgq6erLpWok6Snhp1bI~Stallin Matsitsa~376~chamber pop~37
+4L0dgq6erLpWok6Snhp1bI~Stallin Matsitsa~376~rap belge~37
 2Jb9jVnCpWkXtoGznFJ6bF~ECKO~1329962~argentine hip hop, trap argentino~66
-6KSYSas66s64PZDOnb6knq~Sol Phenduka~15451~neo soul~45
+6KSYSas66s64PZDOnb6knq~Sol Phenduka~15451~ukrainian post-punk~45
 3p7PcrEHaaKLJnPUGOtRlT~Henrique & Juliano~24256802~agronejo, arrocha, musica tocantinense, sertanejo, sertanejo universitario~87
 7vXDAI8JwjW531ouMGbfcp~TINI~8523312~latin pop, latin viral pop, pop argentino~79
 0AqlFI0tz2DsEoJlKSIiT9~Emilia~3825070~pop argentino~81
-7IOSPo9oGCLWtDEZtmxgTi~MC Bruno MS~66604~hamburg hip hop~69
-48yaM25WLHmQZXx5NN3DYH~Aaron Modesto~10857~bhojpuri pop~67
+7IOSPo9oGCLWtDEZtmxgTi~MC Bruno MS~66604~alternative r&b~69
+48yaM25WLHmQZXx5NN3DYH~Aaron Modesto~10857~Stage & Screen~67
 241x5prRiXJmnk4vSGEHcr~Mjolisi~58182~maskandi, sepedi pop~47
 3ZpEKRjHaHANcpk10u6Ntq~Ayra Starr~3918169~afrobeats~78
 3tlXnStJ1fFhdScmQeLpuG~Brent Faiyaz~6755425~r&b, rap~85
 2s4tjL6W3qrblOe0raIzwJ~Yoko Ono~140245~experimental, experimental pop~65
 0GgyFUpOyzWDRDqx8FCTDN~Baby Rasta~2222779~reggaeton, trap latino, urbano latino~72
 5TnQc2N1iKlFjYD7CPGvFc~DAY6~3453731~k-pop, k-pop boy group~71
-6R3w3WdJRJqEMRc0qy1z5i~Audiocrackerr~4794~rage rap~55
+6R3w3WdJRJqEMRc0qy1z5i~Audiocrackerr~4794~argentine hip hop~55
 6HTUcOExehqydqa7C3usAa~Abel Pintos~3501375~argentine telepop, folklore argentino, pop argentino~69
 4AnNB3lPD0Sv7ziKVHqI66~Nkosazana Daughter~570155~amapiano~61
 4gzrZDyL5gYiROkv27pYKx~Varun Jain~215355~desi pop, modern bollywood~69
-6OtlecLaA62XUdzRZDSeBz~Shenge wasehlalankosi~3234~trap argentino~44
+6OtlecLaA62XUdzRZDSeBz~Shenge wasehlalankosi~3234~nigerian pop~44
 2UwqpfQtNuhBwviIC0f2ie~Damso~5224779~belgian hip hop, french hip hop, pop urbaine, r&b francais, rap belge, rap conscient~79
 5m5lgddffBHA2pv0m5E2Ro~Zee Nxumalo~245883~amapiano~57
 1KQuzZH1ix85vt0n3iiRTA~Hyce~65540~viral afropop~59
 5wJ1H6ud777odtZl5gG507~Vishal Mishra~5854636~desi pop, filmi, modern bollywood~78
 64XGTiElvPUfmJjyWJnW8C~Parfeniuk~118542~ukrainian pop, ukrainian viral pop~54
 3J7r4VsNmuWixU0nXvyPd8~Kalash~827470~cloud rap francais, french hip hop, pop urbaine, rap antillais, trap antillais~68
-6vl2O57bwb1wowTzUZIDTv~Ayanda Art~140~funk bh~38
+6vl2O57bwb1wowTzUZIDTv~Ayanda Art~140~pop reggaeton~38
 3y2cIKLjiOlp1Np37WiUdH~Shaboozey~806021~modern country pop, pop rap~80
-0bQK92L70k52lgVCQX0mNp~Umashotana~1662~dance pop~43
-4IqQ3ooH5vvzRl3c3vBfwN~Vicoka~14842~alternative dance~46
+0bQK92L70k52lgVCQX0mNp~Umashotana~1662~dancehall~43
+4IqQ3ooH5vvzRl3c3vBfwN~Vicoka~14842~Pop~46
 1elUiq4X7pxej6FRlrEzjM~Jorge & Mateus~20770663~agronejo, arrocha, sertanejo, sertanejo universitario~83
 04QHNiih9ZesPvals6II1h~MC Marks~1764915~funk consciente, funk paulista~77
-4acowSAiQXmdhs4DCgUQ0U~Ryflo~5011~colombian pop~62
+4acowSAiQXmdhs4DCgUQ0U~Ryflo~5011~ukrainian pop~62
 60XHOAhvEBiV6BGBOv8ClM~La Joaqui~1980324~argentine hip hop, rap latina~73
-0PCCGZ0wGLizHt2KZ7hhA2~Artemas~1006806~funk viral~79
+0PCCGZ0wGLizHt2KZ7hhA2~Artemas~1006806~Rock, Pop, Electronic~79
 6VyttZwyEMGBl90oGdKCB8~MC Leozinho ZS~480136~funk paulista~67
-27OdVby2oeFjM1C5XvC3hC~Peysoh~156684~pop dance~67
+27OdVby2oeFjM1C5XvC3hC~Peysoh~156684~Hip Hop~67
 24nUVBIlCGi4twz4nYxJum~fromis_9~1359335~k-pop, k-pop girl group~63
-0pelomsVlROuivdE2RgeDU~El Mago Y La Nueva~15833~cloud rap francais~64
+0pelomsVlROuivdE2RgeDU~El Mago Y La Nueva~15833~sertanejo~64
 7gZu6kPnY9enEi5FvgTO4F~Felipe e Rodrigo~229156~sertanejo, sertanejo pop~72
 1fctva4kpRbg2k3v7kwRuS~Rvssian~2514304~reggaeton, reggaeton flow, trap latino, urbano latino~75
 2wzMOQwNT6ZvVB4amvhFAH~The Pogues~604223~celtic punk, celtic rock, folk punk, punk~63
@@ -543,9 +543,9 @@ artist_id~artist_name~artist_followers~artist_genres~artist_popularity
 2fMqTqiTxUDlmcOEPaQSsx~Amitabh Bhattacharya~1535153~modern bollywood~82
 3GdSQUH1BRtl9UrrtuwJlP~Irshad Kamil~121480~modern bollywood~71
 5Z8nzSJRSo4HRcUOzemnC1~Juss~182813~punjabi lo-fi~66
-3qqJxbB40F5AmjBiO4akVa~Mr Pilato~9391~argentine hip hop~54
+3qqJxbB40F5AmjBiO4akVa~Mr Pilato~9391~nigerian hip hop~54
 6zK1M4TcabpLQMNmmG2P0Q~Chike~1003186~afrobeats, afropop, nigerian pop~59
-2apYMRrg5FxN4go0pfsCvf~Melanie Thornton~12933~modern bollywood~53
+2apYMRrg5FxN4go0pfsCvf~Melanie Thornton~12933~Funk / Soul, Electronic, Rock, Pop, Hip Hop, Jazz, Blues~53
 4oZolC0sCwCAKqsNXfRlVS~The La Planta~467132~cumbia pop~73
 7vohy1W7YNLxHynG44UFjS~Sampagne~55172~german hip hop~64
 4PY2xnTu90K0hvkgcljRJl~Deepthi Suresh~36425~tamil pop~67
@@ -555,22 +555,22 @@ artist_id~artist_name~artist_followers~artist_genres~artist_popularity
 6WQFTzqYHmh8Ph2X0L0QLQ~Young Stunna~1578361~amapiano~59
 7LvDTuFCBv08xm6u1pOMK0~TJ Monterde~3377579~cdo indie, opm, pinoy singer-songwriter~73
 09UmIX92EUH9hAK4bxvHx6~Mithoon~9640334~filmi, modern bollywood~75
-4v3iE7RK6SOyplsSQxZsjc~Yorssy~144469~rap belge~65
+4v3iE7RK6SOyplsSQxZsjc~Yorssy~144469~Hip Hop~65
 0E56Ncr2I37JQhW71UJALE~KRBK~347995~russian gangster rap, russian hip hop~62
 3vQ0GE3mI0dAaxIMYe5g7z~Paulo Londra~24287103~argentine hip hop, trap argentino, trap latino, urbano latino~79
-0CPfPl6Fy7ueqMoxjZjmYb~Seun1401~1743~rap conscient~46
-16IdDbuertDHTGF9Si2eCN~Stompiiey~2631~modern bollywood~45
+0CPfPl6Fy7ueqMoxjZjmYb~Seun1401~1743~Rock~46
+16IdDbuertDHTGF9Si2eCN~Stompiiey~2631~Pop~45
 6zGPa2tLMJ5HQYUddZI8di~Caio Passos~103075~funk ostentacao, trap funk~67
 3la3vRfIuDMsydpPfUBryR~DJ Ari SL~14190~deboxe, mega funk, rave funk~55
 7GlBOeep6PqTfFi59PTUUN~Chappell Roan~3993314~indie pop~88
 5kVgcCdPbeUwxBqWxi2Ktl~Luan Pereira~2668289~agronejo, sertanejo universitario~79
 7yIp2QRLkQ6loIrupimiri~Pinky SD~39308~cumbia pop~78
-0lxNEAFHu0uIMSTWMiKV3q~Amaza~4502~south african hip hop~47
+0lxNEAFHu0uIMSTWMiKV3q~Amaza~4502~reggaeton colombiano~47
 38XiDu0kK3Z5jdHUDqBzNT~Lil Kesh~691992~afrobeats, afropop, nigerian hip hop, nigerian pop~54
 4Gso3d4CscCijv0lmajZWs~Don Toliver~5389836~rap~88
 16CdFOraHt0BYRkeB7gT5M~Tega Boi Dc~108641~viral afropop~54
 0T1CMVkqffHlqEk4BcAph1~Tulsi Kumar~10637492~filmi, modern bollywood~75
-4hADccnhJWKgtjTKues1oy~Ego Slimflow~3030~afrobeats~51
+4hADccnhJWKgtjTKues1oy~Ego Slimflow~3030~Jazz~51
 7uIbLdzzSEqnX0Pkrb56cR~Yo Yo Honey Singh~21948924~filmi, hindi hip hop, modern bollywood~80
 3EiLUeyEcA6fbRPSHkG5kb~De La Ghetto~7407660~reggaeton, reggaeton flow, trap latino, urbano latino~79
 6DARBhWbfcS9E4yJzcliqQ~Karan Aujla~14008809~desi hip hop, punjabi pop~82
@@ -579,18 +579,18 @@ artist_id~artist_name~artist_followers~artist_genres~artist_popularity
 2loEsOijJ6XiGzWYFXMIRk~Adam Port~221921~melodic house~77
 7tYKF4w9nC0nq9CsPZTHyP~SZA~24515944~pop, r&b, rap~91
 3dRfiJ2650SZu6GbydcHNb~John Williams~1471968~orchestral soundtrack, soundtrack~76
-5g2oHSGu7YX4EHoSCKIUqo~Fanatic SA~868~german hip hop~38
+5g2oHSGu7YX4EHoSCKIUqo~Fanatic SA~868~viral pop~38
 3qpyErDI4i90q5EGgSRmNK~Raghav Chaitanya~176065~desi pop, indian singer-songwriter, modern bollywood~67
 58wXmynHaAWI5hwlPZP3qL~Booba~3180409~french hip hop, old school rap francais, pop urbaine, rap conscient~73
-4gikWg6CUo6uwHkGMXFPuf~Kleyton Souza~20923~afrobeats~63
+4gikWg6CUo6uwHkGMXFPuf~Kleyton Souza~20923~latin viral pop~63
 26WKgv73kRHD0gEDKD1i8j~Keinemusik~352017~melodic house~78
-1eIYP01ZLPKEExhcV6xFgt~Grelo~481193~nigerian pop~71
+1eIYP01ZLPKEExhcV6xFgt~Grelo~481193~dance pop~71
 6q29t5RuXxlBuqIZsOMQss~Priya Saraiya~136878~gujarati pop, modern bollywood~68
-2eXWodjj5K1vVq2CSjl036~DobleP~215032~ukrainian pop~68
+2eXWodjj5K1vVq2CSjl036~DobleP~215032~Rock~68
 5BwbVAdT6rFF2vGVE8su2y~Klavdia Petrivna~219403~ukrainian pop~59
-2J9OgoroujUr9FiiT40sqc~Tycoon~20507~sertanejo universitario~49
+2J9OgoroujUr9FiiT40sqc~Tycoon~20507~Funk / Soul, Electronic, Jazz, Rock, Pop~49
 7K78lVZ8XzkjfRSI7570FF~José Feliciano~414621~latin pop, puerto rican pop~70
-3S4T8XtipStwl34odXn1YS~Scotts Maphuma~284681~latin pop~66
+3S4T8XtipStwl34odXn1YS~Scotts Maphuma~284681~german hip hop~66
 26dSoYclwsYLMAKD3tpOr4~Britney Spears~15580584~dance pop, pop~83
 2FKWNmZWDBZR4dE5KX4plR~Diljit Dosanjh~25958912~filmi, modern bollywood, punjabi pop~82
 3PpjqSKBer3obW6lDflOBx~Ram Sampath~578971~filmi, modern bollywood~67

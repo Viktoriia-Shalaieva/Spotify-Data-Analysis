@@ -71,7 +71,7 @@ followers_data = playlists_table[['Country', 'Playlist Total Followers']].drop_d
 followers_data = followers_data[followers_data['Country'].isin(selected_countries)]
 followers_data = followers_data.sort_values(by='Playlist Total Followers', ascending=False)
 followers_data['Playlist Total Followers (formatted)'] = (
-    plots.format_number_text(followers_data['Playlist Total Followers'])
+    data_processing.format_number_text(followers_data['Playlist Total Followers'])
 )
 
 plots.create_bubble_plot(

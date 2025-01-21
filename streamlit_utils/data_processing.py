@@ -430,6 +430,22 @@ def process_tracks_data(playlists_table, tracks_table, artists_table):
     }
 
 
+def format_number_text(column):
+    """
+    Format numeric values in a column into human-readable text.
+
+    Converts numbers into abbreviated text format with 'K' for thousands and 'M' for millions.
+    Numbers below 1,000 remain unchanged.
+    """
+    return column.apply(
+        lambda x: (
+            f"{x / 1e6:.1f}M" if x >= 1e6 else
+            f"{x / 1e3:.1f}K" if x >= 1e3 else
+            str(x)
+        )
+    )
+
+
 def process_artists_data(artists_table):
     """
     Process artist data to determine the top 10 artists by popularity
@@ -453,7 +469,7 @@ def process_artists_data(artists_table):
     )
 
     top_10_artists_by_followers['Artist Total Followers (formatted)'] = (
-        plots.format_number_text(
+        format_number_text(
             top_10_artists_by_followers['Artist Total Followers']
         )
     )
