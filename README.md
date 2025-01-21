@@ -134,12 +134,17 @@ _This is an example of how you may give instructions on setting up your project 
    ```bash
    git clone https://github.com/Viktoriia-Shalaieva/Spotify-Data-Analysis.git
    ```
-2. Install dependencies:
+
+2. Navigate to the project directory:
+   ```bash
+   cd Spotify-Data-Analysis
+   ```   
+3. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **Optional**: Create a `.credentials.yaml` file in the main directory with the following structure:
+4. **Optional**: Create a `.credentials.yaml` file in the main directory with the following structure:
    ```yaml
    aws:
      aws_access_key_id: YOUR_AWS_ACCESS_KEY_ID
@@ -159,13 +164,13 @@ _This is an example of how you may give instructions on setting up your project 
 
    > **Note**: This step is required only if you intend to run the `download_preprocess_data.py` script to update the data.
 
-4. **Optional for updating data**: Run the data preprocessing script:
+5. **Optional for updating data**: Run the data preprocessing script:
    ```bash
    python download_preprocess_data.py
    ```
    > **Note**: As of [November 27, 2024](https://developer.spotify.com/blog/2024-11-27-changes-to-the-web-api), Spotify has deprecated access to playlist API endpoints. If you don't have access to the Spotify API, you can skip this step and use the local data provided in the `data/` folder.
 
-5. Launch the Streamlit dashboard:
+6. Launch the Streamlit dashboard:
    ```bash
    streamlit run streamlit_app.py
    ```
