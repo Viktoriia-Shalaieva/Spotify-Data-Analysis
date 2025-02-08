@@ -9,7 +9,7 @@ def create_bar_plot(data, x, y, orientation="v", text=None, showticklabels=False
     Create and display a bar plot using Plotly Express.
 
     This function generates a bar plot based on the provided data and customization options.
-    The plot is displayed using Streamlit's `st.plotly_chart`.
+    The plot is displayed using Streamlit"s `st.plotly_chart`.
 
     Args:
         data (DataFrame): The dataset used to generate the bar plot.
@@ -30,7 +30,7 @@ def create_bar_plot(data, x, y, orientation="v", text=None, showticklabels=False
         orientation=orientation,
         text=text,
         color=y if orientation == "v" else x,
-        color_continuous_scale='Turbo',
+        color_continuous_scale="Turbo",
         **kwargs
     )
     fig.update_traces(
@@ -58,7 +58,7 @@ def create_choropleth_map(data, locations, location_mode, color, title=None, hov
     Create and display a choropleth map using Plotly Express.
 
     This function generates a choropleth map to visualize geographical data based on the provided parameters.
-    The map is displayed using Streamlit's `st.plotly_chart`.
+    The map is displayed using Streamlit"s `st.plotly_chart`.
 
     Args:
         data (DataFrame): The dataset used to generate the choropleth map.
@@ -88,7 +88,7 @@ def create_choropleth_map(data, locations, location_mode, color, title=None, hov
         color_continuous_scale=color_continuous_scale,
         labels=labels,
         title=title,
-        hover_data={'Country': False},
+        hover_data={"Country": False},
         **kwargs
     )
     fig.update_layout(
@@ -107,7 +107,7 @@ def create_bubble_plot(data, x, y, size, text=None, yaxis_title=None, **kwargs):
     Create and display a bubble plot using Plotly Express.
 
     This function generates a scatter plot where marker sizes are determined by a specified column,
-    creating a "bubble plot." The plot is displayed using Streamlit's `st.plotly_chart`.
+    creating a "bubble plot." The plot is displayed using Streamlit"s `st.plotly_chart`.
 
     Args:
         data (DataFrame): The dataset used to generate the bubble plot.
@@ -127,15 +127,15 @@ def create_bubble_plot(data, x, y, size, text=None, yaxis_title=None, **kwargs):
         y=y,
         size=size,
         color=y,
-        color_continuous_scale='Turbo',
+        color_continuous_scale="Turbo",
         text=text,
         size_max=80,
         **kwargs
     )
     fig.update_traces(
         textfont_size=12,
-        textposition='bottom center',
-        textfont_color='black',
+        textposition="bottom center",
+        textfont_color="black",
     )
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False)
@@ -155,7 +155,7 @@ def create_scatter_plot(data, x, y, color, hover_data, symbol, color_map):
     Create and display a scatter plot using Plotly Express.
 
     This function generates a scatter plot with options for coloring, hover data, symbol markers,
-    and a LOWESS trendline. The plot is displayed using Streamlit's `st.plotly_chart`.
+    and a LOWESS trendline. The plot is displayed using Streamlit"s `st.plotly_chart`.
 
     Args:
         data (DataFrame): The dataset used to generate the scatter plot.
@@ -186,19 +186,19 @@ def create_scatter_plot(data, x, y, color, hover_data, symbol, color_map):
     st.plotly_chart(fig)
 
 
-def create_histogram(data, x, nbins=10, color=None, yaxis_title='Count', **kwargs):
+def create_histogram(data, x, nbins=10, color=None, yaxis_title="Count", **kwargs):
     """
     Create and display a histogram using Plotly Express.
 
     This function generates a histogram to visualize the distribution of a specified column in the dataset.
-    The plot is displayed using Streamlit's `st.plotly_chart`.
+    The plot is displayed using Streamlit"s `st.plotly_chart`.
 
     Args:
         data (DataFrame): The dataset used to generate the histogram.
         x (str): The column name for the variable to be plotted on the x-axis.
         nbins (int, optional): Number of bins for the histogram. Defaults to 10.
         color (str, optional): The column name for grouping data by color. Defaults to None.
-        yaxis_title (str, optional): Title for the y-axis. Defaults to 'Count'.
+        yaxis_title (str, optional): Title for the y-axis. Defaults to "Count".
         **kwargs: Additional keyword arguments passed to `plotly.express.histogram` for further customization.
 
     Returns:
@@ -209,8 +209,8 @@ def create_histogram(data, x, nbins=10, color=None, yaxis_title='Count', **kwarg
         x=x,
         color=color,
         nbins=nbins,
-        barmode='overlay' if color else 'group',
-        color_discrete_sequence=['#109618'],
+        barmode="overlay" if color else "group",
+        color_discrete_sequence=["#109618"],
         **kwargs
     )
     fig.update_layout(
@@ -222,12 +222,12 @@ def create_histogram(data, x, nbins=10, color=None, yaxis_title='Count', **kwarg
 
 
 def create_histogram_normal_distribution(data, x, country, mean, median, one_std_dev, two_std_dev,
-                                         three_std_dev, nbins=10, yaxis_title='Count', **kwargs):
+                                         three_std_dev, nbins=10, yaxis_title="Count", **kwargs):
     """
     Create and display a histogram with normal distribution indicators using Plotly Express.
 
     This function generates a histogram for a specified variable and overlays visual elements
-    to represent the mean, median, and standard deviations. The plot is displayed using Streamlit's `st.plotly_chart`.
+    to represent the mean, median, and standard deviations. The plot is displayed using Streamlit"s `st.plotly_chart`.
 
     Args:
         data (DataFrame): The dataset used to generate the histogram.
@@ -239,7 +239,7 @@ def create_histogram_normal_distribution(data, x, country, mean, median, one_std
         two_std_dev (tuple): The range representing two standard deviations (min, max).
         three_std_dev (tuple): The range representing three standard deviations (min, max).
         nbins (int, optional): Number of bins for the histogram. Defaults to 10.
-        yaxis_title (str, optional): Title for the y-axis. Defaults to 'Count'.
+        yaxis_title (str, optional): Title for the y-axis. Defaults to "Count".
         **kwargs: Additional keyword arguments passed to `plotly.express.histogram` for further customization.
 
     Returns:
@@ -251,7 +251,7 @@ def create_histogram_normal_distribution(data, x, country, mean, median, one_std
         nbins=nbins,
         title=f"Track Popularity Distribution in Top 50 - {country}",
         opacity=0.7,
-        color_discrete_sequence=['#109618'],
+        color_discrete_sequence=["#109618"],
         **kwargs
     )
     fig.update_layout(
@@ -311,7 +311,7 @@ def create_pie_chart(data, names, **kwargs):
     Create and display a pie chart using Plotly Express.
 
     This function generates a pie chart to visualize the proportion of categories in the dataset.
-    The chart is displayed using Streamlit's `st.plotly_chart`.
+    The chart is displayed using Streamlit"s `st.plotly_chart`.
 
     Args:
         data (DataFrame): The dataset used to generate the pie chart.
@@ -328,7 +328,7 @@ def create_pie_chart(data, names, **kwargs):
         **kwargs
     )
     fig.update_traces(
-        textinfo='percent+label',
+        textinfo="percent+label",
     )
     fig.update_layout(
         showlegend=False
@@ -341,7 +341,7 @@ def create_boxplot(data, x, y, color_discrete_map=None, color_discrete_sequence=
     Create and display a box plot using Plotly Express.
 
     This function generates a box plot to visualize the distribution of a numeric variable
-    across different categories. The plot is displayed using Streamlit's `st.plotly_chart`.
+    across different categories. The plot is displayed using Streamlit"s `st.plotly_chart`.
 
     Args:
         data (DataFrame): The dataset used to generate the box plot.
@@ -371,7 +371,7 @@ def create_polar_chart(data, r, theta, height=550):
     Create and display a polar chart using Plotly Express.
 
     This function generates a polar chart to visualize data in a circular coordinate system,
-    connecting points with lines and markers. The chart is displayed using Streamlit's `st.plotly_chart`.
+    connecting points with lines and markers. The chart is displayed using Streamlit"s `st.plotly_chart`.
 
     Args:
         data (DataFrame): The dataset used to generate the polar chart.
@@ -387,12 +387,12 @@ def create_polar_chart(data, r, theta, height=550):
         r=r,
         theta=theta,
         line_close=True,
-        color_discrete_sequence=['#109618'],
+        color_discrete_sequence=["#109618"],
     )
     fig.update_traces(
-        mode='lines+markers',
-        fill='toself',
-        marker=dict(size=8, line=dict(color='black', width=1))
+        mode="lines+markers",
+        fill="toself",
+        marker=dict(size=8, line=dict(color="black", width=1))
     )
     fig.update_layout(
         autosize=True,
@@ -409,7 +409,7 @@ def create_heatmap(data, x, y, z, label_z, height=600):
     Create and display a heatmap using Plotly Express.
 
     This function generates a density heatmap to visualize the relationship between two variables
-    and their aggregated values. The heatmap is displayed using Streamlit's `st.plotly_chart`.
+    and their aggregated values. The heatmap is displayed using Streamlit"s `st.plotly_chart`.
 
     Args:
         data (DataFrame): The dataset used to generate the heatmap.
@@ -428,7 +428,7 @@ def create_heatmap(data, x, y, z, label_z, height=600):
         y=y,
         z=z,
         labels={z: label_z},
-        color_continuous_scale='Turbo',
+        color_continuous_scale="Turbo",
     )
     fig.update_layout(
         xaxis_title=None,
@@ -445,7 +445,7 @@ def create_line_chart(data, x, y, text=None, log_y=True, yaxis_title=None, **kwa
     Create and display a line chart using Plotly Express.
 
     This function generates a line chart to visualize trends over time or another continuous variable.
-    The chart is displayed using Streamlit's `st.plotly_chart`.
+    The chart is displayed using Streamlit"s `st.plotly_chart`.
 
     Args:
         data (DataFrame): The dataset used to generate the line chart.
@@ -465,14 +465,14 @@ def create_line_chart(data, x, y, text=None, log_y=True, yaxis_title=None, **kwa
         y=y,
         text=text,
         log_y=log_y,
-        color_discrete_sequence=['#109618'],
+        color_discrete_sequence=["#109618"],
         **kwargs
     )
     fig.update_traces(
-        textposition='top center',
-        textfont=dict(size=12, color='black'),
-        line=dict(width=3, color='rgba(0, 0, 255, 0.3)'),
-        marker=dict(size=8, color='green', opacity=1),
+        textposition="top center",
+        textfont=dict(size=12, color="black"),
+        line=dict(width=3, color="rgba(0, 0, 255, 0.3)"),
+        marker=dict(size=8, color="green", opacity=1),
     )
     fig.update_layout(
         yaxis_title=yaxis_title,
@@ -485,7 +485,7 @@ def create_boxplot_subplots(x, y, y2, title, categoryarray):
     Create and display a subplot of box plots using Plotly.
 
     This function generates two side-by-side box plots: one for categorized data and another for overall data.
-    The plots share a y-axis for easier comparison. The visualization is displayed using Streamlit's `st.plotly_chart`.
+    The plots share a y-axis for easier comparison. The visualization is displayed using Streamlit"s `st.plotly_chart`.
 
     Args:
         x (array-like): The categorical variable for the x-axis in the first box plot.
@@ -507,7 +507,7 @@ def create_boxplot_subplots(x, y, y2, title, categoryarray):
         go.Box(
             x=x,
             y=y,
-            marker=dict(color='#109618'),
+            marker=dict(color="#109618"),
         ),
         row=1, col=1
     )
@@ -515,7 +515,7 @@ def create_boxplot_subplots(x, y, y2, title, categoryarray):
         go.Box(
             y=y2,
             name="Overall",
-            marker=dict(color='orange'),
+            marker=dict(color="orange"),
         ),
         row=1, col=2
     )
@@ -524,7 +524,7 @@ def create_boxplot_subplots(x, y, y2, title, categoryarray):
         showlegend=False,
         yaxis=dict(title=title),
         xaxis=dict(
-            categoryorder='array',
+            categoryorder="array",
             categoryarray=categoryarray
         )
     )

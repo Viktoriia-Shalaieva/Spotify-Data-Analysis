@@ -12,30 +12,30 @@ def create_playlist_table(playlist):
     Extracts data from a Spotify playlist, including playlist details (ID, name, followers, country) and track-specific
     information (track ID, album ID, artist IDs). The results are returned as a pandas DataFrame.
     """
-    playlist_id = playlist['id']
-    playlist_name = playlist['name']
-    playlist_followers_total = playlist['followers']['total']
-    country = playlist_name.split('-')[-1].strip()
+    playlist_id = playlist["id"]
+    playlist_name = playlist["name"]
+    playlist_followers_total = playlist["followers"]["total"]
+    country = playlist_name.split("-")[-1].strip()
 
     rows = []
 
-    for item in playlist['tracks']['items']:
-        track = item['track']
+    for item in playlist["tracks"]["items"]:
+        track = item["track"]
 
         row = {
-            'playlist_id': playlist_id,
-            'playlist_name': playlist_name,
-            'country': country,
-            'playlist_followers_total': playlist_followers_total,
-            'track_id': track.get('id'),
+            "playlist_id": playlist_id,
+            "playlist_name": playlist_name,
+            "country": country,
+            "playlist_followers_total": playlist_followers_total,
+            "track_id": track.get("id"),
         }
-        album = track.get('album', {})
+        album = track.get("album", {})
 
         album_info = {
-            'album_id': album.get('id'),
+            "album_id": album.get("id"),
         }
         artists_info = {
-            'artist_id': ', '.join([artist.get('id') for artist in track.get('artists', [])]),
+            "artist_id": ", ".join([artist.get("id") for artist in track.get("artists", [])]),
         }
         row.update(album_info)
         row.update(artists_info)
@@ -92,11 +92,11 @@ def create_tracks_table(token, track_ids, path, save):
 
         if track_info:
             track_data = {
-                'track_id': track_info.get('id'),
-                'track_name': track_info.get('name'),
-                'track_duration_ms': track_info.get('duration_ms'),
-                'track_explicit': track_info.get('explicit'),
-                'track_popularity': track_info.get('popularity'),
+                "track_id": track_info.get("id"),
+                "track_name": track_info.get("name"),
+                "track_duration_ms": track_info.get("duration_ms"),
+                "track_explicit": track_info.get("explicit"),
+                "track_popularity": track_info.get("popularity"),
             }
             tracks_data.append(track_data)
             logger.info(f"Track data retrieved successfully for track ID: {track_id}")
@@ -129,13 +129,13 @@ def create_albums_table(token, album_ids, path, save):
 
         if album_info:
             album_data = {
-                'album_id': album_info.get('id'),
-                'album_name': album_info.get('name'),
-                'album_type': album_info.get('album_type'),
-                'album_release_date': album_info.get('release_date'),
-                'album_total_tracks': album_info.get('total_tracks'),
-                'album_label': album_info.get('label'),
-                'album_popularity': album_info.get('popularity'),
+                "album_id": album_info.get("id"),
+                "album_name": album_info.get("name"),
+                "album_type": album_info.get("album_type"),
+                "album_release_date": album_info.get("release_date"),
+                "album_total_tracks": album_info.get("total_tracks"),
+                "album_label": album_info.get("label"),
+                "album_popularity": album_info.get("popularity"),
             }
             albums_data.append(album_data)
             logger.info(f"Album data retrieved successfully for album ID: {album_id}")
@@ -164,7 +164,7 @@ def create_artists_table(token, artist_ids, path, save):
     unique_artist_ids = set()
 
     for ids in artist_ids:
-        separated_ids = [artist.strip() for artist in ids.split(',')]
+        separated_ids = [artist.strip() for artist in ids.split(",")]
         unique_artist_ids.update(separated_ids)
 
     for artist_id in unique_artist_ids:
@@ -173,11 +173,11 @@ def create_artists_table(token, artist_ids, path, save):
 
         if artist_info:
             row = {
-                'artist_id': artist_info.get('id'),
-                'artist_name': artist_info.get('name'),
-                'artist_followers': artist_info.get('followers', {}).get('total'),
-                'artist_genres': artist_info.get('genres'),
-                'artist_popularity': artist_info.get('popularity'),
+                "artist_id": artist_info.get("id"),
+                "artist_name": artist_info.get("name"),
+                "artist_followers": artist_info.get("followers", {}).get("total"),
+                "artist_genres": artist_info.get("genres"),
+                "artist_popularity": artist_info.get("popularity"),
             }
             rows.append(row)
             logger.info(f"Artist data retrieved for artist ID: {artist_id}")
@@ -200,24 +200,24 @@ def create_artist_genre_table(token, file, path, save):
 
     Args:
         token (str): Discogs API token for authentication.
-        file (pd.DataFrame): A DataFrame containing artist information. It must include a column named 'artist_name'.
+        file (pd.DataFrame): A DataFrame containing artist information. It must include a column named "artist_name".
         path (str): File path to save the resulting DataFrame as a CSV file if `save` is True.
         save (bool): Whether to save the resulting DataFrame to a CSV file. Defaults to False.
     """
     rows = []
 
     for _, row in file.iterrows():  # Using _ indicates that the index value is not important and will not be used.
-        artist = row['artist_name']
+        artist = row["artist_name"]
 
         genres = discogs.get_genre_artist(token, artist)
         time.sleep(0.7)
 
         rows.append({
-                'artist_name': artist,
-                'artist_genre': genres,
+                "artist_name": artist,
+                "artist_genre": genres,
         })
         logger.info(f"Genre data retrieved for artist '{artist}'")
-    artist_genre = pd.DataFrame(rows, columns=['artist_name', 'artist_genre'])
+    artist_genre = pd.DataFrame(rows, columns=["artist_name", "artist_genre"])
     logger.info("All artist genre data processed successfully.")
     if save:
         artist_genre.to_csv(path, index=False, sep="~")
@@ -226,32 +226,32 @@ def create_artist_genre_table(token, file, path, save):
 
 def process_artist_genres(artists_df, path, save):
     """
-    Processes the 'artist_genres' column in a DataFrame, replacing missing genres
+    Processes the "artist_genres" column in a DataFrame, replacing missing genres
     with randomly generated genres based on the distribution of existing genres.
 
     Args:
         artists_df (pd.DataFrame): A DataFrame containing artist information.
-            It must include a column named 'artist_genres'.
+            It must include a column named "artist_genres".
         path (str): File path to save the processed DataFrame as a CSV file if `save` is True.
         save (bool): Whether to save the processed DataFrame to a CSV file. Defaults to False.
 
     """
-    # Replace empty lists ('[]') with NaN
-    artists_df['artist_genres'] = artists_df['artist_genres'].replace('[]', pd.NA)
+    # Replace empty lists ("[]") with NaN
+    artists_df["artist_genres"] = artists_df["artist_genres"].replace("[]", pd.NA)
 
     # Remove square brackets and extra quotes
-    artists_df['artist_genres'] = (
-        artists_df['artist_genres']
+    artists_df["artist_genres"] = (
+        artists_df["artist_genres"]
         .str.strip("[]")
         .str.replace("'", "")
     )
     # Count the frequency of each genre
-    genre_counts = artists_df['artist_genres'].str.split(', ').explode().value_counts(normalize=True)
+    genre_counts = artists_df["artist_genres"].str.split(", ").explode().value_counts(normalize=True)
 
     genres_list = genre_counts.index.tolist()
     weights = genre_counts.tolist()
 
-    unknown_genre_indices = artists_df[artists_df['artist_genres'].isna()].index
+    unknown_genre_indices = artists_df[artists_df["artist_genres"].isna()].index
 
     # Generate random genres for missing values based on frequency distribution
     random_genres = random.choices(
@@ -261,7 +261,7 @@ def process_artist_genres(artists_df, path, save):
     )
 
     # Assign the generated random genres to missing values
-    artists_df.loc[unknown_genre_indices, 'artist_genres'] = random_genres
+    artists_df.loc[unknown_genre_indices, "artist_genres"] = random_genres
 
     if save:
         artists_df.to_csv(path, index=False, sep="~")
