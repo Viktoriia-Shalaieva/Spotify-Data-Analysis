@@ -47,7 +47,7 @@ def get_playlist_status_code(token, playlists_id):
             response = requests.get(url, headers=headers)
             status_code = response.status_code
             status_codes.append(status_code)
-            logger.info(f'Status code for {playlist_id}: {response.status_code}')
+            logger.info(f"Status code for {playlist_id}: {response.status_code}")
         except Exception as error_message:
             logger.error(f"Failed to retrieve playlist {playlist_id}: {error_message}")
     logger.debug(status_codes)
@@ -76,7 +76,7 @@ def get_playlist(access_token, playlist_id):
 def get_save_playlist(token, playlists, file_path):
     """Retrieve Spotify playlists and save them as JSON files in the specified directory."""
     # Create the specified directory path if it doesn't already exist.
-    # 'exist_ok=True' ensures no error is raised if the directory already exists.
+    # "exist_ok=True" ensures no error is raised if the directory already exists.
     os.makedirs(file_path, exist_ok=True)
     for playlist_name, playlist_id in playlists.items():
         playlist_info = get_playlist(token, playlist_id)
@@ -84,11 +84,11 @@ def get_save_playlist(token, playlists, file_path):
         if playlist_info:
             # Convert the playlist name into a file-safe format using slugify
             # to avoid spaces and special characters
-            file_name = slugify(playlist_name, separator="_") + '.json'
+            file_name = slugify(playlist_name, separator="_") + ".json"
             file_path_playlist = os.path.join(file_path, file_name)
 
             try:
-                with open(file_path_playlist, 'w') as file:
+                with open(file_path_playlist, "w") as file:
                     json.dump(playlist_info, file)
                 logger.info(f"Playlist '{playlist_name}' saved successfully")
             except Exception as error_message:

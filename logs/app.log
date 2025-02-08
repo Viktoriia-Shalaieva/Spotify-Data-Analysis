@@ -1,2 +1,44 @@
-21-Jan-25 22:37:54 [INFO] Access token retrieved successfully
-21-Jan-25 22:37:54 [INFO] Number of empty genres in artists: 102
+08-Feb-25 21:51:22 [INFO] Access token retrieved successfully
+08-Feb-25 21:51:22 [INFO] Status code for 37i9dQZEVXbMDoHDwVN2tF: 404
+08-Feb-25 21:51:23 [INFO] Status code for 37i9dQZEVXbLRQDuF5jeBp: 404
+08-Feb-25 21:51:23 [INFO] Status code for 37i9dQZEVXbKj23U1GF4IR: 404
+08-Feb-25 21:51:24 [INFO] Status code for 37i9dQZEVXbMXbN3EUUhlg: 404
+08-Feb-25 21:51:24 [INFO] Status code for 37i9dQZEVXbMMy2roB9myp: 404
+08-Feb-25 21:51:24 [INFO] Status code for 37i9dQZEVXbJiZcmkrIHGU: 404
+08-Feb-25 21:51:25 [INFO] Status code for 37i9dQZEVXbIPWwFssbupI: 404
+08-Feb-25 21:51:25 [INFO] Status code for 37i9dQZEVXbNFJfN1Vw8d9: 404
+08-Feb-25 21:51:26 [INFO] Status code for 37i9dQZEVXbKkidEfWYRuD: 404
+08-Feb-25 21:51:26 [INFO] Status code for 37i9dQZEVXbMH2jvi6jvjk: 404
+08-Feb-25 21:51:26 [INFO] Status code for 37i9dQZEVXbM4UZuIrvHvA: 404
+08-Feb-25 21:51:27 [INFO] Status code for 37i9dQZEVXbNxXF4SkHj9F: 404
+08-Feb-25 21:51:27 [INFO] Status code for 37i9dQZEVXbLZ52XmnySJg: 404
+08-Feb-25 21:51:28 [INFO] Status code for 37i9dQZEVXbLnolsZ8PSNw: 404
+08-Feb-25 21:51:28 [INFO] Status code for 37i9dQZEVXbKY7jLzlJ11V: 404
+08-Feb-25 21:51:28 [INFO] Not all status codes are 200. Downloading data from S3 instead.
+08-Feb-25 21:51:28 [INFO] Starting download operation for bucket: project-spotify-analysis-data
+08-Feb-25 21:51:28 [INFO] File 'data/preprocessed/albums.csv' has been downloaded from bucket 'project-spotify-analysis-data' to local path 'data/preprocessed/albums.csv'.
+08-Feb-25 21:51:29 [INFO] File 'data/preprocessed/artists_full.csv' has been downloaded from bucket 'project-spotify-analysis-data' to local path 'data/preprocessed/artists_full.csv'.
+08-Feb-25 21:51:29 [INFO] File 'data/preprocessed/playlists.csv' has been downloaded from bucket 'project-spotify-analysis-data' to local path 'data/preprocessed/playlists.csv'.
+08-Feb-25 21:51:29 [INFO] File 'data/preprocessed/tracks.csv' has been downloaded from bucket 'project-spotify-analysis-data' to local path 'data/preprocessed/tracks.csv'.
+08-Feb-25 21:51:29 [INFO] Download operation completed successfully for bucket: project-spotify-analysis-data
+08-Feb-25 21:51:29 [INFO] Loading configuration from: config/config.yaml
+08-Feb-25 21:51:29 [INFO] Starting download operation for bucket: project-spotify-analysis-data
+08-Feb-25 21:51:29 [INFO] File 'data/raw/playlists/top_50_global.json' has been downloaded from bucket 'project-spotify-analysis-data' to local path 'data/raw/playlists/top_50_global.json'.
+08-Feb-25 21:51:29 [INFO] File 'data/raw/playlists/top_50_usa.json' has been downloaded from bucket 'project-spotify-analysis-data' to local path 'data/raw/playlists/top_50_usa.json'.
+08-Feb-25 21:51:30 [INFO] File 'data/raw/playlists/top_50_canada.json' has been downloaded from bucket 'project-spotify-analysis-data' to local path 'data/raw/playlists/top_50_canada.json'.
+08-Feb-25 21:51:30 [INFO] File 'data/raw/playlists/top_50_brazil.json' has been downloaded from bucket 'project-spotify-analysis-data' to local path 'data/raw/playlists/top_50_brazil.json'.
+08-Feb-25 21:51:30 [INFO] File 'data/raw/playlists/top_50_argentina.json' has been downloaded from bucket 'project-spotify-analysis-data' to local path 'data/raw/playlists/top_50_argentina.json'.
+08-Feb-25 21:51:30 [INFO] File 'data/raw/playlists/top_50_germany.json' has been downloaded from bucket 'project-spotify-analysis-data' to local path 'data/raw/playlists/top_50_germany.json'.
+08-Feb-25 21:51:30 [INFO] File 'data/raw/playlists/top_50_france.json' has been downloaded from bucket 'project-spotify-analysis-data' to local path 'data/raw/playlists/top_50_france.json'.
+08-Feb-25 21:51:31 [INFO] File 'data/raw/playlists/top_50_spain.json' has been downloaded from bucket 'project-spotify-analysis-data' to local path 'data/raw/playlists/top_50_spain.json'.
+08-Feb-25 21:51:31 [INFO] File 'data/raw/playlists/top_50_ukraine.json' has been downloaded from bucket 'project-spotify-analysis-data' to local path 'data/raw/playlists/top_50_ukraine.json'.
+08-Feb-25 21:51:31 [INFO] File 'data/raw/playlists/top_50_south_africa.json' has been downloaded from bucket 'project-spotify-analysis-data' to local path 'data/raw/playlists/top_50_south_africa.json'.
+08-Feb-25 21:51:31 [INFO] File 'data/raw/playlists/top_50_uae.json' has been downloaded from bucket 'project-spotify-analysis-data' to local path 'data/raw/playlists/top_50_uae.json'.
+08-Feb-25 21:51:31 [INFO] File 'data/raw/playlists/top_50_south_korea.json' has been downloaded from bucket 'project-spotify-analysis-data' to local path 'data/raw/playlists/top_50_south_korea.json'.
+08-Feb-25 21:51:32 [INFO] File 'data/raw/playlists/top_50_india.json' has been downloaded from bucket 'project-spotify-analysis-data' to local path 'data/raw/playlists/top_50_india.json'.
+08-Feb-25 21:51:32 [INFO] File 'data/raw/playlists/top_50_united_kingdom.json' has been downloaded from bucket 'project-spotify-analysis-data' to local path 'data/raw/playlists/top_50_united_kingdom.json'.
+08-Feb-25 21:51:32 [INFO] File 'data/raw/playlists/top_50_nigeria.json' has been downloaded from bucket 'project-spotify-analysis-data' to local path 'data/raw/playlists/top_50_nigeria.json'.
+08-Feb-25 21:51:32 [INFO] Download operation completed successfully for bucket: project-spotify-analysis-data
+08-Feb-25 21:51:35 [INFO] Starting upload operation for bucket: project-spotify-analysis-data
+08-Feb-25 21:51:35 [INFO] 'data/genres/genres.yaml' has been uploaded to bucket 'project-spotify-analysis-data' as 'data/genres/genres.yaml'.
+08-Feb-25 21:51:35 [INFO] Upload operation completed successfully for bucket: project-spotify-analysis-data

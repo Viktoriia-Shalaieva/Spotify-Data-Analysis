@@ -32,15 +32,15 @@ global music trends.
 
 ## 🌍 What You Can Do
 - Compare the popularity of tracks, artists, and albums across various countries.
-- Analyze music trends over time, such as release seasonality and geographical genre distributions.
+- Analyze music trends over time, such as release seasonality.
 - Use dynamic filters and interactive visualizations to tailor the insights to your specific interests.
 
 ## 🔧 Features
 - **Data Preview**: View and summarize the raw data powering these analyses.
-- **Playlists Deep Dive**: Visualize playlist followers, track contributions, and geographical distributions.
+- **Playlists Analysis**: Visualize playlist followers, track contributions, and geographical distributions.
 - **Tracks Analysis**: Discover trends in track popularity, duration, and explicit content.
-- **Artists Insights**: Analyze artist popularity, follower distribution, and genre classifications.
-- **Albums Overview**: Explore album popularity, release patterns, and types.
+- **Artists Analysis**: Analyze artist popularity, follower distribution, and genre classifications.
+- **Albums Analysis**: Explore album popularity, release patterns, and types.
 
 ## 🔍 How to Use
 - **👈 Navigate**: Use the sidebar to explore various sections, including Data Preview, Playlists, Tracks, Artists, 

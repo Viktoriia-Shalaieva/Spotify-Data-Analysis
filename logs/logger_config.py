@@ -2,13 +2,13 @@ import logging
 import os
 
 
-# Ensure the 'logs' directory exists
+# Ensure the "logs" directory exists
 os.makedirs("logs", exist_ok=True)
 
 logging.basicConfig(
     level=logging.INFO,  # Set the logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
     format="%(asctime)s [%(levelname)s] %(message)s",  # Log format with timestamp, level, and message
-    datefmt='%d-%b-%y %H:%M:%S',  # Date format for the timestamp
+    datefmt="%d-%b-%y %H:%M:%S",  # Date format for the timestamp
     handlers=[
         # Write logs to "logs/app.log" with UTF-8 encodingz
         logging.FileHandler("logs/app.log",  mode="w", encoding="utf-8"),
